@@ -1,7 +1,7 @@
 ---
-name: 'USER STORY: <TITLE>'
+name: Reach User Story
 about: User story template for use in Reach project
-title: ''
+title: 'USER STORY: <TITLE>'
 labels: ''
 assignees: ''
 
