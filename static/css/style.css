@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,700;0,900;1,400&display=swap');
+
+/* Google Fonts */
+
+/* 
+font-family: 'Anton', sans-serif; (headings)
+font-family: 'Nunito Sans', sans-serif; (p, others)
+*/
+
+/* Palette */
+
+/* 
+rgba(185, 194, 216, 1) (light-blue-grey)
+rgba(142, 153, 183, 1) (faded-blue)
+rgba(72, 85, 102, 1) (faded-dark-blue)
+rgba(144, 173, 220, 1) (light-lue)
+rgba(187, 212, 229, 1) (sky-blue)
+rgba(250,236,50,255) (vibrant-yellow)
+rgba(245,177,62,255) (#f5b13e) (soft-orange)
+rgba(250,218,77,221) (soft-yellow)
+
+Logo Colors
+#2596be light teal
+
+*/
+
+/* Navbar and Logo */
+
+#logo {
+    max-height: 75px;
+}
+
+#signup_button {
+    border: 2px solid #2596be;
+    padding: 5px;
+}
+
+.navbar {
+    border-bottom: 2px solid black;
+}

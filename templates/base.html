@@ -21,8 +21,37 @@
 
 <body>
 
-    <nav>
-        <!-- navbar -->
+    <nav class="navbar navbar-expand-sm bg-light">
+        <div class="container-fluid">
+
+            <a class="navbar-brand d-flex" href="{% url 'home' %}">
+                <div class="d-flex align-content-center flex-wrap">
+                    <img id="logo" src="/static/images/blue-mountains-trans.png" alt="Reach logo">
+                </div>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
+                aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarToggler">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" id="signup_button" class="btn nav-link text-dark">Sign-up</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
     <main>
