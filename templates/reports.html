@@ -5,19 +5,39 @@
 <h1>Condition Reports</h1>
 <p>Written by climbers for climbers.</p>
 
+<!-- Reports -->
+
 <div class="container-fluid">
 
     <div class="row">
 
-        <!-- Reports -->
+        {% for report in report_list %}
+        <a href="#" class="d-flex">
+            <div class="col-3">
+                {% if report.images.count > 0 %}
+                <!-- Images are uploaded for the report -->
+                    {% for image_file in report.images.all %}
+                        {% if forloop.first %}
+                            <img src="{{ image_file.image_file.url }}" alt="{{ report.title }}" class="img-thumbnail">
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                <!-- No images available in report -->
+                    <img src="/static/images/no-images.png" alt="No images available" class="img-thumbnail">
+                {% endif %}
+            </div>
+            <div class="col-7">
+                {{ report.title }}
+            </div>
+            <div class="col-2">
+                {{ report.overall_conditions }}
+            </div>
+        </a>
+        {% endfor %}
 
-                {% for report in report_list %}
-
-                    <h2>{{ report.title }}</h2>
-
-                {% endfor %}
-        
     </div>
+
+    <!-- Pagination -->
     {% if is_paginated %}
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
@@ -26,11 +46,11 @@
             {% endif %}
             {% if page_obj.has_next %}
             <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-
             {% endif %}
         </ul>
     </nav>
     {% endif %}
+
 </div>
 
 {% endblock %}
