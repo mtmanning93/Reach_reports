@@ -28,13 +28,13 @@
                     <img src="/static/images/no-images.png" alt="No images available" class="img-thumbnail">
                 {% endif %}
             </div>
-            
-            <div class="col-7">
-                {{ report.title }}
+            <!-- Title & author -->
+            <div class="col-3">
+                    <h3>{{ report.title }}</h3>
+                    <p>{{ report.activity_category|title }}</p>
             </div>
-
             <!-- Overall Conditions -->
-            <div class="d-flex flex-column align-items-center col-2">
+            <div class="d-flex flex-column align-items-center col-3">
                 {% if report.overall_conditions == "perfect" %}
                     <i class="fa-solid fa-star"></i>
                 {% elif report.overall_conditions == "good" %}
@@ -45,6 +45,10 @@
                     <i class="fa-solid fa-circle-xmark"></i>
                 {% endif %}
                 {{ report.overall_conditions }}
+            </div>
+            <div class="col-3">
+                <p>{{ report.start_date }}</p>
+                <p><i class="fa-solid fa-user-pen"></i> {{ report.author }}</p>
             </div>
         </a>
         {% endfor %}
