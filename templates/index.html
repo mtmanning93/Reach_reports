@@ -1,1 +1,14 @@
 {% extends 'base.html' %}
+
+{% block content %}
+
+    <div id="head-img-wrapper" class="container-fluid p-0 position-relative">
+        <img src="/static/images/lagginhorn-header.jpg" alt="Climber on the Lagginhorn traverse" class="">
+
+        <div id="head-btns" class="w-50 position-absolute translate-middle d-flex flex-column align-items-center">
+            <a href="#" class="w-50 btn btn-light border-3 border-dark opacity-75 mb-2">Condition Reports</a>
+            <a href="#" id="head-sign-up-btn" class="w-50 btn btn-light">Sign-Up</a>
+        </div>
+    </div>
+
+{% endblock %}
