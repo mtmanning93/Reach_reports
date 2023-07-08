@@ -47,7 +47,7 @@
     <div class="row">
 
         {% for report in report_list %}
-        <a href="#" class="report-list-item d-flex p-1 btn btn-light mb-2">
+        <a href="{% url 'report_details' report.pk  %}" class="report-list-item d-flex p-1 btn btn-light mb-2">
 
             <!-- Images -->
             <div class="col-3 d-flex align-items-center justify-content-center">

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from .models import Report
 
@@ -12,3 +12,8 @@ class ReportList(generic.ListView):
     queryset = Report.objects.filter(status=1).order_by('-start_date')
     template_name = 'reports.html'
     paginate_by = 10
+
+
+def report_details(request, pk):
+    report = get_object_or_404(Report, pk=pk)
+    return render(request, 'report_details.html', {'report': report})
