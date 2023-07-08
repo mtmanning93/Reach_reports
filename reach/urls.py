@@ -20,5 +20,6 @@ from reports.views import get_landing_page
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
-    path('', get_landing_page, name='home')
+    path('', get_landing_page, name='home'),
+    path('reports/', include('reports.urls'), name='reports'),
 ]
