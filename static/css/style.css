@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,700;0,900;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Poppins:wght@100;300;400;500;600&display=swap');
 
 /* Google Fonts */
 
 /* 
-font-family: 'Anton', sans-serif; (headings)
-font-family: 'Nunito Sans', sans-serif; (p, others)
+font-family: 'Lato', sans-serif; 100 400 700
+font-family: 'Poppins', sans-serif; 100 300 400 500 600
 */
 
 /* Palette */
@@ -25,6 +25,21 @@ Logo Colors:
 */
 
 /* Utils */
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 3em;
+    text-transform: uppercase;
+    color: #2596be;
+    letter-spacing: 2px;
+}
+
+h6 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 100;
+    font-size: 1.5em;
+}
 
 a {
     text-decoration: none;
@@ -97,6 +112,12 @@ footer a {
 
 .img-thumbnail {
     width: 100px;
+}
+
+.report-list-item {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-bottom: 5px;
 }
 
 /* Overall_Conditions */
