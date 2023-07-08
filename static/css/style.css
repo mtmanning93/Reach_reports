@@ -125,10 +125,31 @@ footer a {
 }
 
 .fa-circle-exclamation {
-    color: rgb(250,218,77);
+    color: rgb(250, 218, 77);
 }
 
 .fa-circle-xmark {
     color: rgb(177, 65, 65);
 }
 
+/* Report Details */
+
+#report-info-wrapper {
+    width: 80%;
+    padding: 10px;
+}
+
+.report-info {
+    margin: 0;
+}
+
+.report-info-item {
+    width: 75%;
+    border-bottom: 1px solid #2596be;
+    margin: 0;
+    padding: 5px 0;
+}
+
+.report-info-item:last-child {
+    border-bottom: none;
+}
