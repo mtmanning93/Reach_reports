@@ -4,23 +4,31 @@
 
 
 <!-- Title -->
-<div class="container-fluid p-3">
+<div class="container-fluid p-3 mb-5">
     <div class="row text-center">
         <h1>Condition Reports</h1>
         <h6>Written by climbers for climbers.</h6>
     </div>
 </div>
-
-<!-- Search Bar and Filters -->
-
-
-
 <!-- Reports -->
 
 <div class="container-fluid w-75">
 
+    <!-- Search Bar and Filters -->
+    <div class="row pb-3 border-bottom border-3">
+        <div class="col-6">
+            <button class="w-100 btn btn-light"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <div class="col-3 text-center">
+            <p>Filters</p>
+        </div>
+        <div class="col-3 text-end">
+            <button class="btn btn-success">Create Report</button>
+        </div>
+    </div>
+
     <!-- List Key -->
-    <div class="row text-center text-muted">
+    <div class="row text-center text-muted pt-3">
         <div class="col-3">
             <i class="fa-solid fa-camera"></i>
         </div>
@@ -34,10 +42,12 @@
             <p>Date & Author</p>
         </div>
     </div>
+
+    <!-- Reports Objects -->
     <div class="row">
 
         {% for report in report_list %}
-        <a href="#" class="report-list-item d-flex p-1">
+        <a href="#" class="report-list-item d-flex p-1 btn btn-light mb-2">
 
             <!-- Images -->
             <div class="col-3 d-flex align-items-center justify-content-center">
@@ -54,7 +64,7 @@
                 {% endif %}
             </div>
             <!-- Title -->
-            <div class="col-3">
+            <div class="col-3 text-start">
                 <h5>{{ report.title }}</h5>
                 <p>{{ report.activity_category|title }}</p>
             </div>
