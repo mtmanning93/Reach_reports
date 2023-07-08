@@ -13,6 +13,8 @@
 
         {% for report in report_list %}
         <a href="#" class="d-flex">
+
+            <!-- Images -->
             <div class="col-3">
                 {% if report.images.count > 0 %}
                 <!-- Images are uploaded for the report -->
@@ -26,10 +28,22 @@
                     <img src="/static/images/no-images.png" alt="No images available" class="img-thumbnail">
                 {% endif %}
             </div>
+            
             <div class="col-7">
                 {{ report.title }}
             </div>
-            <div class="col-2">
+
+            <!-- Overall Conditions -->
+            <div class="d-flex flex-column align-items-center col-2">
+                {% if report.overall_conditions == "perfect" %}
+                    <i class="fa-solid fa-star"></i>
+                {% elif report.overall_conditions == "good" %}
+                    <i class="fa-solid fa-circle-check"></i>
+                {% elif report.overall_conditions == "ok" %}
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                {% else %}
+                    <i class="fa-solid fa-circle-xmark"></i>
+                {% endif %}
                 {{ report.overall_conditions }}
             </div>
         </a>

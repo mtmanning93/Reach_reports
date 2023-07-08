@@ -24,6 +24,12 @@ Logo Colors:
 #2596be light teal
 */
 
+/* Utils */
+
+a {
+    text-decoration: none;
+}
+
 /* Navbar and Logo */
 
 #logo {
@@ -66,7 +72,6 @@ Logo Colors:
     transition: 0.2s;
 }
 
-
 /* Footer */
 
 footer {
@@ -87,3 +92,28 @@ footer a {
     padding: 0;
     margin: 0;
 }
+
+/* Reports List */
+
+.img-thumbnail {
+    width: 100px;
+}
+
+/* Overall_Conditions */
+
+.fa-star {
+    color: #2596be;
+}
+
+.fa-circle-check {
+    color: rgb(68, 186, 68);
+}
+
+.fa-circle-exclamation {
+    color: rgb(250,218,77);
+}
+
+.fa-circle-xmark {
+    color: rgb(177, 65, 65);
+}
+
