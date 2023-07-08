@@ -40,7 +40,7 @@ class Report(models.Model):
     overall_conditions = models.CharField(max_length=7, choices=GRADE_CHOICES)
     activity_category = models.CharField(
         max_length=12, choices=CATEGORY_CHOICES)
-    report_content = models.TextField(blank=True)
+    description = models.TextField(blank=True)
     number_in_group = models.IntegerField(default=1)
     number_on_route = models.IntegerField(default=1)
     gps_map_link = models.URLField(blank=True)
@@ -61,7 +61,7 @@ class Report(models.Model):
 class ImageFile(models.Model):
     report = models.ForeignKey(
         Report, on_delete=models.CASCADE, related_name='images')
-    image_file = CloudinaryField('image')
+    image_file = CloudinaryField('image', default='placeholder')
 
 
 class Comment(models.Model):
