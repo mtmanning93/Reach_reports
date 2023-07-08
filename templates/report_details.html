@@ -2,8 +2,63 @@
 
 {% block content %}
 
-    <h1>{{ report.title }}</h1>
-    
-    <p>{{ report.description }}</p>
+<div class="container-fluid">
+    <div class="row">
+        <h1>{{ report.title }} - {{ report.start_date }}</h1>
+    </div>
+
+    <div class="row w-75">
+        <!-- Info -->
+        <div class="col-6">
+            <div class="row">
+
+                <p class="report-info-item">{{ report.author }}</p>
+
+                <p class="report-info-item">{{ report.created_on }}</p>
+
+                <p class="report-info-item">{{ report.activity_category }}</p>
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-6">
+                    <p class="report-info-item">{{ report.overall_conditions }}</p>
+                </div>
+                <div class="col-6">
+                    <p class="report-info-item">{{ report.time_taken }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <p class="report-info-item">{{ report.number_in_group }}</p>
+                </div>
+                <div class="col-6">
+                    <p class="report-info-item">{{ report.number_on_route }}</p>
+                </div>
+            </div>
+            <div class="row">
+                {{ report.description|safe }}
+            </div>
+        </div>
+        <!-- Images and Map -->
+        <div class="col-6">
+            <div class="row">
+                {% if report.images.count > 0 %}
+                <!-- Images are uploaded for the report -->
+                {% for image_file in report.images.all %}
+                <img src="{{ image_file.image_file.url }}" alt="{{ report.title }}" class="img-thumbnail">
+                {% endfor %}
+                {% else %}
+                <!-- No images available in report -->
+                <img src="/static/images/no-images.png" alt="No images available" class="img-thumbnail">
+                {% endif %}
+            </div>
+            <div class="row">
+                <iframe src=" {{ report.gps_map_link }}" frameborder="" allowfullscreen="" width="100%" height="300"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
