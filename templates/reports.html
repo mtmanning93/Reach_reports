@@ -5,4 +5,32 @@
 <h1>Condition Reports</h1>
 <p>Written by climbers for climbers.</p>
 
+<div class="container-fluid">
+
+    <div class="row">
+
+        <!-- Reports -->
+
+                {% for report in report_list %}
+
+                    <h2>{{ report.title }}</h2>
+
+                {% endfor %}
+        
+    </div>
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+
 {% endblock %}
