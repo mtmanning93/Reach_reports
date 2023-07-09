@@ -99,8 +99,8 @@
         <!-- Images -->
         <div class="col-md-6 mt-2 mt-md-0">
             <div class="row">
-                <p class="info-label text-muted m-0 p-0">Images: (click to enlarge)</p>
                 {% if report.images.count > 0 %}
+                <p class="info-label text-muted m-0 p-0">Images: (click to enlarge)</p>
                 {% for image_file in report.images.all %}
                 <button type="button" class="report-img col-4" data-bs-toggle="modal"
                     data-bs-target="#myModal{{image_file.pk}}">
