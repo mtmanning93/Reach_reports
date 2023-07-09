@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
-from .models import Report
+from .models import Report, Comment
 
 
 def get_landing_page(request):
@@ -16,4 +16,14 @@ class ReportList(generic.ListView):
 
 def report_details(request, pk):
     report = get_object_or_404(Report, pk=pk)
-    return render(request, 'report_details.html', {'report': report})
+    comments = Comment.objects.filter(report=report)
+    likes_count = report.likes.count()
+    return render(
+        request,
+        'report_details.html',
+        {
+            'report': report,
+            'comments': comments,
+            'likes_count': likes_count
+        },
+    )
