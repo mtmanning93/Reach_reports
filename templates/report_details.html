@@ -97,26 +97,57 @@
 
         </div>
         <!-- Images -->
-        <div class="col-md-6">
+        <div class="col-md-6 mt-2 mt-md-0">
+            <div class="row">
+                <p class="info-label text-muted m-0 p-0">Images: (click to enlarge)</p>
+                {% if report.images.count > 0 %}
+                {% for image_file in report.images.all %}
+                <button type="button" class="report-img col-4" data-bs-toggle="modal"
+                    data-bs-target="#myModal{{image_file.pk}}">
+                    <img src="{{ image_file.image_file.url }}" alt="{{ report.title }}">
+                </button>
+                {% endfor %}
+                {% else %}
+                <div class="report-img">
+                    <img src="/static/images/no-images.png" alt="No images available">
+                </div>
+                {% endif %}
 
-            {% if report.images.count > 0 %}
+                {% for image_file in report.images.all %}
+                <div class="modal fade" id="myModal{{ image_file.pk }}" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fa-solid fa-camera"></i>
+                                    {{ report.title }}</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img class="img-fluid" src="{{ image_file.image_file.url }}" alt="{{ report.title }}">
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" id="close-img-btn" class="btn btn-light w-50"
+                                    data-bs-dismiss="modal">Close Image</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
 
-            {% for image_file in report.images.all %}
-            <div class="report-img">
-                <img src="{{ image_file.image_file.url }}" alt="{{ report.title }}">
+                <!-- Maps -->
+
+                <!-- <div class="row">
+                {% if report.gps_map_link %}
+                    <iframe src=" {{ report.gps_map_link }}" frameborder="" allowfullscreen="" width="50%" height="400"></iframe>
+                {% else %}
+                    <p>No Map Information Given</p>
+                {% endif %}
+            </div> -->
             </div>
-            {% endfor %}
-            {% else %}
-            <div class="report-img">
-                <img src="/static/images/no-images.png" alt="No images available" class="img-thumbnail">
-            </div>
-            {% endif %}
 
         </div>
-
     </div>
-</div>
 
-<!-- <iframe src=" {{ report.gps_map_link }}" frameborder="" allowfullscreen="" width="50%" height="400"></iframe> -->
-
-{% endblock %}
+    {% endblock %}
