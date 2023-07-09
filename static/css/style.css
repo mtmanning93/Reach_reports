@@ -35,10 +35,18 @@ h1 {
     letter-spacing: 2px;
 }
 
+h2 {
+    font-family: 'Lato', sans-serif;
+}
+
 h6 {
     font-family: 'Lato', sans-serif;
     font-weight: 100;
     font-size: 1.5em;
+}
+
+p {
+    font-family: 'Lato', sans-serif;
 }
 
 a {
@@ -134,25 +142,30 @@ footer a {
 
 /* Report Details */
 
-/* #report-info-wrapper {
-    width: 80%;
-    padding: 10px;
+.back-button{
+    color: #2596be;
 }
 
-.report-info {
-    margin: 0;
+.back-button i {
+    font-size: 2em;
 }
 
-.report-info-item {
-    width: 75%;
-    border-bottom: 1px solid #2596be;
-    margin: 0;
-    padding: 5px 0;
+.info-label {
+    margin: 0 0 3px 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 0.7em;
 }
 
-.report-info-item:last-child {
-    border-bottom: none;
-} */
+.info-item {
+    text-align: center;
+    margin: 0 5px 3px 5px;
+}
+
+#report-description {
+    text-align: start;
+    margin: 0 5px 3px 5px;
+}
 
 .report-img {
     width: 100px;
