@@ -134,7 +134,7 @@ footer a {
 
 /* Report Details */
 
-#report-info-wrapper {
+/* #report-info-wrapper {
     width: 80%;
     padding: 10px;
 }
@@ -152,4 +152,23 @@ footer a {
 
 .report-info-item:last-child {
     border-bottom: none;
+} */
+
+.report-img {
+    width: 100px;
+    height: 100px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5px;
+    border: 1px solid #2596be;
+    border-radius: 5px;
+}
+
+.report-img img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
 }
