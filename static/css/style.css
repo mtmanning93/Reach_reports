@@ -35,7 +35,8 @@ h1 {
     letter-spacing: 2px;
 }
 
-h2 {
+h2,
+h3 {
     font-family: 'Lato', sans-serif;
 }
 
@@ -146,7 +147,7 @@ footer a {
 
 /* Report Details */
 
-.back-button{
+.back-button {
     color: #2596be;
 }
 
@@ -192,4 +193,10 @@ footer a {
 
 #close-img-btn {
     border-color: #2596be;
+}
+
+/* Comments */
+
+#comments-title {
+    border-bottom: 4px solid #2596be;
 }

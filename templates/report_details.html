@@ -14,11 +14,9 @@
                 <p class="m-0">Reports List</p>
             </a>
         </div>
-
     </div>
-
 </div>
-
+<!-- Report -->
 <div class="container-fluid d-flex justify-content-center">
     <div class="row w-75 bg-light rounded p-3 mb-3">
         <!-- Info -->
@@ -149,5 +147,35 @@
 
         </div>
     </div>
+</div>
 
-    {% endblock %}
+<!-- Comments & Likes -->
+
+<div class="container-fluid d-flex flex-column align-items-center">
+    <div id="comments-title" class="row w-75">
+        <div class="col-11">
+            <h2 class="p-0 mb-2">Comments</h2>
+
+        </div>
+        <div class="col-1">
+            {% with comments.count as total_comments %}
+            {{ total_comments }}
+            <h3><i class="far fa-comments"></i></h3>
+            {% endwith %}
+        </div>
+    </div>
+
+    {% for comment in comments %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ comment.name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ comment.created_on }}</h6>
+            <p class="card-text">{{ comment.content|linebreaks }}</p>
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
