@@ -20,7 +20,21 @@
             <button class="w-100 btn btn-light"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
         <div class="col-3 text-center">
-            <p>Filters</p>
+            <div class="dropdown">
+                <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Activity Filter
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Alpine</a></li>
+                  <li><a class="dropdown-item" href="#">Hike</a></li>
+                  <li><a class="dropdown-item" href="#">Ice Climbing</a></li>
+                  <li><a class="dropdown-item" href="#">Multipitch</a></li>
+                  <li><a class="dropdown-item" href="#">Ski Tour</a></li>
+                  <li><a class="dropdown-item" href="#">Solo</a></li>
+                  <li><a class="dropdown-item" href="#">Trad</a></li>
+                  <li><a class="dropdown-item" href="#">Other</a></li>
+                </ul>
+              </div>
         </div>
         <div class="col-3 text-end">
             <button class="btn btn-success">Create Report</button>
@@ -53,11 +67,11 @@
             <div class="col-3 d-flex align-items-center justify-content-center">
                 {% if report.images.count > 0 %}
                 <!-- Images are uploaded for the report -->
-                    {% for image_file in report.images.all %}
-                        {% if forloop.first %}
-                        <img src="{{ image_file.image_file.url }}" alt="{{ report.title }}" class="img-thumbnail">
-                        {% endif %}
-                    {% endfor %}
+                {% for image_file in report.images.all %}
+                {% if forloop.first %}
+                <img src="{{ image_file.image_file.url }}" alt="{{ report.title }}" class="img-thumbnail">
+                {% endif %}
+                {% endfor %}
                 {% else %}
                 <!-- No images available in report -->
                 <img src="/static/images/no-images.png" alt="No images available" class="img-thumbnail">
