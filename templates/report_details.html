@@ -157,8 +157,10 @@
             <h2 class="p-0 mb-2">Comments</h2>
         </div>
         <div class="col-4 p-0 mr-2 d-flex justify-content-end">
-            <p class="text-muted m-0 p-2">2</p>
+            {% with report.likes.count as total_likes %}
+            <p class="text-muted m-0 p-2">{{ total_likes }}</p>
             <h3><i class="fa-regular fa-thumbs-up"></i></h3>
+            {% endwith %}
             {% with comments.count as total_comments %}
             <p class="text-muted m-0 p-2">{{ total_comments }}</p>
             <h3><i class="far fa-comments"></i></h3>
