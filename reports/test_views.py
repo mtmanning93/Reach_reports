@@ -9,4 +9,8 @@ class TestReportsView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'index.html')
 
-    # def test_report_details(self):
+    def test_report_list(self):
+
+        response = self.client.get('/reports/reports/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'reports.html')
