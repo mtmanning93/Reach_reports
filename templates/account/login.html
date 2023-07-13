@@ -9,22 +9,21 @@
 
 <div class="container-fluid d-flex justify-content-center mt-5">
     <div class="row">
-        <div class="col-md-8 offset-md-2">
+        <div class="col-md-8 offset-md-2 mb-3">
             <h1 class="text-center">{% trans "Login" %}</h1>
         </div>
         <div class="account-form bg-light col-md-8 offset-md-2">
-            <p class="text-center">{% blocktrans %}If you have not created an account yet, then please
-                <a href="{{ signup_url }}">sign up</a> to join the community.{% endblocktrans %}</p>
-    
-            <form class="login text-center fs-5" method="POST" action="{% url 'account_login' %}">
+            
+            <form class="login text-center m-4" method="POST" action="{% url 'account_login' %}">
                 {% csrf_token %}
                 {{ form.as_p }}
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
-    
                 <button class="primaryAction btn signup_button w-50" type="submit">{% trans "Login" %}</button>
             </form>
+            <p class="text-center">{% blocktrans %}Want to join the community? <br>
+                <a href="{{ signup_url }}" class="mt-md-3 w-50 btn btn-success">Sign Up</a>{% endblocktrans %}</p>
         </div>
     </div>
 </div>
