@@ -44,7 +44,7 @@ class Report(models.Model):
     number_in_group = models.IntegerField(default=1)
     number_on_route = models.IntegerField(default=1)
     gps_map_link = models.URLField(blank=True)
-    status = models.IntegerField(choices=STATUS, default=0)
+    status = models.IntegerField(choices=STATUS, default=1)
     likes = models.ManyToManyField(
         User, related_name='report_likes', blank=True)
 
@@ -71,7 +71,7 @@ class Comment(models.Model):
     email = models.EmailField()
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    approved = models.BooleanField(default=False)
+    approved = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['created_on']

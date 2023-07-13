@@ -61,3 +61,5 @@ class TestViews(TestCase):
         # Assert that the comment's report matches the expected report
         comment_report = comments.first().report
         self.assertEqual(comment_report, self.report)
+
+    # Test likes count is correct per report
