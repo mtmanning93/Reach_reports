@@ -58,14 +58,18 @@ a:hover {
     color: #41ccff;
 }
 
+.content-wrapper {
+    min-height: 75vh;
+}
+
 /* Navbar and Logo */
 
 #logo {
     max-height: 75px;
 }
 
-#signup_button {
-    border: 2px solid #41ccff;
+.signup_button {
+    border: 2px solid #2596be;
     padding: 5px;
 }
 
@@ -95,7 +99,8 @@ a:hover {
     border: 2px solid #2596be;
 }
 
-#head-sign-up-btn:hover {
+#head-sign-up-btn:hover,
+.signup_button:hover {
     border-color: #41ccff;
     transition: 0.2s;
 }
@@ -199,4 +204,18 @@ footer a {
 
 #comments-title {
     border-bottom: 4px solid #2596be;
+}
+
+/* Account */
+
+.account-form {
+    border: 2px solid rgba(37, 149, 190, 0.463);
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: -2px 15px 53px -3px rgba(29, 49, 107, 0.82);
+    -webkit-box-shadow: -2px 15px 53px -3px rgba(29, 49, 107, 0.82);
+    -moz-box-shadow: -2px 15px 53px -3px rgba(29, 49, 107, 0.82);
 }

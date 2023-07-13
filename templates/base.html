@@ -55,7 +55,7 @@
                         <a class="nav-link" href="{% url 'account_login' %}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a id="signup_button" href="{% url 'account_signup' %}" class="btn nav-link text-dark">Sign-up</a>
+                        <a href="{% url 'account_signup' %}" class="signup_button btn nav-link text-dark">Sign-up</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -63,7 +63,7 @@
         </div>
     </nav>
 
-    <main>
+    <main class="content-wrapper">
         {% block content %}
         <!-- Content -->
         {% endblock content %}
@@ -75,10 +75,10 @@
             <div class="d-sm-block col-sm-4 d-sm-flex justify-content-start">
                 <ul id="footer-nav" class="d-flex flex-row justify-content-center flex-sm-column">
                     <li>
-                        <a href="{% url 'home '}">Home</a>
+                        <a href="{% url 'home' %}">Home</a>
                         </li>
                         <li>
-                            <a href="#">Reports</a>
+                            <a href="{% url 'reports' %}">Reports</a>
                         </li>
                         <li>
                             <a href="#">Login</a>
