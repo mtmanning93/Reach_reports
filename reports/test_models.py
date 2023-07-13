@@ -4,7 +4,7 @@ from .models import Report, Comment
 
 
 class TestModels(TestCase):
-    # SET UP
+    # Set Up
     def setUp(self):
         # Create a User instance
         self.user = User.objects.create(username="testuser")
@@ -20,13 +20,8 @@ class TestModels(TestCase):
             activity_category="Hiking",
             description="This is a sample report."
         )
-
-    def test_report_status_defaults_to_published(self):
-        self.assertTrue(self.report.status)
-
-    def test_comment_approved_defaults_to_true(self):
-        # Create Comment Instance
-        comment = Comment.objects.create(
+        # Create a Comment instance
+        self.comment = Comment.objects.create(
             report=self.report,
             name="Tester",
             email="testing@example.com",
@@ -34,4 +29,25 @@ class TestModels(TestCase):
             approved=True
         )
 
-        self.assertTrue(comment.approved)
+    def test_report_status_defaults_to_published(self):
+        self.assertTrue(self.report.status)
+
+    def test_report_string_method_returns_title(self):
+        self.assertEqual(str(self.report), self.report.title)
+
+    def test_report_number_of_likes(self):
+        # Initialise 0 likes
+        self.assertEqual(self.report.number_of_likes(), 0)
+        # Add likes
+        self.report.likes.add(self.user)
+        # Does the count work
+        self.assertEqual(self.report.number_of_likes(), 1)
+
+    def test_comment_approved_defaults_to_true(self):
+        self.assertTrue(self.comment.approved)
+
+    def test_comment_string_method_returns_correctly(self):
+        self.assertEqual(
+            str(self.comment),
+            f"Comment {self.comment.content} by {self.comment.name}"
+            )
