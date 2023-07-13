@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Poppins:wght@100;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&family=Poppins:wght@100;300;400;500;600&display=swap');
 
 /* Google Fonts */
 
@@ -36,12 +36,17 @@ h1 {
 }
 
 h2,
-h3 {
+h3,
+h4,
+h6 {
     font-family: 'Lato', sans-serif;
 }
 
+h4 {
+    font-weight: 300;
+}
+
 h6 {
-    font-family: 'Lato', sans-serif;
     font-weight: 100;
     font-size: 1.5em;
 }
