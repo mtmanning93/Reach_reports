@@ -25,7 +25,7 @@ def report_details(request, pk):
         {
             'report': report,
             'comments': comments,
-            'likes_count': likes_count
+            'likes_count': likes_count,
             'comment_form': CommentForm()
         },
     )

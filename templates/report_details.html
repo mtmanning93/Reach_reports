@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+{% load crispy_forms_tags %}
+
 <!-- Title & back button -->
 <div class="container-fluid d-flex flex-column align-items-center mt-3">
     <div class="row w-75">
@@ -175,12 +178,26 @@
                 <div class="card-body">
                     <h5 class="card-title"><i class="fa-solid fa-user text-muted"></i> {{ comment.name }}</h5>
                     <p class="card-text">{{ comment.content|linebreaks }}</p>
-                    <p class="card-text"><small class="text-muted"><i class="fa-solid fa-pen"></i> {{ comment.created_on }}</small></p>
+                    <p class="card-text"><small class="text-muted"><i class="fa-solid fa-pen"></i>
+                            {{ comment.created_on }}</small></p>
                 </div>
             </div>
         </div>
     </div>
     {% endfor %}
+    {% if user.is_authenticated %}
+    
+    <div class="row w-75 p-0 mt-2">
+        <h6 class="p-0">Leave a comment:</h6>
+        <form class="p-0" method="post">
+            {{ comment_form|crispy }}
+            {% csrf_token %}
+            <p class="float-start"><span class="text-muted">Commenting: </span>{{ user.username }}</p>
+            
+            <button type="submit" class="btn btn-dark float-end">Post</button>
+        </form>
+        {% endif %}
+    </div>
 </div>
 
 

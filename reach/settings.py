@@ -53,8 +53,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'django_summernote',
-    'crispy_froms',
-    'cripsy_bootstrap5',
+    'crispy_forms',
+    'crispy_bootstrap5',
     'reports',
 ]
 
