@@ -72,6 +72,15 @@ a:hover {
     min-height: 65vh;
 }
 
+#messages {
+    position: relative;
+}
+
+#msg {
+    position: absolute;
+    z-index: 1;
+}
+
 /* Navbar and Logo */
 
 #logo {
