@@ -176,14 +176,7 @@
         <div class="card mt-2 bg-light">
             <div class="row g-0">
                 <div class="card-body">
-                    <h5 class="card-title">
-                        <i class="fa-solid fa-user text-muted"></i> 
-                        {% if comment.name %}
-                        {{ comment.name }}
-                        {% else %}
-                        {{ request.user.username }}
-                        {% endif %}
-                    </h5>
+                    <h5 class="card-title"><i class="fa-solid fa-user text-muted"></i> {{ comment.name }}</h5>
                     <p class="card-text">{{ comment.content|linebreaks }}</p>
                     <p class="card-text"><small class="text-muted"><i class="fa-solid fa-pen"></i>
                             {{ comment.created_on }}</small></p>

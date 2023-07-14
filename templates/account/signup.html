@@ -17,7 +17,7 @@
             </h4>
             <p class="text-center">{% trans "To comment, like and create your own reports to share with other climbers, please fill in the form below." %}</p>
 
-            <form class="login d-flex flex-column align-items-center w-100 m-2" method="POST" action="{% url 'account_login' %}">
+            <form class="login d-flex flex-column align-items-center w-100 m-2" method="POST" action="{% url 'account_signup' %}">
                 {% csrf_token %}
                 {{ form.as_p }}
                 {% if redirect_field_value %}
