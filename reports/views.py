@@ -43,3 +43,19 @@ def report_details(request, pk):
             'comment_form': comment_form,
         },
     )
+
+
+def account_view(request):
+    if request.user.is_authenticated:
+        user = request.user
+        context = {
+            'username': user.username,
+            'email': user.email,
+        }
+
+    if request.method == 'POST' and 'delete_account' in request.POST:
+        user = request.user
+        user.delete()
+        return redirect(reverse('home'))  # Replace 'home' with the name of your home URL pattern
+
+        return render(request, 'account.html', context)
