@@ -87,47 +87,47 @@
                 <ul id="footer-nav" class="d-flex flex-row justify-content-center flex-sm-column">
                     <li>
                         <a href="{% url 'home' %}">Home</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'reports' %}">Reports</a>
-                        </li>
-                        {% if user.is_authenticated %}
-                        <li>
-                            <a href="#">Account</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'account_logout' %}">Logout</a>
-                        </li>
-                        {% else %}
-                        <li>
-                            <a href="{% url 'account_login' %}">Login</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'account_signup' %}">Signup</a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </div>
-                <div class="d-none col-sm-4 d-sm-flex text-center justify-content-center">
-                    Take care out there & always reach for more!
-                </div>
-                <div class="text-center col-sm-4 d-sm-flex justify-content-end mt-2 mt-sm-0">
-                    <a href="reach@climbing_reports.com" target="_blank">
-                        <i class="fa-solid fa-envelope"></i>
-                    </a>
-                    <a href="https://www.instagram.com/" target="_blank">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-                    <a href="https://www.facebook.com/" target="_blank">
-                        <i class="fa-brands fa-facebook"></i>
-                    </a>
-                </div>
+                    </li>
+                    <li>
+                        <a href="{% url 'reports' %}">Reports</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="#">Account</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'account_logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="{% url 'account_login' %}">Login</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'account_signup' %}">Signup</a>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
+            <div class="d-none col-sm-4 d-sm-flex text-center justify-content-center">
+                Take care out there & always reach for more!
+            </div>
+            <div class="text-center col-sm-4 d-sm-flex justify-content-end mt-2 mt-sm-0">
+                <a href="reach@climbing_reports.com" target="_blank">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/" target="_blank">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+            </div>
+        </div>
         </div>
     </footer>
 
     <script>
-        setTimeout(function() {
+        setTimeout(function () {
             let messages = document.getElementById("msg");
             let alert = new bootstrap.Alert(messages);
             alert.close()

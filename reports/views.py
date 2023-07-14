@@ -51,11 +51,7 @@ def account_view(request):
         context = {
             'username': user.username,
             'email': user.email,
+            'reports': Report.objects.filter(author=user),
         }
 
-    if request.method == 'POST' and 'delete_account' in request.POST:
-        user = request.user
-        user.delete()
-        return redirect(reverse('home'))  # Replace 'home' with the name of your home URL pattern
-
-        return render(request, 'account.html', context)
+    return render(request, 'account.html', context)

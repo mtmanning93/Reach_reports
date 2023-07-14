@@ -9,7 +9,7 @@
         </div>
         <div class="account-form bg-light col-md-8 offset-md-2">
 
-
+            
 
             <h4 class="text-center mt-2">
                 <i class="fa-solid fa-user"></i>
@@ -20,14 +20,87 @@
                 <i class="fa-solid fa-at"></i>
                 {{ user.email }}
             </h5>
-            <form method="post">
-                {% csrf_token %}
-                <input type="hidden" name="delete_account">
-                <button type="submit">Delete Account</button>
-            </form>
-
         </div>
     </div>
 </div>
 
+<div class="container-fluid w-75 mb-4">
+    <div class="row">
+        <div class="col-md-6 p-0">
+            <h2 class="p-0 mb-2">Your Reports:</h2>
+        </div>
+        <div class="col-2 p-0 mr-2 d-flex justify-content-end">
+            {% with reports.count as total_reports %}
+            <p class="text-muted m-0 p-2">{{ total_reports }}</p>
+            <h3><i class="fa-solid fa-pen"></i></h3>
+            {% endwith %}
+        </div>
+        <div class="col-md-4 pe-0 mb-2">
+            <a href="#" class="btn btn-success w-100">
+                Create New Report
+            </a>
+        </div>
+        {% if reports %}
+        {% for report in reports %}
+        <div class="report-list-item d-flex p-1 bg-light mb-2">
+            <!-- Images -->
+            <div class="col-3 d-flex align-items-center justify-content-center">
+                {% if report.images.count > 0 %}
+                <!-- Images are uploaded for the report -->
+                {% for image_file in report.images.all %}
+                {% if forloop.first %}
+                <img src="{{ image_file.image_file.url }}" alt="{{ report.title }}" class="img-thumbnail">
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                <!-- No images available in report -->
+                <img src="/static/images/no-images.png" alt="No images available" class="img-thumbnail">
+                {% endif %}
+            </div>
+            <!-- Title -->
+            <div class="col-3 text-start">
+                <a href="{% url 'report_details' report.pk  %}"><h5>{{ report.title }}</h5></a>
+                <p>{{ report.activity_category|title }}</p>
+            </div>
+            <!-- Overall Conditions -->
+            <div class="d-flex flex-column align-items-center justify-content-center col-3">
+                {% if report.overall_conditions == "perfect" %}
+                <i class="fa-solid fa-star"></i>
+                {% elif report.overall_conditions == "good" %}
+                <i class="fa-solid fa-circle-check"></i>
+                {% elif report.overall_conditions == "ok" %}
+                <i class="fa-solid fa-circle-exclamation"></i>
+                {% else %}
+                <i class="fa-solid fa-circle-xmark"></i>
+                {% endif %}
+                {{ report.overall_conditions }}
+            </div>
+            <!-- Author Activity Date -->
+            <div class="col-3 d-flex flex-column justify-content-center align-items-center">
+                <p>{{ report.start_date }}</p>
+                <a href="#" class="ud-btn text-info">Edit</a>
+                <a href="#" class="ud-btn text-danger">Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h4>No reports found.</h4>
+        {% endif %}
+
+    </div>
+
+    <!-- Pagination -->
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
 {% endblock %}

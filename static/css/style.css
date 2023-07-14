@@ -62,6 +62,7 @@ p {
 
 a {
     text-decoration: none;
+    color: inherit;
 }
 
 a:hover {
@@ -237,4 +238,8 @@ footer a {
     box-shadow: -2px 15px 53px -3px rgba(29, 49, 107, 0.82);
     -webkit-box-shadow: -2px 15px 53px -3px rgba(29, 49, 107, 0.82);
     -moz-box-shadow: -2px 15px 53px -3px rgba(29, 49, 107, 0.82);
+}
+
+.ud-btn:hover {
+    text-decoration: underline;
 }
