@@ -1,19 +1,21 @@
-from .models import Report, Comment
+from . import models
 from django import forms
+from cloudinary.forms import CloudinaryFileField
 
 
 class CommentForm(forms.ModelForm):
     class Meta:
-        model = Comment
+        model = models.Comment
         fields = ('content',)
 
 
 class CreateReportForm(forms.ModelForm):
+    image_file = CloudinaryFileField(required=False)
+
     class Meta:
-        model = Report
+        model = models.Report
         fields = fields = [
             'title',
-            'slug',
             'start_date',
             'end_date',
             'time_taken',
@@ -24,3 +26,9 @@ class CreateReportForm(forms.ModelForm):
             'number_on_route',
             'gps_map_link'
         ]
+
+
+class ImageFileForm(forms.ModelForm):
+    class Meta:
+        model = models.ImageFile
+        fields = ['image_file']
