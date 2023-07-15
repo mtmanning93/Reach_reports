@@ -24,6 +24,7 @@ class CreateReportForm(forms.ModelForm):
         fields = fields = [
             'title',
             'start_date',
+            'slug',
             'end_date',
             'time_taken',
             'overall_conditions',

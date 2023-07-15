@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import generic
 from django.http import HttpResponseRedirect
+from django.utils.text import slugify
 from .models import Report, Comment
 from .forms import CommentForm, CreateReportForm, ImageFileForm
 
@@ -62,16 +63,18 @@ def account_view(request):
 def create_report(request):
     if request.method == 'POST':
         form = CreateReportForm(request.POST)
-        image_form = ImagesFileForm(request.POST, request.FILES)
+        image_form = ImageFileForm(request.POST, request.FILES)
         if form.is_valid():
+            slug = slugify(form.cleaned_data['title'])
             report = form.save(commit=False)
+            report.slug = slug
             report.author = request.user
             report.save()
 
             image_file = image_form.cleaned_data['image_file']
             ImageFile.objects.create(report=report, image_file=image_file)
 
-            return redirect('report_details', pk=pk)
+            return redirect('report_details', pk=report.pk)
     else:
         form = CreateReportForm()
         image_form = ImageFileForm()
@@ -79,4 +82,4 @@ def create_report(request):
     return render(
         request,
         'create_report.html',
-        {'report_form': CreateReportForm, 'image_form': ImageFileForm})
+        {'report_form': form, 'image_form': image_form})

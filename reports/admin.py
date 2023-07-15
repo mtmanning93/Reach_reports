@@ -16,7 +16,7 @@ class ReportAdmin(SummernoteModelAdmin):
         'start_date',
         'created_on')
     search_fields = ['title', 'description']
-    prepopulated_fields = {'slug': ('title', 'author', 'start_date',)}
+    prepopulated_fields = {'slug': ('title', 'author', 'created_on',)}
     list_filter = ('overall_conditions', 'created_on', 'start_date')
     summernote_fields = ('description')
     inlines = [ImageInline]
