@@ -7,10 +7,9 @@ from .models import Report, Comment
 class TestViews(TestCase):
     # SET UP
     def setUp(self):
-        # Create a User instance
+
         self.user = User.objects.create(username="testuser")
 
-        # Create a Report instance
         self.report = Report.objects.create(
             title="Sample Report",
             slug="sample-report",
@@ -37,7 +36,6 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'report_details.html')
 
-    # Test correct report details selected
     def test_get_correct_report_details(self):
         url = reverse('report_details', args=[self.report.pk])
         expected_url = f'/reports/report/{self.report.pk}/'
