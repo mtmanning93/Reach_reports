@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import generic
 from django.http import HttpResponseRedirect
 from .models import Report, Comment
-from .forms import CommentForm
+from .forms import CommentForm, CreateReportForm
 
 
 def get_landing_page(request):
@@ -57,3 +57,17 @@ def account_view(request):
         }
 
     return render(request, 'account.html', context)
+
+
+def create_report(request):
+    if request.method == 'POST':
+        form = CreateReportForm(request.POST)
+        if form.is_valid():
+            report = form.save(commit=False)
+            report.author = request.user
+            report.save()
+            return redirect('report_details', pk=pk)
+    else:
+        form = CreateReportForm()
+
+    return render(request, 'create_report.html', {'form': form})

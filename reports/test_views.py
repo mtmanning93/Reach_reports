@@ -46,21 +46,14 @@ class TestViews(TestCase):
         self.assertEqual(url, expected_url)
 
     def test_get_report_comments(self):
-
-        # Create a comment for the report
         Comment.objects.create(report=self.report, content="Test comment")
-
         response = self.client.get(
             reverse('report_details', args=[self.report.pk]))
+
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Test comment')
-
-        # Test correct comment for correct report
-        # Retrieve the comment from the response context
         comments = response.context['comments']
         self.assertEqual(comments.count(), 1)
-
-        # Assert that the comment's report matches the expected report
         comment_report = comments.first().report
         self.assertEqual(comment_report, self.report)
 
