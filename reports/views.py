@@ -46,6 +46,8 @@ def report_details(request, pk):
 
 
 def account_view(request):
+    context = {}
+
     if request.user.is_authenticated:
         user = request.user
         context = {

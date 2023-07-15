@@ -2,7 +2,6 @@ from django.test import Client, TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
 from .models import Report, Comment
-
 from .forms import CommentForm
 
 
@@ -72,5 +71,3 @@ class TestCommentForm(TestCase):
         self.assertTrue(
             any(comment.report == self.report for comment in saved_comments)
         )
-
-    

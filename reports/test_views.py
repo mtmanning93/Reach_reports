@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from .models import Report, Comment
@@ -8,7 +8,11 @@ class TestViews(TestCase):
     # SET UP
     def setUp(self):
 
-        self.user = User.objects.create(username="testuser")
+        self.user = User.objects.create(
+            username="testuser",
+            email='test@example.com',
+            password='testpassword'
+        )
 
         self.report = Report.objects.create(
             title="Sample Report",
@@ -61,3 +65,18 @@ class TestViews(TestCase):
         self.assertEqual(comment_report, self.report)
 
     # Test likes count is correct per report
+
+    def test_get_account_page(self):
+        response = self.client.get('/reports/account/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'account.html')
+
+    def test_get_correct_user_account(self):
+        self.client.force_login(self.user)
+        response = self.client.get(reverse('account'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'account.html')
+        self.assertContains(response, self.user.username)
+        self.assertContains(response, self.user.email)
+        self.assertContains(response, self.report.title)
