@@ -4,8 +4,109 @@
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ report_form.as_p }}
+    <!-- {{ report_form.as_p }} -->
+
+    <div class="container-fluid d-flex justify-content-center">
+        <div class="row w-75 bg-light rounded p-3 mb-3">
+            <!-- Info -->
+            <div class="col-md-6">
+    
+                <div class="container text-start">
+                    <div class="row g-2">
+                        <div class="col-12">
+                            <div class="border rounded bg-light">
+                                {{ report_form.title }}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="border rounded bg-light">
+                                <p class="info-label text-muted">Published:</p>
+                                <p class="info-item">{{ report.created_on }}</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="border rounded bg-light">
+                                <p class="info-label text-muted">Climb Type:</p>
+                                <p class="info-item">{{ report.activity_category|title }}</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="border rounded bg-light">
+                                <p class="info-label text-muted">Time Taken:</p>
+                                <p class="info-item">{{ report.time_taken }}</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="border rounded bg-light">
+                                <p class="info-label text-muted">Conditions:</p>
+                                <p class="info-item">
+                                    &nbsp;
+                                    {% if report.overall_conditions == "perfect" %}
+                                    <i class="fa-solid fa-star"></i>
+                                    {% elif report.overall_conditions == "good" %}
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    {% elif report.overall_conditions == "ok" %}
+                                    <i class="fa-solid fa-circle-exclamation"></i>
+                                    {% else %}
+                                    <i class="fa-solid fa-circle-xmark"></i>
+                                    {% endif %}
+                                    {{ report.overall_conditions|title }}&nbsp;&nbsp;
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="border rounded bg-light">
+                                <p class="info-label text-muted">End Date:</p>
+                                <p class="info-item">{{ report.end_date }}</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="border rounded bg-light">
+                                <p class="info-label text-muted"># in Group:</p>
+                                <p class="info-item">{{ report.number_in_group }}</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="border rounded bg-light">
+                                <p class="info-label text-muted"># on Route:</p>
+                                <p class="info-item">{{report.number_on_route}}</p>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="border rounded bg-light text-start">
+                                <p class="info-label text-muted">Description:</p>
+                                <p id="report-description">{{ report.description|striptags }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+            <!-- Images -->
+            <div class="col-md-6 mt-2 mt-md-0">
+                <div class="row">
+                    <div class="col-12">
+                        
+                    </div>
+                    <!-- Maps -->
+    
+                    <!-- <div class="row">
+                    {% if report.gps_map_link %}
+                        <iframe src=" {{ report.gps_map_link }}" frameborder="" allowfullscreen="" width="50%" height="400"></iframe>
+                    {% else %}
+                        <p>No Map Information Given</p>
+                    {% endif %}
+                </div> -->
+                </div>
+    
+            </div>
+
     <button type="submit">Submit</button>
 </form>
+
+
+
+    </div>
+</div>
 
 {% endblock %}
