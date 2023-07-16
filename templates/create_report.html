@@ -4,86 +4,11 @@
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <!-- {{ report_form.as_p }} -->
-
-    <div class="container-fluid d-flex justify-content-center">
-        <div class="row w-75 bg-light rounded p-3 mb-3">
-            <!-- Info -->
-            <div class="col-md-6">
-    
-                <div class="container text-start">
-                    <div class="row g-2">
-                        <div class="col-12">
-                            <div class="border rounded bg-light">
-                                <p class="info-label text-muted">Title:</p>
-                                <p class="info-item">{{ report_form.title }}</p>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="border rounded bg-light">
-                                <p class="info-label text-muted">Start:</p>
-                                <p class="info-item">{{ report_form.start_date }}</p>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="border rounded bg-light">
-                                <p class="info-label text-muted">End:</p>
-                                <p class="info-item">{{ report_form.end_date }}</p>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="border rounded bg-light">
-                                <p class="info-label text-muted">Conditions:</p>
-                                <p class="info-item">{{ report_form.overall_conditions }}</p>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="border rounded bg-light">
-                                <p class="info-label text-muted">Activity:</p>
-                                <p class="info-item">{{ report_form.activity_category }}</p>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="border rounded bg-light">
-                                <p class="info-label text-muted"># in Group:</p>
-                                <p class="info-item">{{ report_form.number_in_group }}</p>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="border rounded bg-light">
-                                <p class="info-label text-muted"># on Route:</p>
-                                <p class="info-item">{{ report_form.number_on_route }}</p>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="border rounded bg-light text-start">
-                                <p class="info-label text-muted">Add Images:</p>
-                                <p id="report-description">{{ report_form.image_file }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
-            </div>
-            <!-- Images -->
-            <div class="col-md-6 mt-2 mt-md-0">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="border rounded bg-light text-start">
-                            <p class="info-label text-muted">Description:</p>
-                            <p id="report-description">{{ report_form.description }}</p>
-                        </div>
-                    </div>
-                </div>
-    
-            </div>
-
-    <button type="submit">Submit</button>
+    {{ report_form.as_p }}
+    <label for="{{ report_form.images.id_for_label }}">Upload Images:</label>
+    {{ report_form.images }}
+    <input type="submit" value="Create Report">
 </form>
 
-
-
-    </div>
-</div>
 
 {% endblock %}

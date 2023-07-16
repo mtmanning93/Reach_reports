@@ -17,14 +17,19 @@ class CreateReportForm(forms.ModelForm):
     end_date = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date'}),
     )
-    image_file = CloudinaryFileField(required=False)
+    images = CloudinaryFileField(
+        options={
+            'resource_type': 'image',
+            'max_files': 10
+        },
+        required=False
+    )
 
     class Meta:
         model = models.Report
         fields = fields = [
             'title',
             'start_date',
-            'slug',
             'end_date',
             'time_taken',
             'overall_conditions',
