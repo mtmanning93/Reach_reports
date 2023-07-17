@@ -73,8 +73,16 @@ def create_report_view(request):
 
             # Multiple image files using CloudinaryFileField
             images = request.FILES.getlist('images')
+
+            # Limit the number of images to 10
+            if len(images) > 10:
+                return render(request, 'create_report.html', {'report_form': report_form, 'error': "You can upload a maximum of 10 images."})
+
             for image in images:
-                ImageFile.objects.create(report=report, image_file=image)
+                ImageFile.objects.create(
+                    report=report,
+                    image_file=image
+                    )
 
             return redirect('reports')
 
