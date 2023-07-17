@@ -11,23 +11,9 @@ class CommentForm(forms.ModelForm):
 
 class CreateReportForm(forms.ModelForm):
 
-    start_date = forms.DateField(
-        widget=forms.DateInput(attrs={'type': 'date'}),
-    )
-    end_date = forms.DateField(
-        widget=forms.DateInput(attrs={'type': 'date'}),
-    )
-    images = CloudinaryFileField(
-        options={
-            'resource_type': 'image',
-            'max_files': 10
-        },
-        required=False
-    )
-
     class Meta:
         model = models.Report
-        fields = fields = [
+        fields = [
             'title',
             'start_date',
             'end_date',
@@ -39,6 +25,29 @@ class CreateReportForm(forms.ModelForm):
             'number_on_route',
             'gps_map_link'
         ]
+
+    def __init__(self, *args, **kwargs):
+        super(CreateReportForm, self).__init__(*args, **kwargs)
+
+        # Define the fields and their customizations here
+        self.fields['title'] = forms.CharField(
+            label="Route Name", initial="e.g. Eiger, Heckmair")
+        self.fields['start_date'] = forms.DateField(
+            widget=forms.DateInput(attrs={'type': 'date'}),
+            label="Start Date"
+        )
+        self.fields['end_date'] = forms.DateField(
+            widget=forms.DateInput(attrs={'type': 'date'}),
+            label="End Date"
+        )
+        self.fields['images'] = CloudinaryFileField(
+            options={
+                'resource_type': 'image',
+                'max_files': 10
+            },
+            required=False,
+            label="Custom Images Field"
+        )
 
 
 class ImageFileForm(forms.ModelForm):

@@ -2,13 +2,68 @@
 
 {% block content %}
 
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ report_form.as_p }}
-    <label for="{{ report_form.images.id_for_label }}">Upload Images:</label>
-    <input id="upload" type="file" name="images" multiple>
-    <input type="submit" value="Create Report">
-</form>
+{% load crispy_forms_tags %}
 
+<div class="container-fluid p-3 mb-5">
+    <div class="row text-center">
+        <h1>Create Report</h1>
+        <h3>Creating report as: {{ user.username }}</h3>
+    </div>
+</div>
+
+<div class="container-fluid d-flex justify-content-center">
+    <div class="row w-75 bg-light rounded p-3 mb-3">
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="col-md-12">
+
+                <div class="container text-start">
+                    <div class="row g-2">
+                        <div class="col-8">
+                            {{ report_form.title|as_crispy_field }}
+                        </div>
+                        <div class="col-4">
+                            {{ report_form.time_taken|as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{ report_form.start_date|as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{ report_form.end_date|as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{ report_form.overall_conditions|as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{ report_form.activity_category|as_crispy_field }}
+                        </div>
+                        <div class="col-4">
+                            {{ report_form.number_in_group|as_crispy_field }}
+                        </div>
+                        <div class="col-4">
+                            {{ report_form.number_on_route|as_crispy_field }}
+                        </div>
+                        <div class="col-12">
+                            {{ report_form.description|as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            <label for="upload"><i class="fa-solid fa-camera"></i> Upload Images:</label>
+                            <br>
+                            <input class="btn" id="upload" type="file" name="images" multiple>
+                        </div>
+                        <div class="col-6">
+                            <!-- GPS -->
+                        </div>
+                        <div class="col-12 d-flex flex-row justify-content-center">
+                            <input class="btn btn-success" type="submit" value="Create Report">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
 
 {% endblock %}
