@@ -38,8 +38,9 @@ class Report(models.Model):
     start_date = models.DateField(auto_now=False, auto_now_add=False)
     end_date = models.DateField(auto_now=False, auto_now_add=False)
     # goal_reached = models.CharField(max_length=17, choices=SUCCESS)
-    # goal_height = models.PositiveIntegerField(
-    #     default='', validators=[MinValueValidator(1), MaxValueValidator(9000)])
+    # height_in_meters = models.PositiveIntegerField(
+    #     default='',
+    #     validators=[MinValueValidator(1), MaxValueValidator(9000)])
     time_taken = models.DurationField(
         null=True, blank=True,
         help_text="""

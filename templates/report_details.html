@@ -33,22 +33,16 @@
                             <p class="info-item">{{ report.author }}</p>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-6">
                         <div class="border rounded bg-light">
-                            <p class="info-label text-muted">Published:</p>
-                            <p class="info-item">{{ report.created_on }}</p>
+                            <p class="info-label text-muted">End Date:</p>
+                            <p class="info-item">{{ report.end_date }}</p>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="border rounded bg-light">
                             <p class="info-label text-muted">Climb Type:</p>
                             <p class="info-item">{{ report.activity_category|title }}</p>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="border rounded bg-light">
-                            <p class="info-label text-muted">Time Taken:</p>
-                            <p class="info-item">{{ report.time_taken }}</p>
                         </div>
                     </div>
                     <div class="col-6">
@@ -71,8 +65,8 @@
                     </div>
                     <div class="col-6">
                         <div class="border rounded bg-light">
-                            <p class="info-label text-muted">End Date:</p>
-                            <p class="info-item">{{ report.end_date }}</p>
+                            <p class="info-label text-muted">Goal Reached:</p>
+                            <p class="info-item">Yes</p>
                         </div>
                     </div>
                     <div class="col-6">
@@ -87,6 +81,25 @@
                             <p class="info-item">{{report.number_on_route}}</p>
                         </div>
                     </div>
+                    {% if field_value %}
+                    <div class="col-6">
+                        <div class="border rounded bg-light">
+                            <p class="info-label text-muted">Time Taken (Speed Ascent):</p>
+                            {% if report.time_taken == None %}
+                            <p class="info-item">--:--:--</p>
+                            {% else %}
+                            <p class="info-item">{{ report.time_taken }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="border rounded bg-light">
+                            <p class="info-label text-muted">Summit Height (masl):</p>
+                            <p class="info-item"> m</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
                     <div class="col-12">
                         <div class="border rounded bg-light text-start">
                             <p class="info-label text-muted">Description:</p>
@@ -148,6 +161,9 @@
             </div> -->
             </div>
 
+        </div>
+        <div class="col-12 d-flex justify-content-end">
+            <p class="text-secondary mb-0 mt-2">Report Published: {{ report.created_on|date:"F j, Y" }}</p>
         </div>
     </div>
 </div>
