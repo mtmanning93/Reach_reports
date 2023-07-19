@@ -87,3 +87,7 @@ def create_report_view(request):
         report_form = CreateReportForm()
 
     return render(request, 'create_report.html', {'report_form': report_form})
+
+
+def edit_report(request, report_id):
+    return render(request, 'edit_report.html')
