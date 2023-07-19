@@ -4,10 +4,10 @@
 
 {% load crispy_forms_tags %}
 
-<div class="container-fluid p-3 mb-5">
-    <div class="row text-center">
-        <h1>Create Report</h1>
-        <h3>Creating report as: {{ user.username }}</h3>
+<div class="container-fluid p-3">
+    <div class="row text-center d-flex flex-column align-items-center">
+        <h1 class="mb-3">Create New Report</h1>
+        <h3 class="w-75 m-0 text-start">Creating report as: <span class="text-secondary">{{ user.username }}</span></h3>
     </div>
 </div>
 

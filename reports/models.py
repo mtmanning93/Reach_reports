@@ -24,8 +24,8 @@ CATEGORY_CHOICES = [
 STATUS = ((0, "Draft"), (1, "Published"))
 
 SUCCESS = [
-    ("yes", "Goal Reached"),
-    ("no", "Goal Not Reached"),
+    ("yes", "Yes"),
+    ("no", "No"),
 ]
 
 

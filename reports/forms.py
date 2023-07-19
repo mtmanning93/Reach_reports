@@ -31,18 +31,16 @@ class CreateReportForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CreateReportForm, self).__init__(*args, **kwargs)
 
-        # Define the fields and their customizations here
         self.fields['title'] = forms.CharField(
             label="Route Name", initial="e.g. Eiger, Heckmair")
+        self.fields['goal_reached'].label = "Goal achieved?"
         self.fields['start_date'] = forms.DateField(
             widget=forms.DateInput(attrs={'type': 'date'}),
-            label="Start Date"
         )
         self.fields['end_date'] = forms.DateField(
             widget=forms.DateInput(attrs={'type': 'date'}),
-            label="End Date"
         )
-        self.fields['height_in_meters'] = forms.IntegerField(required=False)
+        self.fields['height_in_meters'].label = "Summit height (masl)"
         self.fields['images'] = CloudinaryFileField(
             options={
                 'resource_type': 'image',

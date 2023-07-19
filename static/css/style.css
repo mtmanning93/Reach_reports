@@ -151,6 +151,7 @@ footer a {
 .img-thumbnail {
     width: 100px;
     height: 100px;
+    object-fit: cover
 }
 
 .img-num {
@@ -253,4 +254,10 @@ footer a {
 
 .ud-btn:hover {
     text-decoration: underline;
+}
+
+/* Create Report Form */
+
+#upload {
+    padding: 6px 0;
 }

@@ -69,7 +69,7 @@
                             <p class="info-item">
                                 &nbsp;
                                 {% if report.goal_reached == "yes" %}
-                                <i class="fa-solid fa-circle-check text-success"></i>
+                                <i class="fa-solid fa-circle-check text-warning"></i>
                                 {% else %}
                                 <i class="fa-solid fa-ban text-danger"></i>
                                 {% endif %}
@@ -79,14 +79,14 @@
                     </div>
                     <div class="col-6">
                         <div class="border rounded bg-light">
-                            <p class="info-label text-muted mt-1"><i class="fa-solid fa-person-hiking fs-6">-</i><i class="fa-solid fa-person-hiking fs-6"></i> # in Group:</p>
+                            <p class="info-label text-muted mt-1"><i class="fa-solid fa-person-hiking fs-6">-</i><i class="fa-solid fa-person-hiking fs-6"></i> People in Group:</p>
                             <p class="info-item">{{ report.number_in_group }}</p>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="border rounded bg-light">
                             
-                            <p class="info-label text-muted mt-1"><i class="fa-solid fa-people-group fs-6"></i> # on Route:</p>
+                            <p class="info-label text-muted mt-1"><i class="fa-solid fa-people-group fs-6"></i> People on Route:</p>
                             <p class="info-item">{{report.number_on_route}}</p>
                         </div>
                     </div>
