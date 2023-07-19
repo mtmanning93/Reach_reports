@@ -1,5 +1,6 @@
 from . import models
 from django import forms
+from datetime import date
 from cloudinary.forms import CloudinaryFileField
 
 
@@ -35,10 +36,12 @@ class CreateReportForm(forms.ModelForm):
             label="Route Name", initial="e.g. Eiger, Heckmair")
         self.fields['goal_reached'].label = "Goal achieved?"
         self.fields['start_date'] = forms.DateField(
-            widget=forms.DateInput(attrs={'type': 'date'}),
+            widget=forms.DateInput(
+                attrs={'type': 'date', 'max': str(date.today())}),
         )
         self.fields['end_date'] = forms.DateField(
-            widget=forms.DateInput(attrs={'type': 'date'}),
+            widget=forms.DateInput(
+                attrs={'type': 'date', 'max': str(date.today())}),
         )
         self.fields['height_in_meters'].label = "Summit height (masl)"
         self.fields['images'] = CloudinaryFileField(
