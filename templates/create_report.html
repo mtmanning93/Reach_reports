@@ -24,7 +24,7 @@
                             {{ report_form.title|as_crispy_field }}
                         </div>
                         <div class="col-4">
-                            {{ report_form.time_taken|as_crispy_field }}
+                            {{ report_form.goal_reached|as_crispy_field }}
                         </div>
                         <div class="col-6">
                             {{ report_form.start_date|as_crispy_field }}
@@ -32,17 +32,23 @@
                         <div class="col-6">
                             {{ report_form.end_date|as_crispy_field }}
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             {{ report_form.overall_conditions|as_crispy_field }}
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             {{ report_form.activity_category|as_crispy_field }}
+                        </div>
+                        <div class="col-4">
+                            {{ report_form.height_in_meters|as_crispy_field }}
                         </div>
                         <div class="col-4">
                             {{ report_form.number_in_group|as_crispy_field }}
                         </div>
                         <div class="col-4">
                             {{ report_form.number_on_route|as_crispy_field }}
+                        </div>
+                        <div class="col-4">
+                            {{ report_form.time_taken|as_crispy_field }}
                         </div>
                         <div class="col-12">
                             {{ report_form.description|as_crispy_field }}

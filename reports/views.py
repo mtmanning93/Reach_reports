@@ -67,11 +67,8 @@ def create_report_view(request):
         if report_form.is_valid():
             report = report_form.save(commit=False)
             report.author = request.user
-            # report.created_on = datetime.now()
-
             slug = f"{slugify(report.title)}-{slugify(report.author)}-{report.pk}"
             report.slug = slug
-    
             report.save()
 
             # Multiple image files using CloudinaryFileField

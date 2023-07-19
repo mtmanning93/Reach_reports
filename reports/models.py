@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-# from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from cloudinary.models import CloudinaryField
 
 GRADE_CHOICES = [
@@ -23,10 +23,10 @@ CATEGORY_CHOICES = [
 
 STATUS = ((0, "Draft"), (1, "Published"))
 
-# SUCCESS = [
-#     ("yes", "Goal Reached"),
-#     ("no", "Goal Not Reached"),
-# ]
+SUCCESS = [
+    ("yes", "Goal Reached"),
+    ("no", "Goal Not Reached"),
+]
 
 
 class Report(models.Model):
@@ -37,10 +37,13 @@ class Report(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     start_date = models.DateField(auto_now=False, auto_now_add=False)
     end_date = models.DateField(auto_now=False, auto_now_add=False)
-    # goal_reached = models.CharField(max_length=17, choices=SUCCESS)
-    # height_in_meters = models.PositiveIntegerField(
-    #     default='',
-    #     validators=[MinValueValidator(1), MaxValueValidator(9000)])
+    goal_reached = models.CharField(
+        default='yes', max_length=17, choices=SUCCESS)
+    height_in_meters = models.PositiveIntegerField(
+        default=0,
+        blank=True,
+        null=True,
+        validators=[MinValueValidator(0), MaxValueValidator(9000)])
     time_taken = models.DurationField(
         null=True, blank=True,
         help_text="""

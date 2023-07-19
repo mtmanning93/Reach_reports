@@ -18,6 +18,8 @@ class CreateReportForm(forms.ModelForm):
             'start_date',
             'end_date',
             'time_taken',
+            'goal_reached',
+            'height_in_meters',
             'overall_conditions',
             'activity_category',
             'description',
@@ -40,6 +42,7 @@ class CreateReportForm(forms.ModelForm):
             widget=forms.DateInput(attrs={'type': 'date'}),
             label="End Date"
         )
+        self.fields['height_in_meters'] = forms.IntegerField(required=False)
         self.fields['images'] = CloudinaryFileField(
             options={
                 'resource_type': 'image',

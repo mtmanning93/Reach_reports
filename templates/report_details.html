@@ -66,7 +66,7 @@
                     <div class="col-6">
                         <div class="border rounded bg-light">
                             <p class="info-label text-muted">Goal Reached:</p>
-                            <p class="info-item">Yes</p>
+                            <p class="info-item">{{ report.goal_reached }}</p>
                         </div>
                     </div>
                     <div class="col-6">
@@ -84,22 +84,19 @@
                     {% if field_value %}
                     <div class="col-6">
                         <div class="border rounded bg-light">
-                            <p class="info-label text-muted">Time Taken (Speed Ascent):</p>
-                            {% if report.time_taken == None %}
-                            <p class="info-item">--:--:--</p>
-                            {% else %}
-                            <p class="info-item">{{ report.time_taken }}</p>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="border rounded bg-light">
                             <p class="info-label text-muted">Summit Height (masl):</p>
-                            <p class="info-item"> m</p>
+                            <p class="info-item">{{ report.height_in_meters }}m</p>
                         </div>
                     </div>
                     {% endif %}
-                    
+                    {% if field_value %}
+                    <div class="col-6">
+                        <div class="border rounded bg-light">
+                            <p class="info-label text-muted">Time Taken (Speed Ascent):</p>
+                            <p class="info-item">{{ report.time_taken }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
                     <div class="col-12">
                         <div class="border rounded bg-light text-start">
                             <p class="info-label text-muted">Description:</p>
