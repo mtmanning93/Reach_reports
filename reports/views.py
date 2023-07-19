@@ -65,11 +65,13 @@ def create_report_view(request):
         report_form = CreateReportForm(request.POST, request.FILES)
 
         if report_form.is_valid():
-            slug = slugify(report_form.cleaned_data['title'])
             report = report_form.save(commit=False)
-            report.slug = slug
             report.author = request.user
-            report.created_on = datetime.now()
+            # report.created_on = datetime.now()
+
+            slug = f"{slugify(report.title)}-{slugify(report.author)}-{report.pk}"
+            report.slug = slug
+    
             report.save()
 
             # Multiple image files using CloudinaryFileField
