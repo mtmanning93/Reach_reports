@@ -66,7 +66,6 @@ def create_report_view(request):
 
         if report_form.is_valid():
             slug = slugify(report_form.cleaned_data['title'])
-            # report.created_on = datetime.now()
             report = report_form.save(commit=False)
             report.slug = slug
             report.author = request.user
