@@ -14,19 +14,19 @@ class ReportAdmin(SummernoteModelAdmin):
         'activity_category',
         'author',
         'start_date'
-        )
+    )
     search_fields = ['title', 'description']
     list_filter = ('overall_conditions', 'start_date')
     summernote_fields = ('description')
     inlines = [ImageInline]
 
-    # save slug as...
+    # Hide slug...
+    exclude = ('slug',)
+
+    # Save slug as...
     def save_model(self, request, obj, form, change):
         if not obj.pk:
-            original_post_date = obj.created_on.strftime('%Y-%m-%d')
-            slug = f"{slugify(obj.title)}.\
-                {slugify(obj.author.username)}.\
-                {original_post_date}"
+            slug = f"{slugify(obj.title)}-{slugify(obj.author)}-{obj.pk}"
             obj.slug = slug
 
         super().save_model(request, obj, form, change)
