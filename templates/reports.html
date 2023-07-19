@@ -74,6 +74,7 @@
                 {% for image_file in report.images.all %}
                 {% if forloop.first %}
                 <img src="{{ image_file.image_file.url }}" alt="{{ report.title }}" class="img-thumbnail">
+                <p class="img-num text-secondary">{{ report.images.all.count }}</p>
                 {% endif %}
                 {% endfor %}
                 {% else %}
@@ -83,8 +84,15 @@
             </div>
             <!-- Title -->
             <div class="col-3 text-start">
-                <h5>{{ report.title }}</h5>
-                <p>{{ report.activity_category|title }}</p>
+                <h4 class="report-list-title mt-2 mb-2">{{ report.title }}</h4>
+                <p class="m-0">{{ report.activity_category|title }}</p>
+                <p class="mb-2">Goal Reached: 
+                    {% if report.goal_reached == "yes" %}
+                    <i class="fa-solid fa-circle-check text-success"></i>
+                    {% else %}
+                    <i class="fa-solid fa-ban text-danger"></i>
+                    {% endif %}
+                    {{ report.goal_reached|title }}</p>
             </div>
             <!-- Overall Conditions -->
             <div class="d-flex flex-column align-items-center justify-content-center col-3">

@@ -150,6 +150,17 @@ footer a {
 
 .img-thumbnail {
     width: 100px;
+    height: 100px;
+}
+
+.img-num {
+    place-self: flex-end;
+    margin: 0;
+}
+
+
+.report-list-title {
+    color: #2596be;
 }
 
 /* Overall_Conditions */
