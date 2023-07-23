@@ -35,7 +35,9 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'reach-reports-e02886ddeda3.herokuapp.com',
     'localhost',
-    '8000-mtmanning93-reachreport-5awquwjx6kz.ws-eu101.gitpod.io']
+    '8000-mtmanning93-reachreport-5awquwjx6kz.ws-eu101.gitpod.io',
+    '8000-mtmanning93-reachreport-5awquwjx6kz.ws-eu102.gitpod.io'
+    ]
 
 
 # Application definition
