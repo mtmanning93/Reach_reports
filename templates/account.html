@@ -75,7 +75,7 @@
             <!-- Author Activity Date -->
             <div class="col-3 d-flex flex-column justify-content-center align-items-center">
                 <p>{{ report.start_date }}</p>
-                <a href="{% url 'edit_report' %}" class="ud-btn text-info">Edit</a>
+                <a href="{% url 'edit_report' pk=report.pk %}" class="ud-btn text-info">Edit</a>
                 <a href="#" class="ud-btn text-danger">Delete</a>
             </div>
         </div>

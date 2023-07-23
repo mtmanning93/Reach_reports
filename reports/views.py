@@ -91,7 +91,7 @@ def create_report_view(request):
 
 def edit_report(request, pk):
 
-    report = get_object_or_404(Report, pk=pk)
+    report = Report.objects.get(pk=pk)
     edit_form = CreateReportForm(instance=report)
 
     return render(request, 'edit_report.html', {'edit_form': edit_form})
