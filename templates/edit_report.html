@@ -6,15 +6,15 @@
 
 <div class="container-fluid p-3">
     <div class="row text-center d-flex flex-column align-items-center">
-        <h1 class="mb-3">Create New Report</h1>
-        <h3 class="w-75 m-0 text-start">Creating report as: <span class="text-secondary">{{ user.username }}</span></h3>
+        <h1 class="mb-3">Edit Report</h1>
+        <h3 class="w-75 m-0 text-start">Editing report as: <span class="text-secondary">{{ user.username }}</span></h3>
     </div>
 </div>
 
 <div class="container-fluid d-flex justify-content-center">
     <div class="row w-75 bg-light rounded p-3 mb-3">
 
-        <form method="post" action="" enctype="multipart/form-data">
+        <form method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="col-md-12">
 
@@ -53,18 +53,24 @@
                         <div class="col-12">
                             {{ edit_form.description|as_crispy_field }}
                         </div>
-                        <div class="col-6">
-                            <label for="upload"><i class="fa-solid fa-camera"></i> Uploaded Images:</label>
+                        <label for="upload">Images:</label>
+                        <div id="upload" class="col-6">
+
+                            {% for image in images %}
+                                <img class="report-img" src="{{ image.image_file.url }}" alt="Image" height="100">
+                                <!-- delete -->
+                            {% endfor %}
+                            <!-- add image -->
+                            <label for="upload"><i class="fa-solid fa-camera"></i> Upload More Images:</label>
                             <br>
-                            <!-- images need to loop and display an editable field -->
-                            {{ edit_form.images|as_crispy_field }}
+                            <input class="btn" id="upload" type="file" name="images" multiple>
                         </div>
                         <div class="col-6">
                             {{ edit_form.gps_map_link|as_crispy_field }}
                         </div>
-                        <!-- <div class="col-12 d-flex flex-row justify-content-center">
+                        <div class="col-12 d-flex flex-row justify-content-center">
                             <input class="btn btn-success" type="submit" value="Update Report">
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -74,3 +80,29 @@
 </div>
 
 {% endblock %}
+
+<!-- <label for="upload"><i class="fa-solid fa-camera"></i> Uploaded Images:</label>
+                            <br>
+                            {% for image in images %}
+                            <img src="{{ image.image_file.url }}" alt="Image" height="100">
+                            {% endfor %} -->
+
+<!-- <div id="image-inputs">
+                                
+                            </div>
+
+                            <a href="#" onclick="addImageInput()">Add Another Image</a> -->
+
+<!-- <script>
+    var inputCount = 1;
+
+    function addImageInput() {
+        event.preventDefault();
+        var container = document.getElementById("image-inputs");
+        var newInput = document.createElement("input");
+        newInput.type = "file";
+        newInput.name = "images" + inputCount;
+        container.appendChild(newInput);
+        inputCount++;
+    }
+</script> -->

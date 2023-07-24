@@ -220,6 +220,7 @@ footer a {
     margin: 5px 5px 0 0;
     border: 1px solid #2596be;
     border-radius: 5px;
+    object-fit: cover;
 }
 
 .report-img img {

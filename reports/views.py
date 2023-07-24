@@ -92,6 +92,32 @@ def create_report_view(request):
 def edit_report(request, pk):
 
     report = Report.objects.get(pk=pk)
-    edit_form = CreateReportForm(instance=report)
+    edit_form = None
+    images = report.images.all()
 
-    return render(request, 'edit_report.html', {'edit_form': edit_form})
+    if request.method == 'POST':
+        edit_form = CreateReportForm(
+            request.POST, request.FILES, instance=report)
+
+        if edit_form.is_valid():
+            report = edit_form.save()
+
+            images = request.FILES.getlist('images')
+
+            for image in images:
+                ImageFile.objects.create(
+                    report=report,
+                    image_file=image
+                    )
+
+            return redirect('account')
+
+    else:
+        edit_form = CreateReportForm(instance=report)
+
+    context = {
+        'edit_form': edit_form,
+        'images': images
+    }
+
+    return render(request, 'edit_report.html', context)
