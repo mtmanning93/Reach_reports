@@ -76,7 +76,31 @@
             <div class="col-3 d-flex flex-column justify-content-center align-items-center">
                 <p>{{ report.start_date }}</p>
                 <a href="{% url 'edit_report' pk=report.pk %}" class="ud-btn text-info">Edit</a>
-                <a href="#" class="ud-btn text-danger">Delete</a>
+                <a href="#" class="ud-btn text-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal" data-report-id="{{ report.pk }}">
+                    Delete
+                </a>
+            </div>
+            <!-- Delete Modal -->
+            <div class="modal" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm Deletion</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this report? This can not be undone!
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <!-- The form submission will handle the delete action -->
+                            <form method="post" action="{% url 'delete' pk=report.pk %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         {% endfor %}
@@ -100,4 +124,5 @@
     </nav>
     {% endif %}
 </div>
+
 {% endblock %}

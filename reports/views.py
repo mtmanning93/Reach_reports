@@ -138,3 +138,13 @@ def edit_report(request, pk):
     }
 
     return render(request, 'edit_report.html', context)
+
+
+def delete_report(request, pk):
+    report = get_object_or_404(Report, pk=pk)
+
+    if request.method == 'POST':
+        report.delete()
+        return redirect('account')
+
+    return redirect('account')
