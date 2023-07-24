@@ -91,13 +91,27 @@ def create_report_view(request):
 
 
 def edit_report(request, pk):
-
     report = Report.objects.get(pk=pk)
     edit_form = None
     images = report.images.all()
     images_to_delete = []
 
     if request.method == 'POST':
+        confirm_deletion = request.POST.get('confirm-deletion', 'false')
+
+        if confirm_deletion == 'true':
+            # Handle image deletions (confirmed by the user)
+            for image in report.images.all():
+                checkbox_name = f"delete_image_{image.id}"
+                if request.POST.get(checkbox_name):
+                    images_to_delete.append(image.id)
+                    cloudinary.api.delete_resources(
+                        [image.image_file.public_id])
+                    image.delete()
+
+            return redirect('account')
+
+        # If confirm-deletion is not true, regular form submission
         edit_form = CreateReportForm(
             request.POST, request.FILES, instance=report)
 
@@ -110,18 +124,7 @@ def edit_report(request, pk):
                 ImageFile.objects.create(
                     report=report,
                     image_file=image
-                    )
-
-            # image deletions
-            for image in report.images.all():
-                checkbox_name = f"delete_image_{image.id}"
-                if request.POST.get(checkbox_name):
-                    images_to_delete.append(image.id)
-                    cloudinary.api.delete_resources(
-                        [image.image_file.public_id]
-                        )
-                    
-                    image.delete()
+                )
 
             return redirect('account')
 
@@ -131,6 +134,7 @@ def edit_report(request, pk):
     context = {
         'edit_form': edit_form,
         'images': images,
+        'show_modal': False,  # Initially set to False
     }
 
     return render(request, 'edit_report.html', context)
