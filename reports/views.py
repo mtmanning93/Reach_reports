@@ -148,3 +148,13 @@ def delete_report(request, pk):
         return redirect('account')
 
     return redirect('account')
+
+
+def delete_account(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+
+    if request.method == 'POST':
+        user.delete()
+        return redirect('home')
+
+    return redirect('home')
