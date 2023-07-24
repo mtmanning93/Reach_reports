@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import generic
+import cloudinary
 from django.http import HttpResponseRedirect
 from django.utils.text import slugify
 from .models import Report, Comment, ImageFile
@@ -94,6 +95,7 @@ def edit_report(request, pk):
     report = Report.objects.get(pk=pk)
     edit_form = None
     images = report.images.all()
+    images_to_delete = []
 
     if request.method == 'POST':
         edit_form = CreateReportForm(
@@ -110,6 +112,17 @@ def edit_report(request, pk):
                     image_file=image
                     )
 
+            # image deletions
+            for image in report.images.all():
+                checkbox_name = f"delete_image_{image.id}"
+                if request.POST.get(checkbox_name):
+                    images_to_delete.append(image.id)
+                    cloudinary.api.delete_resources(
+                        [image.image_file.public_id]
+                        )
+                    
+                    image.delete()
+
             return redirect('account')
 
     else:
@@ -117,7 +130,7 @@ def edit_report(request, pk):
 
     context = {
         'edit_form': edit_form,
-        'images': images
+        'images': images,
     }
 
     return render(request, 'edit_report.html', context)

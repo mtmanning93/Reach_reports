@@ -53,17 +53,23 @@
                         <div class="col-12">
                             {{ edit_form.description|as_crispy_field }}
                         </div>
-                        <label for="upload">Images:</label>
-                        <div id="upload" class="col-6">
+                        <div class="col-6">
+                            <div class="row">
+                                <p>Report Images</p>
+                                {% for image in images %}
+                                <div class="col-4">
+                                    <img class="report-img" src="{{ image.image_file.url }}" alt="Image" height="100">
+                                    <p class="text-secondary d-inline">Delete</p>
+                                    <input type="checkbox" name="delete_image_{{ image.id }}">
+                                </div>
+                                {% endfor %}
+                            </div>
 
-                            {% for image in images %}
-                                <img class="report-img" src="{{ image.image_file.url }}" alt="Image" height="100">
-                                <!-- delete -->
-                            {% endfor %}
                             <!-- add image -->
-                            <label for="upload"><i class="fa-solid fa-camera"></i> Upload More Images:</label>
-                            <br>
-                            <input class="btn" id="upload" type="file" name="images" multiple>
+                            <div class="col-12 mt-2">
+                                <label for="upload"><i class="fa-solid fa-camera"></i> Upload More Images:</label>
+                                <input class="btn" id="upload" type="file" name="images" multiple>
+                            </div>
                         </div>
                         <div class="col-6">
                             {{ edit_form.gps_map_link|as_crispy_field }}
@@ -80,29 +86,3 @@
 </div>
 
 {% endblock %}
-
-<!-- <label for="upload"><i class="fa-solid fa-camera"></i> Uploaded Images:</label>
-                            <br>
-                            {% for image in images %}
-                            <img src="{{ image.image_file.url }}" alt="Image" height="100">
-                            {% endfor %} -->
-
-<!-- <div id="image-inputs">
-                                
-                            </div>
-
-                            <a href="#" onclick="addImageInput()">Add Another Image</a> -->
-
-<!-- <script>
-    var inputCount = 1;
-
-    function addImageInput() {
-        event.preventDefault();
-        var container = document.getElementById("image-inputs");
-        var newInput = document.createElement("input");
-        newInput.type = "file";
-        newInput.name = "images" + inputCount;
-        container.appendChild(newInput);
-        inputCount++;
-    }
-</script> -->
