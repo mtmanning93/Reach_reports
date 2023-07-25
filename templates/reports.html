@@ -15,28 +15,30 @@
 <div class="container-fluid w-75">
 
     <!-- Search Bar and Filters -->
-    <div class="row pb-3 border-bottom border-3">
+    <div class="row pb-4 border-bottom border-3">
         <div class="col-6">
-            <button class="w-100 btn btn-light"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <!-- conditions filter -->
         </div>
-        <div class="col-3 text-center">
+        <div class="col-4 text-center">
             <div class="dropdown">
-                <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Activity Filter
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Alpine</a></li>
-                  <li><a class="dropdown-item" href="#">Hike</a></li>
-                  <li><a class="dropdown-item" href="#">Ice Climbing</a></li>
-                  <li><a class="dropdown-item" href="#">Multipitch</a></li>
-                  <li><a class="dropdown-item" href="#">Ski Tour</a></li>
-                  <li><a class="dropdown-item" href="#">Solo</a></li>
-                  <li><a class="dropdown-item" href="#">Trad</a></li>
-                  <li><a class="dropdown-item" href="#">Other</a></li>
-                </ul>
+                <form id="filterForm" method="get">
+                    <label for="activity">Activity Filter</label>
+                    <select name="activity" onchange="this.form.submit()">
+                        <option value="">----</option>
+                        <option value="all">All</option>
+                        <option value="alpine">Alpine</option>
+                        <option value="hike">Hike</option>
+                        <option value="skitour">Ski Tour</option>
+                        <option value="iceclimbing">Ice Climbing</option>
+                        <option value="multipitch">Mulitpitch</option>
+                        <option value="trad">Trad</option>
+                        <option value="solo">Solo</option>
+                        <option value="other">Other</option>
+                    </select>
+                </form>
               </div>
         </div>
-        <div class="col-3 text-end">
+        <div class="col-4 text-end">
             {% if user.is_authenticated %}
                 <a href="{% url 'create_report' %}" class="btn btn-success">Create New Report</a>
             {% else %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
-from django.views import generic
+from django.views.generic import ListView
 from django.http import HttpResponseRedirect
 from django.utils.text import slugify
 from django.contrib import messages
@@ -31,11 +31,21 @@ def get_landing_page(request):
         request, 'index.html', {'random_image_url': random_image_url})
 
 
-class ReportList(generic.ListView):
+class ReportList(ListView):
     model = Report
-    queryset = Report.objects.filter(status=1).order_by('-start_date')
     template_name = 'reports.html'
     paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        selected_activity = self.request.GET.get('activity', 'all')
+
+        if selected_activity == 'all':
+            queryset = queryset.filter(status=1).order_by('-start_date')
+        else:
+            queryset = queryset.filter(status=1, activity_category=selected_activity).order_by('-start_date')
+
+        return queryset
 
 
 def report_details(request, pk):
