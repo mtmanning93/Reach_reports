@@ -129,11 +129,13 @@
     </footer>
 
     <script>
-        setTimeout(function () {
-            let messages = document.getElementById("msg");
-            let alert = new bootstrap.Alert(messages);
-            alert.close()
-        }, 3000);
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(function () {
+                let messages = document.getElementById("msg");
+                let alert = new bootstrap.Alert(messages);
+                alert.close()
+            }, 3000);
+        });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

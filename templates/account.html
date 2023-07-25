@@ -77,7 +77,7 @@
 <!-- Reports -->
 
 <div class="container-fluid w-75 mb-4">
-    <div class="row">
+    <div class="row pb-2">
         <div class="col-md-8 p-0">
             <h2 class="p-0 mb-2">Your Reports:</h2>
         </div>
@@ -86,105 +86,126 @@
                 Create New Report
             </a>
         </div>
-        {% if reports %}
-        {% for report in reports %}
-        <div class="report-list-item d-flex justify-content-evenly bg-light mb-2">
-            <!-- Images -->
-            <div class="col-2 d-flex align-items-center justify-content-center">
-                {% if report.images.count > 0 %}
-                <!-- Images are uploaded for the report -->
-                {% for image_file in report.images.all %}
-                {% if forloop.first %}
-                <img src="{{ image_file.image_file.url }}" alt="{{ report.title }}" class="img-thumbnail">
-                {% endif %}
-                {% endfor %}
-                {% else %}
-                <!-- No images available in report -->
-                <img src="/static/images/no-images.png" alt="No images available" class="img-thumbnail">
-                {% endif %}
-                <p class="img-num text-secondary">{{ report.images.all.count }}</p>
-            </div>
-            <!-- Title -->
-            <div class="col-3 text-start">
-                <a href="{% url 'report_details' report.pk  %}">
-                    <h5>{{ report.title }}</h5>
-                </a>
-                <p>{{ report.activity_category|title }}</p>
-            </div>
-            <!-- Overall Conditions -->
-            <div class="d-flex flex-column align-items-center justify-content-center col-2">
-                {% if report.overall_conditions == "perfect" %}
-                <i class="fa-solid fa-star"></i>
-                {% elif report.overall_conditions == "good" %}
-                <i class="fa-solid fa-circle-check"></i>
-                {% elif report.overall_conditions == "ok" %}
-                <i class="fa-solid fa-circle-exclamation"></i>
-                {% else %}
-                <i class="fa-solid fa-circle-xmark"></i>
-                {% endif %}
-                {{ report.overall_conditions }}
-            </div>
-            <!-- Status -->
-            <div class="d-flex flex-column align-items-center justify-content-center col-2">
-                {{ report.status|display_status|title }}
-            </div>
-            <!-- Author Activity Date -->
-            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-                <p>{{ report.start_date }}</p>
-                <a href="{% url 'edit_report' pk=report.pk %}" class="ud-btn text-info">Edit</a>
-                <a href="#" class="ud-btn text-danger" data-bs-toggle="modal" data-bs-target="#deleteReportModal"
-                    data-report-id="{{ report.pk }}">
-                    Delete
-                </a>
-            </div>
+    </div>
 
-            <!-- Delete Report Modal -->
+    <!-- List Key -->
+    <div class="row justify-content-evenly text-center text-muted p-0 m-0">
+        <div class="col-2">
+            <i class="fa-solid fa-camera"></i>
+        </div>
+        <div class="col-3">
+            <p>Title</p>
+        </div>
+        <div class="col-2">
+            <p>Conditions</p>
+        </div>
+        <div class="col-2">
+            <p>Published</p>
+        </div>
+        <div class="col-2">
+            <p>Date</p>
+        </div>
+    </div>
 
-            <div class="modal" id="deleteReportModal" tabindex="-1" aria-labelledby="deleteReportModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="deleteReportModalLabel">Confirm Deletion</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Are you sure you want to delete <strong>{{ report.title }}</strong> report? This can
-                            <strong>NOT</strong> be undone!
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <!-- The form submission will delete -->
-                            <form method="post" action="{% url 'delete' pk=report.pk %}">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </div>
+    {% if reports %}
+    {% for report in reports %}
+    <div class="report-list-item d-flex justify-content-evenly bg-light rounded p-2 mb-2">
+        <!-- Images -->
+        <div class="col-2 d-flex align-items-center justify-content-center">
+            {% if report.images.count > 0 %}
+            <!-- Images are uploaded for the report -->
+            {% for image_file in report.images.all %}
+            {% if forloop.first %}
+            <img src="{{ image_file.image_file.url }}" alt="{{ report.title }}" class="img-thumbnail">
+            {% endif %}
+            {% endfor %}
+            {% else %}
+            <!-- No images available in report -->
+            <img src="/static/images/no-images.png" alt="No images available" class="img-thumbnail">
+            {% endif %}
+            <p class="img-num text-secondary">{{ report.images.all.count }}</p>
+        </div>
+        <!-- Title -->
+        <div class="col-3 text-start">
+            <a href="{% url 'report_details' report.pk  %}">
+                <h5>{{ report.title }}</h5>
+            </a>
+            <p>{{ report.activity_category|title }}</p>
+        </div>
+        <!-- Overall Conditions -->
+        <div class="d-flex flex-column align-items-center justify-content-center col-2">
+            {% if report.overall_conditions == "perfect" %}
+            <i class="fa-solid fa-star"></i>
+            {% elif report.overall_conditions == "good" %}
+            <i class="fa-solid fa-circle-check"></i>
+            {% elif report.overall_conditions == "ok" %}
+            <i class="fa-solid fa-circle-exclamation"></i>
+            {% else %}
+            <i class="fa-solid fa-circle-xmark"></i>
+            {% endif %}
+            {{ report.overall_conditions }}
+        </div>
+        <!-- Status -->
+        <div class="d-flex flex-column align-items-center justify-content-center col-2">
+            {{ report.status|display_status|title }}
+        </div>
+        <!-- Author Activity Date -->
+        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+            <p>{{ report.start_date }}</p>
+            <a href="{% url 'edit_report' pk=report.pk %}" class="ud-btn text-info">Edit</a>
+            <a href="#" class="ud-btn text-danger" data-bs-toggle="modal" data-bs-target="#deleteReportModal"
+                data-report-id="{{ report.pk }}">
+                Delete
+            </a>
+        </div>
+
+        <!-- Delete Report Modal -->
+
+        <div class="modal" id="deleteReportModal" tabindex="-1" aria-labelledby="deleteReportModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteReportModalLabel">Confirm Deletion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete <strong>{{ report.title }}</strong> report? This can
+                        <strong>NOT</strong> be undone!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <!-- The form submission will delete -->
+                        <form method="post" action="{% url 'delete' pk=report.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </div>
                 </div>
             </div>
-
         </div>
-        {% endfor %}
-        {% else %}
-        <h4>No reports found.</h4>
-        {% endif %}
 
     </div>
-
-    <!-- Pagination -->
-    {% if is_paginated %}
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
-            {% endif %}
-            {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-            {% endif %}
-        </ul>
-    </nav>
+    {% endfor %}
+    {% else %}
+    <h4>No reports found.</h4>
     {% endif %}
+
+</div>
+
+<!-- Pagination -->
+{% if is_paginated %}
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+        {% endif %}
+        {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
 </div>
 
 {% endblock %}

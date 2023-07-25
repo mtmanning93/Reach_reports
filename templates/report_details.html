@@ -162,18 +162,7 @@
                     </div>
                 </div>
                 {% endfor %}
-
-                <!-- Maps -->
-
-                <!-- <div class="row">
-                {% if report.gps_map_link %}
-                    <iframe src=" {{ report.gps_map_link }}" frameborder="" allowfullscreen="" width="50%" height="400"></iframe>
-                {% else %}
-                    <p>No Map Information Given</p>
-                {% endif %}
-            </div> -->
             </div>
-
         </div>
         <div class="col-12 d-flex justify-content-end">
             <p class="text-secondary mb-0 mt-2">Report Published: {{ report.created_on|date:"F j, Y" }}</p>
