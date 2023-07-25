@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import generic
-import cloudinary
 from django.http import HttpResponseRedirect
 from django.utils.text import slugify
+from django.contrib import messages
+import cloudinary
 from .models import Report, Comment, ImageFile
 from .forms import CommentForm, CreateReportForm, ImageFileForm
 
@@ -30,6 +31,9 @@ def report_details(request, pk):
             comment.report = report
             comment.name = request.user.username
             comment.save()
+
+            messages.add_message(
+                request, messages.SUCCESS, 'Commented Succesfully')
             return redirect('report_details', pk=pk)
     else:
         comment_form = CommentForm()
@@ -82,6 +86,9 @@ def create_report_view(request):
                     image_file=image
                     )
 
+            messages.add_message(
+                request, messages.SUCCESS, 'Report created successfully!')
+
             return redirect('reports')
 
     else:
@@ -109,9 +116,35 @@ def edit_report(request, pk):
                         [image.image_file.public_id])
                     image.delete()
 
-            return redirect('account')
+            # Continue with form validation and saving
+            edit_form = CreateReportForm(
+                request.POST, request.FILES, instance=report)
 
-        # If confirm-deletion is not true, regular form submission
+            if edit_form.is_valid():
+                report = edit_form.save()
+
+                images = request.FILES.getlist('images')
+
+                for image in images:
+                    ImageFile.objects.create(
+                        report=report,
+                        image_file=image
+                    )
+
+                messages.add_message(
+                    request, messages.INFO,
+                    'Report updated successfully and images have been deleted!')
+
+                return redirect('account')
+            else:
+                context = {
+                    'edit_form': edit_form,
+                    'images': images,
+                    'show_modal': True,
+                }
+                return render(request, 'edit_report.html', context)
+
+        # If confirm-deletion is not true
         edit_form = CreateReportForm(
             request.POST, request.FILES, instance=report)
 
@@ -125,6 +158,9 @@ def edit_report(request, pk):
                     report=report,
                     image_file=image
                 )
+
+            messages.add_message(
+                request, messages.INFO, 'Report updated successfully!')
 
             return redirect('account')
 
@@ -145,6 +181,8 @@ def delete_report(request, pk):
 
     if request.method == 'POST':
         report.delete()
+        messages.add_message(
+                request, messages.SUCCESS, 'Report deleted successfully!')
         return redirect('account')
 
     return redirect('account')
