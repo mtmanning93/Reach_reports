@@ -85,7 +85,7 @@ def account_view(request):
 
     if request.user.is_authenticated:
         user = request.user
-        
+
         context = {
             'username': user.username,
             'email': user.email,

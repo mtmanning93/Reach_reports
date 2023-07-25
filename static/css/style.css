@@ -146,6 +146,10 @@ footer a {
     margin: 0;
 }
 
+#safety_message {
+    font-size: 0.75em;
+}
+
 /* Reports List */
 
 .img-thumbnail {
