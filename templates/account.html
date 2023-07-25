@@ -21,6 +21,34 @@
                 {{ total_reports }}
             </h4>
             {% endwith %}
+            <div class="col-12 text-center">
+                <a href="#" class="text-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                    Delete Account
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Account Deletion Modal -->
+
+<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteAccountModalLabel">Confirm Account Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form method="post" action="{% url 'delete_account' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete Account</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -76,16 +104,18 @@
             <div class="col-3 d-flex flex-column justify-content-center align-items-center">
                 <p>{{ report.start_date }}</p>
                 <a href="{% url 'edit_report' pk=report.pk %}" class="ud-btn text-info">Edit</a>
-                <a href="#" class="ud-btn text-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal" data-report-id="{{ report.pk }}">
+                <a href="#" class="ud-btn text-danger" data-bs-toggle="modal" data-bs-target="#deleteReportModal" data-report-id="{{ report.pk }}">
                     Delete
                 </a>
             </div>
-            <!-- Delete Modal -->
-            <div class="modal" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+
+            <!-- Delete Report Modal -->
+
+            <div class="modal" id="deleteReportModal" tabindex="-1" aria-labelledby="deleteReportModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm Deletion</h5>
+                            <h5 class="modal-title" id="deleteReportModalLabel">Confirm Deletion</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -102,6 +132,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         {% endfor %}
         {% else %}
