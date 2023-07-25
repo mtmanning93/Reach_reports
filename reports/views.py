@@ -39,11 +39,19 @@ class ReportList(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         selected_activity = self.request.GET.get('activity', 'all')
+        selected_grade = self.request.GET.get('grade', 'all')
 
-        if selected_activity == 'all':
+        if selected_activity == 'all' and selected_grade == 'all':
             queryset = queryset.filter(status=1).order_by('-start_date')
+        elif selected_activity == 'all':
+            queryset = queryset.filter(
+                status=1, overall_conditions=selected_grade).order_by('-start_date')
+        elif selected_grade == 'all':
+            queryset = queryset.filter(
+                status=1, activity_category=selected_activity).order_by('-start_date')
         else:
-            queryset = queryset.filter(status=1, activity_category=selected_activity).order_by('-start_date')
+            queryset = queryset.filter(
+                status=1, activity_category=selected_activity, overall_conditions=selected_grade).order_by('-start_date')
 
         return queryset
 

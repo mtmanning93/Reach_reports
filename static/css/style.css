@@ -163,9 +163,17 @@ footer a {
     margin: 0;
 }
 
-
 .report-list-title {
     color: #2596be;
+}
+
+label {
+    font-family: 'Lato', sans-serif;
+}
+
+.filter {
+    border: 1px solid #2596be;
+    border-radius: 5px;
 }
 
 /* Overall_Conditions */

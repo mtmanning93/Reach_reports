@@ -10,20 +10,32 @@
         <h6>Written by climbers for climbers.</h6>
     </div>
 </div>
+
 <!-- Reports -->
 
 <div class="container-fluid w-75">
 
-    <!-- Search Bar and Filters -->
+    <!-- Filters -->
+
     <div class="row pb-4 border-bottom border-3">
-        <div class="col-6">
-            <!-- conditions filter -->
-        </div>
-        <div class="col-4 text-center">
-            <div class="dropdown">
+        <div class="col-6 text-start d-flex">
+            <div class="col-6 d-flex align-items-end">
+                <form id="gradeFilterForm" method="get">
+                    <label for="grade">Grade Filter</label>
+                    <select class="filter" name="grade" onchange="this.form.submit()">
+                        <option value="">----</option>
+                        <option value="all">All</option>
+                        <option value="bad">Bad</option>
+                        <option value="ok">OK</option>
+                        <option value="good">Good</option>
+                        <option value="perfect">Perfect</option>
+                    </select>
+                </form>
+            </div>
+            <div class="col-6 d-flex align-items-end">
                 <form id="filterForm" method="get">
                     <label for="activity">Activity Filter</label>
-                    <select name="activity" onchange="this.form.submit()">
+                    <select class="filter" name="activity" onchange="this.form.submit()">
                         <option value="">----</option>
                         <option value="all">All</option>
                         <option value="alpine">Alpine</option>
@@ -36,13 +48,13 @@
                         <option value="other">Other</option>
                     </select>
                 </form>
-              </div>
+            </div>
         </div>
-        <div class="col-4 text-end">
+        <div class="col-6 text-end">
             {% if user.is_authenticated %}
-                <a href="{% url 'create_report' %}" class="btn btn-success">Create New Report</a>
+            <a href="{% url 'create_report' %}" class="btn btn-success">Create New Report</a>
             {% else %}
-                <a href="{% url 'account_login' %}" class="btn btn-success">Login To Create Reports</a>
+            <a href="{% url 'account_login' %}" class="btn btn-success">Login To Create Reports</a>
             {% endif %}
         </div>
     </div>
@@ -88,7 +100,7 @@
             <div class="col-3 text-start">
                 <h4 class="report-list-title mt-2 mb-2">{{ report.title }}</h4>
                 <p class="m-0">{{ report.activity_category|title }}</p>
-                <p class="mb-2">Goal achieved: 
+                <p class="mb-2">Goal achieved:
                     {% if report.goal_reached == "yes" %}
                     <i class="fa-solid fa-circle-check text-success"></i>
                     {% else %}
