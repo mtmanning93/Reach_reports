@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load custom_tags %}
 
 <div class="container-fluid d-flex justify-content-center mt-5 mb-5">
     <div class="row">
@@ -46,14 +47,19 @@
                     This action cannot be undone and will erase all reports, comments and images created by
                     <strong>{{ user.username }}.</strong>
                 </p>
-                <h5>Deletions:</h5>
-                <p>Reports:
+                <h5>Account Statistics:</h5>
+                <p class="m-0">
+                    Reports created:
                     {% with reports.count as total_reports %}
                     {{ total_reports }}
                     {% endwith %}
                 </p>
-                <p>Comments:
-                    {% load custom_tags %}
+                <p class="m-0">
+                    Images uploaded:
+                    {% count_user_images request.user %}
+                </p>
+                <p>
+                    Comments left:
                     {% count_user_comments request.user %}
                 </p>
             </div>
