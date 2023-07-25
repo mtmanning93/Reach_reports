@@ -133,7 +133,8 @@ def edit_report(request, pk):
 
                 messages.add_message(
                     request, messages.INFO,
-                    'Report updated successfully and images have been deleted!')
+                    'Report updated successfully and images have been deleted!'
+                    )
 
                 return redirect('account')
             else:
