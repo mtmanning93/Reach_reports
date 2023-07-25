@@ -6,10 +6,26 @@ from django.contrib import messages
 import cloudinary
 from .models import Report, Comment, ImageFile
 from .forms import CommentForm, CreateReportForm, ImageFileForm
+import random
+
+
+def get_random_images():
+
+    images = [
+        "/static/images/lagginhorn-header.jpg",
+        "/static/images/steep_snow.jpg",
+        "/static/images/ridge_scramble.jpg",
+        "/static/images/hiking.jpg",
+
+        # Add more image URLs here
+    ]
+
+    return random.choice(images)
 
 
 def get_landing_page(request):
-    return render(request, 'index.html')
+    random_image_url = get_random_images()
+    return render(request, 'index.html', {'random_image_url': random_image_url})
 
 
 class ReportList(generic.ListView):

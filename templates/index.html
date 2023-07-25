@@ -3,16 +3,16 @@
 {% block content %}
 
     <div id="head-img-wrapper" class="container-fluid p-0 position-relative">
-        <img src="/static/images/lagginhorn-header.jpg" alt="Climber on the Lagginhorn traverse" class="">
+        <img src="{{ random_image_url }}" alt="Random Image" class="d-block w-100">
 
         <div id="head-btns" class="w-50 position-absolute translate-middle d-flex flex-column align-items-center">
             <a href="{% url 'reports' %}" class="w-50 btn btn-light border-3 border-dark opacity-75 mb-2">Condition Reports</a>
             {% if user.is_authenticated %}
-            <a href="{% url 'create_report' %}" class="w-50 btn btn-success">Create New Report</a>
+                <a href="{% url 'create_report' %}" class="w-50 btn btn-success">Create New Report</a>
             {% else %}
-            <a href="{% url 'account_signup' %}" id="head-sign-up-btn" class="w-50 btn btn-light">Sign-Up</a>
+                <a href="{% url 'account_signup' %}" id="head-sign-up-btn" class="w-50 btn btn-light">Sign-Up</a>
             {% endif %}
         </div>
     </div>
-
+    
 {% endblock %}
