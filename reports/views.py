@@ -34,7 +34,7 @@ def get_landing_page(request):
 class ReportList(ListView):
     model = Report
     template_name = 'reports.html'
-    paginate_by = 10
+    paginate_by = 15
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -42,16 +42,25 @@ class ReportList(ListView):
         selected_grade = self.request.GET.get('grade', 'all')
 
         if selected_activity == 'all' and selected_grade == 'all':
-            queryset = queryset.filter(status=1).order_by('-start_date')
+            queryset = queryset.filter(
+                status=1
+                ).order_by('-start_date')
         elif selected_activity == 'all':
             queryset = queryset.filter(
-                status=1, overall_conditions=selected_grade).order_by('-start_date')
+                status=1,
+                overall_conditions=selected_grade
+                ).order_by('-start_date')
         elif selected_grade == 'all':
             queryset = queryset.filter(
-                status=1, activity_category=selected_activity).order_by('-start_date')
+                status=1,
+                activity_category=selected_activity
+                ).order_by('-start_date')
         else:
             queryset = queryset.filter(
-                status=1, activity_category=selected_activity, overall_conditions=selected_grade).order_by('-start_date')
+                status=1,
+                activity_category=selected_activity,
+                overall_conditions=selected_grade
+                ).order_by('-start_date')
 
         return queryset
 
