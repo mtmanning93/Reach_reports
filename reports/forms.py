@@ -26,7 +26,8 @@ class CreateReportForm(forms.ModelForm):
             'description',
             'number_in_group',
             'number_on_route',
-            'gps_map_link'
+            'gps_map_link',
+            'status'
         ]
 
     def __init__(self, *args, **kwargs):
@@ -52,6 +53,7 @@ class CreateReportForm(forms.ModelForm):
             required=False,
             label="Custom Images Field"
         )
+        self.fields['status'].label = "Publish/ Draft"
 
 
 class ImageFileForm(forms.ModelForm):

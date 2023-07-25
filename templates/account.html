@@ -74,6 +74,8 @@
     </div>
 </div>
 
+<!-- Reports -->
+
 <div class="container-fluid w-75 mb-4">
     <div class="row">
         <div class="col-md-8 p-0">
@@ -86,9 +88,9 @@
         </div>
         {% if reports %}
         {% for report in reports %}
-        <div class="report-list-item d-flex p-1 bg-light mb-2">
+        <div class="report-list-item d-flex justify-content-evenly bg-light mb-2">
             <!-- Images -->
-            <div class="col-3 d-flex align-items-center justify-content-center">
+            <div class="col-2 d-flex align-items-center justify-content-center">
                 {% if report.images.count > 0 %}
                 <!-- Images are uploaded for the report -->
                 {% for image_file in report.images.all %}
@@ -100,6 +102,7 @@
                 <!-- No images available in report -->
                 <img src="/static/images/no-images.png" alt="No images available" class="img-thumbnail">
                 {% endif %}
+                <p class="img-num text-secondary">{{ report.images.all.count }}</p>
             </div>
             <!-- Title -->
             <div class="col-3 text-start">
@@ -109,7 +112,7 @@
                 <p>{{ report.activity_category|title }}</p>
             </div>
             <!-- Overall Conditions -->
-            <div class="d-flex flex-column align-items-center justify-content-center col-3">
+            <div class="d-flex flex-column align-items-center justify-content-center col-2">
                 {% if report.overall_conditions == "perfect" %}
                 <i class="fa-solid fa-star"></i>
                 {% elif report.overall_conditions == "good" %}
@@ -121,8 +124,12 @@
                 {% endif %}
                 {{ report.overall_conditions }}
             </div>
+            <!-- Status -->
+            <div class="d-flex flex-column align-items-center justify-content-center col-2">
+                {{ report.status|display_status|title }}
+            </div>
             <!-- Author Activity Date -->
-            <div class="col-3 d-flex flex-column justify-content-center align-items-center">
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                 <p>{{ report.start_date }}</p>
                 <a href="{% url 'edit_report' pk=report.pk %}" class="ud-btn text-info">Edit</a>
                 <a href="#" class="ud-btn text-danger" data-bs-toggle="modal" data-bs-target="#deleteReportModal"
