@@ -59,7 +59,7 @@
                             <input class="btn" id="upload" type="file" name="images" multiple>
                         </div>
                         <div class="col-6">
-                            <!-- GPS -->
+                            {{ report_form.gps_map_link|as_crispy_field }}
                         </div>
                         <div class="col-12 d-flex flex-row justify-content-center">
                             <input class="btn btn-success" type="submit" value="Create Report">

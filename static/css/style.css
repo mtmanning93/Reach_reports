@@ -233,6 +233,10 @@ footer a {
     border-color: #2596be;
 }
 
+#liked {
+    color: #2596be;
+}
+
 /* Comments */
 
 #comments-title {

@@ -51,6 +51,19 @@ def report_details(request, pk):
     )
 
 
+def like_report(request, pk):
+    if request.method == 'POST':
+        report = get_object_or_404(Report, pk=pk)
+
+        if request.user.is_authenticated:
+            if report.likes.filter(id=request.user.id).exists():
+                report.likes.remove(request.user)
+            else:
+                report.likes.add(request.user)
+
+    return HttpResponseRedirect(reverse('report_details', args=[pk]))
+
+
 def account_view(request):
     context = {}
 
@@ -193,10 +206,9 @@ def delete_account(request):
     if request.method == 'POST':
         user = request.user
         user.delete()
-        logout(request)
 
         messages.add_message(
-                request, messages.DANGER, 'Account deleted successfully!')
+                request, messages.SUCCESS, 'Account deleted successfully!')
 
         return redirect('home')
 

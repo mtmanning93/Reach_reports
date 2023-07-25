@@ -5,6 +5,7 @@
 {% load crispy_forms_tags %}
 
 <!-- Title & back button -->
+
 <div class="container-fluid d-flex flex-column align-items-center mt-3">
     <div class="row w-75">
         <div class="col-10 p-0">
@@ -19,7 +20,9 @@
         </div>
     </div>
 </div>
+
 <!-- Report -->
+
 <div class="container-fluid d-flex justify-content-center">
     <div class="row w-75 bg-light rounded p-3 mb-3">
         <!-- Info -->
@@ -79,14 +82,16 @@
                     </div>
                     <div class="col-6">
                         <div class="border rounded bg-light">
-                            <p class="info-label text-muted mt-1"><i class="fa-solid fa-person-hiking fs-6">-</i><i class="fa-solid fa-person-hiking fs-6"></i> People in Group:</p>
+                            <p class="info-label text-muted mt-1"><i class="fa-solid fa-person-hiking fs-6">-</i><i
+                                    class="fa-solid fa-person-hiking fs-6"></i> People in Group:</p>
                             <p class="info-item">{{ report.number_in_group }}</p>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="border rounded bg-light">
-                            
-                            <p class="info-label text-muted mt-1"><i class="fa-solid fa-people-group fs-6"></i> People on Route:</p>
+
+                            <p class="info-label text-muted mt-1"><i class="fa-solid fa-people-group fs-6"></i> People
+                                on Route:</p>
                             <p class="info-item">{{report.number_on_route}}</p>
                         </div>
                     </div>
@@ -114,9 +119,10 @@
                     </div>
                 </div>
             </div>
-
         </div>
+
         <!-- Images -->
+
         <div class="col-md-6 mt-2 mt-md-0">
             <div class="row">
                 {% if report.images.count > 0 %}
@@ -181,11 +187,27 @@
         <div class="col-8 p-0">
             <h2 class="p-0 mb-2">Comments</h2>
         </div>
-        <div class="col-4 p-0 mr-2 d-flex justify-content-end">
-            {% with report.likes.count as total_likes %}
-            <p class="text-muted m-0 p-2">{{ total_likes }}</p>
-            <h3><i class="fa-regular fa-thumbs-up"></i></h3>
-            {% endwith %}
+        <div class="col-4 p-0 mr-2 d-flex justify-content-end align-items-center">
+            <p class="text-muted m-0 p-2">
+                {{ report.likes.count }}
+            </p>
+            {% if request.user.is_authenticated %}
+            {% if request.user in report.likes.all %}
+            <form action="{% url 'like_report' report.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn p-0 border-none">
+                    <h3 id="liked"><i class="fa-solid fa-thumbs-up"></i></h3>
+                </button>
+            </form>
+            {% else %}
+            <form action="{% url 'like_report' report.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn p-0 border-none">
+                    <h3><i class="fa-regular fa-thumbs-up"></i></h3>
+                </button>
+            </form>
+            {% endif %}
+            {% endif %}
             {% with comments.count as total_comments %}
             <p class="text-muted m-0 p-2">{{ total_comments }}</p>
             <h3><i class="far fa-comments"></i></h3>
