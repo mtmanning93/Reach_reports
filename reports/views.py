@@ -16,8 +16,9 @@ def get_random_images():
         "/static/images/steep_snow.jpg",
         "/static/images/ridge_scramble.jpg",
         "/static/images/hiking.jpg",
-
-        # Add more image URLs here
+        "/static/images/ice_climbing.jpg",
+        "/static/images/skiing.jpg",
+        "/static/images/climbing.jpg",
     ]
 
     return random.choice(images)
@@ -25,7 +26,9 @@ def get_random_images():
 
 def get_landing_page(request):
     random_image_url = get_random_images()
-    return render(request, 'index.html', {'random_image_url': random_image_url})
+
+    return render(
+        request, 'index.html', {'random_image_url': random_image_url})
 
 
 class ReportList(generic.ListView):
@@ -54,17 +57,14 @@ def report_details(request, pk):
     else:
         comment_form = CommentForm()
 
-    return render(
-        request,
-        'report_details.html',
-        {
+    context = {
             'report': report,
             'comments': comments,
             'commented': False,
             'likes_count': likes_count,
             'comment_form': comment_form,
-        },
-    )
+        }
+    return render(request, 'report_details.html', context)
 
 
 def like_report(request, pk):
@@ -85,6 +85,7 @@ def account_view(request):
 
     if request.user.is_authenticated:
         user = request.user
+        
         context = {
             'username': user.username,
             'email': user.email,
