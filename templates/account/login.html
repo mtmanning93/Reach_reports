@@ -17,14 +17,14 @@
             <h4 class="text-center mt-2">{% trans "Welcome back to Reach.<br>We hope your adventures were a success." %}
             </h4>
 
-            <form class="login text-center border-bottom border-primary m-2 p-2" method="POST" action="{% url 'account_login' %}">
+            <form class="login text-center border-bottom border-primary m-2 p-3" method="POST" action="{% url 'account_login' %}">
                 {% csrf_token %}
                 {{ form.as_p }}
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
                 <button class="primaryAction btn signup_button w-75" type="submit">{% trans "Login" %}</button>
-                <a class="d-block mt-2 button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                <!-- <a class="d-block mt-2 button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a> -->
             </form>
             <h5 class="text-center">
                 {% blocktrans %}Want to join the community?

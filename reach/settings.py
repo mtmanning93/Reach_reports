@@ -61,7 +61,10 @@ INSTALLED_APPS = [
     'reports',
 ]
 
+# Allauth
+
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_REQUIRED = True
 
 SITE_ID = 1
 
