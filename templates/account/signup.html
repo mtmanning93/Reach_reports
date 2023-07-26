@@ -16,20 +16,20 @@
             <h4 class="text-center mt-2">
                 {% trans "Welcome to Reach." %}
             </h4>
-            <p class="text-center">{% trans "To comment, like and create your own reports to share with other climbers, please fill in the form below." %}</p>
+            <p class="text-center">{% trans "To comment, like and create your own reports for other climbers,<br>please fill in the form below." %}</p>
 
-            <form class="login d-flex flex-column align-items-center w-100 m-2" method="POST" action="{% url 'account_signup' %}">
+            <form class="login d-flex flex-column align-items-center border-bottom border-primary m-2 p-3" method="POST" action="{% url 'account_signup' %}">
                 {% csrf_token %}
                 {{ form.as_p }}
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
-                <button class="primaryAction btn signup_button w-50" type="submit">{% trans "Signup" %}</button>
+                <button class="primaryAction btn signup_button w-75" type="submit">{% trans "Signup" %}</button>
             </form>
             <h5 class="text-center">
                 {% blocktrans %}Already have an account?
             </h5>
-            <a href="{{ login_url }}" class="mt-md-3 w-50 btn btn-success">
+            <a href="{{ login_url }}" class="m-sm-3 w-50 btn btn-success">
                 Login
             </a>
             {% endblocktrans %}
