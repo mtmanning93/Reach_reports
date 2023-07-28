@@ -114,13 +114,13 @@ class ReportListViewTests(TestCase):
             end_date="2023-07-10",
         )
 
-    # def test_filter_by_activity_and_grade(self):
-    #     url = reverse('reports') + '?activity=alpine&grade=good'
-    #     response = self.client.get(url)
-    #     self.assertEqual(response.status_code, 200)
-    #     reports = response.context['object_list']
-    #     self.assertEqual(reports.count(), 1)
-    #     self.assertEqual(reports[0].title, 'Report 1')
+    def test_filter_by_activity_and_grade(self):
+        url = reverse('reports') + '?activity=alpine&grade=good'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        reports = response.context['object_list']
+        self.assertEqual(reports.count(), 1)
+        self.assertEqual(reports[0].title, 'Report 1')
 
     def test_filter_by_activity_only(self):
         url = reverse('reports') + '?activity=hike'
@@ -332,3 +332,4 @@ class DeleteAccountTests(TestCase):
         response = self.client.get(reverse('delete_account'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'account.html')
+        self.assertTrue(User.objects.filter(username='testuser').exists())
