@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
-from .models import Report, Comment
+from .models import Report, Comment, ImageFile
 from .forms import CreateReportForm
 
 
@@ -214,7 +214,8 @@ class CreateReportTests(TestCase):
             'number_on_route': 2,
             'status': 1,
         }
-        response = self.client.post(reverse('create_report'), data=report_data, follow=True)
+        response = self.client.post(
+            reverse('create_report'), data=report_data, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'reports.html')
         self.assertContains(response, 'Report created successfully!')
@@ -227,3 +228,42 @@ class CreateReportTests(TestCase):
         self.assertTemplateUsed(response, 'create_report.html')
         self.assertContains(response, 'is-invalid')
         self.assertFalse(Report.objects.filter(title='Test Report').exists())
+
+
+class EditReportTests(TestCase):
+
+    def setUp(self):
+
+        self.client = Client()
+
+        self.user = User.objects.create(
+            username="testuser",
+            email='test@example.com',
+            password='testpassword'
+        )
+
+        self.report = Report.objects.create(
+            title="Sample Report",
+            slug="sample-report",
+            author=self.user,
+            start_date="2023-07-13",
+            end_date="2023-07-15",
+            overall_conditions="Good",
+            activity_category="Hiking",
+            description="This is a sample report."
+        )
+
+    def test_edit_report_view_GET(self):
+        report = self.report
+        response = self.client.get(reverse('edit_report', args=[report.pk]))
+        self.assertEqual(response.status_code, 200)
+
+    def test_confirm_deletion_true(self):
+        form_data = {
+            'confirm-deletion': 'true',  # Set confirm-deletion to 'true'
+        }
+        response = self.client.post(reverse('edit_report', args=[self.report.pk]), data=form_data, follow=True)
+        self.assertEqual(response.status_code, 200)
+
+        images_deleted = ImageFile.objects.filter(report=self.report).exists()
+        self.assertFalse(images_deleted)
