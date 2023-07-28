@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from .models import Report, Comment
+from .forms import CreateReportForm
 
 
 class TestViews(TestCase):
@@ -175,3 +176,54 @@ class LikeReportTests(TestCase):
         self.assertRedirects(
             response, reverse('report_details', kwargs={'pk': self.report.pk}))
         self.assertTrue(self.report.likes.filter(id=self.user.id).exists())
+
+
+class CreateReportTests(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+
+        self.user = User.objects.create_user(
+            username='testuser', password='testpassword'
+        )
+
+        self.login_status = self.client.login(
+            username='testuser', password='testpassword'
+        )
+
+    def test_create_report_view_GET(self):
+        response = self.client.get(reverse('create_report'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'create_report.html')
+        self.assertContains(response, '<form')
+        self.assertIsInstance(
+            response.context['report_form'], CreateReportForm)
+
+    def test_create_report_view_with_valid_form(self):
+        # Ensure the view creates a report on valid POST request
+        report_data = {
+            'title': 'Test Report',
+            'start_date': '2023-07-29',
+            'end_date': '2023-07-30',
+            'goal_reached': 'yes',
+            'height_in_meters': 3500,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'This is a test report.',
+            'number_in_group': 3,
+            'number_on_route': 2,
+            'status': 1,
+        }
+        response = self.client.post(reverse('create_report'), data=report_data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'reports.html')
+        self.assertContains(response, 'Report created successfully!')
+        self.assertTrue(Report.objects.filter(title='Test Report').exists())
+
+    def test_create_report_view_with_invalid_form(self):
+        report_data = {}  # Empty to create invalid input
+        response = self.client.post(reverse('create_report'), data=report_data)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'create_report.html')
+        self.assertContains(response, 'is-invalid')
+        self.assertFalse(Report.objects.filter(title='Test Report').exists())
