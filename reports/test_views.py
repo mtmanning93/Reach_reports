@@ -1,5 +1,6 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
+from django.contrib.messages import get_messages
 from django.shortcuts import reverse
 from .models import Report, Comment, ImageFile
 from .forms import CreateReportForm
@@ -262,8 +263,79 @@ class EditReportTests(TestCase):
         form_data = {
             'confirm-deletion': 'true',  # Set confirm-deletion to 'true'
         }
-        response = self.client.post(reverse('edit_report', args=[self.report.pk]), data=form_data, follow=True)
+        response = self.client.post(
+            reverse('edit_report', args=[self.report.pk]),
+            data=form_data, follow=True)
         self.assertEqual(response.status_code, 200)
 
         images_deleted = ImageFile.objects.filter(report=self.report).exists()
         self.assertFalse(images_deleted)
+
+    def test_confirm_deletion_false(self):
+        form_data = {
+            'confirm-deletion': 'false',
+        }
+        response = self.client.post(
+            reverse('edit_report', args=[self.report.pk]),
+            data=form_data, follow=True)
+        self.assertEqual(response.status_code, 200)
+
+
+class DeleteReportTests(TestCase):
+
+    def setUp(self):
+
+        self.user = User.objects.create_user(
+            username='testuser', password='testpassword'
+            )
+
+        self.report = Report.objects.create(
+            title='Sample Report',
+            start_date='2023-07-27',
+            end_date='2023-07-28',
+            author=self.user,
+        )
+
+    def test_delete_report_view_deletes_report(self):
+        self.client.login(
+            username=self.user.username, password=self.user.password
+            )
+        response = self.client.post(reverse('delete', args=[self.report.pk]))
+        # Check if the report is deleted and redirects
+        self.assertEqual(response.status_code, 302)  # Redirect not success
+        # Check if the report is deleted in db
+        report_exists = Report.objects.filter(pk=self.report.pk).exists()
+        self.assertFalse(report_exists)
+
+
+class DeleteAccountViewTests(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create_user(
+            username='testuser', email='test@example.com', password='testpassword'
+        )
+        self.client.login(username='testuser', password='testpassword')
+
+    def test_delete_account_successful(self):
+        # Ensure the view deletes the account and redirects to the home page on POST request
+        response = self.client.post(reverse('delete_account'))
+        self.assertEqual(response.status_code, 302)  # 302 means redirect
+        self.assertFalse(User.objects.filter(username='testuser').exists())
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Account deleted successfully!')
+
+    def test_delete_account_not_post(self):
+        # Ensure the view returns the account.html template on non-POST request
+        response = self.client.get(reverse('delete_account'))
+        self.assertEqual(response.status_code, 200)  # 200 means OK
+        self.assertTemplateUsed(response, 'account.html')
+        self.assertTrue(User.objects.filter(username='testuser').exists())
+
+    def test_delete_account_not_authenticated(self):
+        # Ensure the view redirects to the home page if the user is not authenticated
+        self.client.logout()
+        response = self.client.post(reverse('delete_account'))
+        self.assertEqual(response.status_code, 302)  # 302 means redirect
+        self.assertRedirects(response, reverse('home'))
+        self.assertTrue(User.objects.filter(username='testuser').exists())

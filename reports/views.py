@@ -156,9 +156,7 @@ def create_report_view(request):
 
 def edit_report(request, pk):
     report = Report.objects.get(pk=pk)
-    edit_form = None
     images = report.images.all()
-    images_to_delete = []
 
     if request.method == 'POST':
         confirm_deletion = request.POST.get('confirm-deletion', 'false')
@@ -168,41 +166,11 @@ def edit_report(request, pk):
             for image in report.images.all():
                 checkbox_name = f"delete_image_{image.id}"
                 if request.POST.get(checkbox_name):
-                    images_to_delete.append(image.id)
                     cloudinary.api.delete_resources(
-                        [image.image_file.public_id])
+                        [image.image_file.public_id]
+                        )
                     image.delete()
 
-            # Continue with form validation and saving
-            edit_form = CreateReportForm(
-                request.POST, request.FILES, instance=report)
-
-            if edit_form.is_valid():
-                report = edit_form.save()
-
-                images = request.FILES.getlist('images')
-
-                for image in images:
-                    ImageFile.objects.create(
-                        report=report,
-                        image_file=image
-                    )
-
-                messages.add_message(
-                    request, messages.INFO,
-                    'Report updated successfully and images have been deleted!'
-                    )
-
-                return redirect('account')
-            else:
-                context = {
-                    'edit_form': edit_form,
-                    'images': images,
-                    'show_modal': True,
-                }
-                return render(request, 'edit_report.html', context)
-
-        # If confirm-deletion is not true
         edit_form = CreateReportForm(
             request.POST, request.FILES, instance=report)
 
@@ -242,8 +210,6 @@ def delete_report(request, pk):
         messages.add_message(
                 request, messages.SUCCESS, 'Report deleted successfully!')
         return redirect('account')
-
-    return redirect('account')
 
 
 def delete_account(request):
