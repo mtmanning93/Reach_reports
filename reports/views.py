@@ -12,7 +12,7 @@ import random
 def get_random_images():
 
     images = [
-        "../static/images/lagginhorn-header.jpg",
+        "images/lagginhorn-header.jpg",
         "../static/images/steep_snow.jpg",
         "../static/images/ridge_scramble.jpg",
         "../static/images/hiking.jpg",
