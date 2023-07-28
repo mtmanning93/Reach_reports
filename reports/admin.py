@@ -23,14 +23,6 @@ class ReportAdmin(SummernoteModelAdmin):
     # Hide slug...
     exclude = ('slug',)
 
-    # Save slug as...
-    def save_model(self, request, obj, form, change):
-        if not obj.pk:
-            slug = f"{slugify(obj.title)}-{slugify(obj.author)}-{obj.pk}"
-            obj.slug = slug
-
-        super().save_model(request, obj, form, change)
-
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):

@@ -60,6 +60,7 @@ class TestViews(TestCase):
     # Test likes count is correct per report
 
     def test_get_account_page(self):
+        self.client.force_login(self.user)
         response = self.client.get('/reports/account/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'account.html')
