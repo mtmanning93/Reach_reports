@@ -112,6 +112,14 @@ class ReportListViewTests(TestCase):
             end_date="2023-07-10",
         )
 
+    # def test_filter_by_activity_and_grade(self):
+    #     url = reverse('reports') + '?activity=alpine&grade=good'
+    #     response = self.client.get(url)
+    #     self.assertEqual(response.status_code, 200)
+    #     reports = response.context['object_list']
+    #     self.assertEqual(reports.count(), 1)
+    #     self.assertEqual(reports[0].title, 'Report 1')
+
     def test_filter_by_activity_only(self):
         url = reverse('reports') + '?activity=hike'
         response = self.client.get(url)
@@ -134,3 +142,36 @@ class ReportListViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         reports = response.context['object_list']
         self.assertEqual(reports.count(), 3)
+
+
+class LikeReportTests(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+
+        self.user = User.objects.create(
+            username="testuser",
+            email='test@example.com',
+            password='testpassword'
+        )
+
+        # Create a test report
+        self.report = Report.objects.create(
+            title="Tester",
+            author=self.user,
+            status=1,
+            overall_conditions="perfect",
+            activity_category="ski",
+            start_date="2023-07-09",
+            end_date="2023-07-10",
+        )
+
+    def test_like_report_authenticated_user(self):
+        # Simulate an authenticated user
+        self.client.force_login(self.user)
+        response = self.client.post(
+            reverse('like_report', kwargs={'pk': self.report.pk}))
+
+        self.assertRedirects(
+            response, reverse('report_details', kwargs={'pk': self.report.pk}))
+        self.assertTrue(self.report.likes.filter(id=self.user.id).exists())
