@@ -57,8 +57,6 @@ class TestViews(TestCase):
         comment_report = comments.first().report
         self.assertEqual(comment_report, self.report)
 
-    # Test likes count is correct per report
-
     def test_get_account_page(self):
         self.client.force_login(self.user)
         response = self.client.get('/reports/account/')
@@ -74,3 +72,65 @@ class TestViews(TestCase):
         self.assertContains(response, self.user.username)
         self.assertContains(response, self.user.email)
         self.assertContains(response, self.report.title)
+
+
+class ReportListViewTests(TestCase):
+    def setUp(self):
+
+        self.user = User.objects.create(
+            username="testuser",
+            email='test@example.com',
+            password='testpassword'
+        )
+
+        # Create sample reports for testing
+        Report.objects.create(
+            title="Report 1",
+            author=self.user,
+            status=1,
+            overall_conditions="good",
+            activity_category="alpine",
+            start_date="2023-07-09",
+            end_date="2023-07-10",
+        )
+        Report.objects.create(
+            title="Report 2",
+            author=self.user,
+            status=1,
+            overall_conditions="ok",
+            activity_category="hike",
+            start_date="2023-07-09",
+            end_date="2023-07-10",
+        )
+        Report.objects.create(
+            title="Report 3",
+            author=self.user,
+            status=1,
+            overall_conditions="perfect",
+            activity_category="ski",
+            start_date="2023-07-09",
+            end_date="2023-07-10",
+        )
+
+    def test_filter_by_activity_only(self):
+        url = reverse('reports') + '?activity=hike'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        reports = response.context['object_list']
+        self.assertEqual(reports.count(), 1)
+        self.assertEqual(reports[0].title, 'Report 2')
+
+    def test_filter_by_grade_only(self):
+        url = reverse('reports') + '?grade=perfect'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        reports = response.context['object_list']
+        self.assertEqual(reports.count(), 1)
+        self.assertEqual(reports[0].title, 'Report 3')
+
+    def test_filter_all_activities_and_grades(self):
+        url = reverse('reports') + '?activity=all&grade=all'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        reports = response.context['object_list']
+        self.assertEqual(reports.count(), 3)
