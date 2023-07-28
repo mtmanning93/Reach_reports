@@ -168,7 +168,7 @@ class LikeReportTests(TestCase):
             end_date="2023-07-10",
         )
 
-    def test_like_report_authenticated_user(self):
+    def test_like_report(self):
         # Simulate an authenticated user
         self.client.force_login(self.user)
         response = self.client.post(
@@ -177,6 +177,19 @@ class LikeReportTests(TestCase):
         self.assertRedirects(
             response, reverse('report_details', kwargs={'pk': self.report.pk}))
         self.assertTrue(self.report.likes.filter(id=self.user.id).exists())
+
+    def test_unlike_report(self):
+        # like the report
+        self.client.force_login(self.user)
+        self.client.post(reverse('like_report', kwargs={'pk': self.report.pk}))
+
+        # unlike
+        response = self.client.post(
+            reverse('like_report', kwargs={'pk': self.report.pk}))
+
+        self.assertRedirects(
+            response, reverse('report_details', kwargs={'pk': self.report.pk}))
+        self.assertFalse(self.report.likes.filter(id=self.user.id).exists())
 
 
 class CreateReportTests(TestCase):
