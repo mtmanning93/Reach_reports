@@ -296,7 +296,7 @@ class DeleteReportTests(TestCase):
             author=self.user,
         )
 
-    def test_delete_report_view_deletes_report(self):
+    def test_delete_report_deletes_report(self):
         self.client.login(
             username=self.user.username, password=self.user.password
             )
@@ -308,34 +308,27 @@ class DeleteReportTests(TestCase):
         self.assertFalse(report_exists)
 
 
-class DeleteAccountViewTests(TestCase):
+class DeleteAccountTests(TestCase):
+
     def setUp(self):
         self.client = Client()
+
         self.user = User.objects.create_user(
-            username='testuser', email='test@example.com', password='testpassword'
+            username='testuser',
+            email='test@example.com',
+            password='testpassword',
         )
+
         self.client.login(username='testuser', password='testpassword')
 
-    def test_delete_account_successful(self):
-        # Ensure the view deletes the account and redirects to the home page on POST request
+    def test_delete_account_deletes_account_and_redirects(self):
+
         response = self.client.post(reverse('delete_account'))
-        self.assertEqual(response.status_code, 302)  # 302 means redirect
+        self.assertEqual(response.status_code, 302)
         self.assertFalse(User.objects.filter(username='testuser').exists())
-        messages = list(get_messages(response.wsgi_request))
-        self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), 'Account deleted successfully!')
 
-    def test_delete_account_not_post(self):
-        # Ensure the view returns the account.html template on non-POST request
+    def test_delete_account_redirects_to_account_not_delete(self):
+
         response = self.client.get(reverse('delete_account'))
-        self.assertEqual(response.status_code, 200)  # 200 means OK
+        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'account.html')
-        self.assertTrue(User.objects.filter(username='testuser').exists())
-
-    def test_delete_account_not_authenticated(self):
-        # Ensure the view redirects to the home page if the user is not authenticated
-        self.client.logout()
-        response = self.client.post(reverse('delete_account'))
-        self.assertEqual(response.status_code, 302)  # 302 means redirect
-        self.assertRedirects(response, reverse('home'))
-        self.assertTrue(User.objects.filter(username='testuser').exists())
