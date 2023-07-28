@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
     <div id="head-img-wrapper" class="container-fluid p-0 position-relative">
-        <img src="{{ random_image_url }}" alt="Random Image" class="d-block w-100">
+        <img src="{% static random_image_url %}" alt="Random Image" class="d-block w-100">
 
         <div id="head-btns" class="w-50 position-absolute translate-middle d-flex flex-column align-items-center">
             <a href="{% url 'reports' %}" class="w-50 btn btn-light border-3 border-dark opacity-75 mb-2">Condition Reports</a>
