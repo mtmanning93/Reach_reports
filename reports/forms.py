@@ -54,6 +54,7 @@ class CreateReportForm(forms.ModelForm):
             label="Custom Images Field"
         )
         self.fields['status'].label = "Publish/ Draft"
+        self.fields['gps_map_link'].required = False
 
 
 class ImageFileForm(forms.ModelForm):

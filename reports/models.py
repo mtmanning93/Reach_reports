@@ -73,7 +73,8 @@ class Report(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.pk:
-            slug = f"{slugify(self.title)}-{slugify(self.author.username)}-{self.pk}"
+            slug = f"{slugify(self.title)}\
+                -{slugify(self.author.username)}-{self.pk}"
             self.slug = slug
 
         super(Report, self).save(*args, **kwargs)
