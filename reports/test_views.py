@@ -228,13 +228,21 @@ class CreateReportTests(TestCase):
             'number_in_group': 3,
             'number_on_route': 2,
             'status': 1,
+            'images': [open('reports/tests/test_img.png', 'rb')],
         }
         response = self.client.post(
             reverse('create_report'), data=report_data, follow=True)
         self.assertEqual(response.status_code, 200)
+
+        self.assertEqual(Report.objects.count(), 1)
+        self.assertEqual(ImageFile.objects.count(), 1)
+
         self.assertTemplateUsed(response, 'reports.html')
         self.assertContains(response, 'Report created successfully!')
         self.assertTrue(Report.objects.filter(title='Test Report').exists())
+
+        image = ImageFile.objects.first()
+        self.assertTrue(image.image_file.url.startswith('https://res.cloudinary.com/dsmfunyxk/image/upload/'))
 
     def test_create_report_view_with_invalid_form(self):
         report_data = {}  # Empty to create invalid input
