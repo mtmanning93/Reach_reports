@@ -4,6 +4,7 @@ from django.contrib.messages import get_messages
 from django.shortcuts import reverse
 from .models import Report, Comment, ImageFile
 from .forms import CreateReportForm
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 
 class TestViews(TestCase):
@@ -182,7 +183,6 @@ class LikeReportTests(TestCase):
         # like the report
         self.client.force_login(self.user)
         self.client.post(reverse('like_report', kwargs={'pk': self.report.pk}))
-
         # unlike
         response = self.client.post(
             reverse('like_report', kwargs={'pk': self.report.pk}))
