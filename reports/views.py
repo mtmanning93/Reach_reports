@@ -223,3 +223,49 @@ def delete_account(request):
         return redirect('home')
 
     return render(request, 'account.html')
+
+
+# def edit_report(request, pk):
+#     report = Report.objects.get(pk=pk)
+#     images = report.images.all()
+
+#     if request.method == 'POST':
+#         confirm_deletion = request.POST.get('confirm-deletion', 'false')
+
+#         if confirm_deletion == 'true':
+#             # Handle image deletions (confirmed by the user)
+#             for image in report.images.all():
+#                 checkbox_name = f"delete_image_{image.id}"
+#                 if request.POST.get(checkbox_name):
+#                     # Delete the image from Cloudinary
+#                     cloudinary.api.delete_resources([image.image_file.public_id])
+#                     image.delete()
+
+#         edit_form = CreateReportForm(request.POST, request.FILES, instance=report)
+
+#         if edit_form.is_valid():
+#             report = edit_form.save()
+
+#             images = request.FILES.getlist('images')
+
+#             for image in images:
+#                 ImageFile.objects.create(
+#                     report=report,
+#                     image_file=image
+#                 )
+
+#             messages.add_message(
+#                 request, messages.INFO, 'Report updated successfully!')
+
+#             return redirect('account')
+
+#     else:
+#         edit_form = CreateReportForm(instance=report)
+
+#     context = {
+#         'edit_form': edit_form,
+#         'images': images,
+#         'show_modal': False,  # Initially set to False
+#     }
+
+#     return render(request, 'edit_report.html', context)

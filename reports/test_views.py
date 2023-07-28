@@ -1,10 +1,11 @@
-from django.test import TestCase, Client
+from django.test import TestCase, Client, RequestFactory
 from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
 from django.shortcuts import reverse
 from .models import Report, Comment, ImageFile
 from .forms import CreateReportForm
 from django.core.files.uploadedfile import SimpleUploadedFile
+from .views import edit_report
 
 
 class TestViews(TestCase):
@@ -267,31 +268,49 @@ class EditReportTests(TestCase):
             description="This is a sample report."
         )
 
+        # Read the binary content of the mock image file
+        with open('reports/tests/test_img.png', 'rb') as file:
+            image_data = file.read()
+
+        # Create a mock image using SimpleUploadedFile
+        self.image = SimpleUploadedFile(
+            "test_image.png", image_data, content_type="image/png")
+
+        # Associate the mock image with the report
+        self.image_file = ImageFile.objects.create(
+            report=self.report, image_file=self.image)
+        self.image_file_pk = ImageFile.pk
+
     def test_edit_report_view_GET(self):
         report = self.report
         response = self.client.get(reverse('edit_report', args=[report.pk]))
         self.assertEqual(response.status_code, 200)
 
-    def test_confirm_deletion_true(self):
-        form_data = {
-            'confirm-deletion': 'true',  # Set confirm-deletion to 'true'
-        }
-        response = self.client.post(
-            reverse('edit_report', args=[self.report.pk]),
-            data=form_data, follow=True)
-        self.assertEqual(response.status_code, 200)
-
-        images_deleted = ImageFile.objects.filter(report=self.report).exists()
-        self.assertFalse(images_deleted)
-
     def test_confirm_deletion_false(self):
         form_data = {
             'confirm-deletion': 'false',
+            # No image
         }
-        response = self.client.post(
-            reverse('edit_report', args=[self.report.pk]),
-            data=form_data, follow=True)
+        response = self.client.post(reverse(
+            'edit_report', args=[self.report.pk]), data=form_data, follow=True)
         self.assertEqual(response.status_code, 200)
+
+        # Check if the image is still present in the database and Cloudinary
+        images_present = ImageFile.objects.filter(report=self.report).exists()
+        self.assertTrue(images_present)
+
+    def test_confirm_deletion_true(self):
+        form_data = {
+            'confirm-deletion': 'true',
+            f'delete_image_{self.image_file.pk}': 'on',
+        }
+        response = self.client.post(reverse(
+            'edit_report', args=[self.report.pk]), data=form_data, follow=True)
+        self.assertEqual(response.status_code, 200)
+
+        # Check if the image is deleted from the database and Cloudinary
+        images_deleted = ImageFile.objects.filter(report=self.report).exists()
+        self.assertFalse(images_deleted)
 
 
 class DeleteReportTests(TestCase):
