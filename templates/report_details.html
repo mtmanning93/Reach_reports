@@ -197,6 +197,10 @@
                 </button>
             </form>
             {% endif %}
+            {% else %}
+            <a class="btn p-0 border-none" href="#" data-bs-toggle="tooltip" title="Login or Signup to Like and Comment">
+                <h3><i class="fa-regular fa-thumbs-up"></i></h3>
+            </a>
             {% endif %}
             {% with comments.count as total_comments %}
             <p class="text-muted m-0 p-2">{{ total_comments }}</p>
@@ -212,8 +216,12 @@
                 <div class="card-body">
                     <h5 class="card-title"><i class="fa-solid fa-user text-muted"></i> {{ comment.name }}</h5>
                     <p class="card-text">{{ comment.content|linebreaks }}</p>
-                    <p class="card-text"><small class="text-muted"><i class="fa-solid fa-pen"></i>
-                            {{ comment.created_on }}</small></p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <i class="fa-solid fa-pen"></i>
+                            {{ comment.created_on }}
+                        </small>
+                    </p>
                 </div>
             </div>
         </div>
@@ -232,4 +240,12 @@
     </div>
 </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (element) {
+            return new bootstrap.Tooltip(element);
+        });
+    });
+</script>
 {% endblock %}
