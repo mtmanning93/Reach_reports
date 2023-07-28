@@ -1,11 +1,9 @@
-from django.test import TestCase, Client, RequestFactory
+from django.test import TestCase, Client
 from django.contrib.auth.models import User
-from django.contrib.messages import get_messages
 from django.shortcuts import reverse
 from .models import Report, Comment, ImageFile
 from .forms import CreateReportForm
 from django.core.files.uploadedfile import SimpleUploadedFile
-from .views import edit_report
 
 
 class TestViews(TestCase):
@@ -242,7 +240,9 @@ class CreateReportTests(TestCase):
         self.assertTrue(Report.objects.filter(title='Test Report').exists())
 
         image = ImageFile.objects.first()
-        self.assertTrue(image.image_file.url.startswith('https://res.cloudinary.com/dsmfunyxk/image/upload/'))
+        self.assertTrue(
+            image.image_file.url.startswith(
+                'https://res.cloudinary.com/dsmfunyxk/image/upload/'))
 
     def test_create_report_view_with_invalid_form(self):
         report_data = {}  # Empty to create invalid input
