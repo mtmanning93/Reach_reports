@@ -111,12 +111,14 @@ def like_report(request, pk):
 
 def delete_comment(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
+    report_pk = comment.report.pk
 
     if request.method == 'POST':
         comment.delete()
-        messages.add_message(request, messages.SUCCESS, 'Comment deleted successfully!')
+        messages.add_message(
+            request, messages.SUCCESS, 'Comment deleted successfully!')
 
-        return redirect('account')
+        return redirect('report_details', pk=report_pk)
 
 
 def account_view(request):

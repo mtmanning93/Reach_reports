@@ -218,7 +218,9 @@
                     {% if comment.name == user.username %}
                         <form class="float-end" method="POST" action="{% url 'delete_comment' comment.pk %}">
                             {% csrf_token %}
-                            <button type="submit" class="text-muted"><i class="fa-solid fa-x"></i></button>
+                            <button type="submit" class="btn p-0 border-none">
+                                <i class="fa-solid fa-x text-muted"></i>
+                            </button>
                         </form>
                         {% endif %}
                     <h5 class="card-title">
