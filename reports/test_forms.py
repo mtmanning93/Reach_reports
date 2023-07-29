@@ -3,7 +3,7 @@ from datetime import date
 from django.urls import reverse
 from django.contrib.auth.models import User
 from .models import Report, Comment
-from .forms import CommentForm, CreateReportForm
+from .forms import CommentForm, CreateReportForm, UpdateAccountForm
 
 
 class TestCommentForm(TestCase):
@@ -162,4 +162,26 @@ class CreateReportFormTests(TestCase):
         }
 
         form = CreateReportForm(data=form_data)
+        self.assertTrue(form.is_valid())
+
+
+class UpdateAccountFormTests(TestCase):
+
+    def setUp(self):
+
+        self.user = User.objects.create_user(
+            username='testuser',
+            email='test@example.com',
+            password='testpassword'
+        )
+
+    def test_valid_form(self):
+
+        initial_data = {
+            'username': 'new_username',
+            'email': 'new_email@example.com',
+        }
+
+        form = UpdateAccountForm(data=initial_data, instance=self.user)
+
         self.assertTrue(form.is_valid())
