@@ -4,9 +4,10 @@ from django.http import HttpResponseRedirect
 from django.utils.text import slugify
 from django.contrib import messages
 from django.urls import reverse_lazy
-import cloudinary
+
+from . import forms
 from .models import Report, Comment, ImageFile
-from .forms import CommentForm, CreateReportForm, ImageFileForm, UpdateAccountForm
+import cloudinary
 import random
 
 
@@ -72,7 +73,7 @@ def report_details(request, pk):
     likes_count = report.likes.count()
 
     if request.method == 'POST':
-        comment_form = CommentForm(request.POST)
+        comment_form = forms.CommentForm(request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.report = report
@@ -83,7 +84,7 @@ def report_details(request, pk):
                 request, messages.SUCCESS, 'Commented Succesfully')
             return redirect('report_details', pk=pk)
     else:
-        comment_form = CommentForm()
+        comment_form = forms.CommentForm()
 
     context = {
             'report': report,
@@ -125,7 +126,7 @@ def account_view(request):
 
 class UpdateAccountView(UpdateView):
     template_name = 'update_account.html'
-    form_class = UpdateAccountForm
+    form_class = forms.UpdateAccountForm
     success_url = reverse_lazy('account')
 
     def get_object(self, queryset=None):
@@ -138,7 +139,7 @@ class UpdateAccountView(UpdateView):
 
 def create_report_view(request):
     if request.method == 'POST':
-        report_form = CreateReportForm(request.POST, request.FILES)
+        report_form = forms.CreateReportForm(request.POST, request.FILES)
 
         if report_form.is_valid():
             report = report_form.save(commit=False)
@@ -163,7 +164,7 @@ def create_report_view(request):
             return redirect('reports')
 
     else:
-        report_form = CreateReportForm()
+        report_form = forms.CreateReportForm()
 
     return render(request, 'create_report.html', {'report_form': report_form})
 
@@ -185,7 +186,7 @@ def edit_report(request, pk):
                         )
                     image.delete()
 
-        edit_form = CreateReportForm(
+        edit_form = forms.CreateReportForm(
             request.POST, request.FILES, instance=report)
 
         if edit_form.is_valid():
@@ -205,7 +206,7 @@ def edit_report(request, pk):
             return redirect('account')
 
     else:
-        edit_form = CreateReportForm(instance=report)
+        edit_form = forms.CreateReportForm(instance=report)
 
     context = {
         'edit_form': edit_form,
