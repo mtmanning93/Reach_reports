@@ -1,14 +1,27 @@
-
 {% extends 'base.html' %}
+
 {% load static %}
 
 {% block content %}
-<div class="container">
-    <h2 class="mt-5 mb-3">Update Your Account</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
+
+{%load crispy_forms_tags %} 
+
+<div class="container-fluid d-flex justify-content-center mt-5">
+    <div class="row mb-5">
+        <div class="col-md-8 offset-md-2 mb-3">
+            <h1 class="text-center">Update Account Details</h1>
+        </div>
+        <div class="account-form bg-light col-md-8 offset-md-2">
+            <h4 class="text-center mt-2">
+                Welcome back to Reach.<br>We hope your adventures were a success.
+            </h4>
+            <form class="text-center w-75 border-bottom border-primary m-2 p-3" method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn signup_button w-75">Update</button>
+            </form>
+        </div>
+    </div>
 </div>
+
 {% endblock %}

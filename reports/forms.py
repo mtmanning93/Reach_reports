@@ -66,6 +66,13 @@ class ImageFileForm(forms.ModelForm):
 
 
 class UpdateAccountForm(UserChangeForm):
+
+    email = forms.EmailField(required=True)
+
     class Meta:
         model = User
         fields = ('username', 'email')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields.pop('password')

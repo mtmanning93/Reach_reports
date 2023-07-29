@@ -22,13 +22,9 @@
                 {{ total_reports }}
             </h4>
             {% endwith %}
-            <div class="col-12 text-center">
-                <a href="#" class="text-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
-                    Delete Account
-                </a>
-                <a href="{% url 'update_account' %}" class="text-info">
-                    Edit Account
-                </a>
+            <div class="col-12 text-center m-2">
+                <a href="{% url 'update_account' %}" class="text-info">Edit Account</a>
+                <a href="#" class="text-danger ms-1" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">Delete Account</a>
             </div>
         </div>
     </div>
