@@ -130,7 +130,9 @@ class UpdateAccountView(UpdateView):
     success_url = reverse_lazy('account')
 
     def get_object(self, queryset=None):
-        return self.request.user
+        if self.request.user.is_authenticated:
+            return self.request.user
+        return None
 
     def form_valid(self, form):
         messages.success(self.request, 'Your account has been updated!')

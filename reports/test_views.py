@@ -2,7 +2,7 @@ from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from .models import Report, Comment, ImageFile
-from .forms import CreateReportForm
+from .forms import CreateReportForm, UpdateAccountForm
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 
@@ -373,3 +373,17 @@ class DeleteAccountTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'account.html')
         self.assertTrue(User.objects.filter(username='testuser').exists())
+
+
+class UpdateAccountViewTests(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create_user(
+            username='testuser', email='test@example.com', password='testpassword'
+        )
+        self.client.login(username=self.user.username, password=self.user.password)
+
+    def test_get_update_account_template(self):
+        response = self.client.get(reverse('update_account'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'update_account.html')
