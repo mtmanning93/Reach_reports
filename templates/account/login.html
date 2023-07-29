@@ -24,7 +24,7 @@
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
                 <button class="primaryAction btn signup_button w-75" type="submit">{% trans "Login" %}</button>
-                <!-- <a class="d-block mt-2 button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a> -->
+                <a class="d-block mt-2 button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
             </form>
             <h5 class="text-center">
                 {% blocktrans %}Want to join the community?
