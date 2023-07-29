@@ -4,7 +4,6 @@ from django.http import HttpResponseRedirect
 from django.utils.text import slugify
 from django.contrib import messages
 from django.urls import reverse_lazy
-
 from . import forms
 from .models import Report, Comment, ImageFile
 import cloudinary
@@ -130,9 +129,7 @@ class UpdateAccountView(UpdateView):
     success_url = reverse_lazy('account')
 
     def get_object(self, queryset=None):
-        if self.request.user.is_authenticated:
-            return self.request.user
-        return None
+        return self.request.user
 
     def form_valid(self, form):
         messages.success(self.request, 'Your account has been updated!')

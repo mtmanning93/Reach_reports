@@ -376,14 +376,45 @@ class DeleteAccountTests(TestCase):
 
 
 class UpdateAccountViewTests(TestCase):
+
     def setUp(self):
+
         self.client = Client()
         self.user = User.objects.create_user(
-            username='testuser', email='test@example.com', password='testpassword'
+            username='testuser',
+            email='test@example.com',
+            password='testpassword'
         )
-        self.client.login(username=self.user.username, password=self.user.password)
+        self.client.login(
+            username='testuser', password='testpassword'
+        )
+        self.url = reverse('update_account')
 
-    def test_get_update_account_template(self):
-        response = self.client.get(reverse('update_account'))
+    def test_update_account_view_get_request(self):
+        response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'update_account.html')
+        self.assertIn('form', response.context)
+
+    def test_update_account_view_valid_form(self):
+
+        new_data = {
+            'username': 'new_username',
+            'email': 'new_email@example.com',
+        }
+
+        response = self.client.post(self.url, data=new_data, follow=True)
+        self.assertRedirects(response, reverse('account'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_update_account_view_invalid_form(self):
+
+        invalid_data = {
+            'username': '',
+            'email': 'new_email@example.com',
+        }
+
+        response = self.client.post(self.url, data=invalid_data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertFormError(
+            response, 'form', 'username', 'This field is required.')
