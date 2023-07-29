@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
-from django.views.generic import ListView
+from django.views.generic import ListView, UpdateView
 from django.http import HttpResponseRedirect
 from django.utils.text import slugify
 from django.contrib import messages
+from django.urls import reverse_lazy
 import cloudinary
 from .models import Report, Comment, ImageFile
 from .forms import CommentForm, CreateReportForm, ImageFileForm
 import random
-
+from django.contrib.auth.forms import UserChangeForm
 
 def get_random_images():
 
@@ -120,7 +121,6 @@ def account_view(request):
         }
 
     return render(request, 'account.html', context)
-
 
 def create_report_view(request):
     if request.method == 'POST':
