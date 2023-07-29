@@ -6,9 +6,10 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 import cloudinary
 from .models import Report, Comment, ImageFile
-from .forms import CommentForm, CreateReportForm, ImageFileForm
+from .forms import CommentForm, CreateReportForm, ImageFileForm, UpdateAccountForm
 import random
-from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.models import User
+
 
 def get_random_images():
 
@@ -121,6 +122,20 @@ def account_view(request):
         }
 
     return render(request, 'account.html', context)
+
+
+class UpdateAccountView(UpdateView):
+    template_name = 'update_account.html'
+    form_class = UpdateAccountForm
+    success_url = reverse_lazy('account')
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Your account has been updated!')
+        return super().form_valid(form)
+
 
 def create_report_view(request):
     if request.method == 'POST':
