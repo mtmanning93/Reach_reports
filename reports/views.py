@@ -109,6 +109,16 @@ def like_report(request, pk):
     return HttpResponseRedirect(reverse('report_details', args=[pk]))
 
 
+def delete_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+
+    if request.method == 'POST':
+        comment.delete()
+        messages.add_message(request, messages.SUCCESS, 'Comment deleted successfully!')
+
+        return redirect('account')
+
+
 def account_view(request):
     context = {}
 

@@ -198,7 +198,8 @@
             </form>
             {% endif %}
             {% else %}
-            <a class="btn p-0 border-none" href="#" data-bs-toggle="tooltip" title="Login or Signup to Like and Comment">
+            <a class="btn p-0 border-none" href="#" data-bs-toggle="tooltip"
+                title="Login or Signup to Like and Comment">
                 <h3><i class="fa-regular fa-thumbs-up"></i></h3>
             </a>
             {% endif %}
@@ -214,7 +215,15 @@
         <div class="card mt-2 bg-light">
             <div class="row g-0">
                 <div class="card-body">
-                    <h5 class="card-title"><i class="fa-solid fa-user text-muted"></i> {{ comment.name }}</h5>
+                    {% if comment.name == user.username %}
+                        <form class="float-end" method="POST" action="{% url 'delete_comment' comment.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="text-muted"><i class="fa-solid fa-x"></i></button>
+                        </form>
+                        {% endif %}
+                    <h5 class="card-title">
+                        <i class="fa-solid fa-user text-muted"></i> {{ comment.name }}
+                    </h5>
                     <p class="card-text">{{ comment.content|linebreaks }}</p>
                     <p class="card-text">
                         <small class="text-muted">
