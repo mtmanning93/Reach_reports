@@ -191,6 +191,42 @@ class LikeReportTests(TestCase):
         self.assertFalse(self.report.likes.filter(id=self.user.id).exists())
 
 
+class DeleteCommentTest(TestCase):
+
+    def setUp(self):
+
+        self.user = User.objects.create_user(
+            username='testuser',
+            password='testpassword'
+            )
+
+        self.report = Report.objects.create(
+            title="Sample Report",
+            slug="sample-report",
+            author=self.user,
+            start_date="2023-07-13",
+            end_date="2023-07-15",
+            overall_conditions="Good",
+            activity_category="Hiking",
+            description="This is a sample report."
+        )
+
+        # Create a test comment
+        self.comment = Comment.objects.create(
+            name='testuser',
+            content='Test comment content.',
+            report=self.report
+        )
+
+    def test_delete_comment(self):
+        self.client.login(username='testuser', password='testpassword')
+        delete_url = reverse('delete_comment', args=[self.comment.pk])
+        response = self.client.post(delete_url)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(Comment.objects.filter(pk=self.comment.pk).exists())
+
+
 class CreateReportTests(TestCase):
 
     def setUp(self):
