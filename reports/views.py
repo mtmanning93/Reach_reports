@@ -8,7 +8,6 @@ import cloudinary
 from .models import Report, Comment, ImageFile
 from .forms import CommentForm, CreateReportForm, ImageFileForm, UpdateAccountForm
 import random
-from django.contrib.auth.models import User
 
 
 def get_random_images():

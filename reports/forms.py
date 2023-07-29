@@ -2,6 +2,8 @@ from . import models
 from django import forms
 from datetime import date
 from cloudinary.forms import CloudinaryFileField
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.models import User
 
 
 class CommentForm(forms.ModelForm):
@@ -61,3 +63,9 @@ class ImageFileForm(forms.ModelForm):
     class Meta:
         model = models.ImageFile
         fields = ['image_file']
+
+
+class UpdateAccountForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ('username', 'email')
