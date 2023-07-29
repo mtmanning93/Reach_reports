@@ -13,12 +13,12 @@
         </div>
         <div class="account-form bg-light col-md-8 offset-md-2">
             <h4 class="text-center mt-2">
-                Welcome back to Reach.<br>We hope your adventures were a success.
+                Edit account details for {{ user.username }}.
             </h4>
-            <form class="text-center w-75 border-bottom border-primary m-2 p-3" method="POST">
+            <form class="text-center w-75 m-2 p-3" method="POST">
                 {% csrf_token %}
                 {{ form|crispy }}
-                <button type="submit" class="btn signup_button w-75">Update</button>
+                <button type="submit" class="btn signup_button border-none w-75">Update</button>
             </form>
         </div>
     </div>

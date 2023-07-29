@@ -75,4 +75,7 @@ class UpdateAccountForm(UserChangeForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         self.fields.pop('password')
+        self.fields['username'].label = "Update Username"
+        self.fields['email'].label = "Update Email"
