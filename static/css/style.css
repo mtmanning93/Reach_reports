@@ -306,10 +306,9 @@ label {
 
     /* Reports */
 
-    /* #gradeFilterForm {
-        display: flex;
-        flex-direction: column;
-    } */
+    .report-list-item {
+        font-size: 0.65em;
+    }
 
 }
 
@@ -336,10 +335,24 @@ label {
         font-size: 0.85em;
     }
 
+    .report-list-item,
+    #list-key {
+        font-size: 0.7em;
+    }
+
+    .report-list-item h4 {
+        font-size: 1.2em;
+    }
+
+    .img-thumbnail {
+        width: 65px;
+        height: 65px;
+    }
+
 }
 
 /* M screens, Tablets, Bootstrap <medium breakpoint */
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 577px) and (max-width: 768px) {
 
     h1 {
         font-size: 2.5em;
@@ -356,8 +369,20 @@ label {
     }
 
     #sociallinks,
-    #footer-nav li {
+    #footer-nav li,
+    .report-list-item,
+    #list-key {
         font-size: 0.75em;
     }
 
+    /* Reports */
+
+    .report-list-item h4 {
+        font-size: 1.5em;
+    }
+
+    .img-thumbnail {
+        width: 75px;
+        height: 75px;
+    }
 }
