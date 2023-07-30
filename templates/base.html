@@ -36,12 +36,10 @@
         </div>
     </div>
     <nav class="navbar navbar-expand-sm bg-light">
-        <div class="container-fluid d-flex justify-content-center">
+        <div id="nav-pos" class="container-fluid d-sm-flex justify-content-sm-center">
 
-            <a class="navbar-brand d-flex" href="{% url 'home' %}">
-                <div class="d-flex align-content-center flex-wrap">
+            <a class="navbar-brand" href="{% url 'home' %}">
                     <img id="logo" src="{% static 'images/blue-mountains-trans.png' %}" alt="Reach logo">
-                </div>
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
@@ -50,7 +48,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarToggler">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
                     </li>
@@ -86,11 +84,9 @@
 
     <footer class="container-fluid d-flex flex-column justify-content-center bg-light text-dark mt-auto">
         <div class="row d-flex justify-content-between">
-            <div class="d-sm-block col-sm-4 d-sm-flex justify-content-start">
-                <ul id="footer-nav" class="d-flex flex-row justify-content-center flex-sm-column">
-                    <li>
-                        <h5 class="text-secondary">Navigation:</h5>
-                    </li>
+            <div class="d-sm-block col-6 col-sm-3 d-sm-flex justify-content-start">
+                <ul id="footer-nav" class="d-flex flex-column">
+                    <h5 class="text-secondary">Navigation:</h5>
                     <li>
                         <a href="{% url 'home' %}">Home</a>
                     </li>
@@ -114,14 +110,14 @@
                     {% endif %}
                 </ul>
             </div>
-            <div class="d-none col-sm-4 d-sm-flex flex-column text-center">
+            <div id="contact" class="d-none d-sm-block col-6 d-sm-flex flex-column p-0 text-center">
                 <p id="safety_message">
                     All Reach Reports are provided with intention to simply give advice. It is down to you as a climber
                     to make the right decisions. Be safe, respect the mountains and don't forget to Reach!
                 </p>
-                <p><i class="fa-solid fa-envelope"></i> reportsreach@gmail.com</p>
+                <h5 class="m-0"><i class="fa-solid fa-envelope"></i> reportsreach@gmail.com</h5>
             </div>
-            <div class="text-end col-sm-4 d-sm-flex flex-column mt-2 mt-sm-0">
+            <div id="sociallinks" class="text-end col-6 col-sm-3 d-sm-flex flex-column">
                 <h5 class="d-block text-secondary">Social Links:</h5>
                 <div>
                     <a href="https://www.youtube.com/" target="_blank">

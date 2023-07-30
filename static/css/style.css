@@ -146,6 +146,10 @@ footer a {
     margin: 0;
 }
 
+#footer-nav li a {
+    padding: 0;
+}
+
 #safety_message {
     font-size: 0.75em;
 }
@@ -277,4 +281,65 @@ label {
 
 #upload {
     padding: 6px 0;
+}
+
+/* Media Queries */
+
+/* XS screens, mainly for logo */
+@media screen and (max-width: 366px) {
+
+    #logo {
+        height: 45px;
+    }
+
+    #nav-pos {
+        padding: 0;
+    }
+
+    .navbar-brand {
+        margin: auto;
+    }
+
+    .navbar-toggler{
+        margin: auto;
+    }
+
+}
+
+/* S screens, mobiles, Bootstrap <small breakpoint */
+@media screen and (max-width: 576px) {
+
+    #head-img-wrapper {
+        height: 571px;
+    }
+
+    footer {
+        height: fit-content;
+        padding: 10px;
+    }
+
+    #sociallinks>div {
+        display: inline-flex;
+    }
+
+}
+
+/* M screens, Tablets, Bootstrap <medium breakpoint */
+@media screen and (max-width: 768px) {
+
+    #logo {
+        height: 60px;
+    }
+
+    #sociallinks>h5,
+    #footer-nav>h5,
+    #contact>h5 {
+        font-size: 15px;
+    }
+
+    #sociallinks,
+    #footer-nav li {
+        font-size: 0.75em;
+    }
+
 }
