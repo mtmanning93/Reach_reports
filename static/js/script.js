@@ -1,11 +1,14 @@
 // Alerts
 
 document.addEventListener("DOMContentLoaded", function () {
-    setTimeout(function () {
-        let messages = document.getElementById("msg");
-        let alert = new bootstrap.Alert(messages);
-        alert.close()
-    }, 3000);
+    let messages = document.getElementById("msg");
+
+    if (messages) {
+        setTimeout(function () {
+            let alert = new bootstrap.Alert(messages);
+            alert.close()
+        }, 3000);
+    }
 });
 
 // Delete Images in Edit Form
