@@ -13,13 +13,15 @@
 
 <!-- Reports -->
 
-<div class="container-fluid w-75">
+<div class="container-fluid col-11 col-sm-9 p-0">
 
     <!-- Filters -->
 
-    <div class="row pb-4 border-bottom border-3">
-        <div class="col-6 text-start d-flex">
-            <div class="col-6 d-flex align-items-end">
+    <div id="filters"
+        class="d-flex flex-column-reverse flex-sm-row justify-content-sm-between pb-2 pb-sm-4 border-bottom border-3">
+        <div id="filter-forms"
+            class="col-12 col-sm-6 col-md-8 d-flex flex-row justify-content-evenly mt-3 mt-sm-0 justify-content-sm-start text-start d-flex p-0">
+            <div class="d-flex align-items-end me-sm-2 me-sm-2">
                 <form id="gradeFilterForm" method="get">
                     <label for="grade">Grade Filter</label>
                     <select class="filter" name="grade" onchange="this.form.submit()">
@@ -32,7 +34,7 @@
                     </select>
                 </form>
             </div>
-            <div class="col-6 d-flex align-items-end">
+            <div class="d-flex align-items-end">
                 <form id="filterForm" method="get">
                     <label for="activity">Activity Filter</label>
                     <select class="filter" name="activity" onchange="this.form.submit()">
@@ -50,11 +52,11 @@
                 </form>
             </div>
         </div>
-        <div class="col-6 text-end">
+        <div class="col-12 col-sm-6 col-md-4 d-flex align-items-end justify-content-end ms-sm-2 p-0">
             {% if user.is_authenticated %}
-            <a href="{% url 'create_report' %}" class="btn btn-success">Create New Report</a>
+            <a href="{% url 'create_report' %}" class="btn btn-success col-12">Create New Report</a>
             {% else %}
-            <a href="{% url 'account_login' %}" class="btn btn-success">Login To Create Reports</a>
+            <a href="{% url 'account_login' %}" class="btn btn-success col-12">Login To Create Reports</a>
             {% endif %}
         </div>
     </div>

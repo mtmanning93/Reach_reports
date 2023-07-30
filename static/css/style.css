@@ -300,9 +300,16 @@ label {
         margin: auto;
     }
 
-    .navbar-toggler{
+    .navbar-toggler {
         margin: auto;
     }
+
+    /* Reports */
+
+    /* #gradeFilterForm {
+        display: flex;
+        flex-direction: column;
+    } */
 
 }
 
@@ -322,10 +329,21 @@ label {
         display: inline-flex;
     }
 
+    /* Reports */
+
+    #filters a,
+    #filter-forms {
+        font-size: 0.85em;
+    }
+
 }
 
 /* M screens, Tablets, Bootstrap <medium breakpoint */
 @media screen and (max-width: 768px) {
+
+    h1 {
+        font-size: 2.5em;
+    }
 
     #logo {
         height: 60px;
