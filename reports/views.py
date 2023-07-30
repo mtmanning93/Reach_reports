@@ -42,12 +42,12 @@ def get_landing_page(request):
 
 class ReportList(ListView):
     """
-    Renders entire reports list
+    Renders entire reports list in pages of 10 reports.
     """
 
     model = Report
     template_name = 'reports.html'
-    paginate_by = 15
+    paginate_by = 10
 
     def get_queryset(self):
         """
