@@ -31,6 +31,10 @@ SUCCESS = [
 
 
 class Report(models.Model):
+    """
+    Main model for the reports objects.
+    Users have full CRUD functionailtiy over these obects.
+    """
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(
@@ -81,12 +85,18 @@ class Report(models.Model):
 
 
 class ImageFile(models.Model):
+    """
+    Handles all image files uploaded in report object creation.
+    """
     report = models.ForeignKey(
         Report, on_delete=models.CASCADE, related_name='images')
     image_file = CloudinaryField('image', default='placeholder')
 
 
 class Comment(models.Model):
+    """
+    Stores all comment objects, relating them to reports via an FK.
+    """
     report = models.ForeignKey(
         Report, on_delete=models.CASCADE, related_name="comments")
     name = models.CharField(max_length=100)

@@ -6,12 +6,15 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 import cloudinary
 import random
-
 from . import forms
 from .models import Report, Comment, ImageFile
 
 
 def get_random_images():
+    """
+    Stores the images to be used on the landing page 'index.html'.
+    Randomises the image returned, each time function is run.
+    """
 
     images = [
         "images/lagginhorn-header.jpg",
@@ -27,6 +30,10 @@ def get_random_images():
 
 
 def get_landing_page(request):
+    """
+    Renders landing page template and random image to display
+    """
+
     random_image_url = get_random_images()
 
     return render(
@@ -34,11 +41,18 @@ def get_landing_page(request):
 
 
 class ReportList(ListView):
+    """
+    Renders entire reports list
+    """
+
     model = Report
     template_name = 'reports.html'
     paginate_by = 15
 
     def get_queryset(self):
+        """
+        Filters reports list to display reports in selected category.
+        """
         queryset = super().get_queryset()
         selected_activity = self.request.GET.get('activity', 'all')
         selected_grade = self.request.GET.get('grade', 'all')
@@ -68,6 +82,10 @@ class ReportList(ListView):
 
 
 def report_details(request, pk):
+    """
+    Renders selected report details.
+    Displays comment form below details and enables commenting and liking.
+    """
     report = get_object_or_404(Report, pk=pk)
     comments = Comment.objects.filter(report=report).order_by('created_on')
     likes_count = report.likes.count()
@@ -97,6 +115,9 @@ def report_details(request, pk):
 
 
 def like_report(request, pk):
+    """
+    Provides like and unlike functionality on each report.
+    """
     if request.method == 'POST':
         report = get_object_or_404(Report, pk=pk)
 
@@ -110,6 +131,9 @@ def like_report(request, pk):
 
 
 def delete_comment(request, pk):
+    """
+    Deletes selected comment from database and displays confirmation.
+    """
     comment = get_object_or_404(Comment, pk=pk)
     report_pk = comment.report.pk
 
@@ -122,6 +146,10 @@ def delete_comment(request, pk):
 
 
 def account_view(request):
+    """
+    Renders account.html template for authenticated users.
+    Context is relevant to user instance.
+    """
     context = {}
 
     if request.user.is_authenticated:
@@ -137,19 +165,34 @@ def account_view(request):
 
 
 class UpdateAccountView(UpdateView):
+    """
+    Updates account information, username, email.
+    """
     template_name = 'update_account.html'
     form_class = forms.UpdateAccountForm
     success_url = reverse_lazy('account')
 
-    def get_object(self, queryset=None):
+    def get_object(self):
+        """
+        Gets correct user instance.
+        """
         return self.request.user
 
     def form_valid(self, form):
+        """
+        Provides success message when valid UpdateView form.
+        """
         messages.success(self.request, 'Your account has been updated!')
         return super().form_valid(form)
 
 
 def create_report_view(request):
+    """
+    Renders create report template and form.
+    Populates the slug field with title, author and report.pk.
+    Allows for multiple image file uploads.
+    On form submission, displays success essage if form is valid.
+    """
     if request.method == 'POST':
         report_form = forms.CreateReportForm(request.POST, request.FILES)
 
@@ -182,6 +225,10 @@ def create_report_view(request):
 
 
 def edit_report(request, pk):
+    """
+    Updates report details with valid form. Redirects to 'account'.
+    Handles Image updates, deletions and additions from db.
+    """
     report = Report.objects.get(pk=pk)
     images = report.images.all()
 
@@ -189,7 +236,7 @@ def edit_report(request, pk):
         confirm_deletion = request.POST.get('confirm-deletion', 'false')
 
         if confirm_deletion == 'true':
-            # Handle image deletions (confirmed by the user)
+            # Image deletions (confirmed by the user)
             for image in report.images.all():
                 checkbox_name = f"delete_image_{image.id}"
                 if request.POST.get(checkbox_name):
@@ -230,6 +277,10 @@ def edit_report(request, pk):
 
 
 def delete_report(request, pk):
+    """
+    Deletes report instances and displays success message.
+    Redirects to account page.
+    """
     report = get_object_or_404(Report, pk=pk)
 
     if request.method == 'POST':
@@ -240,6 +291,11 @@ def delete_report(request, pk):
 
 
 def delete_account(request):
+    """
+    Deletes user instance.
+    Displays successful deletion message.
+    Redirects user to landing page.
+    """
     if request.method == 'POST':
         user = request.user
         user.delete()

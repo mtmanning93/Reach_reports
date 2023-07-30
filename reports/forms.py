@@ -7,13 +7,19 @@ from django.contrib.auth.models import User
 
 
 class CommentForm(forms.ModelForm):
+    """
+    A form for the comments, for authenticated users, found in report details.
+    """
     class Meta:
         model = models.Comment
         fields = ('content',)
 
 
 class CreateReportForm(forms.ModelForm):
-
+    """
+    The form for creating a report.
+    Also used in the edit_report view with prepopulated fields.
+    """
     class Meta:
         model = models.Report
         fields = [
@@ -60,12 +66,18 @@ class CreateReportForm(forms.ModelForm):
 
 
 class ImageFileForm(forms.ModelForm):
+    """
+    The form to handle image file uploads within the create report template.
+    """
     class Meta:
         model = models.ImageFile
         fields = ['image_file']
 
 
 class UpdateAccountForm(UserChangeForm):
+    """
+    Form used for updated account information; username and email.
+    """
 
     email = forms.EmailField(required=True)
 
