@@ -26,7 +26,7 @@
 <div class="container-fluid d-flex justify-content-center">
     <div class="row w-75 bg-light rounded p-3 mb-3">
         <!-- Info -->
-        <div class="col-md-6">
+        <div class="col-12 col-lg-6">
 
             <div class="container text-start">
                 <div class="row g-2">
@@ -124,44 +124,55 @@
 
         <!-- Images -->
 
-        <div class="col-md-6 mt-2 mt-md-0">
-            <div class="row">
-                {% if report.images.count > 0 %}
-                <p class="info-label text-muted m-0 p-0">Images: (click to enlarge)</p>
-                {% for image_file in report.images.all %}
-                <button type="button" class="report-img col-4" data-bs-toggle="modal"
-                    data-bs-target="#myModal{{image_file.pk}}">
-                    <img src="{{ image_file.image_file.url }}" alt="{{ report.title }}">
-                </button>
-                {% endfor %}
-                {% else %}
-                <div class="report-img">
-                    <img src="/static/images/no-images.png" alt="No images available">
-                </div>
-                {% endif %}
+        <div class="col-12 col-lg-6 mt-2 mt-lg-0 p-3 p-lg-0">
+            <div class="container">
+                <div class="row">
+                    {% if report.images.count > 0 %}
+                    <p class="info-label text-muted m-0 p-0">Images: (click to enlarge)</p>
+                    {% for image_file in report.images.all %}
+                    <button type="button" class="report-img col-4" data-bs-toggle="modal"
+                        data-bs-target="#myModal{{image_file.pk}}">
+                        <img src="{{ image_file.image_file.url }}" alt="{{ report.title }}">
+                    </button>
+                    {% endfor %}
+                    {% else %}
+                    <div class="report-img">
+                        <img src="/static/images/no-images.png" alt="No images available">
+                    </div>
+                    {% endif %}
 
-                {% for image_file in report.images.all %}
-                <div class="modal fade" id="myModal{{ image_file.pk }}" tabindex="-1"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fa-solid fa-camera"></i>
-                                    {{ report.title }}</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <img class="img-fluid" src="{{ image_file.image_file.url }}" alt="{{ report.title }}">
-                            </div>
-                            <div class="modal-footer justify-content-center">
-                                <button type="button" id="close-img-btn" class="btn btn-light w-50"
-                                    data-bs-dismiss="modal">Close Image</button>
+                    {% for image_file in report.images.all %}
+                    <div class="modal fade" id="myModal{{ image_file.pk }}" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel"><i
+                                            class="fa-solid fa-camera"></i>
+                                        {{ report.title }}</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <img class="img-fluid" src="{{ image_file.image_file.url }}"
+                                        alt="{{ report.title }}">
+                                </div>
+                                <div class="modal-footer justify-content-center">
+                                    <button type="button" id="close-img-btn" class="btn btn-light w-50"
+                                        data-bs-dismiss="modal">Close Image</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
+                {% if report.gps_map_link %}
+                <div class="row mt-2 mt-lg-0">
+                    <p class="info-label text-muted m-0 p-0">Interactive Map:</p>
+                    <iframe class="col-12 mt-2 p-0" src="{{ report.gps_map_link }}" frameborder="" allowfullscreen=""
+                        height="300px"></iframe>
+                </div>
+                {% endif %}
             </div>
         </div>
         <div class="col-12 d-flex justify-content-end">
@@ -235,7 +246,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Delete comment modal for each comment -->
 
     <div class="modal" id="deleteCommentModal" tabindex="-1" aria-labelledby="deleteCommentModalLabel"

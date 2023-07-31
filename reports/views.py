@@ -249,6 +249,7 @@ def edit_report(request, pk):
             request.POST, request.FILES, instance=report)
 
         if edit_form.is_valid():
+            print('test valid form')
             report = edit_form.save()
 
             images = request.FILES.getlist('images')
@@ -263,7 +264,8 @@ def edit_report(request, pk):
                 request, messages.INFO, 'Report updated successfully!')
 
             return redirect('account')
-
+        else:
+            print('form has errors', edit_form.errors)
     else:
         edit_form = forms.CreateReportForm(instance=report)
 
