@@ -30,7 +30,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'reach-reports-e02886ddeda3.herokuapp.com',
@@ -62,11 +62,18 @@ INSTALLED_APPS = [
 ]
 
 # Allauth
+SITE_ID = 1
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_EMAIL_REQUIRED = True
 
-SITE_ID = 1
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+AUTHENTICATION_BACKENDS = [
+    'reports.backends.EmailAuthenticationBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = 'account'
