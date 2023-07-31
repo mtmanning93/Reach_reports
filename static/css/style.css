@@ -304,6 +304,10 @@ label {
         margin: auto;
     }
 
+    #head-img-wrapper {
+        height: 571px;
+    }
+
     /* Reports */
 
     .report-list-item {
@@ -314,6 +318,10 @@ label {
 
 /* S screens, mobiles, Bootstrap <small breakpoint */
 @media screen and (max-width: 576px) {
+
+    .nav-item a {
+        text-align: end;
+    }
 
     #head-img-wrapper {
         height: 571px;
@@ -352,7 +360,7 @@ label {
 }
 
 /* M screens, Tablets, Bootstrap <medium breakpoint */
-@media screen and (min-width: 577px) and (max-width: 768px) {
+@media screen and (max-width: 768px) {
 
     h1 {
         font-size: 2.5em;
