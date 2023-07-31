@@ -320,7 +320,7 @@ label {
 @media screen and (max-width: 576px) {
 
     .nav-item a {
-        text-align: end;
+        text-align: center;
     }
 
     #head-img-wrapper {
