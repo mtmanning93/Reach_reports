@@ -314,6 +314,15 @@ label {
         font-size: 0.65em;
     }
 
+    #filter-forms form {
+        font-size: 0.9em;
+    }
+
+    .row a .list_image,
+    #list-key #camera {
+        display: none;
+    }
+
     /* Create Report */
 
     #create_form,
@@ -363,6 +372,10 @@ label {
     .img-thumbnail {
         width: 65px;
         height: 65px;
+    }
+
+    .img-num {
+        display: none;
     }
 
     /* Report forms */
