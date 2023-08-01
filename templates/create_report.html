@@ -7,17 +7,17 @@
 <div class="container-fluid p-3">
     <div class="row text-center d-flex flex-column align-items-center">
         <h1 class="mb-3">Create New Report</h1>
-        <h3 class="col-12 col-md-9 m-0 text-start">Creating report as: <span class="text-secondary">{{ user.username }}</span></h3>
+        <h3 class="col-12 col-md-9 col-lg-6 m-0 text-start">Creating report as: <span class="text-secondary">{{ user.username }}</span></h3>
     </div>
 </div>
 
 <div class="container-fluid d-flex justify-content-center p-0 pb-3 p-sm-3">
-    <div class="row col-12 col-md-9 bg-light rounded pt-2 p-sm-3 mb-3">
+    <div class="row col-12 col-md-9 col-lg-6 bg-light rounded pt-2 p-sm-3 mb-3">
 
         <form id="create_form" class="text-start pb-3" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row col-12 justify-content-center justify-content-sm-start g-2">
-                <div class="create_item col-12 col-md-8">
+                <div class="col-12 col-md-8">
                     {{ report_form.title|as_crispy_field }}
                 </div>
                 <div class="col-12 col-sm-4">

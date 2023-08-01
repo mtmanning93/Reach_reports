@@ -316,10 +316,6 @@ label {
 
     /* Create Report */
 
-    .create_item div {
-        margin-bottom: 0;
-    }
-
     #create_form,
     #create_form div input,
     #create_form div select {
@@ -367,6 +363,12 @@ label {
     .img-thumbnail {
         width: 65px;
         height: 65px;
+    }
+
+    /* Report forms */
+
+    .report_img_wrapper {
+        width: auto;
     }
 
 }
