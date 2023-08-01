@@ -35,11 +35,11 @@
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-expand-sm bg-light">
+    <nav class="navbar navbar-expand-sm d-flex flex-column bg-light">
         <div id="nav-pos" class="container-fluid d-sm-flex justify-content-sm-center">
 
             <a class="navbar-brand" href="{% url 'home' %}">
-                    <img id="logo" src="{% static 'images/blue-mountains-trans.png' %}" alt="Reach logo">
+                <img id="logo" src="{% static 'images/blue-mountains-trans.png' %}" alt="Reach logo">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
@@ -75,15 +75,22 @@
         </div>
     </nav>
 
+
     <main class="content-wrapper">
         {% block content %}
         <!-- Content -->
         {% endblock content %}
     </main>
 
-
     <footer class="container-fluid d-flex flex-column justify-content-center bg-light text-dark mt-auto">
         <div class="row d-flex justify-content-between">
+            <div class="contact d-sm-none text-center mb-2 col-12">
+                <p class="safety_message">
+                    All Reach Reports are provided with intention to simply give advice. It is down to you as a climber
+                    to make the right decisions. Be safe, respect the mountains and don't forget to Reach!
+                </p>
+                <h5 class="m-0"><i class="fa-solid fa-envelope"></i> reportsreach@gmail.com</h5>
+            </div>
             <div class="d-sm-block col-6 col-sm-3 d-sm-flex justify-content-start">
                 <ul id="footer-nav" class="d-flex flex-column">
                     <h5 class="text-secondary">Navigation:</h5>
@@ -110,8 +117,8 @@
                     {% endif %}
                 </ul>
             </div>
-            <div id="contact" class="d-none d-sm-block col-6 d-sm-flex flex-column p-0 text-center">
-                <p id="safety_message">
+            <div class="contact d-none d-sm-block col-6 d-sm-flex flex-column p-0 text-center">
+                <p class="safety_message">
                     All Reach Reports are provided with intention to simply give advice. It is down to you as a climber
                     to make the right decisions. Be safe, respect the mountains and don't forget to Reach!
                 </p>

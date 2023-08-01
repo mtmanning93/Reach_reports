@@ -150,7 +150,7 @@ footer a {
     padding: 0;
 }
 
-#safety_message {
+.safety_message {
     font-size: 0.75em;
 }
 
@@ -291,7 +291,7 @@ label {
     #logo {
         height: 45px;
     }
-
+    
     #nav-pos {
         padding: 0;
     }
@@ -312,6 +312,18 @@ label {
 
     .report-list-item {
         font-size: 0.65em;
+    }
+
+    /* Create Report */
+
+    .create_item div {
+        margin-bottom: 0;
+    }
+
+    #create_form,
+    #create_form div input,
+    #create_form div select {
+        font-size: 0.7em;
     }
 
 }
@@ -372,7 +384,7 @@ label {
 
     #sociallinks>h5,
     #footer-nav>h5,
-    #contact>h5 {
+    .contact>h5 {
         font-size: 15px;
     }
 
@@ -393,4 +405,5 @@ label {
         width: 75px;
         height: 75px;
     }
+
 }
