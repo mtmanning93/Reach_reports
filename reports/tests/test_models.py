@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Report, Comment
+from reports.models import Report, Comment
 
 
 class TestModels(TestCase):

@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.utils.text import slugify
 from django.contrib import messages
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 import cloudinary
 import random
 from . import forms
@@ -145,6 +146,7 @@ def delete_comment(request, pk):
         return redirect('report_details', pk=report_pk)
 
 
+@login_required
 def account_view(request):
     """
     Renders account.html template for authenticated users.
@@ -159,6 +161,8 @@ def account_view(request):
             'username': user.username,
             'email': user.email,
             'reports': Report.objects.filter(author=user),
+            'image_count': ImageFile.objects.filter(
+                report__author=user).count(),
         }
 
     return render(request, 'account.html', context)
@@ -249,7 +253,6 @@ def edit_report(request, pk):
             request.POST, request.FILES, instance=report)
 
         if edit_form.is_valid():
-            print('test valid form')
             report = edit_form.save()
 
             images = request.FILES.getlist('images')
@@ -260,12 +263,12 @@ def edit_report(request, pk):
                     image_file=image
                 )
 
+            images = report.images.all()
+
             messages.add_message(
                 request, messages.INFO, 'Report updated successfully!')
 
             return redirect('account')
-        else:
-            print('form has errors', edit_form.errors)
     else:
         edit_form = forms.CreateReportForm(instance=report)
 

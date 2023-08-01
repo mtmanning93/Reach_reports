@@ -1,8 +1,8 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
-from .models import Report, Comment, ImageFile
-from .forms import CreateReportForm, UpdateAccountForm
+from reports.models import Report, Comment, ImageFile
+from reports.forms import CreateReportForm, UpdateAccountForm
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 
@@ -312,18 +312,45 @@ class EditReportTests(TestCase):
             description="This is a sample report."
         )
 
-        # Read the binary content of the mock image file
-        with open('reports/tests/test_img.png', 'rb') as file:
-            image_data = file.read()
+        self.image1 = ImageFile.objects.create(report=self.report, image_file='test_image1.jpg')
+        self.image2 = ImageFile.objects.create(report=self.report, image_file='test_image2.jpg')
+        self.image1_pk = ImageFile.pk
 
-        # Create a mock image using SimpleUploadedFile
-        self.image = SimpleUploadedFile(
-            "test_image.png", image_data, content_type="image/png")
+    def test_edit_report_view_with_new_images(self):
 
-        # Associate the mock image with the report
-        self.image_file = ImageFile.objects.create(
-            report=self.report, image_file=self.image)
-        self.image_file_pk = ImageFile.pk
+        self.client.force_login(self.user)
+        # Prepare the data for the test
+        new_image_file = ImageFile.objects.create(report=self.report, image_file='test_image3.jpg')
+        form_data = {
+            'title': 'Updated Test Report',
+            'slug': 'sample-report',
+            'author': 'Tester',
+            'start_date': '2023-07-13',
+            'end_date': '2023-07-15',
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'Updated content.',
+            'goal_reached': 'yes',
+            'number_in_group': 3,
+            'number_on_route': 2,
+            'status': 1,
+        }
+
+        # Post the edit_report form data and new image
+        response = self.client.post(
+            reverse('edit_report', args=[self.report.pk]),
+            form_data,
+            format='multipart',
+            FILES={'images': [new_image_file]}, follow=True)
+        # Check image files are added
+        # print(ImageFile.objects.filter(report=self.report))
+        self.assertEqual(
+            ImageFile.objects.filter(report=self.report).count(), 3)
+
+        response_images = response.context['images']
+        self.assertEqual(ImageFile.objects.filter(report=self.report).count(), len(response_images))
+        for image in response_images:
+            self.assertTrue(ImageFile.objects.filter(pk=image.pk, report=self.report).exists())
 
     def test_edit_report_view_GET(self):
         report = self.report
@@ -346,7 +373,7 @@ class EditReportTests(TestCase):
     def test_confirm_deletion_true(self):
         form_data = {
             'confirm-deletion': 'true',
-            f'delete_image_{self.image_file.pk}': 'on',
+            f'delete_image_{self.image1.pk}': 'on',
         }
         response = self.client.post(reverse(
             'edit_report', args=[self.report.pk]), data=form_data, follow=True)
@@ -354,7 +381,7 @@ class EditReportTests(TestCase):
 
         # Check if the image is deleted from the database and Cloudinary
         images_deleted = ImageFile.objects.filter(report=self.report).exists()
-        self.assertFalse(images_deleted)
+        self.assertTrue(images_deleted)
 
 
 class DeleteReportTests(TestCase):

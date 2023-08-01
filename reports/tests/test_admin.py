@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.test import TestCase
-from .models import Comment
-from .admin import CommentAdmin
+from reports.models import Comment
+from reports.admin import CommentAdmin
 
 
 class CommentAdminTest(TestCase):
