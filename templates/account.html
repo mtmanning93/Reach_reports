@@ -75,12 +75,12 @@
 
 <!-- Reports -->
 
-<div class="container-fluid w-75 mb-4">
-    <div class="row pb-2">
+<div class="container-fluid col-12 col-md-9 mb-4">
+    <div class="row flex-column-reverse flex-md-row pb-2">
         <div class="col-md-8 p-0">
-            <h2 class="p-0 mb-2">Your Reports:</h2>
+            <h2 class="ps-2 p-md-0 m-0 mb-md-2">Your Reports:</h2>
         </div>
-        <div class="col-md-4 pe-0 mb-2">
+        <div class="col-md-4 col-md-4 p-2 p-md-0 mb-2">
             <a href="{% url 'create_report' %}" class="btn btn-success w-100">
                 Create New Report
             </a>
@@ -88,8 +88,8 @@
     </div>
 
     <!-- List Key -->
-    <div class="row justify-content-evenly text-center text-muted p-0 m-0">
-        <div class="col-2">
+    <div class="list-key row justify-content-between justify-content-sm-evenly text-center text-muted p-0 m-0">
+        <div class="camera col-2">
             <i class="fa-solid fa-camera"></i>
         </div>
         <div class="col-3">
@@ -108,9 +108,9 @@
 
     {% if reports %}
     {% for report in reports %}
-    <div class="report-list-item d-flex justify-content-evenly bg-light rounded p-2 mb-2">
+    <div class="report-list-item d-flex justify-content-between justify-content-sm-evenly bg-light rounded p-2 mb-2">
         <!-- Images -->
-        <div class="col-2 d-flex align-items-center justify-content-center">
+        <div class="list_image col-2 d-sm-flex align-items-center justify-content-center">
             {% if report.images.count > 0 %}
             <!-- Images are uploaded for the report -->
             {% for image_file in report.images.all %}
@@ -125,7 +125,7 @@
             <p class="img-num text-secondary">{{ report.images.all.count }}</p>
         </div>
         <!-- Title -->
-        <div class="col-3 text-start">
+        <div class="account_report_title col-3 text-start">
             <a href="{% url 'report_details' report.pk  %}">
                 <h5>{{ report.title }}</h5>
             </a>
@@ -145,12 +145,12 @@
             {{ report.overall_conditions }}
         </div>
         <!-- Status -->
-        <div class="d-flex flex-column align-items-center justify-content-center col-2">
+        <div class="d-flex flex-column align-items-center justify-content-center col-sm-2">
             {{ report.status|display_status|title }}
         </div>
         <!-- Author Activity Date -->
         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-            <p>{{ report.start_date }}</p>
+            <p class="text-center">{{ report.start_date }}</p>
             <a href="{% url 'edit_report' pk=report.pk %}" class="ud-btn text-info">Edit</a>
             <a href="#" class="ud-btn text-danger" data-bs-toggle="modal" data-bs-target="#deleteReportModal"
                 data-report-id="{{ report.pk }}">

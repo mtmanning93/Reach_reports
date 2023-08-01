@@ -318,8 +318,9 @@ label {
         font-size: 0.9em;
     }
 
-    .row a .list_image,
-    #list-key #camera {
+    .report-list-item .list_image,
+    .list-key .camera,
+    #status {
         display: none;
     }
 
@@ -412,7 +413,8 @@ label {
 
     /* Reports */
 
-    .report-list-item h4 {
+    .report-list-item h4,
+    .account_report_title a h5 {
         font-size: 1.5em;
     }
 
@@ -420,5 +422,6 @@ label {
         width: 75px;
         height: 75px;
     }
+
 
 }
