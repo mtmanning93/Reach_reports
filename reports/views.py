@@ -263,8 +263,6 @@ def edit_report(request, pk):
                     image_file=image
                 )
 
-            images = report.images.all()
-
             messages.add_message(
                 request, messages.INFO, 'Report updated successfully!')
 

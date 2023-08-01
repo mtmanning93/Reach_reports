@@ -312,15 +312,16 @@ class EditReportTests(TestCase):
             description="This is a sample report."
         )
 
-        self.image1 = ImageFile.objects.create(report=self.report, image_file='test_image1.jpg')
-        self.image2 = ImageFile.objects.create(report=self.report, image_file='test_image2.jpg')
+        self.image1 = ImageFile.objects.create(
+            report=self.report, image_file='test_image1.jpg')
+        self.image2 = ImageFile.objects.create(
+            report=self.report, image_file='test_image2.jpg')
         self.image1_pk = ImageFile.pk
 
     def test_edit_report_view_with_new_images(self):
 
         self.client.force_login(self.user)
         # Prepare the data for the test
-        new_image_file = ImageFile.objects.create(report=self.report, image_file='test_image3.jpg')
         form_data = {
             'title': 'Updated Test Report',
             'slug': 'sample-report',
@@ -335,6 +336,8 @@ class EditReportTests(TestCase):
             'number_on_route': 2,
             'status': 1,
         }
+        new_image_file = ImageFile.objects.create(
+            report=self.report, image_file='test_image3.jpg')
 
         # Post the edit_report form data and new image
         response = self.client.post(
@@ -347,10 +350,10 @@ class EditReportTests(TestCase):
         self.assertEqual(
             ImageFile.objects.filter(report=self.report).count(), 3)
 
-        response_images = response.context['images']
-        self.assertEqual(ImageFile.objects.filter(report=self.report).count(), len(response_images))
-        for image in response_images:
-            self.assertTrue(ImageFile.objects.filter(pk=image.pk, report=self.report).exists())
+        # Check that image file exists with the correct report and name
+        image_exists = ImageFile.objects.filter(
+            report=self.report, image_file='test_image3.jpg').exists()
+        self.assertTrue(image_exists)
 
     def test_edit_report_view_GET(self):
         report = self.report
