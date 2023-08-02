@@ -195,21 +195,21 @@ def create_report_view(request):
     Renders create report template and form.
     Populates the slug field with title, author and report.pk.
     Allows for multiple image file uploads.
-    On form submission, displays success essage if form is valid.
+    On form submission, displays success message if form is valid.
     """
     if request.method == 'POST':
-        report_form = forms.CreateReportForm(request.POST, request.FILES)
 
-        if report_form.is_valid():
+        report_form = forms.CreateReportForm(request.POST, request.FILES)
+        # input file multiple name
+        images = request.FILES.getlist('images')
+
+        if len(images) <= 12 and report_form.is_valid():
             report = report_form.save(commit=False)
             report.author = request.user
             slug = f"{slugify(report.title)}\
                 -{slugify(report.author)}-{report.pk}"
             report.slug = slug
             report.save()
-
-            # Multiple image files using CloudinaryFileField
-            images = request.FILES.getlist('images')
 
             for image in images:
                 ImageFile.objects.create(
@@ -221,6 +221,10 @@ def create_report_view(request):
                 request, messages.SUCCESS, 'Report created successfully!')
 
             return redirect('reports')
+        else:
+            if len(images) > 12:
+                error_msg = "Incorrect Input: You can upload a maximum of 12 images."
+                report_form.add_error(None, error_msg)
 
     else:
         report_form = forms.CreateReportForm()

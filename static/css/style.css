@@ -283,6 +283,15 @@ label {
     padding: 6px 0;
 }
 
+.errorlist {
+    list-style: none;
+    color: red;
+}
+
+#error ul {
+    margin: 8px 0 0 0;
+}
+
 /* Media Queries */
 
 /* XS screens, mainly for logo */
@@ -343,6 +352,10 @@ label {
     #create_form div input,
     #create_form div select {
         font-size: 0.7em;
+    }
+
+    #error ul {
+        padding: 0;
     }
 
 }
