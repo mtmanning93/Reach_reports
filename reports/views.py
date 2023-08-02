@@ -11,6 +11,22 @@ from . import forms
 from .models import Report, Comment, ImageFile
 
 
+def page_not_found(request, exception, template_name='404.html'):
+    """
+    Custom error 404 error handler.
+    Returns a rendered error template
+    """
+    return render(request, template_name)
+
+
+def page_not_found(request, exception, template_name='500.html'):
+    """
+    Custom error 500 error handler.
+    Returns a rendered error template
+    """
+    return render(request, template_name)
+
+
 def get_random_images():
     """
     Stores the images to be used on the landing page 'index.html'.

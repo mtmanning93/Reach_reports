@@ -5,7 +5,6 @@
 {% load crispy_forms_tags %}
 
 <!-- Title & back button -->
-
 <div class="container-fluid d-flex flex-column align-items-between align-items-sm-center mt-3">
     <div class="row col-12 col-md-9 col-xl-7">
         <div id="report-title" class="col-10 ps-3">
@@ -20,9 +19,7 @@
         </div>
     </div>
 </div>
-
 <!-- Report -->
-
 <div class="container-fluid d-flex justify-content-center">
     <div class="row flex-column flex-lg-row col-12 col-md-9 col-xl-7 bg-light rounded pt-2 p-sm-3 mb-3">
         <!-- Info -->
@@ -99,13 +96,9 @@
                 </div>
             </div>
         </div>
-
-
         <!-- Images -->
-
         <div class="col-lg-6 col-lg-6 mt-2 mt-lg-0">
-
-            <div class="row ps-3 pe-3 p-lg-0">
+            <div class="row justify-content-lg-center ps-3 pe-3 p-lg-0">
                 {% if report.images.count > 0 %}
                 <p class="info-label text-muted m-0 p-0"><i class="fa-solid fa-camera"></i> Images: (click to enlarge)</p>
                 {% for image_file in report.images.all %}
@@ -163,9 +156,7 @@
         </div>
     </div>
 </div>
-
 <!-- Comments & Likes -->
-
 <div class="container-fluid mb-3 d-flex flex-column align-items-center">
     <div id="comments-title" class="row col-12 col-sm-9 col-xl-7">
         <div class="col-8 p-0">
@@ -203,7 +194,6 @@
             {% endwith %}
         </div>
     </div>
-
     {% for comment in comments %}
     <div class="row col-12 col-sm-9 col-xl-7 justify-content-center">
         <div class="card mt-2 bg-light">
@@ -229,9 +219,7 @@
             </div>
         </div>
     </div>
-
     <!-- Delete comment modal for each comment -->
-
     <div class="modal" id="deleteCommentModal" tabindex="-1" aria-labelledby="deleteCommentModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">

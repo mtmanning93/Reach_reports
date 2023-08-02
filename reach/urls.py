@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from reports.views import get_landing_page
 
+handler404 = 'reports.views.page_not_found'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),

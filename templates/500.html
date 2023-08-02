@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load custom_tags %}
+<div class="container-fluid text-center mt-5">
+    <h1>500 error</h1>
+    <h6>Sorry, server error. Click below to get back on track!</h6>
+    <a href="{% url 'home' %}" class="m-sm-3 btn signup_button">
+        Back to Home
+    </a>
+</div>
+
+{% endblock %}
