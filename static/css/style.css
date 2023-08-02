@@ -253,6 +253,10 @@ label {
     color: #2596be;
 }
 
+.form-control {
+    height: 100px;
+}
+
 /* Comments */
 
 #comments-title {
@@ -324,6 +328,19 @@ label {
         display: none;
     }
 
+    .report-img {
+        width: 75px;
+        height: 75px;
+    }
+
+    .counter {
+        display: none;
+    }
+
+    #report-title {
+        font-size: 0.75em;
+    }
+
     /* Create Report */
 
     #create_form,
@@ -377,6 +394,10 @@ label {
 
     .img-num {
         display: none;
+    }
+
+    #date_published {
+        font-size: 0.75em;
     }
 
     /* Report forms */
