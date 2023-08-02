@@ -13,15 +13,15 @@ from .models import Report, Comment, ImageFile
 
 def page_not_found(request, exception, template_name='404.html'):
     """
-    Custom error 404 error handler.
+    Custom 404 error handler.
     Returns a rendered error template
     """
     return render(request, template_name)
 
 
-def page_not_found(request, exception, template_name='500.html'):
+def internal_server_error(request, template_name='500.html'):
     """
-    Custom error 500 error handler.
+    Custom 500 error handler.
     Returns a rendered error template
     """
     return render(request, template_name)
