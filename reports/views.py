@@ -281,7 +281,8 @@ def edit_report(request, pk):
         else:
             if len(new_images) + len(curr_images) > 12:
                 error_msg = """
-                Invalid Input: You can upload a maximum of 12 images per report."""
+                Invalid Input:
+                 You can upload a maximum of 12 images per report."""
                 edit_form.add_error(None, error_msg)
     else:
         edit_form = forms.CreateReportForm(instance=report)
