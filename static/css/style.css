@@ -288,7 +288,7 @@ label {
     color: red;
 }
 
-#error ul {
+.error ul {
     margin: 8px 0 0 0;
 }
 
@@ -354,7 +354,7 @@ label {
         font-size: 0.7em;
     }
 
-    #error ul {
+    .error ul {
         padding: 0;
     }
 

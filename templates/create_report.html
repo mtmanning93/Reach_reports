@@ -10,7 +10,7 @@
         <h3 class="col-12 col-md-9 col-lg-6 m-0 text-start">Creating report as: <span
                 class="text-secondary">{{ user.username }}</span>
         </h3>
-        <div id="error">
+        <div class="error">
             {% if report_form.non_field_errors %}
             {{ report_form.non_field_errors }}
             {% endif %}
@@ -59,7 +59,7 @@
                     <label for="upload"><i class="fa-solid fa-camera"></i> Upload Images: <span class="text-danger">Max
                             Total 12</span></label>
                     <br>
-                    <input class="btn" id="upload" type="file" name="images" multiple>
+                    <input class="btn button" id="upload" type="file" name="images" multiple>
                 </div>
                 <div class="col-12 col-sm-6">
                     {{ report_form.gps_map_link|as_crispy_field }}

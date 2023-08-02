@@ -223,7 +223,8 @@ def create_report_view(request):
             return redirect('reports')
         else:
             if len(images) > 12:
-                error_msg = "Incorrect Input: You can upload a maximum of 12 images."
+                error_msg = """
+                Invalid Input: You can upload a maximum of 12 images."""
                 report_form.add_error(None, error_msg)
 
     else:
@@ -238,16 +239,21 @@ def edit_report(request, pk):
     Handles Image updates, deletions and additions from db.
     """
     report = Report.objects.get(pk=pk)
-    images = report.images.all()
+    curr_images = report.images.all()
 
     if request.method == 'POST':
         confirm_deletion = request.POST.get('confirm-deletion', 'false')
+        new_images = request.FILES.getlist('images')
+        delete_these = []
 
         if confirm_deletion == 'true':
             # Image deletions (confirmed by the user)
-            for image in report.images.all():
+            for image in curr_images:
                 checkbox_name = f"delete_image_{image.id}"
                 if request.POST.get(checkbox_name):
+                    # count for deletion
+                    delete_these.append(image)
+                    print(delete_these)
                     cloudinary.api.delete_resources(
                         [image.image_file.public_id]
                         )
@@ -256,12 +262,13 @@ def edit_report(request, pk):
         edit_form = forms.CreateReportForm(
             request.POST, request.FILES, instance=report)
 
-        if edit_form.is_valid():
+        if (
+            len(new_images) + len(curr_images)) - len(
+                delete_these) <= 12 and edit_form.is_valid():
+
             report = edit_form.save()
 
-            images = request.FILES.getlist('images')
-
-            for image in images:
+            for image in new_images:
                 ImageFile.objects.create(
                     report=report,
                     image_file=image
@@ -271,12 +278,17 @@ def edit_report(request, pk):
                 request, messages.INFO, 'Report updated successfully!')
 
             return redirect('account')
+        else:
+            if len(new_images) + len(curr_images) > 12:
+                error_msg = """
+                Invalid Input: You can upload a maximum of 12 images per report."""
+                edit_form.add_error(None, error_msg)
     else:
         edit_form = forms.CreateReportForm(instance=report)
 
     context = {
         'edit_form': edit_form,
-        'images': images,
+        'images': curr_images,
         'show_modal': False,  # Initially set to False
     }
 

@@ -4,10 +4,17 @@
 
 {% load crispy_forms_tags %}
 
-<div class="container-fluid p-3">
+<div class="container-fluid pt-3">
     <div class="row text-center d-flex flex-column align-items-center">
         <h1 class="mb-3">Edit Report</h1>
-        <h3 class="col-12 col-md-9 col-lg-6 m-0 text-start">Editing report as: <span class="text-secondary">{{ user.username }}</span></h3>
+        <h3 class="col-12 col-md-9 col-lg-6 m-0 text-start">
+            Editing report as: <span class="text-secondary">{{ user.username }}</span>
+        </h3>
+        <div class="error">
+            {% if edit_form.non_field_errors %}
+            {{ edit_form.non_field_errors }}
+            {% endif %}
+        </div>
     </div>
 </div>
 
