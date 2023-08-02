@@ -64,6 +64,11 @@ class CreateReportForm(forms.ModelForm):
         )
         self.fields['status'].label = "Publish/ Draft"
         self.fields['gps_map_link'].required = False
+        self.fields[
+            'number_in_group', 'number_on_route'] = forms.IntegerField(
+            min_value=1,
+            initial=1,
+        )
 
 
 class ImageFileForm(forms.ModelForm):
