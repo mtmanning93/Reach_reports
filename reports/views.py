@@ -211,11 +211,7 @@ def create_report_view(request):
             report.slug = slug
             report.save()
 
-            for image in images:
-                ImageFile.objects.create(
-                    report=report,
-                    image_file=image
-                    )
+            create_new_images(report, images)
 
             messages.add_message(
                 request, messages.SUCCESS, 'Report created successfully!')
@@ -233,6 +229,17 @@ def create_report_view(request):
     return render(request, 'create_report.html', {'report_form': report_form})
 
 
+def create_new_images(report, new_images):
+    """
+    Creates new ImageFile object and uploads to cloudinary
+    """
+    for image in new_images:
+        ImageFile.objects.create(
+            report=report,
+            image_file=image
+        )
+
+
 def edit_report(request, pk):
     """
     Updates report details with valid form. Redirects to 'account'.
@@ -242,6 +249,7 @@ def edit_report(request, pk):
     curr_images = report.images.all()
 
     if request.method == 'POST':
+
         confirm_deletion = request.POST.get('confirm-deletion', 'false')
         new_images = request.FILES.getlist('images')
         delete_these = []
@@ -253,11 +261,8 @@ def edit_report(request, pk):
                 if request.POST.get(checkbox_name):
                     # count for deletion
                     delete_these.append(image)
-                    print(delete_these)
-                    cloudinary.api.delete_resources(
-                        [image.image_file.public_id]
-                        )
-                    image.delete()
+                    # print(delete_these)
+                    delete_image(image)
 
         edit_form = forms.CreateReportForm(
             request.POST, request.FILES, instance=report)
@@ -268,11 +273,7 @@ def edit_report(request, pk):
 
             report = edit_form.save()
 
-            for image in new_images:
-                ImageFile.objects.create(
-                    report=report,
-                    image_file=image
-                )
+            create_new_images(report, new_images)
 
             messages.add_message(
                 request, messages.INFO, 'Report updated successfully!')
@@ -294,6 +295,14 @@ def edit_report(request, pk):
     }
 
     return render(request, 'edit_report.html', context)
+
+
+def delete_image(image):
+    """
+    Deletes images from cloudinary and db
+    """
+    cloudinary.api.delete_resources([image.image_file.public_id])
+    image.delete()
 
 
 def delete_report(request, pk):

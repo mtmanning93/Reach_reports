@@ -98,7 +98,7 @@
         </div>
         <!-- Images -->
         <div class="col-lg-6 col-lg-6 mt-2 mt-lg-0">
-            <div class="row justify-content-lg-center ps-3 pe-3 p-lg-0">
+            <div class="row ps-3 pe-3 p-lg-0">
                 {% if report.images.count > 0 %}
                 <p class="info-label text-muted m-0 p-0"><i class="fa-solid fa-camera"></i> Images: (click to enlarge)</p>
                 {% for image_file in report.images.all %}
@@ -134,6 +134,7 @@
                 </div>
                 {% endfor %}
             </div>
+            <!-- Map -->
             {% if report.gps_map_link %}
             <div class="d-none d-xl-block col-12 mt-2 mt-lg-0">
                 <p class="info-label text-muted m-0 p-0">Interactive Map:</p>
@@ -143,7 +144,7 @@
             {% endif %}
         </div>
         {% if report.gps_map_link %}
-        <div class="d-xl-none col-12 mt-2">
+        <div class="d-xl-none col-12 col-lg-9 m-auto mt-2">
             <p class="info-label text-muted m-0 p-0">Interactive Map:</p>
             <iframe class="col-12 mt-2 p-0" src="{{ report.gps_map_link }}" frameborder="" allowfullscreen=""
                 height="300px"></iframe>
