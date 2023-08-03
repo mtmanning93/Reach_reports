@@ -203,11 +203,10 @@ def create_report_view(request):
         # input file multiple name
         images = request.FILES.getlist('images')
 
-        if len(images) <= 12 and report_form.is_valid():
+        if validate_report_creation(images, report_form):
             report = report_form.save(commit=False)
             report.author = request.user
-            slug = f"{slugify(report.title)}\
-                -{slugify(report.author)}-{report.pk}"
+            slug = generate_slug(report.title, report.author, report.pk)
             report.slug = slug
             report.save()
 
@@ -217,16 +216,20 @@ def create_report_view(request):
                 request, messages.SUCCESS, 'Report created successfully!')
 
             return redirect('reports')
-        else:
-            if len(images) > 12:
-                error_msg = """
-                Invalid Input: You can upload a maximum of 12 images."""
-                report_form.add_error(None, error_msg)
-
     else:
         report_form = forms.CreateReportForm()
 
     return render(request, 'create_report.html', {'report_form': report_form})
+
+
+def validate_report_creation(images, report_form):
+    if len(images) <= 12 and report_form.is_valid():
+        return True
+    else:
+        if len(images) > 12:
+            error_msg = "Invalid Input: You can upload a maximum of 12 images."
+            report_form.add_error(None, error_msg)
+        return False
 
 
 def create_new_images(report, new_images):
@@ -238,6 +241,10 @@ def create_new_images(report, new_images):
             report=report,
             image_file=image
         )
+
+
+def generate_slug(title, author, pk):
+    return f"{slugify(title)}-{slugify(author)}-{pk}"
 
 
 def edit_report(request, pk):
