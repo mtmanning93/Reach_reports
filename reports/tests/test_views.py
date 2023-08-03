@@ -4,7 +4,7 @@ from django.shortcuts import reverse
 from reports.models import Report, Comment, ImageFile
 from reports.forms import CreateReportForm, UpdateAccountForm
 from django.core.files.uploadedfile import SimpleUploadedFile
-from reports.views import generate_slug, validate_report_creation
+from reports.views import generate_slug, validate_report_creation, validate_edit_report_image_data
 
 
 class TestViews(TestCase):
@@ -501,6 +501,83 @@ class EditReportTests(TestCase):
         # Check if the image is deleted from the database and Cloudinary
         images_deleted = ImageFile.objects.filter(report=self.report).exists()
         self.assertTrue(images_deleted)
+
+
+class ValidateEditReportImageDataTests(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create(username="testuser")
+
+        self.report = Report.objects.create(
+            title="Sample Report",
+            slug="sample-report",
+            author=self.user,
+            start_date="2023-07-13",
+            end_date="2023-07-15",
+            overall_conditions="Good",
+            activity_category="Hiking",
+            description="This is a sample report."
+        )
+
+        self.test_image = ImageFile.objects.create(
+            report=self.report, image_file='test_image1.jpg')
+
+    def test_edit_report_images_valid_data(self):
+
+        form_data = {
+            'title': 'Updated Test Report',
+            'slug': 'sample-report',
+            'author': 'Tester',
+            'start_date': '2023-07-13',
+            'end_date': '2023-07-15',
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'Updated content.',
+            'goal_reached': 'yes',
+            'number_in_group': 3,
+            'number_on_route': 2,
+            'status': 1,
+        }
+        # Must equal 12 or less
+        new_images = [self.test_image for _ in range(5)]
+        curr_images = [self.test_image for _ in range(4)]
+        delete_these = [self.test_image for _ in range(3)]
+
+        form = CreateReportForm(data=form_data)
+        form.is_valid()  # Validate the form
+        result = validate_edit_report_image_data(
+            new_images, curr_images, delete_these, form)
+
+        self.assertTrue(result)
+
+    def test_edit_report_images_invalid_data(self):
+
+        form_data = {
+            'title': 'Updated Test Report',
+            'slug': 'sample-report',
+            'author': 'Tester',
+            'start_date': '2023-07-13',
+            'end_date': '2023-07-15',
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'Updated content.',
+            'goal_reached': 'yes',
+            'number_in_group': 3,
+            'number_on_route': 2,
+            'status': 1,
+        }
+
+        # Total should be 15 (new + curr - delete)
+        new_images = [self.test_image for _ in range(4)]
+        curr_images = [self.test_image for _ in range(12)]
+        delete_these = [self.test_image for _ in range(3)]
+
+        form = CreateReportForm(data=form_data)
+        form.is_valid()
+        result = validate_edit_report_image_data(
+            new_images, curr_images, delete_these, form)
+
+        self.assertFalse(result)
 
 
 class DeleteReportTests(TestCase):
