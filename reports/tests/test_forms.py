@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from reports.models import Report, Comment
 from reports.forms import CommentForm, CreateReportForm, UpdateAccountForm
+from reports.views import generate_slug
 
 
 class TestCommentForm(TestCase):
@@ -157,12 +158,34 @@ class CreateReportFormTests(TestCase):
             'description': 'This is a test description.',
             'number_in_group': 5,
             'number_on_route': 3,
-            'gps_map_link': '',  # Empty as optional
+            'gps_map_link': '',
             'status': 1,
         }
 
         form = CreateReportForm(data=form_data)
         self.assertTrue(form.is_valid())
+
+    def test_end_date_validaion(self):
+        form_data = {
+            'title': 'Test Report Title',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 7, 31),
+            'height_in_meters': 3000,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'This is a test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+        }
+
+        form = CreateReportForm(data=form_data)
+        self.assertFalse(form.is_valid())
+        self.assertIn('end_date', form.errors)
+        self.assertEqual(
+            form.errors['end_date'][0], "End date cannot be before start date."
+            )
 
 
 class UpdateAccountFormTests(TestCase):

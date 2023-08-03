@@ -81,7 +81,7 @@ class Report(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = generate_slug(self)
+            self.slug = slugify(self)
         super(Report, self).save(*args, **kwargs)
 
 

@@ -55,13 +55,13 @@ class CreateReportForm(forms.ModelForm):
         self.fields['height_in_meters'].label = "Summit height (masl)"
         self.fields['status'].label = "Publish/ Draft"
         self.fields['gps_map_link'].required = False
-        self.fields['time_taken'].initial = "hh:mm:ss"
+        # self.fields['time_taken'].initial = "hh:mm:ss"
 
     def validate_end_date(self, value):
         start_date = self.cleaned_data.get('start_date')
         if value and start_date and value < start_date:
             raise forms.ValidationError(
-                "End Date cannot be before start date.")
+                "End date cannot be before start date.")
         return value
 
 

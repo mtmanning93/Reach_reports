@@ -16,12 +16,9 @@ class ReportAdmin(SummernoteModelAdmin):
         'start_date'
     )
     search_fields = ['title', 'description']
-    list_filter = ('overall_conditions', 'start_date')
+    list_filter = ('overall_conditions', 'start_date', 'created_on')
     summernote_fields = ('description')
     inlines = [ImageInline]
-
-    # Hide slug...
-    # exclude = ('slug',)
 
 
 @admin.register(Comment)
