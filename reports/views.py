@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 import cloudinary
 import random
+
 from . import forms
 from .models import Report, Comment, ImageFile
 
@@ -34,7 +35,6 @@ def get_landing_page(request):
     """
     Renders landing page template and random image to display
     """
-
     random_image_url = get_random_images()
 
     return render(

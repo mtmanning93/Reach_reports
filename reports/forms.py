@@ -1,7 +1,6 @@
 from . import models
 from django import forms
 from datetime import date
-from cloudinary.forms import CloudinaryFileField
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
 
@@ -55,11 +54,6 @@ class CreateReportForm(forms.ModelForm):
         self.fields['height_in_meters'].label = "Summit height (masl)"
         self.fields['status'].label = "Publish/ Draft"
         self.fields['gps_map_link'].required = False
-        # self.fields[
-        #     'number_in_group', 'number_on_route'] = forms.IntegerField(
-        #     min_value=1,
-        #     initial=1,
-        # )
 
 
 class ImageFileForm(forms.ModelForm):
@@ -69,10 +63,6 @@ class ImageFileForm(forms.ModelForm):
     class Meta:
         model = models.ImageFile
         fields = ['image_file']
-
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['image_file'].widget.attrs.update({'multiple': True})
 
 
 class UpdateAccountForm(UserChangeForm):

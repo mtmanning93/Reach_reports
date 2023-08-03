@@ -59,8 +59,12 @@ class Report(models.Model):
     activity_category = models.CharField(
         max_length=12, choices=CATEGORY_CHOICES)
     description = models.TextField(blank=True)
-    number_in_group = models.IntegerField(default=1)
-    number_on_route = models.IntegerField(default=1)
+    number_in_group = models.PositiveIntegerField(
+        default=1,
+        validators=[MinValueValidator(0), MaxValueValidator(9000)])
+    number_on_route = models.PositiveIntegerField(
+        default=1,
+        validators=[MinValueValidator(0), MaxValueValidator(9000)])
     gps_map_link = models.URLField(blank=True)
     status = models.IntegerField(choices=STATUS, default=1)
     likes = models.ManyToManyField(
