@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 import cloudinary
 import random
+import uuid
 
 from . import forms
 from .models import Report, Comment, ImageFile
@@ -206,7 +207,7 @@ def create_report_view(request):
         if validate_report_creation(images, report_form):
             report = report_form.save(commit=False)
             report.author = request.user
-            slug = generate_slug(report.title, report.author, report.pk)
+            slug = generate_slug(report)
             report.slug = slug
             report.save()
 
@@ -232,8 +233,21 @@ def validate_report_creation(images, report_form):
         return False
 
 
-def generate_slug(title, author, pk):
-    return f"{slugify(title)}-{slugify(author)}-{pk}"
+def generate_slug(instance):
+
+    slug = f"{slugify(instance.title)}-{slugify(instance.author)}"
+    new_slug = slug
+    counter = 1
+
+    while Report.objects.filter(slug=new_slug).exists():
+        new_slug = f"{slug}-{counter}"
+        counter += 1
+
+    return new_slug
+
+# def generate_slug(title, author, pk):
+
+#     return f"{slugify(title)}-{slugify(author)}-{pk}"
 
 
 def create_new_images(report, new_images):

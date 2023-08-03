@@ -21,7 +21,7 @@ class ReportAdmin(SummernoteModelAdmin):
     inlines = [ImageInline]
 
     # Hide slug...
-    exclude = ('slug',)
+    # exclude = ('slug',)
 
 
 @admin.register(Comment)

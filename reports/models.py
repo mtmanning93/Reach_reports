@@ -80,11 +80,8 @@ class Report(models.Model):
         return self.likes.count()
 
     def save(self, *args, **kwargs):
-        if not self.pk:
-            slug = f"{slugify(self.title)}\
-                -{slugify(self.author.username)}-{self.pk}"
-            self.slug = slug
-
+        if not self.slug:
+            self.slug = generate_slug(self)
         super(Report, self).save(*args, **kwargs)
 
 
