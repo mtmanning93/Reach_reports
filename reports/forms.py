@@ -51,9 +51,17 @@ class CreateReportForm(forms.ModelForm):
             widget=forms.DateInput(
                 attrs={'type': 'date', 'max': str(date.today())}),
         )
+        self.fields['end_date'].validators.append(self.validate_end_date)
         self.fields['height_in_meters'].label = "Summit height (masl)"
         self.fields['status'].label = "Publish/ Draft"
         self.fields['gps_map_link'].required = False
+
+    def validate_end_date(self, value):
+        start_date = self.cleaned_data.get('start_date')
+        if value and start_date and value < start_date:
+            raise forms.ValidationError(
+                "End Date cannot be before start date.")
+        return value
 
 
 class ImageFileForm(forms.ModelForm):

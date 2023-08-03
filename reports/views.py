@@ -245,10 +245,6 @@ def generate_slug(instance):
 
     return new_slug
 
-# def generate_slug(title, author, pk):
-
-#     return f"{slugify(title)}-{slugify(author)}-{pk}"
-
 
 def create_new_images(report, new_images):
     """
