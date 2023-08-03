@@ -232,6 +232,10 @@ def validate_report_creation(images, report_form):
         return False
 
 
+def generate_slug(title, author, pk):
+    return f"{slugify(title)}-{slugify(author)}-{pk}"
+
+
 def create_new_images(report, new_images):
     """
     Creates new ImageFile object and uploads to cloudinary
@@ -243,55 +247,37 @@ def create_new_images(report, new_images):
         )
 
 
-def generate_slug(title, author, pk):
-    return f"{slugify(title)}-{slugify(author)}-{pk}"
-
-
 def edit_report(request, pk):
     """
     Updates report details with valid form. Redirects to 'account'.
-    Handles Image updates, deletions and additions from db.
+    Handles Image updates, deletions, and additions from db.
     """
     report = Report.objects.get(pk=pk)
     curr_images = report.images.all()
 
     if request.method == 'POST':
-
+        edit_form = forms.CreateReportForm(
+            request.POST, request.FILES, instance=report)
         confirm_deletion = request.POST.get('confirm-deletion', 'false')
         new_images = request.FILES.getlist('images')
         delete_these = []
 
+        # Image deletions (confirmed by the user)
         if confirm_deletion == 'true':
-            # Image deletions (confirmed by the user)
             for image in curr_images:
                 checkbox_name = f"delete_image_{image.id}"
                 if request.POST.get(checkbox_name):
-                    # count for deletion
                     delete_these.append(image)
-                    # print(delete_these)
                     delete_image(image)
 
-        edit_form = forms.CreateReportForm(
-            request.POST, request.FILES, instance=report)
-
-        if (
-            len(new_images) + len(curr_images)) - len(
-                delete_these) <= 12 and edit_form.is_valid():
-
+        if validate_edit_report_image_data(
+                new_images, curr_images, delete_these, edit_form):
             report = edit_form.save()
-
             create_new_images(report, new_images)
 
             messages.add_message(
                 request, messages.INFO, 'Report updated successfully!')
-
             return redirect('account')
-        else:
-            if len(new_images) + len(curr_images) > 12:
-                error_msg = """
-                Invalid Input:
-                 You can upload a maximum of 12 images per report."""
-                edit_form.add_error(None, error_msg)
     else:
         edit_form = forms.CreateReportForm(instance=report)
 
@@ -302,6 +288,22 @@ def edit_report(request, pk):
     }
 
     return render(request, 'edit_report.html', context)
+
+
+def validate_edit_report_image_data(
+        new_images, curr_images, delete_these, edit_form):
+
+    if (len(new_images) + len(curr_images)) - len(delete_these) > 12:
+        error_msg = """
+        Invalid Input: You can upload a maximum of 12 images per report."""
+        edit_form.add_error(None, error_msg)
+
+        return False
+
+    elif edit_form.is_valid():
+        return True
+
+    return False
 
 
 def delete_image(image):
