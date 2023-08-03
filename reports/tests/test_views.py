@@ -4,6 +4,7 @@ from django.shortcuts import reverse
 from reports.models import Report, Comment, ImageFile
 from reports.forms import CreateReportForm, UpdateAccountForm
 from django.core.files.uploadedfile import SimpleUploadedFile
+from reports.views import generate_slug
 
 
 class TestViews(TestCase):
@@ -191,7 +192,7 @@ class LikeReportTests(TestCase):
         self.assertFalse(self.report.likes.filter(id=self.user.id).exists())
 
 
-class DeleteCommentTest(TestCase):
+class DeleteCommentTests(TestCase):
 
     def setUp(self):
 
@@ -287,6 +288,50 @@ class CreateReportTests(TestCase):
         self.assertTemplateUsed(response, 'create_report.html')
         self.assertContains(response, 'is-invalid')
         self.assertFalse(Report.objects.filter(title='Test Report').exists())
+
+
+class GenerateSlugTests(TestCase):
+
+    def setUp(self):
+        # Create a test user
+        self.user = User.objects.create(username="testuser")
+
+        self.report = Report.objects.create(
+            title="Sample Report",
+            slug="sample-report",
+            author=self.user,
+            start_date="2023-07-13",
+            end_date="2023-07-15",
+            overall_conditions="Good",
+            activity_category="Hiking",
+            description="This is a sample report."
+        )
+
+    def test_generate_slug_unique(self):
+        # Create two reports with the same title and author
+        report1 = Report.objects.create(
+            title="Sample Report",
+            author=self.user,
+            start_date="2023-07-13",
+            end_date="2023-07-15",
+            overall_conditions="Good",
+            activity_category="Hiking",
+            description="This is a sample report."
+        )
+        report2 = Report.objects.create(
+            title="Sample Report",
+            author=self.user,
+            start_date="2023-07-13",
+            end_date="2023-07-15",
+            overall_conditions="Good",
+            activity_category="Hiking",
+            description="This is another sample report."
+        )
+
+        print(f"SLUG={report1.slug}")
+        print(f"SLUG2={report2.slug}")
+        # Check that slugs are generated and different
+        self.assertNotEqual(report1.slug, report2.slug)
 
 
 class EditReportTests(TestCase):

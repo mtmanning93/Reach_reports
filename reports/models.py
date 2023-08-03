@@ -30,6 +30,19 @@ SUCCESS = [
 ]
 
 
+def generate_slug(instance):
+
+    slug = f"{slugify(instance.title)}-{slugify(instance.author)}"
+    new_slug = slug
+    counter = 1
+
+    while Report.objects.filter(slug=new_slug).exists():
+        new_slug = f"{slug}-{counter}"
+        counter += 1
+
+    return new_slug
+
+
 class Report(models.Model):
     """
     Main model for the reports objects.
@@ -81,7 +94,7 @@ class Report(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self)
+            self.slug = generate_slug(self)
         super(Report, self).save(*args, **kwargs)
 
 
