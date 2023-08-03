@@ -4,7 +4,7 @@ from django.shortcuts import reverse
 from reports.models import Report, Comment, ImageFile
 from reports.forms import CreateReportForm, UpdateAccountForm
 from django.core.files.uploadedfile import SimpleUploadedFile
-from reports.views import generate_slug
+from reports.views import generate_slug, validate_report_creation
 
 
 class TestViews(TestCase):
@@ -290,10 +290,9 @@ class CreateReportTests(TestCase):
         self.assertFalse(Report.objects.filter(title='Test Report').exists())
 
 
-class GenerateSlugTests(TestCase):
+class ValidateReportCreationTests(TestCase):
 
     def setUp(self):
-        # Create a test user
         self.user = User.objects.create(username="testuser")
 
         self.report = Report.objects.create(
@@ -306,6 +305,82 @@ class GenerateSlugTests(TestCase):
             activity_category="Hiking",
             description="This is a sample report."
         )
+
+        self.test_image = ImageFile.objects.create(
+            report=self.report, image_file='test_image1.jpg')
+
+    def test_validate_report_with_under_12_images(self):
+
+        form_data = {
+            'title': 'Updated Test Report',
+            'slug': 'sample-report',
+            'author': 'Tester',
+            'start_date': '2023-07-13',
+            'end_date': '2023-07-15',
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'Updated content.',
+            'goal_reached': 'yes',
+            'number_in_group': 3,
+            'number_on_route': 2,
+            'status': 1,
+        }
+
+        # Mock 10 image files
+        images = [self.test_image for _ in range(10)]
+
+        form = CreateReportForm(data=form_data)
+        form.is_valid()  # Validate the form
+        result = validate_report_creation(images, form)
+
+        # More than 12 images (validator function = True)
+        self.assertTrue(result)
+
+    def test_validate_report_with_over_12_images(self):
+
+        form_data = {
+            'title': 'Updated Test Report',
+            'slug': 'sample-report',
+            'author': 'Tester',
+            'start_date': '2023-07-13',
+            'end_date': '2023-07-15',
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'Updated content.',
+            'goal_reached': 'yes',
+            'number_in_group': 3,
+            'number_on_route': 2,
+            'status': 1,
+        }
+
+        # Mock 15 image files
+        images = [self.test_image for _ in range(15)]  
+
+        form = CreateReportForm(data=form_data)
+        form.is_valid()  # Validate the form
+        result = validate_report_creation(images, form)
+
+        # More than 12 images (validator function = False)
+        self.assertFalse(result)
+
+        # Check if there errors
+        self.assertIn(
+            '__all__', form.errors)  
+        # Check if there's one error message
+        self.assertEqual(
+            len(form.errors['__all__']), 1)
+        # Check first index is the correct error
+        self.assertEqual(
+            form.errors['__all__'][0],
+            "Invalid Input: You can upload a maximum of 12 images."
+            )
+
+
+class GenerateSlugTests(TestCase):
+
+    def setUp(self):
+        # Create a test user
+        self.user = User.objects.create(username="testuser")
 
     def test_generate_slug_unique(self):
         # Create two reports with the same title and author
@@ -327,10 +402,6 @@ class GenerateSlugTests(TestCase):
             activity_category="Hiking",
             description="This is another sample report."
         )
-
-        print(f"SLUG={report1.slug}")
-        print(f"SLUG2={report2.slug}")
-        # Check that slugs are generated and different
         self.assertNotEqual(report1.slug, report2.slug)
 
 
