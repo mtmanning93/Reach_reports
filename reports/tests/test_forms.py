@@ -10,6 +10,7 @@ from reports.views import generate_slug
 class TestCommentForm(TestCase):
 
     def setUp(self):
+
         self.user = User.objects.create(username="testuser")
 
         self.report = Report.objects.create(
@@ -29,17 +30,24 @@ class TestCommentForm(TestCase):
         )
 
     def test_content_validation_with_valid_input(self):
+
         form = CommentForm(data={'content': 'This is a valid comment.'})
+
         self.assertTrue(form.is_valid())
 
     def test_form_validation_with_empty_content(self):
+
         form = CommentForm(data={'content': ''})
+
         self.assertFalse(form.is_valid())
         self.assertIn('content', form.errors)
 
     def test_form_saves_correctly(self):
+
         form = CommentForm(data={'content': self.comment.content})
+
         self.assertTrue(form.is_valid())
+
         comment = form.save(commit=False)
         comment.report = self.report
         comment.save()
@@ -49,18 +57,19 @@ class TestCommentForm(TestCase):
         self.assertEqual(comment.report, self.report)
 
     def test_comment_form_renders_correctly(self):
+
         form = CommentForm()
+
         self.assertIn('content', form.as_p())
 
     def test_comment_posts_to_page(self):
 
-        client = Client()
         form_data = {
             'content': 'This is a test comment',
         }
         form = CommentForm(data=form_data)
 
-        response = client.post(
+        response = self.client.post(
             reverse(
                 'report_details', kwargs={'pk': self.report.pk}
             ), data=form_data, follow=True
@@ -68,7 +77,9 @@ class TestCommentForm(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, form_data['content'])
+
         saved_comments = Comment.objects.filter(content=form_data['content'])
+
         self.assertGreaterEqual(saved_comments.count(), 1)
         self.assertTrue(
             any(comment.report == self.report for comment in saved_comments)
@@ -78,14 +89,11 @@ class TestCommentForm(TestCase):
 class CreateReportFormTests(TestCase):
 
     def setUp(self):
-        # Create a test user
+
         self.user = User.objects.create(username="testuser")
 
-    def test_create_report_form_rendering(self):
-        form = CreateReportForm()
-        rendered_form = form.as_p()
-
     def test_create_report_form_with_valid_data(self):
+
         form_data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -102,19 +110,20 @@ class CreateReportFormTests(TestCase):
         }
 
         form = CreateReportForm(data=form_data)
+
         self.assertTrue(form.is_valid())
+
         report = form.save(commit=False)
         report.author = self.user
         report.save()
 
-        # Check if the report is saved to the database
         saved_report = Report.objects.get(pk=report.pk)
+
         self.assertEqual(saved_report.title, form_data['title'])
 
     def test_create_report_form_with_missing_required_fields(self):
 
         form_data = {
-            # no title
             'start_date': str(date.today()),
             'end_date': str(date.today()),
             'goal_reached': 'yes',
@@ -124,10 +133,11 @@ class CreateReportFormTests(TestCase):
         }
 
         form = CreateReportForm(data=form_data)
+
         self.assertFalse(form.is_valid())
 
     def test_create_report_form_with_invalid_data(self):
-        # Test case for report with invalid data
+
         form_data = {
             'title': 'Test Report Title',
             'goal_reached': 'invalid_choice',
@@ -143,10 +153,11 @@ class CreateReportFormTests(TestCase):
         }
 
         form = CreateReportForm(data=form_data)
+
         self.assertFalse(form.is_valid())
 
     def test_create_report_form_with_optional_gps_map_link(self):
-        # Report without GPS map link
+
         form_data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -163,9 +174,11 @@ class CreateReportFormTests(TestCase):
         }
 
         form = CreateReportForm(data=form_data)
+
         self.assertTrue(form.is_valid())
 
     def test_end_date_validaion(self):
+
         form_data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -181,6 +194,7 @@ class CreateReportFormTests(TestCase):
         }
 
         form = CreateReportForm(data=form_data)
+
         self.assertFalse(form.is_valid())
         self.assertIn('end_date', form.errors)
         self.assertEqual(
