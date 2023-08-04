@@ -1,13 +1,14 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
+from django.core.files.uploadedfile import SimpleUploadedFile
+
 from reports.models import Report, Comment, ImageFile
 from reports.forms import CreateReportForm, UpdateAccountForm
-from django.core.files.uploadedfile import SimpleUploadedFile
 from reports import views
 
 
-class TestViews(TestCase):
+class TestGetViews(TestCase):
     # SET UP
     def setUp(self):
 
@@ -77,7 +78,8 @@ class TestViews(TestCase):
         self.assertContains(response, self.report.title)
 
 
-class ReportListViewTests(TestCase):
+class ReportListViewFilterTests(TestCase):
+
     def setUp(self):
 
         self.user = User.objects.create(
@@ -86,7 +88,6 @@ class ReportListViewTests(TestCase):
             password='testpassword'
         )
 
-        # Create sample reports for testing
         Report.objects.create(
             title="Report 1",
             author=self.user,
@@ -150,7 +151,6 @@ class ReportListViewTests(TestCase):
 class LikeReportTests(TestCase):
 
     def setUp(self):
-        self.client = Client()
 
         self.user = User.objects.create(
             username="testuser",
@@ -158,7 +158,6 @@ class LikeReportTests(TestCase):
             password='testpassword'
         )
 
-        # Create a test report
         self.report = Report.objects.create(
             title="Tester",
             author=self.user,
@@ -170,7 +169,7 @@ class LikeReportTests(TestCase):
         )
 
     def test_like_report(self):
-        # Simulate an authenticated user
+
         self.client.force_login(self.user)
         response = self.client.post(
             reverse('like_report', kwargs={'pk': self.report.pk}))
@@ -180,10 +179,9 @@ class LikeReportTests(TestCase):
         self.assertTrue(self.report.likes.filter(id=self.user.id).exists())
 
     def test_unlike_report(self):
-        # like the report
+
         self.client.force_login(self.user)
         self.client.post(reverse('like_report', kwargs={'pk': self.report.pk}))
-        # unlike
         response = self.client.post(
             reverse('like_report', kwargs={'pk': self.report.pk}))
 
@@ -212,7 +210,6 @@ class DeleteCommentTests(TestCase):
             description="This is a sample report."
         )
 
-        # Create a test comment
         self.comment = Comment.objects.create(
             name='testuser',
             content='Test comment content.',
@@ -231,7 +228,6 @@ class DeleteCommentTests(TestCase):
 class CreateReportTests(TestCase):
 
     def setUp(self):
-        self.client = Client()
 
         self.user = User.objects.create_user(
             username='testuser', password='testpassword'
@@ -243,6 +239,7 @@ class CreateReportTests(TestCase):
 
     def test_create_report_view_GET(self):
         response = self.client.get(reverse('create_report'))
+
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'create_report.html')
         self.assertContains(response, '<form')
@@ -250,7 +247,7 @@ class CreateReportTests(TestCase):
             response.context['report_form'], CreateReportForm)
 
     def test_create_report_view_with_valid_form(self):
-        # Ensure the view creates a report on valid POST request
+
         report_data = {
             'title': 'Test Report',
             'start_date': '2023-07-29',
@@ -265,25 +262,28 @@ class CreateReportTests(TestCase):
             'status': 1,
             'images': [open('reports/tests/test_img.png', 'rb')],
         }
+
         response = self.client.post(
             reverse('create_report'), data=report_data, follow=True)
-        self.assertEqual(response.status_code, 200)
 
+        self.assertEqual(response.status_code, 200)
         self.assertEqual(Report.objects.count(), 1)
         self.assertEqual(ImageFile.objects.count(), 1)
-
         self.assertTemplateUsed(response, 'reports.html')
         self.assertContains(response, 'Report created successfully!')
         self.assertTrue(Report.objects.filter(title='Test Report').exists())
 
         image = ImageFile.objects.first()
+
         self.assertTrue(
             image.image_file.url.startswith(
                 'https://res.cloudinary.com/dsmfunyxk/image/upload/'))
 
     def test_create_report_view_with_invalid_form(self):
-        report_data = {}  # Empty to create invalid input
+
+        report_data = {}
         response = self.client.post(reverse('create_report'), data=report_data)
+
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'create_report.html')
         self.assertContains(response, 'is-invalid')
@@ -293,6 +293,7 @@ class CreateReportTests(TestCase):
 class ValidateReportCreationTests(TestCase):
 
     def setUp(self):
+
         self.user = User.objects.create(username="testuser")
 
         self.report = Report.objects.create(
@@ -326,14 +327,11 @@ class ValidateReportCreationTests(TestCase):
             'status': 1,
         }
 
-        # Mock 10 image files
-        images = [self.test_image for _ in range(10)]
-
+        images = [self.test_image for i in range(10)]
         form = CreateReportForm(data=form_data)
-        form.is_valid()  # Validate the form
+        form.is_valid()
         result = views.validate_report_creation(images, form)
 
-        # More than 12 images (validator function = True)
         self.assertTrue(result)
 
     def test_validate_report_with_over_12_images(self):
@@ -353,23 +351,14 @@ class ValidateReportCreationTests(TestCase):
             'status': 1,
         }
 
-        # Mock 15 image files
         images = [self.test_image for _ in range(15)]
-
         form = CreateReportForm(data=form_data)
-        form.is_valid()  # Validate the form
+        form.is_valid()
         result = views.validate_report_creation(images, form)
 
-        # More than 12 images (validator function = False)
         self.assertFalse(result)
-
-        # Check if there errors
-        self.assertIn(
-            '__all__', form.errors)
-        # Check if there's one error message
-        self.assertEqual(
-            len(form.errors['__all__']), 1)
-        # Check first index is the correct error
+        self.assertIn('__all__', form.errors)
+        self.assertEqual(len(form.errors['__all__']), 1)
         self.assertEqual(
             form.errors['__all__'][0],
             "Invalid Input: You can upload a maximum of 12 images."
@@ -379,11 +368,11 @@ class ValidateReportCreationTests(TestCase):
 class GenerateSlugTests(TestCase):
 
     def setUp(self):
-        # Create a test user
+
         self.user = User.objects.create(username="testuser")
 
     def test_generate_slug_unique(self):
-        # Create two reports with the same title and author
+
         report1 = Report.objects.create(
             title="Sample Report",
             author=self.user,
@@ -393,6 +382,7 @@ class GenerateSlugTests(TestCase):
             activity_category="Hiking",
             description="This is a sample report."
         )
+
         report2 = Report.objects.create(
             title="Sample Report",
             author=self.user,
@@ -402,14 +392,13 @@ class GenerateSlugTests(TestCase):
             activity_category="Hiking",
             description="This is another sample report."
         )
+
         self.assertNotEqual(report1.slug, report2.slug)
 
 
 class EditReportTests(TestCase):
 
     def setUp(self):
-
-        self.client = Client()
 
         self.user = User.objects.create(
             username="testuser",
@@ -437,7 +426,7 @@ class EditReportTests(TestCase):
     def test_edit_report_view_with_new_images(self):
 
         self.client.force_login(self.user)
-        # Prepare the data for the test
+
         form_data = {
             'title': 'Updated Test Report',
             'slug': 'sample-report',
@@ -452,53 +441,55 @@ class EditReportTests(TestCase):
             'number_on_route': 2,
             'status': 1,
         }
+
         new_image_file = ImageFile.objects.create(
             report=self.report, image_file='test_image3.jpg')
-
-        # Post the edit_report form data and new image
         response = self.client.post(
             reverse('edit_report', args=[self.report.pk]),
             form_data,
             format='multipart',
             FILES={'images': [new_image_file]}, follow=True)
-        # Check image files are added
-        # print(ImageFile.objects.filter(report=self.report))
+
         self.assertEqual(
             ImageFile.objects.filter(report=self.report).count(), 3)
 
-        # Check that image file exists with the correct report and name
         image_exists = ImageFile.objects.filter(
             report=self.report, image_file='test_image3.jpg').exists()
+
         self.assertTrue(image_exists)
 
     def test_edit_report_view_GET(self):
+
         report = self.report
         response = self.client.get(reverse('edit_report', args=[report.pk]))
+
         self.assertEqual(response.status_code, 200)
 
     def test_confirm_deletion_false(self):
+
         form_data = {
             'confirm-deletion': 'false',
-            # No image
         }
+
         response = self.client.post(reverse(
             'edit_report', args=[self.report.pk]), data=form_data, follow=True)
+
         self.assertEqual(response.status_code, 200)
 
-        # Check if the image is still present in the database and Cloudinary
         images_present = ImageFile.objects.filter(report=self.report).exists()
         self.assertTrue(images_present)
 
     def test_confirm_deletion_true(self):
+
         form_data = {
             'confirm-deletion': 'true',
             f'delete_image_{self.image1.pk}': 'on',
         }
+
         response = self.client.post(reverse(
             'edit_report', args=[self.report.pk]), data=form_data, follow=True)
         self.assertEqual(response.status_code, 200)
 
-        # Check if the image is deleted from the database and Cloudinary
         images_deleted = ImageFile.objects.filter(report=self.report).exists()
         self.assertTrue(images_deleted)
 
@@ -506,6 +497,7 @@ class EditReportTests(TestCase):
 class ValidateEditReportImageDataTests(TestCase):
 
     def setUp(self):
+
         self.user = User.objects.create(username="testuser")
 
         self.report = Report.objects.create(
@@ -522,7 +514,7 @@ class ValidateEditReportImageDataTests(TestCase):
         self.test_image = ImageFile.objects.create(
             report=self.report, image_file='test_image1.jpg')
 
-    def test_edit_report_images_valid_data(self):
+    def test_edit_report_valid_data_and_number_of_images(self):
 
         form_data = {
             'title': 'Updated Test Report',
@@ -538,19 +530,18 @@ class ValidateEditReportImageDataTests(TestCase):
             'number_on_route': 2,
             'status': 1,
         }
-        # Must equal 12 or less
+
         new_images = [self.test_image for _ in range(5)]
         curr_images = [self.test_image for _ in range(4)]
         delete_these = [self.test_image for _ in range(3)]
-
         form = CreateReportForm(data=form_data)
-        form.is_valid()  # Validate the form
+        form.is_valid()
         result = views.validate_edit_report_image_data(
             new_images, curr_images, delete_these, form)
 
         self.assertTrue(result)
 
-    def test_edit_report_images_invalid_data(self):
+    def test_edit_report_invalid_number_of_images(self):
 
         form_data = {
             'title': 'Updated Test Report',
@@ -567,11 +558,9 @@ class ValidateEditReportImageDataTests(TestCase):
             'status': 1,
         }
 
-        # Total should be 15 (new + curr - delete)
         new_images = [self.test_image for _ in range(4)]
         curr_images = [self.test_image for _ in range(12)]
         delete_these = [self.test_image for _ in range(3)]
-
         form = CreateReportForm(data=form_data)
         form.is_valid()
         result = views.validate_edit_report_image_data(
@@ -596,13 +585,13 @@ class DeleteReportTests(TestCase):
         )
 
     def test_delete_report_deletes_report(self):
+
         self.client.login(
             username=self.user.username, password=self.user.password
             )
         response = self.client.post(reverse('delete', args=[self.report.pk]))
-        # Check if the report is deleted and redirects
-        self.assertEqual(response.status_code, 302)  # Redirect not success
-        # Check if the report is deleted in db
+
+        self.assertEqual(response.status_code, 302)
         report_exists = Report.objects.filter(pk=self.report.pk).exists()
         self.assertFalse(report_exists)
 
@@ -610,7 +599,6 @@ class DeleteReportTests(TestCase):
 class DeleteAccountTests(TestCase):
 
     def setUp(self):
-        self.client = Client()
 
         self.user = User.objects.create_user(
             username='testuser',
@@ -623,12 +611,14 @@ class DeleteAccountTests(TestCase):
     def test_delete_account_deletes_account_and_redirects(self):
 
         response = self.client.post(reverse('delete_account'))
+
         self.assertEqual(response.status_code, 302)
         self.assertFalse(User.objects.filter(username='testuser').exists())
 
     def test_delete_account_redirects_to_account_not_delete(self):
 
         response = self.client.get(reverse('delete_account'))
+
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'account.html')
         self.assertTrue(User.objects.filter(username='testuser').exists())
@@ -638,19 +628,22 @@ class UpdateAccountViewTests(TestCase):
 
     def setUp(self):
 
-        self.client = Client()
         self.user = User.objects.create_user(
             username='testuser',
             email='test@example.com',
             password='testpassword'
         )
+
         self.client.login(
             username='testuser', password='testpassword'
         )
+
         self.url = reverse('update_account')
 
     def test_update_account_view_get_request(self):
+
         response = self.client.get(self.url)
+
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'update_account.html')
         self.assertIn('form', response.context)
@@ -663,6 +656,7 @@ class UpdateAccountViewTests(TestCase):
         }
 
         response = self.client.post(self.url, data=new_data, follow=True)
+
         self.assertRedirects(response, reverse('account'))
         self.assertEqual(response.status_code, 200)
 
@@ -674,6 +668,7 @@ class UpdateAccountViewTests(TestCase):
         }
 
         response = self.client.post(self.url, data=invalid_data, follow=True)
+
         self.assertEqual(response.status_code, 200)
         self.assertFormError(
             response, 'form', 'username', 'This field is required.')
