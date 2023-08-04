@@ -354,7 +354,7 @@ class ValidateReportCreationTests(TestCase):
         }
 
         # Mock 15 image files
-        images = [self.test_image for _ in range(15)]  
+        images = [self.test_image for _ in range(15)]
 
         form = CreateReportForm(data=form_data)
         form.is_valid()  # Validate the form
@@ -365,7 +365,7 @@ class ValidateReportCreationTests(TestCase):
 
         # Check if there errors
         self.assertIn(
-            '__all__', form.errors)  
+            '__all__', form.errors)
         # Check if there's one error message
         self.assertEqual(
             len(form.errors['__all__']), 1)
