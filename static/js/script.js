@@ -1,5 +1,4 @@
 // Alerts
-
 document.addEventListener("DOMContentLoaded", function () {
     let messages = document.getElementById("msg");
 
@@ -12,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Delete Images in Edit Form
-
 function showConfirmationModal() {
     const imagesToDelete = document.querySelectorAll('input[data-marked-for-deletion]:checked');
 
@@ -35,7 +33,7 @@ function submitForm() {
 // Tooltip on like when unauthenticated user
 document.addEventListener("DOMContentLoaded", function () {
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    var tooltipList = tooltipTriggerList.map(function (element) {
+    tooltipTriggerList.map(function (element) {
         return new bootstrap.Tooltip(element);
     });
 });

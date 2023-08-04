@@ -423,9 +423,9 @@ class EditReportTests(TestCase):
             report=self.report, image_file='test_image2.jpg')
         self.image1_pk = ImageFile.pk
 
-    def test_edit_report_view_with_new_images(self):
-
         self.client.force_login(self.user)
+
+    def test_edit_report_view_with_new_images(self):
 
         form_data = {
             'title': 'Updated Test Report',
