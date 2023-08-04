@@ -4,7 +4,7 @@ from django.shortcuts import reverse
 from reports.models import Report, Comment, ImageFile
 from reports.forms import CreateReportForm, UpdateAccountForm
 from django.core.files.uploadedfile import SimpleUploadedFile
-from reports.views import generate_slug, validate_report_creation, validate_edit_report_image_data
+from reports import views
 
 
 class TestViews(TestCase):
@@ -331,7 +331,7 @@ class ValidateReportCreationTests(TestCase):
 
         form = CreateReportForm(data=form_data)
         form.is_valid()  # Validate the form
-        result = validate_report_creation(images, form)
+        result = views.validate_report_creation(images, form)
 
         # More than 12 images (validator function = True)
         self.assertTrue(result)
@@ -358,7 +358,7 @@ class ValidateReportCreationTests(TestCase):
 
         form = CreateReportForm(data=form_data)
         form.is_valid()  # Validate the form
-        result = validate_report_creation(images, form)
+        result = views.validate_report_creation(images, form)
 
         # More than 12 images (validator function = False)
         self.assertFalse(result)
@@ -545,7 +545,7 @@ class ValidateEditReportImageDataTests(TestCase):
 
         form = CreateReportForm(data=form_data)
         form.is_valid()  # Validate the form
-        result = validate_edit_report_image_data(
+        result = views.validate_edit_report_image_data(
             new_images, curr_images, delete_these, form)
 
         self.assertTrue(result)
@@ -574,7 +574,7 @@ class ValidateEditReportImageDataTests(TestCase):
 
         form = CreateReportForm(data=form_data)
         form.is_valid()
-        result = validate_edit_report_image_data(
+        result = views.validate_edit_report_image_data(
             new_images, curr_images, delete_these, form)
 
         self.assertFalse(result)
