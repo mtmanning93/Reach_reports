@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views.generic import ListView, UpdateView
 from django.http import HttpResponseRedirect
-from django.utils.text import slugify
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 import cloudinary
 import random
-import uuid
 
 from . import forms
 from .models import Report, Comment, ImageFile, generate_slug
@@ -169,7 +168,7 @@ def account_view(request):
     return render(request, 'account.html', context)
 
 
-class UpdateAccountView(UpdateView):
+class UpdateAccountView(LoginRequiredMixin, UpdateView):
     """
     Updates account information, username, email.
     """
@@ -191,6 +190,7 @@ class UpdateAccountView(UpdateView):
         return super().form_valid(form)
 
 
+@login_required
 def create_report_view(request):
     """
     Renders create report template and form.
@@ -233,19 +233,6 @@ def validate_report_creation(images, report_form):
         return False
 
 
-# def generate_slug(instance):
-
-#     slug = f"{slugify(instance.title)}-{slugify(instance.author)}"
-#     new_slug = slug
-#     counter = 1
-
-#     while Report.objects.filter(slug=new_slug).exists():
-#         new_slug = f"{slug}-{counter}"
-#         counter += 1
-
-#     return new_slug
-
-
 def create_new_images(report, new_images):
     """
     Creates new ImageFile object and uploads to cloudinary
@@ -257,6 +244,7 @@ def create_new_images(report, new_images):
         )
 
 
+@login_required
 def edit_report(request, pk):
     """
     Updates report details with valid form. Redirects to 'account'.
@@ -338,6 +326,7 @@ def delete_report(request, pk):
         return redirect('account')
 
 
+@login_required
 def delete_account(request):
     """
     Deletes user instance.

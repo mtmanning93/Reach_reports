@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from allauth.account.auth_backends import AuthenticationBackend
+
 from reports.backends import EmailAuthenticationBackend
 
 User = get_user_model()

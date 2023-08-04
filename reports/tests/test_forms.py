@@ -2,6 +2,7 @@ from django.test import Client, TestCase
 from datetime import date
 from django.urls import reverse
 from django.contrib.auth.models import User
+
 from reports.models import Report, Comment
 from reports.forms import CommentForm, CreateReportForm, UpdateAccountForm
 from reports.views import generate_slug
