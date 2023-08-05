@@ -65,8 +65,7 @@ class Report(models.Model):
     time_taken = models.DurationField(
         null=True, blank=True,
         help_text="""
-            If necessary (speed ascent) please use the following format:
-            HH:MM:SS.
+            If necessary (e.g. FKT Attempt)
             """)
     overall_conditions = models.CharField(max_length=7, choices=GRADE_CHOICES)
     activity_category = models.CharField(

@@ -15,6 +15,18 @@
             {{ report_form.non_field_errors }}
             {% endif %}
         </div>
+        {% for field in report_form %}
+        {% if field.errors %}
+        <div class="error">
+            {{ field.label_tag }}
+            <ul>
+                {% for error in field.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% endfor %}
     </div>
 </div>
 <div class="container-fluid d-flex justify-content-center p-0 pb-3 p-sm-3">
