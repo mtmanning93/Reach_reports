@@ -73,10 +73,10 @@ class Report(models.Model):
     description = models.TextField(blank=True)
     number_in_group = models.PositiveIntegerField(
         default=1,
-        validators=[MinValueValidator(0), MaxValueValidator(9000)])
+        validators=[MinValueValidator(0), MaxValueValidator(50)])
     number_on_route = models.PositiveIntegerField(
         default=1,
-        validators=[MinValueValidator(0), MaxValueValidator(9000)])
+        validators=[MinValueValidator(0), MaxValueValidator(500)])
     gps_map_link = models.URLField(blank=True)
     status = models.IntegerField(choices=STATUS, default=1)
     likes = models.ManyToManyField(

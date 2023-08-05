@@ -1,9 +1,11 @@
-from . import models
 from django import forms
-from datetime import date, timedelta
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
+from django.core.validators import MaxLengthValidator
+from datetime import date, timedelta, timezone
 import re
+
+from . import models
 
 
 class CommentForm(forms.ModelForm):
@@ -48,20 +50,24 @@ class CreateReportForm(forms.ModelForm):
             widget=forms.DateInput(
                 attrs={
                     'type': 'date',
-                    'max': str(date.today())
+                    # 'max': str(date.today())
                     }),
         )
         self.fields['end_date'] = forms.DateField(
             widget=forms.DateInput(
                 attrs={
                     'type': 'date',
-                    'max': str(date.today())
+                    # 'max': str(date.today())
                     }),
         )
         self.fields['time_taken'].widget.attrs.update({
             'placeholder': 'hh:mm:ss', 'required': False,
         })
         self.fields['height_in_meters'].label = "Summit height (masl)"
+        max_description_length = 1500
+        self.fields['description'].validators.append(
+            MaxLengthValidator(limit_value=max_description_length)
+        )
         self.fields['status'].label = "Publish/ Draft"
         self.fields['gps_map_link'].required = False
 
@@ -86,8 +92,8 @@ class CreateReportForm(forms.ModelForm):
 
     def clean_start_date(self):
         """
-        Validate the start_date field.
-        The start date should not be before five years prior to report creation.
+        Validate the start_date field. The start date should not be
+        before five years prior to report creation.
         """
         start_date = self.cleaned_data.get('start_date')
         five_years_ago = date.today() - timedelta(days=365*5)
@@ -97,21 +103,34 @@ class CreateReportForm(forms.ModelForm):
                 """Start date must not be more than
                  5 years old, it keeps our reports current!""")
 
+        if start_date > date.today():
+            raise forms.ValidationError(
+                "Start date cannot be in the future.")
+
         return start_date
 
     def clean_end_date(self):
-
+        """
+        Validates the end_date field, returning ValidationError
+        if user inputs an end_date prior to start_date.
+        """
         start_date = self.cleaned_data.get('start_date')
         end_date = self.cleaned_data.get('end_date')
+
         if end_date and start_date and end_date < start_date:
             raise forms.ValidationError(
                 "End date cannot be before start date.")
+
+        if end_date > date.today():
+            raise forms.ValidationError(
+                "End date cannot be in the future.")
+
         return end_date
 
     def clean_time_taken(self):
         """
-        Validates the time_taken field
-        returns ValidationError to user if invalid input.
+        Validates the time_taken field and returns ValidationError
+        if user inputs wrong format. Does not raise if nothing input.
         """
         time_taken = self.data.get('time_taken')
 
@@ -122,6 +141,35 @@ class CreateReportForm(forms.ModelForm):
             raise forms.ValidationError("Invalid time format. Use hh:mm:ss.")
 
         return time_taken
+
+    def clean_height_in_meters(self):
+        """
+        Validates the height_in_meters field
+        returns ValidationError to user if height is less than 0,
+        or over the height of Everest.
+        """
+        height = self.cleaned_data.get('height_in_meters')
+
+        if height < 0:
+            raise forms.ValidationError("Height must be a positive number.")
+
+        if height > 8850:
+            raise forms.ValidationError("Height must be less than 8850m (Everest).")
+
+        return height
+
+    def clean_number_in_group(self):
+        """
+        Validates the number_in_group field
+        returns ValidationError to user if inpur is negative number or None.
+        """
+        number = self.cleaned_data.get('number_in_group')
+
+        if (number is not None) and (number < 0):
+            raise forms.ValidationError(
+                "Number in group must be a positive number.")
+
+        return number
 
 
 class ImageFileForm(forms.ModelForm):
