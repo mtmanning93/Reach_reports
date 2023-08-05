@@ -3,6 +3,7 @@ from django import forms
 from datetime import date
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
+import re
 
 
 class CommentForm(forms.ModelForm):
@@ -55,7 +56,14 @@ class CreateReportForm(forms.ModelForm):
         self.fields['height_in_meters'].label = "Summit height (masl)"
         self.fields['status'].label = "Publish/ Draft"
         self.fields['gps_map_link'].required = False
-        # self.fields['time_taken'].initial = "hh:mm:ss"
+        self.fields['time_taken'].validators.append(self.validate_time_taken)
+
+    def validate_time_taken(self, time_taken):
+        time_taken = self.data.get('time_taken')
+        if not re.match(r'^\d{2}:\d{2}:\d{2}$', time_taken):
+            raise forms.ValidationError("Invalid time format. Use hh:mm:ss.")
+
+        return time_taken
 
     def validate_end_date(self, value):
         start_date = self.cleaned_data.get('start_date')
