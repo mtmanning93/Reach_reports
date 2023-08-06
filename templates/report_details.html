@@ -143,13 +143,7 @@
             </div>
             {% endif %}
         </div>
-        {% if report.gps_map_link %}
-        <div class="d-xl-none col-12 col-lg-9 m-auto mt-2">
-            <p class="info-label text-muted m-0 p-0">Interactive Map:</p>
-            <iframe class="col-12 mt-2 p-0" src="{{ report.gps_map_link }}" frameborder="" allowfullscreen=""
-                height="300px"></iframe>
-        </div>
-        {% endif %}
+
         <div class="col-12 d-flex justify-content-end">
             <p id="date_published" class="text-secondary mb-0 mt-2">Report Published: {{ report.created_on|date:"F j, Y" }}</p>
         </div>

@@ -50,14 +50,14 @@ class CreateReportForm(forms.ModelForm):
             widget=forms.DateInput(
                 attrs={
                     'type': 'date',
-                    # 'max': str(date.today())
+                    'max': str(date.today())
                     }),
         )
         self.fields['end_date'] = forms.DateField(
             widget=forms.DateInput(
                 attrs={
                     'type': 'date',
-                    # 'max': str(date.today())
+                    'max': str(date.today())
                     }),
         )
         self.fields['time_taken'].widget.attrs.update({
@@ -69,6 +69,7 @@ class CreateReportForm(forms.ModelForm):
             MaxLengthValidator(limit_value=max_description_length)
         )
         self.fields['status'].label = "Publish/ Draft"
+        self.fields['gps_map_link'].label = "Fatmap.com link"
         self.fields['gps_map_link'].required = False
 
     # Validators
@@ -154,7 +155,8 @@ class CreateReportForm(forms.ModelForm):
             raise forms.ValidationError("Height must be a positive number.")
 
         if height > 8850:
-            raise forms.ValidationError("Height must be less than 8850m (Everest).")
+            raise forms.ValidationError(
+                "Height must be less than 8850m (Everest).")
 
         return height
 
@@ -170,6 +172,18 @@ class CreateReportForm(forms.ModelForm):
                 "Number in group must be a positive number.")
 
         return number
+
+    def clean_gps_map_link(self):
+        """
+        Validates the gps_map_link field to ensure 'fatmap.com' is in the URL.
+        """
+        gps_map_link = self.cleaned_data.get('gps_map_link')
+
+        if gps_map_link and 'fatmap.com' not in gps_map_link:
+            raise forms.ValidationError(
+                "The GPS map link must be from fatmap.com.")
+
+        return gps_map_link
 
 
 class ImageFileForm(forms.ModelForm):
