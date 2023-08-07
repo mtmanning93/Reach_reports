@@ -497,7 +497,7 @@ class TestTimeTakenValidation(TestCase):
             'height_in_meters': 3000,
             'overall_conditions': 'good',
             'activity_category': 'hike',
-            'description': 'This is a test description.',
+            'description': 'Test description.',
             'number_in_group': 5,
             'number_on_route': 3,
             'status': 1,
@@ -509,6 +509,214 @@ class TestTimeTakenValidation(TestCase):
         print(form.errors)
         self.assertIn(
             "Enter a valid duration.", form.errors['time_taken'])
+
+
+class TestHeightInMetersValidation(TestCase):
+
+    def test_valid_height(self):
+        # Test with a valid height (within range)
+        data = {
+            'title': 'Test Report Title',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'height_in_meters': 3000,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'Test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            }
+        form = CreateReportForm(data)
+
+        self.assertTrue(form.is_valid())
+
+    def test_height_less_than_zero(self):
+        # Test with a height less than 0
+        data = {
+            'title': 'Test Report Title',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'height_in_meters': -100,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'Test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            }
+        form = CreateReportForm(data)
+
+        self.assertFalse(form.is_valid())
+        self.assertIn(
+            "Ensure this value is greater than or equal to 0.",
+            form.errors['height_in_meters'])
+
+    def test_height_greater_than_everest(self):
+        # Test with a height greater than Everest
+        data = {
+            'title': 'Test Report Title',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'height_in_meters': 9000,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'Test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            }
+        form = CreateReportForm(data)
+
+        self.assertFalse(form.is_valid())
+        self.assertIn(
+            "Height must be less than 8850m (Everest).",
+            form.errors['height_in_meters'])
+
+    def test_height_is_none(self):
+        # Test with height as None (allowed case)
+        data = {
+            'title': 'Test Report Title',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'height_in_meters': None,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'Test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            }
+        form = CreateReportForm(data)
+
+        self.assertTrue(form.is_valid())
+
+
+class TestNumberInGroupValidation(TestCase):
+
+    def test_valid_number(self):
+        # Test with a valid number (positive number)
+        data = {
+            'title': 'Test Report Title',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'Test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            }
+        form = CreateReportForm(data)
+
+        self.assertTrue(form.is_valid())
+
+    def test_negative_number(self):
+        # Test with a negative number
+        data = {
+            'title': 'Test Report Title',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'Test description.',
+            'number_in_group': -2,
+            'number_on_route': 3,
+            'status': 1,
+            }
+        form = CreateReportForm(data)
+
+        self.assertFalse(form.is_valid())
+        self.assertIn(
+            "Ensure this value is greater than or equal to 0.",
+            form.errors['number_in_group'])
+
+    def test_number_is_none(self):
+        # Test with number as None (allowed case)
+        data = {
+            'title': 'Test Report Title',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'Test description.',
+            'number_in_group': None,
+            'number_on_route': 3,
+            'status': 1,
+            }
+        form = CreateReportForm(data)
+
+        self.assertFalse(form.is_valid())
+
+
+class TestGPSMapLinkValidation(TestCase):
+
+    def test_valid_gps_map_link(self):
+        # Test with a valid GPS map link containing 'fatmap.com'
+        data = {
+            'title': 'Test Report Title',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'Test description.',
+            'number_in_group': 3,
+            'number_on_route': 3,
+            'status': 1,
+            'gps_map_link': 'https://www.fatmap.com/your-map'
+            }
+        form = CreateReportForm(data)
+
+        self.assertTrue(form.is_valid())
+
+    def test_invalid_gps_map_link(self):
+        # Test with an invalid GPS map link not containing 'fatmap.com'
+        data = {
+            'title': 'Test Report Title',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'Test description.',
+            'number_in_group': 3,
+            'number_on_route': 3,
+            'status': 1,
+            'gps_map_link': 'https://www.google.com/maps'
+            }
+        form = CreateReportForm(data)
+
+        self.assertFalse(form.is_valid())
+        self.assertIn(
+            "The GPS map link must be from fatmap.com.",
+            form.errors['gps_map_link'])
+
+    def test_gps_map_link_is_none(self):
+        # Test with GPS map link as None (allowed case)
+        data = {
+            'title': 'Test Report Title',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'Test description.',
+            'number_in_group': 3,
+            'number_on_route': 3,
+            'status': 1,
+            'gps_map_link': None
+            }
+        form = CreateReportForm(data)
+
+        self.assertTrue(form.is_valid())
 
 
 class UpdateAccountFormTests(TestCase):

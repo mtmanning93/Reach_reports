@@ -152,28 +152,11 @@ class CreateReportForm(forms.ModelForm):
         height = self.cleaned_data.get('height_in_meters')
 
         if height is not None:
-            if height < 0:
-                raise forms.ValidationError(
-                    "Height must be a positive number.")
-
             if height > 8850:
                 raise forms.ValidationError(
                     "Height must be less than 8850m (Everest).")
 
         return height
-
-    def clean_number_in_group(self):
-        """
-        Validates the number_in_group field
-        returns ValidationError to user if inpur is negative number or None.
-        """
-        number = self.cleaned_data.get('number_in_group')
-
-        if (number is not None) and (number < 0):
-            raise forms.ValidationError(
-                "Number in group must be a positive number.")
-
-        return number
 
     def clean_gps_map_link(self):
         """
