@@ -378,6 +378,73 @@ class TestStartDateValidation(TestCase):
             form.errors['start_date'])
 
 
+class TestEndDateValidation(TestCase):
+
+    def test_valid_end_date(self):
+        # Test with a valid end date (today's date)
+        data = {
+            'title': 'Title123',
+            'goal_reached': 'yes',
+            'start_date': date.today(),
+            'end_date': date.today(),
+            'height_in_meters': 3000,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'This is a test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            }
+        form = CreateReportForm(data)
+
+        self.assertTrue(form.is_valid())
+
+    def test_end_date_before_start_date(self):
+        # Test with an end date before the start date
+        start_date = date.today()
+        end_date = start_date - timedelta(days=1)
+        data = {
+            'title': 'Title123',
+            'goal_reached': 'yes',
+            'start_date': start_date,
+            'end_date': end_date,
+            'height_in_meters': 3000,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'This is a test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            }
+        form = CreateReportForm(data)
+
+        self.assertFalse(form.is_valid())
+        self.assertIn(
+            "End date cannot be before start date.", form.errors['end_date'])
+
+    def test_end_date_in_the_future(self):
+        # Test with an end date in the future
+        future_date = date.today() + timedelta(days=1)
+        data = {
+            'title': 'Title123',
+            'goal_reached': 'yes',
+            'start_date': date.today(),
+            'end_date': future_date,
+            'height_in_meters': 3000,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'This is a test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            }
+        form = CreateReportForm(data)
+
+        self.assertFalse(form.is_valid())
+        self.assertIn(
+            "End date cannot be in the future.", form.errors['end_date'])
+
+
 class UpdateAccountFormTests(TestCase):
 
     def setUp(self):
