@@ -445,6 +445,72 @@ class TestEndDateValidation(TestCase):
             "End date cannot be in the future.", form.errors['end_date'])
 
 
+class TestTimeTakenValidation(TestCase):
+
+    def test_valid_time_format(self):
+        # Test with a valid time format (hh:mm:ss)
+        data = {
+            'title': 'Test Report Title',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'height_in_meters': 3000,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'This is a test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            'time_taken': '12:34:56'
+            }
+        form = CreateReportForm(data)
+
+        self.assertTrue(form.is_valid())
+
+    def test_empty_time_taken(self):
+        # Test with an empty time_taken field (no input)
+        data = {
+            'title': 'Test Report Title',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'height_in_meters': 3000,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'This is a test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            'time_taken': ''
+            }
+        form = CreateReportForm(data)
+
+        self.assertTrue(form.is_valid())
+
+    def test_wrong_time_format(self):
+        # Test with an invalid time format (wrong pattern)
+        data = {
+            'title': 'Test Report Title',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'height_in_meters': 3000,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'This is a test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            'time_taken': 'invalid_time_format'
+            }
+        form = CreateReportForm(data)
+
+        self.assertFalse(form.is_valid())
+        print(form.errors)
+        self.assertIn(
+            "Enter a valid duration.", form.errors['time_taken'])
+
+
 class UpdateAccountFormTests(TestCase):
 
     def setUp(self):
