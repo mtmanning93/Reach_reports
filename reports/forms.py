@@ -95,6 +95,7 @@ class CreateReportForm(forms.ModelForm):
         """
         Validate the start_date field. The start date should not be
         before five years prior to report creation.
+        Or in the future (after today)
         """
         start_date = self.cleaned_data.get('start_date')
         five_years_ago = date.today() - timedelta(days=365*5)
@@ -113,7 +114,8 @@ class CreateReportForm(forms.ModelForm):
     def clean_end_date(self):
         """
         Validates the end_date field, returning ValidationError
-        if user inputs an end_date prior to start_date.
+        if user inputs an end_date prior to start_date,
+        or a date in the future.
         """
         start_date = self.cleaned_data.get('start_date')
         end_date = self.cleaned_data.get('end_date')
@@ -160,7 +162,8 @@ class CreateReportForm(forms.ModelForm):
 
     def clean_gps_map_link(self):
         """
-        Validates the gps_map_link field to ensure 'fatmap.com' is in the URL.
+        Validates the gps_map_link(fatmap url) field.
+        Ensures 'fatmap.com' is in the URL.
         """
         gps_map_link = self.cleaned_data.get('gps_map_link')
 
@@ -173,7 +176,7 @@ class CreateReportForm(forms.ModelForm):
 
 class ImageFileForm(forms.ModelForm):
     """
-    The form to handle image file uploads within the create report template.
+    The form to handle image file uploads.
     """
     class Meta:
         model = models.ImageFile
@@ -183,6 +186,7 @@ class ImageFileForm(forms.ModelForm):
 class UpdateAccountForm(UserChangeForm):
     """
     Form used for updated account information; username and email.
+    Removes pop as this is uneditable without token.
     """
 
     email = forms.EmailField(required=True)

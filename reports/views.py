@@ -44,8 +44,8 @@ def get_landing_page(request):
 class ReportList(ListView):
     """
     Renders entire reports list in pages of 10 reports.
+    Provides the filter methods for the reportslist.
     """
-
     model = Report
     template_name = 'reports.html'
     paginate_by = 10
@@ -85,7 +85,9 @@ class ReportList(ListView):
 def report_details(request, pk):
     """
     Renders selected report details.
-    Displays comment form below details and enables commenting and liking.
+    Displays comment form below details enabling commenting and liking.
+    If request is post then saves the comment to the DB, using the
+    report object FK.
     """
     report = get_object_or_404(Report, pk=pk)
     comments = Comment.objects.filter(report=report).order_by('created_on')
@@ -176,32 +178,33 @@ class UpdateAccountView(LoginRequiredMixin, UpdateView):
     form_class = forms.UpdateAccountForm
     success_url = reverse_lazy('account')
 
-    def get_object(self):
+    def get_user(self):
         """
         Gets correct user instance.
         """
         return self.request.user
 
-    def form_valid(self, form):
+    def update_account_post(self, form):
         """
         Provides success message when valid UpdateView form.
         """
         messages.success(self.request, 'Your account has been updated!')
-        return super().form_valid(form)
+        return super().update_account_post(form)
 
 
 @login_required
 def create_report_view(request):
     """
     Renders create report template and form.
-    Populates the slug field with title, author and report.pk.
-    Allows for multiple image file uploads.
+    Populates the slug field.
+    Allows for multiple image file uploads and creates the
+    object instance in the db.
     On form submission, displays success message if form is valid.
     """
     if request.method == 'POST':
 
         report_form = forms.CreateReportForm(request.POST, request.FILES)
-        # input file multiple name
+        # 'images' is name of input <input type='file' mutliple name='images'>
         images = request.FILES.getlist('images')
 
         if validate_report_creation(images, report_form):
@@ -224,6 +227,11 @@ def create_report_view(request):
 
 
 def validate_report_creation(images, report_form):
+    """
+    Validates that the submitted report creation is valid and
+    holds less than or equal to 12 images, otherwise throws error.
+    """
+
     if len(images) <= 12 and report_form.is_valid():
         return True
     else:
@@ -235,7 +243,9 @@ def validate_report_creation(images, report_form):
 
 def create_new_images(report, new_images):
     """
-    Creates new ImageFile object and uploads to cloudinary
+    Creates new ImageFile objects from list of 'images'.
+    'images' relates to the name of the multiple file
+    input field within the form.
     """
     for image in new_images:
         ImageFile.objects.create(
@@ -248,7 +258,8 @@ def create_new_images(report, new_images):
 def edit_report(request, pk):
     """
     Updates report details with valid form. Redirects to 'account'.
-    Handles Image updates, deletions, and additions from db.
+    Handles the report objects image updates and deletions from db.
+    Handles the modal, provoked by the image deletions.
     """
     report = Report.objects.get(pk=pk)
     curr_images = report.images.all()
@@ -282,7 +293,7 @@ def edit_report(request, pk):
     context = {
         'edit_form': edit_form,
         'images': curr_images,
-        'show_modal': False,  # Initially set to False
+        'show_modal': False,
     }
 
     return render(request, 'edit_report.html', context)
@@ -290,6 +301,10 @@ def edit_report(request, pk):
 
 def validate_edit_report_image_data(
         new_images, curr_images, delete_these, edit_form):
+    """
+    Validates the image updates within the edit report view.
+    Allowing a max total of 12 images per each report object.
+    """
 
     if (len(new_images) + len(curr_images)) - len(delete_these) > 12:
         error_msg = """
@@ -306,7 +321,8 @@ def validate_edit_report_image_data(
 
 def delete_image(image):
     """
-    Deletes images from cloudinary and db
+    Deletes checked images within the edit report view
+    from cloudinary and the db.
     """
     cloudinary.api.delete_resources([image.image_file.public_id])
     image.delete()
