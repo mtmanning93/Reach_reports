@@ -1,5 +1,5 @@
 from django.test import Client, TestCase
-from datetime import date
+from datetime import date, timedelta
 from django.urls import reverse
 from django.contrib.auth.models import User
 
@@ -221,6 +221,7 @@ class TestTitleValidation(TestCase):
             'status': 1,
             }
         form = CreateReportForm(data)
+
         self.assertTrue(form.is_valid())
 
     def test_title_too_short(self):
@@ -240,6 +241,7 @@ class TestTitleValidation(TestCase):
             }
 
         form = CreateReportForm(form_data)
+
         self.assertFalse(form.is_valid())
         self.assertIn(
             'Title must be between 3 and 30 characters.', form.errors['title'])
@@ -261,6 +263,7 @@ class TestTitleValidation(TestCase):
             'status': 1,
             }
         form = CreateReportForm(form_data)
+
         self.assertFalse(form.is_valid())
         self.assertIn(
             'Title must be between 3 and 30 characters.', form.errors['title'])
@@ -281,6 +284,7 @@ class TestTitleValidation(TestCase):
             'status': 1,
             }
         form = CreateReportForm(form_data)
+
         self.assertFalse(form.is_valid())
         self.assertIn('Title cannot be just numbers.', form.errors['title'])
 
@@ -300,7 +304,78 @@ class TestTitleValidation(TestCase):
             'status': 1,
             }
         form = CreateReportForm(form_data)
+
         self.assertTrue(form.is_valid())
+
+
+class TestStartDateValidation(TestCase):
+
+    def test_valid_start_date(self):
+        # Test with a valid start date within the last 5 years
+        five_years_ago = date.today() - timedelta(days=365*5)
+        data = {
+            'title': 'Title123',
+            'goal_reached': 'yes',
+            'start_date': five_years_ago,
+            'end_date': date(2023, 8, 2),
+            'height_in_meters': 3000,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'This is a test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            }
+        form = CreateReportForm(data)
+
+        self.assertTrue(form.is_valid())
+
+    def test_start_date_in_future(self):
+        # Test with a start date in the future
+        future_date = date.today() + timedelta(days=1)
+        data = {
+            'title': 'Title123',
+            'goal_reached': 'yes',
+            'start_date': future_date,
+            'end_date': date(2023, 8, 2),
+            'height_in_meters': 3000,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'This is a test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            }
+        form = CreateReportForm(data)
+
+        self.assertFalse(form.is_valid())
+        self.assertIn(
+            'Start date cannot be in the future.', form.errors['start_date'])
+
+    def test_start_date_more_than_5_years_ago(self):
+        # Test with a start date more than 5 years ago
+        more_than_5_years_ago = date.today() - timedelta(
+            days=365 * 6)
+        data = {
+            'title': 'Title123',
+            'goal_reached': 'yes',
+            'start_date': more_than_5_years_ago,
+            'end_date': date(2023, 8, 2),
+            'height_in_meters': 3000,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'This is a test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            }
+        form = CreateReportForm(data)
+
+        self.assertFalse(form.is_valid())
+        self.assertIn(
+            """Start date must not be more than
+                 5 years old, it keeps our reports current!""",
+            form.errors['start_date'])
 
 
 class UpdateAccountFormTests(TestCase):
