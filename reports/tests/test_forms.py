@@ -656,6 +656,66 @@ class TestNumberInGroupValidation(TestCase):
         self.assertFalse(form.is_valid())
 
 
+class TestNumberOnRouteValidation(TestCase):
+
+    def test_valid_number(self):
+        # Test with a valid number (positive number)
+        data = {
+            'title': 'Test Report Title',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'Test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            }
+        form = CreateReportForm(data)
+
+        self.assertTrue(form.is_valid())
+
+    def test_negative_number(self):
+        # Test with a negative number
+        data = {
+            'title': 'Test Report Title',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'Test description.',
+            'number_in_group': 5,
+            'number_on_route': -3,
+            'status': 1,
+            }
+        form = CreateReportForm(data)
+
+        self.assertFalse(form.is_valid())
+        self.assertIn(
+            "Ensure this value is greater than or equal to 0.",
+            form.errors['number_on_route'])
+
+    def test_number_is_none(self):
+        # Test with number as None (allowed case)
+        data = {
+            'title': 'Test Report Title',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'Test description.',
+            'number_in_group': 5,
+            'number_on_route': None,
+            'status': 1,
+            }
+        form = CreateReportForm(data)
+
+        self.assertFalse(form.is_valid())
+
+
 class TestGPSMapLinkValidation(TestCase):
 
     def test_valid_gps_map_link(self):
