@@ -106,7 +106,6 @@ class CreateReportFormTests(TestCase):
             'description': 'This is a test.',
             'number_in_group': 5,
             'number_on_route': 3,
-            'gps_map_link': 'https://example.com/gps',
             'status': 1,
         }
 
@@ -501,14 +500,14 @@ class TestTimeTakenValidation(TestCase):
             'number_in_group': 5,
             'number_on_route': 3,
             'status': 1,
-            'time_taken': 'invalid_time_format'
+            'time_taken': '200000'
             }
         form = CreateReportForm(data)
 
         self.assertFalse(form.is_valid())
-        print(form.errors)
         self.assertIn(
-            "Enter a valid duration.", form.errors['time_taken'])
+            "Invalid time format. Use hh:mm:ss.",
+            form.errors['time_taken'])
 
 
 class TestHeightInMetersValidation(TestCase):

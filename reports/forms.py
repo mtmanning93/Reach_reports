@@ -135,7 +135,7 @@ class CreateReportForm(forms.ModelForm):
         """
         time_taken = self.data.get('time_taken')
 
-        if time_taken is None or 'hh:mm:ss':
+        if time_taken in (None, '', 'hh:mm:ss'):
             return None
 
         if not re.match(r'^\d{2}:\d{2}:\d{2}$', time_taken):
