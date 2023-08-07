@@ -151,12 +151,14 @@ class CreateReportForm(forms.ModelForm):
         """
         height = self.cleaned_data.get('height_in_meters')
 
-        if height < 0:
-            raise forms.ValidationError("Height must be a positive number.")
+        if height is not None:
+            if height < 0:
+                raise forms.ValidationError(
+                    "Height must be a positive number.")
 
-        if height > 8850:
-            raise forms.ValidationError(
-                "Height must be less than 8850m (Everest).")
+            if height > 8850:
+                raise forms.ValidationError(
+                    "Height must be less than 8850m (Everest).")
 
         return height
 

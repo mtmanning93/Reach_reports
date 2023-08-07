@@ -203,6 +203,106 @@ class CreateReportFormTests(TestCase):
             )
 
 
+class TestTitleValidation(TestCase):
+
+    def test_valid_title(self):
+        # Test with a valid title
+        data = {
+            'title': 'Test Report Title',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'height_in_meters': 3000,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'This is a test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            }
+        form = CreateReportForm(data)
+        self.assertTrue(form.is_valid())
+
+    def test_title_too_short(self):
+        # Test with a title that is too short
+        form_data = data = {
+            'title': 'A',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'height_in_meters': 3000,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'This is a test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            }
+
+        form = CreateReportForm(form_data)
+        self.assertFalse(form.is_valid())
+        self.assertIn(
+            'Title must be between 3 and 30 characters.', form.errors['title'])
+
+    def test_title_too_long(self):
+        # Test with a title that is too long
+        form_data = {
+            'title': '''
+                This is a very long title that exceeds the character limit''',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'height_in_meters': 3000,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'This is a test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            }
+        form = CreateReportForm(form_data)
+        self.assertFalse(form.is_valid())
+        self.assertIn(
+            'Title must be between 3 and 30 characters.', form.errors['title'])
+
+    def test_title_contains_only_numbers(self):
+        # Test with a title that contains only numbers
+        form_data = {
+            'title': '12345',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'height_in_meters': 3000,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'This is a test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            }
+        form = CreateReportForm(form_data)
+        self.assertFalse(form.is_valid())
+        self.assertIn('Title cannot be just numbers.', form.errors['title'])
+
+    def test_title_contains_numbers_and_letters(self):
+        # Test with a title that contains both numbers and letters
+        form_data = {
+            'title': 'Title123',
+            'goal_reached': 'yes',
+            'start_date': date(2023, 8, 1),
+            'end_date': date(2023, 8, 2),
+            'height_in_meters': 3000,
+            'overall_conditions': 'good',
+            'activity_category': 'hike',
+            'description': 'This is a test description.',
+            'number_in_group': 5,
+            'number_on_route': 3,
+            'status': 1,
+            }
+        form = CreateReportForm(form_data)
+        self.assertTrue(form.is_valid())
+
+
 class UpdateAccountFormTests(TestCase):
 
     def setUp(self):

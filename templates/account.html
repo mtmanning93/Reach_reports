@@ -32,9 +32,6 @@
                 <a href="{% url 'update_account' %}" class="text-info">Edit Account</a>
                 <a href="#" class="text-danger ms-1" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">Delete Account</a>
             </div>
-            {% if user.is_superuser %}
-            <a href="{% url 'admin:index' %}" class="text-warning">Admin Panel</a>
-            {% endif %}
         </div>
     </div>
 </div>
