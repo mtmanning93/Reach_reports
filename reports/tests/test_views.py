@@ -9,9 +9,13 @@ from reports import views
 
 
 class TestGetViews(TestCase):
-    # SET UP
+    """
+    Tests for the retrieval of view and templates.
+    """
     def setUp(self):
-
+        """
+        Set up the test environment.
+        """
         self.user = User.objects.create(
             username="testuser",
             email='test@example.com',
@@ -30,26 +34,42 @@ class TestGetViews(TestCase):
         )
 
     def test_get_landing_page(self):
+        """
+        Tests the landing page view response and correct template retrieval
+        """
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'index.html')
 
     def test_get_reports_list_page(self):
+        """
+        Tests the reports list view response and correct template retrieval
+        """
         response = self.client.get('/reports/reports/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'reports.html')
 
     def test_get_report_details_page(self):
+        """
+        Tests the report details view response and correct template retrieval
+        """
         response = self.client.get(f'/reports/report/{self.report.pk}/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'report_details.html')
 
     def test_get_correct_report_details(self):
+        """
+        Test the correct url for each report is retrieved
+        """
         url = reverse('report_details', args=[self.report.pk])
         expected_url = f'/reports/report/{self.report.pk}/'
         self.assertEqual(url, expected_url)
 
     def test_get_report_comments(self):
+        """
+        Tests getting the comments for each report on the report details
+        page. Checks the counter updates accordingly.
+        """
         Comment.objects.create(report=self.report, content="Test comment")
         response = self.client.get(
             reverse('report_details', args=[self.report.pk]))
@@ -62,12 +82,18 @@ class TestGetViews(TestCase):
         self.assertEqual(comment_report, self.report)
 
     def test_get_account_page(self):
+        """
+        Tests getting the account page view and corresponding template.
+        """
         self.client.force_login(self.user)
         response = self.client.get('/reports/account/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'account.html')
 
     def test_get_correct_user_account(self):
+        """
+        Tests getting the correct details and url for the account page.
+        """
         self.client.force_login(self.user)
         response = self.client.get(reverse('account'))
 
@@ -79,9 +105,13 @@ class TestGetViews(TestCase):
 
 
 class ReportListViewFilterTests(TestCase):
-
+    """
+    Tests for the reports list view and all queries in the filter methods.
+    """
     def setUp(self):
-
+        """
+        Set up the test environment.
+        """
         self.user = User.objects.create(
             username="testuser",
             email='test@example.com',
@@ -117,6 +147,9 @@ class ReportListViewFilterTests(TestCase):
         )
 
     def test_filter_by_activity_and_grade(self):
+        """
+        Tests the filtering of reports by activity and grade.
+        """
         url = reverse('reports') + '?activity=alpine&grade=good'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -125,6 +158,9 @@ class ReportListViewFilterTests(TestCase):
         self.assertEqual(reports[0].title, 'Report 1')
 
     def test_filter_by_activity_only(self):
+        """
+        Tests filtering reports by activity only.
+        """
         url = reverse('reports') + '?activity=hike'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -133,6 +169,9 @@ class ReportListViewFilterTests(TestCase):
         self.assertEqual(reports[0].title, 'Report 2')
 
     def test_filter_by_grade_only(self):
+        """
+        Tests filtering reports by condition grade only.
+        """
         url = reverse('reports') + '?grade=perfect'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -141,6 +180,9 @@ class ReportListViewFilterTests(TestCase):
         self.assertEqual(reports[0].title, 'Report 3')
 
     def test_filter_all_activities_and_grades(self):
+        """
+        Tests the all filter by grade and activity displays all.
+        """
         url = reverse('reports') + '?activity=all&grade=all'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -149,15 +191,18 @@ class ReportListViewFilterTests(TestCase):
 
 
 class LikeReportTests(TestCase):
-
+    """
+    Unit tests for the like reports view.
+    """
     def setUp(self):
-
+        """
+        Set up the test environment.
+        """
         self.user = User.objects.create(
             username="testuser",
             email='test@example.com',
             password='testpassword'
         )
-
         self.report = Report.objects.create(
             title="Tester",
             author=self.user,
@@ -169,7 +214,10 @@ class LikeReportTests(TestCase):
         )
 
     def test_like_report(self):
-
+        """
+        This test verifies users can like a report and the likes are
+        related to the correct report.
+        """
         self.client.force_login(self.user)
         response = self.client.post(
             reverse('like_report', kwargs={'pk': self.report.pk}))
@@ -179,7 +227,11 @@ class LikeReportTests(TestCase):
         self.assertTrue(self.report.likes.filter(id=self.user.id).exists())
 
     def test_unlike_report(self):
-
+        """
+        This test verifies users can unlike a report and the unlike response
+        relates to the report. For example the user is no longer listed in
+        the report likes.
+        """
         self.client.force_login(self.user)
         self.client.post(reverse('like_report', kwargs={'pk': self.report.pk}))
         response = self.client.post(
