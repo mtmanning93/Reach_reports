@@ -9,9 +9,15 @@ from reports.views import generate_slug
 
 
 class TestCommentForm(TestCase):
-
+    """
+    This test case covers the process of posting comments to a page using the
+    CommentForm, and verifies that the posted comment content appears in the
+    response.
+    """
     def setUp(self):
-
+        """
+        Set up the test environment.
+        """
         self.user = User.objects.create(username="testuser")
 
         self.report = Report.objects.create(
@@ -30,13 +36,20 @@ class TestCommentForm(TestCase):
             report=self.report,
         )
 
-    def test_content_validation_with_valid_input(self):
+    def test_form_validation_with_valid_input(self):
+        """
+        Checks the comment form is submitted if content is valid
+        """
 
         form = CommentForm(data={'content': 'This is a valid comment.'})
 
         self.assertTrue(form.is_valid())
 
     def test_form_validation_with_empty_content(self):
+        """
+        Test form validation when there is no input in the comment seciton
+        Expected form validation error 'Please fill in this field.'
+        """
 
         form = CommentForm(data={'content': ''})
 
@@ -44,6 +57,10 @@ class TestCommentForm(TestCase):
         self.assertIn('content', form.errors)
 
     def test_form_saves_correctly(self):
+        """
+        Ensures that comments are associated with the correct report object
+        when saved in the db.
+        """
 
         form = CommentForm(data={'content': self.comment.content})
 
@@ -58,12 +75,20 @@ class TestCommentForm(TestCase):
         self.assertEqual(comment.report, self.report)
 
     def test_comment_form_renders_correctly(self):
+        """
+        Tests the correct fields are rendered within the CommentForm.
+        'content' is the field which should be present in the rendered form.
+        """
 
         form = CommentForm()
 
         self.assertIn('content', form.as_p())
 
     def test_comment_posts_to_page(self):
+        """
+        Ensures that when a comment is posted to a page using the CommentForm,
+        the posted comment content appears in the response.
+        """
 
         form_data = {
             'content': 'This is a test comment',
@@ -88,13 +113,21 @@ class TestCommentForm(TestCase):
 
 
 class CreateReportFormTests(TestCase):
-
+    """
+    This test case covers the process of validating and saving
+    a report using the CreateReportForm with valid data.
+    """
     def setUp(self):
-
+        """
+        Set up the test environment before each test method.
+        """
         self.user = User.objects.create(username="testuser")
 
     def test_create_report_form_with_valid_data(self):
-
+        """
+        Checks that a report can be successfully validated and saved using
+        valid data.
+        """
         form_data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -122,7 +155,9 @@ class CreateReportFormTests(TestCase):
         self.assertEqual(saved_report.title, form_data['title'])
 
     def test_create_report_form_with_missing_required_fields(self):
-
+        """
+        Ensures the form is not valid if reuired fields are missing input.
+        """
         form_data = {
             'start_date': str(date.today()),
             'end_date': str(date.today()),
@@ -137,7 +172,9 @@ class CreateReportFormTests(TestCase):
         self.assertFalse(form.is_valid())
 
     def test_create_report_form_with_invalid_data(self):
-
+        """
+        Tests that for is invalid with invalid data input.
+        """
         form_data = {
             'title': 'Test Report Title',
             'goal_reached': 'invalid_choice',
@@ -157,7 +194,10 @@ class CreateReportFormTests(TestCase):
         self.assertFalse(form.is_valid())
 
     def test_create_report_form_with_optional_gps_map_link(self):
-
+        """
+        Ensures form s still valid with empty gps_map_link,
+        meaning its an optional input for users!
+        """
         form_data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -178,6 +218,10 @@ class CreateReportFormTests(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_end_date_validaion(self):
+        """
+        Tests that end_date is invalid if before start_date,
+        and checks for correct error message.
+        """
 
         form_data = {
             'title': 'Test Report Title',
@@ -203,9 +247,13 @@ class CreateReportFormTests(TestCase):
 
 
 class TestTitleValidation(TestCase):
-
+    """
+    Test the title validator functionality.
+    """
     def test_valid_title(self):
-        # Test with a valid title
+        """
+        Checks the form is valid with a valid title input.
+        """
         data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -224,7 +272,10 @@ class TestTitleValidation(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_title_too_short(self):
-        # Test with a title that is too short
+        """
+        Checks the correct validation error if the title is too short,
+        and the error message is corresponding correctly.
+        """
         form_data = data = {
             'title': 'A',
             'goal_reached': 'yes',
@@ -246,7 +297,10 @@ class TestTitleValidation(TestCase):
             'Title must be between 3 and 30 characters.', form.errors['title'])
 
     def test_title_too_long(self):
-        # Test with a title that is too long
+        """
+        Checks the correct validation error if the title is too long,
+        and the error message is corresponding correctly.
+        """
         form_data = {
             'title': '''
                 This is a very long title that exceeds the character limit''',
@@ -268,7 +322,9 @@ class TestTitleValidation(TestCase):
             'Title must be between 3 and 30 characters.', form.errors['title'])
 
     def test_title_contains_only_numbers(self):
-        # Test with a title that contains only numbers
+        """
+        Tests the title is not valid if it is only populated by numbers.
+        """
         form_data = {
             'title': '12345',
             'goal_reached': 'yes',
@@ -288,7 +344,9 @@ class TestTitleValidation(TestCase):
         self.assertIn('Title cannot be just numbers.', form.errors['title'])
 
     def test_title_contains_numbers_and_letters(self):
-        # Test with a title that contains both numbers and letters
+        """
+        Ensures a title is valid if it contains both numbers and letters.
+        """
         form_data = {
             'title': 'Title123',
             'goal_reached': 'yes',
@@ -308,9 +366,13 @@ class TestTitleValidation(TestCase):
 
 
 class TestStartDateValidation(TestCase):
-
+    """
+    Test the start_date validator functionality.
+    """
     def test_valid_start_date(self):
-        # Test with a valid start date within the last 5 years
+        """
+        Tests the form is valid when the start date is within the last 5 years.
+        """
         five_years_ago = date.today() - timedelta(days=365*5)
         data = {
             'title': 'Title123',
@@ -330,7 +392,10 @@ class TestStartDateValidation(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_start_date_in_future(self):
-        # Test with a start date in the future
+        """
+        Checks the start date is invalid if it is in the future,
+        and checks the corresponding error message is correct.
+        """
         future_date = date.today() + timedelta(days=1)
         data = {
             'title': 'Title123',
@@ -352,7 +417,9 @@ class TestStartDateValidation(TestCase):
             'Start date cannot be in the future.', form.errors['start_date'])
 
     def test_start_date_more_than_5_years_ago(self):
-        # Test with a start date more than 5 years ago
+        """
+        Tests the start_date is not valid when more than 5 years old.
+        """
         more_than_5_years_ago = date.today() - timedelta(
             days=365 * 6)
         data = {
@@ -378,9 +445,13 @@ class TestStartDateValidation(TestCase):
 
 
 class TestEndDateValidation(TestCase):
-
+    """
+    Test the start_date validator functionality.
+    """
     def test_valid_end_date(self):
-        # Test with a valid end date (today's date)
+        """
+        Tests the form is valid when the end date is valid.
+        """
         data = {
             'title': 'Title123',
             'goal_reached': 'yes',
@@ -399,7 +470,10 @@ class TestEndDateValidation(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_end_date_before_start_date(self):
-        # Test with an end date before the start date
+        """
+        Tests to ensure end_date can not be before the start date,
+        and checks the corresponding error message is correct.
+        """
         start_date = date.today()
         end_date = start_date - timedelta(days=1)
         data = {
@@ -422,7 +496,10 @@ class TestEndDateValidation(TestCase):
             "End date cannot be before start date.", form.errors['end_date'])
 
     def test_end_date_in_the_future(self):
-        # Test with an end date in the future
+        """
+        Tests to ensure end_date can not be in the future,
+        and checks the corresponding error message is correct.
+        """
         future_date = date.today() + timedelta(days=1)
         data = {
             'title': 'Title123',
@@ -445,9 +522,13 @@ class TestEndDateValidation(TestCase):
 
 
 class TestTimeTakenValidation(TestCase):
-
+    """
+    Test the time_taken custom validator functionality.
+    """
     def test_valid_time_format(self):
-        # Test with a valid time format (hh:mm:ss)
+        """
+        Tests a valid duration input.
+        """
         data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -467,7 +548,10 @@ class TestTimeTakenValidation(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_empty_time_taken(self):
-        # Test with an empty time_taken field (no input)
+        """
+        Tests the form is valid if the field is empty,
+        or has no input.
+        """
         data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -487,7 +571,10 @@ class TestTimeTakenValidation(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_wrong_time_format(self):
-        # Test with an invalid time format (wrong pattern)
+        """
+        Tests the time format used is correct (hh:mm:ss),
+        otherwise it is invalid. Checks for the correct error message.
+        """
         data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -511,9 +598,13 @@ class TestTimeTakenValidation(TestCase):
 
 
 class TestHeightInMetersValidation(TestCase):
-
+    """
+    Test the height_in_meters field custom validator functionality.
+    """
     def test_valid_height(self):
-        # Test with a valid height (within range)
+        """
+        Tests the form is valid with a valid height in meters input.
+        """
         data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -532,7 +623,10 @@ class TestHeightInMetersValidation(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_height_less_than_zero(self):
-        # Test with a height less than 0
+        """
+        Test to check if the input is less than 0 the form is invalid.
+        Checks the corresponding error message is correct.
+        """
         data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -554,7 +648,11 @@ class TestHeightInMetersValidation(TestCase):
             form.errors['height_in_meters'])
 
     def test_height_greater_than_everest(self):
-        # Test with a height greater than Everest
+        """
+        Checks the height input isnt higher than the tallest possible
+        climb, Mt. Everest at 8849m. Checks the correct error message
+        is displayed.
+        """
         data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -576,7 +674,10 @@ class TestHeightInMetersValidation(TestCase):
             form.errors['height_in_meters'])
 
     def test_height_is_none(self):
-        # Test with height as None (allowed case)
+        """
+        Tests to check that no input in this field still allows for
+        valid form. Checks the field is optional.
+        """
         data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -596,9 +697,13 @@ class TestHeightInMetersValidation(TestCase):
 
 
 class TestNumberInGroupValidation(TestCase):
-
+    """
+    Test case to check the number_in_group validator.
+    """
     def test_valid_number(self):
-        # Test with a valid number (positive number)
+        """
+        Tests the field with a valid input.
+        """
         data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -616,7 +721,10 @@ class TestNumberInGroupValidation(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_negative_number(self):
-        # Test with a negative number
+        """
+        Tests the field with a negative number (-2).
+        Checks tzhe correct error message is displayed.
+        """
         data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -637,7 +745,10 @@ class TestNumberInGroupValidation(TestCase):
             form.errors['number_in_group'])
 
     def test_number_is_none(self):
-        # Test with number as None (allowed case)
+        """
+        Test to check if the input is 'None' (empty),
+        the form is still valid.
+        """
         data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -656,9 +767,13 @@ class TestNumberInGroupValidation(TestCase):
 
 
 class TestNumberOnRouteValidation(TestCase):
-
+    """
+    Test case to check the number_on_route validator.
+    """
     def test_valid_number(self):
-        # Test with a valid number (positive number)
+        """
+        Tests form with a valid number_on_route input.
+        """
         data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -676,7 +791,9 @@ class TestNumberOnRouteValidation(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_negative_number(self):
-        # Test with a negative number
+        """
+        Checks the form with an invalid negative number input.
+        """
         data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -697,7 +814,9 @@ class TestNumberOnRouteValidation(TestCase):
             form.errors['number_on_route'])
 
     def test_number_is_none(self):
-        # Test with number as None (allowed case)
+        """
+        Tests with no input or 'None'. This is allowed.
+        """
         data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -716,9 +835,14 @@ class TestNumberOnRouteValidation(TestCase):
 
 
 class TestGPSMapLinkValidation(TestCase):
-
+    """
+    Test case to check the gps_map_link validator.
+    """
     def test_valid_gps_map_link(self):
-        # Test with a valid GPS map link containing 'fatmap.com'
+        """
+        Checks the form is still valid with a valid gps_map_link input,
+        Includes the 'fatmap.com' string.
+        """
         data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -737,7 +861,10 @@ class TestGPSMapLinkValidation(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_invalid_gps_map_link(self):
-        # Test with an invalid GPS map link not containing 'fatmap.com'
+        """
+        Test with an invalid GPS map link not containing 'fatmap.com',
+        but still a url. Checks the related error message is displayed.
+        """
         data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -759,7 +886,9 @@ class TestGPSMapLinkValidation(TestCase):
             form.errors['gps_map_link'])
 
     def test_gps_map_link_is_none(self):
-        # Test with GPS map link as None (allowed case)
+        """
+        Checks that no input still allows for a valid form.
+        """
         data = {
             'title': 'Test Report Title',
             'goal_reached': 'yes',
@@ -779,9 +908,13 @@ class TestGPSMapLinkValidation(TestCase):
 
 
 class UpdateAccountFormTests(TestCase):
-
+    """
+    Test case to check UpdateAccountForm.
+    """
     def setUp(self):
-
+        """
+        Set up the test environment.
+        """
         self.user = User.objects.create_user(
             username='testuser',
             email='test@example.com',
@@ -789,7 +922,9 @@ class UpdateAccountFormTests(TestCase):
         )
 
     def test_valid_form(self):
-
+        """
+        Tests the form with valid inputs.
+        """
         initial_data = {
             'username': 'new_username',
             'email': 'new_email@example.com',
@@ -800,7 +935,9 @@ class UpdateAccountFormTests(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_invalid_email(self):
-
+        """
+        Test to check an invalid input in the email field.
+        """
         initial_data = {
             'username': 'new_username',
             'email': 'test_not_an_email',
