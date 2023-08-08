@@ -243,9 +243,13 @@ class LikeReportTests(TestCase):
 
 
 class DeleteCommentTests(TestCase):
-
+    """
+    Unit tests for the delete report view.
+    """
     def setUp(self):
-
+        """
+        Set up the test environment.
+        """
         self.user = User.objects.create_user(
             username='testuser',
             password='testpassword'
@@ -269,6 +273,10 @@ class DeleteCommentTests(TestCase):
         )
 
     def test_delete_comment(self):
+        """
+        Tests when a comment is deleted by the user it is removed from
+        the report object also.
+        """
         self.client.login(username='testuser', password='testpassword')
         delete_url = reverse('delete_comment', args=[self.comment.pk])
         response = self.client.post(delete_url)
@@ -278,18 +286,25 @@ class DeleteCommentTests(TestCase):
 
 
 class CreateReportTests(TestCase):
-
+    """
+    Test case for the create report view.
+    """
     def setUp(self):
-
+        """
+        Set up the test environment.
+        """
         self.user = User.objects.create_user(
             username='testuser', password='testpassword'
         )
-
         self.login_status = self.client.login(
             username='testuser', password='testpassword'
         )
 
     def test_create_report_view_GET(self):
+        """
+        A test to verify the create report view is retrievable
+        and displays the correct form.
+        """
         response = self.client.get(reverse('create_report'))
 
         self.assertEqual(response.status_code, 200)
@@ -299,7 +314,9 @@ class CreateReportTests(TestCase):
             response.context['report_form'], CreateReportForm)
 
     def test_create_report_view_with_valid_form(self):
-
+        """
+        Tests the submition of a valid form to create a new report.
+        """
         report_data = {
             'title': 'Test Report',
             'start_date': '2023-07-29',
@@ -332,7 +349,10 @@ class CreateReportTests(TestCase):
                 'https://res.cloudinary.com/dsmfunyxk/image/upload/'))
 
     def test_create_report_view_with_invalid_form(self):
-
+        """
+        Tests the submition of an invalid form to create a new report.
+        Invalid form represented by no report_data.
+        """
         report_data = {}
         response = self.client.post(reverse('create_report'), data=report_data)
 
@@ -343,9 +363,13 @@ class CreateReportTests(TestCase):
 
 
 class ValidateReportCreationTests(TestCase):
-
+    """
+    Test case for the validate report creation view.
+    """
     def setUp(self):
-
+        """
+        Set up the test environment.
+        """
         self.user = User.objects.create(username="testuser")
 
         self.report = Report.objects.create(
@@ -363,7 +387,10 @@ class ValidateReportCreationTests(TestCase):
             report=self.report, image_file='test_image1.jpg')
 
     def test_validate_report_with_under_12_images(self):
-
+        """
+        Tests the create report form instance is valid if the report 
+        being added has under 12 images attached.
+        """
         form_data = {
             'title': 'Updated Test Report',
             'slug': 'sample-report',
@@ -387,7 +414,10 @@ class ValidateReportCreationTests(TestCase):
         self.assertTrue(result)
 
     def test_validate_report_with_over_12_images(self):
-
+        """
+        Checks that a form is considered invalid if the create report
+        form is submmitted with more than 12 images attached.
+        """
         form_data = {
             'title': 'Updated Test Report',
             'slug': 'sample-report',
