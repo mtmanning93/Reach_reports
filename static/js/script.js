@@ -27,11 +27,10 @@ function showConfirmationModal() {
 function submitForm() {
     // Change 'confirm-deletion' hidden input boolean
     document.getElementById('confirm-deletion').value = 'true';
-    // Submit the form
     document.getElementById('edit-report-form').submit();
 }
 
-// Tooltip on like when unauthenticated user
+// Tooltip on like for unauthenticated user
 document.addEventListener("DOMContentLoaded", function () {
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     tooltipTriggerList.map(function (element) {
