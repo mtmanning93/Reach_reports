@@ -97,6 +97,10 @@ a:hover {
     border-bottom: 2px solid black;
 }
 
+.nav-item a {
+    font-size: 1.1em;
+}
+
 #username_dropdown {
     color: #2596be;
 }
