@@ -54,6 +54,8 @@ Cloudinary, Crispy Forms
             - [Product Backlog](#product-backlog)
             - [Iterations](#iterations)
             - [Kanban Board](#kanban-board)
+    - [Features](#features)
+
     - [Technologies Used](#technologies-used)
         - [Django](#django)
         - [Python](#python)
@@ -68,6 +70,17 @@ Cloudinary, Crispy Forms
         - [CSS Testing](#css-testing)
         - [Html Testing](#html-testing)
         - [User Testing](#user-testing)
+    - [Bugs](#bugs)
+        - [Resolved Bugs](#resolved)
+        - [Unresolved Bugs](#unresolved)
+    - [Deployment](#deployment)
+        - [Cloudinary Deployment](#cloudinary-deployment)
+        - [Elephant SQL DEployment](#elephant-sql-deployment)
+        - [Heroku Deployment](#heroku-deployment)
+    - [Credits](#credits)
+        - [References](#references)
+        - [Tools](#tools)
+        - [Resources](#resources)
 
 ## Design Thinking
 
@@ -87,14 +100,14 @@ As a passionate alpinist, it was possible to gather a group of climbers and hold
 
 There were 3 key takeaways from the brainstorming session:
     
-    1. Images Are Important
-        - An image says a thousand words, with experience you can tell a lot from an image.
-    2. Comments
-        - A discussion on each report would provide even further information for users.
-        - Other user input on each report would create more in depth reports.
-    3. Key Information
-        - Every report should be simple but provide enough information in order to give an insight.
-        - Key information such as number of people and an overall grade should be given on all reports.
+1. Images Are Important
+    - An image says a thousand words, with experience you can tell a lot from an image.
+2. Comments
+    - A discussion on each report would provide even further information for users.
+    - Other user input on each report would create more in depth reports.
+3. Key Information
+    - Every report should be simple but provide enough information in order to give an insight.
+    - Key information such as number of people and an overall grade should be given on all reports.
 
 ### Site Goals
 
@@ -294,6 +307,8 @@ When possible I would close an issue from the terminal using the `close #10` com
 
 [Reach Kanban Board](https://github.com/users/mtmanning93/projects/7)
 
+## Features
+
 ## Technologies Used
 
 ### Django:
@@ -430,3 +445,25 @@ The addition to the `.eslintrc.json` file:
 
 ### User Testing
 ----------------
+
+## Bugs
+
+### Resolved
+
+### Unresolved
+
+## Deployment
+
+### Cloudinary Deployment
+
+### Elephant SQL Deployment
+
+### Heroku Deployment
+
+## Credits
+
+### References
+
+### Tools
+
+### Resources
