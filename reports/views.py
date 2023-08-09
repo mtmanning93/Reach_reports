@@ -12,6 +12,32 @@ from . import forms
 from .models import Report, Comment, ImageFile, generate_slug
 
 
+def get_random_quote():
+
+    quotes = [
+        {
+            'quote': """We cannot lower the mountain,
+             therefore we must elevate ourselves.""",
+            'author': "Todd Skinner",
+        },
+        {
+            'quote': "The mountains are calling, and i must go",
+            'author': "John Muir",
+        },
+        {
+            'quote': """I don't like talking about climbing that much.
+             You don't have to discuss, just do it.""",
+            'author': "Ueli Steck",
+        },
+        {
+            'quote': "You can't move mountains by whispering at them.",
+            'author': "Unknown",
+        },
+    ]
+
+    return random.choice(quotes)
+
+
 def get_random_images():
     """
     Stores the images to be used on the landing page 'index.html'.
@@ -36,9 +62,12 @@ def get_landing_page(request):
     Renders landing page template and random image to display
     """
     random_image_url = get_random_images()
+    quote = get_random_quote()
 
     return render(
-        request, 'index.html', {'random_image_url': random_image_url})
+        request,
+        'index.html',
+        {'random_image_url': random_image_url, 'quote': quote})
 
 
 class ReportList(ListView):

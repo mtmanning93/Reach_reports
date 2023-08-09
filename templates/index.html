@@ -5,6 +5,13 @@
     <div id="head-img-wrapper" class="container-fluid p-0 position-relative">
         <img src="{% static random_image_url %}" alt="Random Image" class="col-12 d-block">
 
+        <div id="head-quote" class="col-10 col-sm-8 col-md-6 col-xl-4 position-absolute translate-middle d-sm-flex flex-column align-items-center">
+            <blockquote class="m-0">
+                <em>“{{ quote.quote }}”</em>
+                - <strong>{{ quote.author }}</strong>
+            </blockquote>
+        </div>
+
         <div id="head-btns" class="col-10 col-sm-8 col-md-6 col-xl-4 position-absolute translate-middle d-flex flex-column align-items-center">
             <a href="{% url 'reports' %}" class="col-12 btn btn-light border-3 border-dark opacity-75 mb-2">Condition Reports</a>
             {% if user.is_authenticated %}

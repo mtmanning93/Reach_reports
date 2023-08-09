@@ -122,6 +122,18 @@ a:hover {
     object-fit: cover;
 }
 
+#head-quote {
+    top: 10%;
+    left: 50%;
+    text-align: center;
+    /* border: 2px solid black; */
+    border-radius: 5px;
+    background-color: #f6f6f669;
+    padding: 10px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.2em;
+}
+
 #head-btns {
     top: 75%;
     left: 50%;
@@ -334,6 +346,19 @@ label {
         height: 571px;
     }
 
+    #head-quote {
+        display: none;
+    }
+    
+    #head-btns {
+        width: 100%;
+    }
+
+    #head-btns a {
+        border-radius: 0;
+        border: 1px 0 1px 0;
+    }
+
     /* Reports */
 
     .report-list-item {
@@ -391,6 +416,11 @@ label {
 
     #head-img-wrapper {
         height: 571px;
+    }
+
+    #head-quote {
+        top: 10%;
+        font-size: 0.9em;
     }
 
     footer {
