@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Delete Images in Edit Form
+// eslint-disable-next-line no-unused-vars
 function showConfirmationModal() {
     const imagesToDelete = document.querySelectorAll('input[data-marked-for-deletion]:checked');
 
@@ -22,7 +23,7 @@ function showConfirmationModal() {
         document.getElementById('edit-report-form').submit();
     }
 }
-
+// eslint-disable-next-line no-unused-vars
 function submitForm() {
     // Change 'confirm-deletion' hidden input boolean
     document.getElementById('confirm-deletion').value = 'true';

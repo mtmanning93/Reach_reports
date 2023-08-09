@@ -386,3 +386,27 @@ I also used cloudinary in my ImageFile model using:
     image_file = CloudinaryField('image', default='placeholder')
 
 [Cloudinary Docs](https://cloudinary.com/documentation)
+
+## Testing
+
+### Python Testing
+------------------
+#### - Unit Tests (automated testing)
+- coverage 100%
+
+### JavaScript Testing
+----------------------
+#### Manual Testing
+
+#### JSHint
+
+### CSS Testing
+---------------
+#### W3C Validator
+
+### Html Testing
+----------------
+#### W3C Validator
+
+### User Testing
+----------------
