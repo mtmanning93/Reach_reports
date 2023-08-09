@@ -59,6 +59,7 @@ Cloudinary, Crispy Forms
         - [Python](#python)
         - [JavaScript](#javascript)
         - [CSS & Bootstrap](#css-&-bootstrap)
+        - [Cloudinary](#cloudinary)
 
 ## Design Thinking
 
@@ -369,3 +370,19 @@ In order to include Bootstrap5 include this CDN link:
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
 [Bootstrap 5.2 docs](https://getbootstrap.com/docs/5.2/getting-started/introduction/)
+
+### Cloudinary
+
+The primary use of cloudinary in this project was to upload and destroy stored images. Of course with a number of users storage would quickly fill up therefore it was important to limit the number of images a user can add to each report. Users can add 12 images to a report. Even within the edit report where users can add and delte images at the same time it is only possible to have a total of 12 images connected to the report object.
+
+Once set up you must import cloudinary in your file:
+
+    import cloudinary
+    or
+    from cloudinary.models import CloudinaryField
+
+I also used cloudinary in my ImageFile model using:
+
+    image_file = CloudinaryField('image', default='placeholder')
+
+[Cloudinary Docs](https://cloudinary.com/documentation)
