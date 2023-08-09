@@ -60,6 +60,14 @@ Cloudinary, Crispy Forms
         - [JavaScript](#javascript)
         - [CSS & Bootstrap](#css-&-bootstrap)
         - [Cloudinary](#cloudinary)
+    - [Testing](#testing)
+        - [Python Testing](#python-testing)
+            - [Unit Testing](#unit-tests-automated-testing)
+        - [JavaScript Testing](#javascript-testing)
+            - [ESLint](#eslint)
+        - [CSS Testing](#css-testing)
+        - [Html Testing](#html-testing)
+        - [User Testing](#user-testing)
 
 ## Design Thinking
 
@@ -396,9 +404,21 @@ I also used cloudinary in my ImageFile model using:
 
 ### JavaScript Testing
 ----------------------
-#### Manual Testing
+#### ESLint
 
-#### JSHint
+I tested the JavaScript file using ESLint. After running the tests initally there were 3 errors, regarding the use of global variables. ESLint isnt aware of project file structure so I needed to update the settings within the `.eslintrc.json` file. Once this was done and used variables was specified the `script.js` file **passed** all tests with 0 errors.
+
+To install ESLint in the terminal:
+
+    npm install eslint --save-dev
+
+The addition to the `.eslintrc.json` file:
+
+    "globals": {
+        "bootstrap": true
+    },
+
+[ESLint Docs](https://eslint.org/docs/latest/use/getting-started#prerequisites)
 
 ### CSS Testing
 ---------------
