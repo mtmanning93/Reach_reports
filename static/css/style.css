@@ -97,6 +97,14 @@ a:hover {
     border-bottom: 2px solid black;
 }
 
+#username_dropdown {
+    color: #2596be;
+}
+
+.dropdown .dropdown-menu {
+    border: 2px solid #2596be;
+}
+
 /* Header Images */
 
 #head-img-wrapper {
@@ -365,6 +373,11 @@ label {
 
     .nav-item a {
         text-align: center;
+    }
+
+    .dropdown .dropdown-menu {
+        border: 2px 0 0 0;
+        border-top-color:#2596be;
     }
 
     #head-img-wrapper {
