@@ -207,18 +207,18 @@ class UpdateAccountView(LoginRequiredMixin, UpdateView):
     form_class = forms.UpdateAccountForm
     success_url = reverse_lazy('account')
 
-    def get_user(self):
+    def get_object(self):
         """
         Gets correct user instance.
         """
         return self.request.user
 
-    def update_account_post(self, form):
+    def form_valid(self, form):
         """
         Provides success message when valid UpdateView form.
         """
         messages.success(self.request, 'Your account has been updated!')
-        return super().update_account_post(form)
+        return super().form_valid(form)
 
 
 @login_required

@@ -747,7 +747,7 @@ class DeleteAccountTests(TestCase):
     def test_delete_account_redirects_to_account_not_delete(self):
         """
         Tests the redirection of the user to the account view when the deletion
-        is cancelled in the modal by the user.
+        is cancelled in the modal by the user
         """
         response = self.client.get(reverse('delete_account'))
 
@@ -762,22 +762,25 @@ class UpdateAccountViewTests(TestCase):
     """
     def setUp(self):
         """
-        Set up the test environement before each test method.
+        Set up test environment.
         """
         self.user = User.objects.create_user(
             username='testuser',
             email='test@example.com',
             password='testpassword'
         )
+
         self.client.login(
             username='testuser', password='testpassword'
         )
+
         self.url = reverse('update_account')
 
     def test_update_account_view_get_request(self):
         """
-        Tests the retrieval of the update account view and template.
+        Tests the retrieval of the view and template
         """
+
         response = self.client.get(self.url)
 
         self.assertEqual(response.status_code, 200)
@@ -786,8 +789,7 @@ class UpdateAccountViewTests(TestCase):
 
     def test_update_account_view_valid_form(self):
         """
-        Tests the account form is valid when all input data is valid.
-        Email field must be email etc.
+        Tests the update account view with a valid form submission.
         """
         new_data = {
             'username': 'new_username',
@@ -801,13 +803,14 @@ class UpdateAccountViewTests(TestCase):
 
     def test_update_account_view_invalid_form(self):
         """
-        Tests the account form is not valid when not all input data is
-        submitted. Here there is no username input.
+        Test the update account view with an invalid form submission.
+        Submits invalid user data, such as an empty 'username'.
         """
         invalid_data = {
             'username': '',
             'email': 'new_email@example.com',
         }
+
         response = self.client.post(self.url, data=invalid_data, follow=True)
 
         self.assertEqual(response.status_code, 200)
