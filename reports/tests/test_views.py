@@ -388,7 +388,7 @@ class ValidateReportCreationTests(TestCase):
 
     def test_validate_report_with_under_12_images(self):
         """
-        Tests the create report form instance is valid if the report 
+        Tests the create report form instance is valid if the report
         being added has under 12 images attached.
         """
         form_data = {
@@ -448,13 +448,19 @@ class ValidateReportCreationTests(TestCase):
 
 
 class GenerateSlugTests(TestCase):
-
+    """
+    Test case for the generating unique slugs view.
+    """
     def setUp(self):
-
+        """
+        Set up the tests environment before each method.
+        """
         self.user = User.objects.create(username="testuser")
 
     def test_generate_slug_unique(self):
-
+        """
+        Tests the slug generated is unique when the same report is created.
+        """
         report1 = Report.objects.create(
             title="Sample Report",
             author=self.user,
@@ -479,15 +485,18 @@ class GenerateSlugTests(TestCase):
 
 
 class EditReportTests(TestCase):
-
+    """
+    Unit tests for the edit reports view.
+    """
     def setUp(self):
-
+        """
+        Set up the test environment before each test.
+        """
         self.user = User.objects.create(
             username="testuser",
             email='test@example.com',
             password='testpassword'
         )
-
         self.report = Report.objects.create(
             title="Sample Report",
             slug="sample-report",
@@ -508,7 +517,11 @@ class EditReportTests(TestCase):
         self.client.force_login(self.user)
 
     def test_edit_report_view_with_new_images(self):
-
+        """
+        Tests form validation with new images attached for upload.
+        Checks when created that the images are saved to the db and
+        related to the correct report instance.
+        """
         form_data = {
             'title': 'Updated Test Report',
             'slug': 'sample-report',
@@ -541,14 +554,20 @@ class EditReportTests(TestCase):
         self.assertTrue(image_exists)
 
     def test_edit_report_view_GET(self):
-
+        """
+        Tests the retrieval of the edit report view and template.
+        """
         report = self.report
         response = self.client.get(reverse('edit_report', args=[report.pk]))
 
         self.assertEqual(response.status_code, 200)
 
     def test_confirm_deletion_false(self):
-
+        """
+        Tests the response and db reaction when the confirm deletion of images
+        modal is False (the user has cancelled the deletion)
+        Checks if the images are still present.
+        """
         form_data = {
             'confirm-deletion': 'false',
         }
@@ -557,12 +576,15 @@ class EditReportTests(TestCase):
             'edit_report', args=[self.report.pk]), data=form_data, follow=True)
 
         self.assertEqual(response.status_code, 200)
-
         images_present = ImageFile.objects.filter(report=self.report).exists()
         self.assertTrue(images_present)
 
     def test_confirm_deletion_true(self):
-
+        """
+        Tests the response and db reaction when the confirm deletion of images
+        modal is True (the user has confirmed the deletion)
+        Checks if the images deleted.
+        """
         form_data = {
             'confirm-deletion': 'true',
             f'delete_image_{self.image1.pk}': 'on',
@@ -577,11 +599,14 @@ class EditReportTests(TestCase):
 
 
 class ValidateEditReportImageDataTests(TestCase):
-
+    """
+    Unit tests for the validate image report data view.
+    """
     def setUp(self):
-
+        """
+        Set up tests environment before each test method.
+        """
         self.user = User.objects.create(username="testuser")
-
         self.report = Report.objects.create(
             title="Sample Report",
             slug="sample-report",
@@ -592,12 +617,17 @@ class ValidateEditReportImageDataTests(TestCase):
             activity_category="Hiking",
             description="This is a sample report."
         )
-
         self.test_image = ImageFile.objects.create(
             report=self.report, image_file='test_image1.jpg')
 
     def test_edit_report_valid_data_and_number_of_images(self):
-
+        """
+        Tests to check if a form is valid when the users total image count,
+        after adding new images, current images and deleted images are taken
+        into consideration.
+        The max number of images is 12, therefore:
+        (new_images + curr_images) - delete_these <= 12
+        """
         form_data = {
             'title': 'Updated Test Report',
             'slug': 'sample-report',
@@ -612,7 +642,7 @@ class ValidateEditReportImageDataTests(TestCase):
             'number_on_route': 2,
             'status': 1,
         }
-
+        # Total images < 12
         new_images = [self.test_image for _ in range(5)]
         curr_images = [self.test_image for _ in range(4)]
         delete_these = [self.test_image for _ in range(3)]
@@ -624,7 +654,12 @@ class ValidateEditReportImageDataTests(TestCase):
         self.assertTrue(result)
 
     def test_edit_report_invalid_number_of_images(self):
-
+        """
+        Tests to check if a form is invalid when the users total image count
+        is above 12.
+        The max number of images is 12, therefore:
+        (new_images + curr_images) - delete_these <= 12
+        """
         form_data = {
             'title': 'Updated Test Report',
             'slug': 'sample-report',
@@ -639,7 +674,7 @@ class ValidateEditReportImageDataTests(TestCase):
             'number_on_route': 2,
             'status': 1,
         }
-
+        # Total images > 12 (13)
         new_images = [self.test_image for _ in range(4)]
         curr_images = [self.test_image for _ in range(12)]
         delete_these = [self.test_image for _ in range(3)]
@@ -652,13 +687,16 @@ class ValidateEditReportImageDataTests(TestCase):
 
 
 class DeleteReportTests(TestCase):
-
+    """
+    Unit tests for the delete report view.
+    """
     def setUp(self):
-
+        """
+        Set up for test environment before each test method.
+        """
         self.user = User.objects.create_user(
             username='testuser', password='testpassword'
             )
-
         self.report = Report.objects.create(
             title='Sample Report',
             start_date='2023-07-27',
@@ -667,7 +705,10 @@ class DeleteReportTests(TestCase):
         )
 
     def test_delete_report_deletes_report(self):
-
+        """
+        Tests reports are deleted when confirmed by the user.
+        Checks if report object no longer exist in the db.
+        """
         self.client.login(
             username=self.user.username, password=self.user.password
             )
@@ -679,26 +720,35 @@ class DeleteReportTests(TestCase):
 
 
 class DeleteAccountTests(TestCase):
-
+    """
+    Unit tests for the delete account view.
+    """
     def setUp(self):
-
+        """
+        Set up test environment.
+        """
         self.user = User.objects.create_user(
             username='testuser',
             email='test@example.com',
             password='testpassword',
         )
-
         self.client.login(username='testuser', password='testpassword')
 
-    def test_delete_account_deletes_account_and_redirects(self):
-
+    def test_delete_account_removes_account_and_redirects(self):
+        """
+        Tests the deletion of an account when confirmed by user.
+        Checks the deletion of the user object from the database.
+        """
         response = self.client.post(reverse('delete_account'))
 
         self.assertEqual(response.status_code, 302)
         self.assertFalse(User.objects.filter(username='testuser').exists())
 
     def test_delete_account_redirects_to_account_not_delete(self):
-
+        """
+        Tests the redirection of the user to the account view when the deletion
+        is cancelled in the modal by the user.
+        """
         response = self.client.get(reverse('delete_account'))
 
         self.assertEqual(response.status_code, 200)
@@ -707,23 +757,27 @@ class DeleteAccountTests(TestCase):
 
 
 class UpdateAccountViewTests(TestCase):
-
+    """
+    Unit tests for the update account view.
+    """
     def setUp(self):
-
+        """
+        Set up the test environement before each test method.
+        """
         self.user = User.objects.create_user(
             username='testuser',
             email='test@example.com',
             password='testpassword'
         )
-
         self.client.login(
             username='testuser', password='testpassword'
         )
-
         self.url = reverse('update_account')
 
     def test_update_account_view_get_request(self):
-
+        """
+        Tests the retrieval of the update account view and template.
+        """
         response = self.client.get(self.url)
 
         self.assertEqual(response.status_code, 200)
@@ -731,7 +785,10 @@ class UpdateAccountViewTests(TestCase):
         self.assertIn('form', response.context)
 
     def test_update_account_view_valid_form(self):
-
+        """
+        Tests the account form is valid when all input data is valid.
+        Email field must be email etc.
+        """
         new_data = {
             'username': 'new_username',
             'email': 'new_email@example.com',
@@ -743,12 +800,14 @@ class UpdateAccountViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_update_account_view_invalid_form(self):
-
+        """
+        Tests the account form is not valid when not all input data is
+        submitted. Here there is no username input.
+        """
         invalid_data = {
             'username': '',
             'email': 'new_email@example.com',
         }
-
         response = self.client.post(self.url, data=invalid_data, follow=True)
 
         self.assertEqual(response.status_code, 200)
