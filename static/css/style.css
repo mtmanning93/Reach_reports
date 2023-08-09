@@ -300,8 +300,13 @@ label {
     color: red;
 }
 
-.error ul {
+.error ul,
+.error p {
     margin: 8px 0 0 0;
+}
+
+.error p {
+    color: red;
 }
 
 /* Media Queries */
