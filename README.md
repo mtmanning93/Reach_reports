@@ -17,7 +17,7 @@ Reach is a website where users have the abiltiy to create and post condition rep
 Django, Python, JavaScript, Bootstrap 5.2, CSS, HTML
 
 ### Includes:
-Cloudinary, CrispyForms
+Cloudinary, Crispy Forms
 
 ## Contents
 
@@ -36,6 +36,13 @@ Cloudinary, CrispyForms
             - [Site Admin](#site-admin)
             - [User](#user)
             - [Registered User](#registered-user)
+        - [Wireframe](#wireframe)
+        - [Information Architecture](#information-architecture)
+        - [Visual Design](#visual-design)
+            - [Color Scheme](#color-scheme)
+            - [Fonts](#fonts)
+            - [Imagery](#imagery)
+            - [Logo](#logo)
     - [Development](#development)
         - [Agile Design](#agile-design)
             - [Github Isssues](#github-issues)
@@ -47,8 +54,11 @@ Cloudinary, CrispyForms
             - [Product Backlog](#product-backlog)
             - [Iterations](#iterations)
             - [Kanban Board](#kanban-board)
-        - [Wireframe](#wireframe)
-    - [Technologies](#technologies)
+    - [Technologies Used](#technologies-used)
+        - [Django](#django)
+        - [Python](#python)
+        - [JavaScript](#javascript)
+        - [CSS & Bootstrap](#css-&-bootstrap)
 
 ## Design Thinking
 
@@ -89,9 +99,9 @@ The goal is to create a discussion and library of up to date condition reports t
 
 ## UX / User Experience Design
 
-Example user stories which have affected the overall design and functionailty of the project.
-
 ### User Stories
+----------------
+Example user stories which have affected the overall design and functionailty of the project.
 
 #### - Site Admin
 > "As a site admin I can create, read, update and delete reports so that I can manage the site content"
@@ -125,6 +135,70 @@ Example user stories which have affected the overall design and functionailty of
 > "As a logged in  user I can like or unlike posts so that I can show my appreciation towards good reports"
 >
 > "As a site admin/ registered user I can add images to reports so that the report is more informative"
+
+### Wireframe
+-------------
+
+To aid in the design of the UI I created a wireframe. My preference was to create a large wireframe incorporating all pages, to visualise the flow of the website as well as the design. I provided wireframes for, desktop/ laptop and mobile devices, along with the deletion confirmation modals.
+
+Line Key:\
+**Green** - Creation or Addition\
+**Orange** - Action\
+**Red** - Deletion
+
+![Full wireframe and flow of Reach website](README_images/wirefram_full.png)
+
+### Information Architecture
+----------------------------
+
+When building the projects wireframe it was important to take into consideration positioning of elements. Across the entire site the user will find consistent layout of a navbar and footer with the main content sandwiched between. Key aspects of the information architecture, found throughout the site are:
+
+- **Site Wide Navbar:**\
+The navbar offers the user links to various pages of the site, such as "Home" and "Reports", the consistency of this navigation aids the user in moving easily between different parts of the site, contributing to a better user experience.
+
+- **Branding:**\
+Within the navbar is a large brand logo, this allows users to quickly identify the website and helps establish a visual identity.
+
+- **User Authentication:**\
+Depending on whether a user is authenticated or not, the navigation options change to "Account" and "Logout" or "Login" and "Signup." This provides a clear path to the users account management.
+
+- **Footer:**\
+The footer contains relevant links, including navigation links, social media links, and a contact email. Footers often serve as a secondary navigation or quick access to important sections and resources. Also the footer includes a short safety message to the user helping to connect at a human level.
+
+- **Report Details:**\
+The template displays various details about the report. This organized presentation of the reports details allows users to quickly understand key aspects of the report, without having to read large chunks of information.
+
+- **Images and Map:**\
+"A picture tells a thousand words". These visual elements enhance the user's understanding of the climbing experience.
+
+### Visual Design
+-----------------
+
+#### Color Scheme
+
+The color scheme was chosen to effectively communicate the adventurous and trustworthy aspects of mountaineers and climbers, and therefore the website. The use of blues, combined with the 'bootstrap-light' theme (#F8F9FA) and black text, allows for strong contrast throughout the site. This was very important within the reports details so users can easily read the information provided. The use of white space also aligns well with the outdoor and exploratory theme of the website.
+
+The main colors used throughout the site were:
+
+![Color palette](README_images/color_palette.png)
+
+#### Fonts
+
+I used 2 fonts throughout the site, in different weights, to display hierarchy and guide users. The fonts were chosen due to the versatility and clarity. The two fonts used were; **LATO** for almost all elements, and **Poppins** for added details of lesser importance.
+
+![An example use of both fonts](README_images/fonts.png)
+
+#### Imagery
+
+Across the site I used just nine images. Seven of these are shown as the 'Home' pages main header image. These images were chosen as they cover a wide range of mountainous activites and all convey the main them of the site, adventure. These header images were taken from [Unsplash](https://unsplash.com/) a loyalty free high quality image resource.
+
+![Header Images](README_images/header_images.png)
+
+#### Logo
+
+The sites logo is a simple mountain emblem with bold and capitalised REACH after it. This is immediately visible to a user and allows the user to quickly identify the site, the colors are inkeeping with the sites theme.
+
+![Reach site logo](README_images/logo.png)
 
 ## Development
 
@@ -211,3 +285,87 @@ When possible I would close an issue from the terminal using the `close #10` com
 
 [Reach Kanban Board](https://github.com/users/mtmanning93/projects/7)
 
+## Technologies Used
+
+### Django:
+
+Django was used as the core framework during this project, its documentation is second to none and it provides the user with a batteries included framework making the development of larger scale sites faster.
+
+[Full Django documentation](https://docs.djangoproject.com/en/3.2/)
+
+#### `django-allauth`
+I used django-allauth django add-on in the project, as it provides a set of views, templates, and functionality which integrate with any Django project to handle user authentication, registration, password management. Aiding in the speed of the development process.
+
+To install allauth in the command line:
+
+    pip install django-allauth
+
+Next add to your settings:
+
+    INSTALLED_APPS = [
+    'allauth',
+    'allauth.account',
+    ]
+
+[Link to allauth docs](https://django-allauth.readthedocs.io/en/latest/)
+
+
+### Python:
+
+I used python for the main logic and functionality of the site, within python I used other packages.
+
+#### `Crispy Forms`
+
+Crispy forms allows your django forms to be styled with bootstrap. As my project was using bootstrap already it made sense to have a uniformed styling.
+
+To install crispy-forms in the command line:
+
+    pip install django-crispy-forms
+
+Next add to your settings:
+
+    INSTALLED_APPS = [
+        'crispy_forms',
+    ]
+
+    CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+[Crispy Forms Docs](https://django-crispy-forms.readthedocs.io/en/latest/)
+
+#### `Coverage`
+
+Coverage allowed me to visually check how much of my python code was tested in my unit tests. It provides reports and html documents to check which lines need to be tested.
+
+To install crispy-forms in the command line:
+
+    pip install coverage
+
+Then to run coverage in the command line:
+
+    coverage run --source=app_name manage.py test
+    coverage report
+    coverage html
+    python3 -m http.server
+
+[Coverage Docs](https://pypi.org/project/coverage/)
+
+### JavaScript
+
+During the build very little javascript was necessary, this was mostly due to the use of `Bootstrap 5.2` which includes a large amount of built in javascript functionality such as tool tips, navbars and modals.
+
+In order to include Bootstraps JavScript functionality include this script tag:
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+    </script>
+
+### CSS & Bootstrap
+
+As mentioned above `Bootstrap 5.2` was used heavily in this project to provide styling and some JavaScript functionality. The beauty of bootstrap is it aso aids in the responsiveness of the site. Given clear breakpoints to work from. In the instance of XS screens I need to create a new breakpoint myself but the use of `Bootstrap` keeps custom css minimal.
+
+In order to include Bootstrap5 include this CDN link:
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+[Bootstrap 5.2 docs](https://getbootstrap.com/docs/5.2/getting-started/introduction/)
