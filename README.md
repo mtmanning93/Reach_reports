@@ -69,8 +69,11 @@ Cloudinary, Crispy Forms
         - [JavaScript Testing](#javascript-testing)
             - [ESLint](#eslint)
         - [CSS Testing](#css-testing)
-        - [Html Testing](#html-testing)
         - [User Testing](#user-testing)
+        - [Manual Testing](#manual-testing)
+        - [Screen Testing](#screen-testing)
+        - [Browser Testing](#browser-testing)
+        - [Lighthouse](#lighthouse)
     - [Bugs](#bugs)
         - [Resolved Bugs](#resolved)
         - [Unresolved Bugs](#unresolved)
@@ -501,7 +504,7 @@ With these errors fixed I ran the deployed url again and recieved "Document chec
 
 ![W3C Html validation success](README_images/w3c_html.png)
 
-### Manual Testing
+### User Testing
 ----------------
 These tests were written and given to a user to carry out whilst using the site. They were made to test overall functionailty of the site.
 
@@ -603,11 +606,39 @@ These tests were written and given to a user to carry out whilst using the site.
 | **404 & 500 Error** |
 | Click 'back to home' button | returns user to home page | √ | Pass |
 
+### Screen Testing
+------------------
+When designing the app and the UI, responsiveness was key. When the sites main components were in place, I worked on the less responsive parts of the design, using `bootstraps` gridsystem and some custom styling I was able to use Chrome dev tools to implement a responsive design site wide across a range of devices from iPhone 6 to large monitor sized screens.
+
+To further test the app would work across screens I physically tested its appearance across some devices of differeing sizes, these were:
+
+- 24" Monitor
+- 12" Square Desktop
+- 12" Macbook Air Laptop
+- iPad
+- Samsung Galaxy s21
+- iPhone 7
+
+### Browser Testing
+-------------------
+The project was developed in Google Chrome using the Gitpod IDE. This made building the project simple as I had access to the Chrome Devtools. It is however not just available in the Chrome browser therefore it was important to test it across a number of different browsers, the browser tests included:
+
+- Chrome
+- Firefox
+- Safari
+- Edge
+
+### Lighthouse
+--------------
+
 ## Bugs
 
-### Resolved
+When a bug is identified I was able to raise an issue in Github using the [Bug Report Template](#bug-report). As I was building the project I would identify a bug but in order to keep productive I would create a report in order to focus on it at a later time.
+
+[Resolved Bugs](https://github.com/mtmanning93/Reach_reports/issues?q=is%3Aissue+is%3Aclosed+label%3ABug)
 
 ### Unresolved
+--------------
 
 ## Deployment
 
