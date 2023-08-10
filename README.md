@@ -67,6 +67,7 @@ Cloudinary, Crispy Forms
                 - [Likes](#likes)
                 - [Comments](#comments)
             - [Create Report](#create-report)
+            - [Edit Report](#edit-report)
         - [Future Features](#future-features)
     - [Technologies Used](#technologies-used)
         - [Django](#django)
