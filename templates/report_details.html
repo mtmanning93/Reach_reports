@@ -106,7 +106,7 @@
                 {% for image_file in report.images.all %}
                 <button type="button" class="report-img col-4" data-bs-toggle="modal"
                     data-bs-target="#myModal{{image_file.pk}}">
-                    <img src="{% static 'images/no-.png' %}" alt="{{ report.title }}">
+                    <img src="{% static 'images/no-images.png' %}" alt="{{ report.title }}">
                 </button>
                 {% endfor %}
                 {% else %}

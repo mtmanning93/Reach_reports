@@ -505,9 +505,7 @@ With these errors fixed I ran the deployed url again and recieved "Document chec
 ----------------
 These tests were written and given to a user to carry out whilst using the site. They were made to test overall functionailty of the site.
 
-√ = Success
-
-| **Test** | **Expected result** | **Initial Outcome** | **Final Result** |
+| **Test** | **Expected result** | **Success** | **Final Result** |
 | ---- | ------ | ------ | ------ |
 | **Navbar** |
 | Click logo in navbar | Returns user to landing page | √ | Pass |
