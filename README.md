@@ -55,7 +55,6 @@ Cloudinary, Crispy Forms
             - [Iterations](#iterations)
             - [Kanban Board](#kanban-board)
     - [Features](#features)
-
     - [Technologies Used](#technologies-used)
         - [Django](#django)
         - [Python](#python)
@@ -65,6 +64,8 @@ Cloudinary, Crispy Forms
     - [Testing](#testing)
         - [Python Testing](#python-testing)
             - [Unit Testing](#unit-tests-automated-testing)
+            - [Coverage](#coverage)
+            - [Linters](#linters)
         - [JavaScript Testing](#javascript-testing)
             - [ESLint](#eslint)
         - [CSS Testing](#css-testing)
@@ -414,8 +415,31 @@ I also used cloudinary in my ImageFile model using:
 
 ### Python Testing
 ------------------
-#### - Unit Tests (automated testing)
-- coverage 100%
+#### Unit Tests (automated testing)
+
+I decided to take on Unit Testing for all python code in the project. After a steep and frustrating learning curve I managed to write **80** tests, including **152** assertions. I am however aware that there is many more tests which could be run to check the logic even further.
+
+*Some resources I used to build knowledge and write tests:*
+
+[Intro Testing Python](https://www.freecodecamp.org/news/an-introduction-to-testing-in-python/#:~:text=First%20you%20need%20to%20create,cases%20of%20your%20function's%20behavior.&text=First%2C%20you%20need%20to%20import,want%20to%20test%2C%20formatted_name()%20.)
+
+[Beginner Tests](https://cferreirasuazo.medium.com/lets-unit-test-django-forms-280704168d1b)
+
+[Django Testing Docs](https://docs.djangoproject.com/en/4.2/topics/testing/tools/)
+
+[Django Advanced Testing](https://docs.djangoproject.com/en/4.2/topics/testing/advanced/)
+
+#### Coverage
+
+Throughout testing I was using `coverage` to test how much of my code was being tested and which statements still needed to be tested. Its an icredibly helpful tool, providing reports in the CLI and even a Html docment, visible from the browser. To avoid even further confusion I seperated my tests into different files, seperating `test_views` from `test_forms` meant I could also focus running tests on just one document or TestCase easier.
+
+After using `coverage` I was able to make **100%** of code covered.
+
+![Coverage report](README_images/coverage.png)
+
+#### Linters
+
+Not done yet
 
 ### JavaScript Testing
 ----------------------

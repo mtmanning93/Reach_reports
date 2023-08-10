@@ -22,6 +22,6 @@ class CommentAdminTest(TestCase):
         to True for the chosen comments.
         """
         queryset = Comment.objects.none()
-
         self.admin.approve_comments(None, queryset)
+
         self.assertFalse(queryset.filter(approved=True).exists())
