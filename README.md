@@ -56,6 +56,16 @@ Cloudinary, Crispy Forms
             - [Kanban Board](#kanban-board)
     - [Features](#features)
         - [Current Features](#current-features)
+            - [Navbar](#navbar)
+            - [Footer](#footer)
+            - [Home](#home)
+            - [Reports](#reports)
+            - [Reports Details](#report-details)
+                - [Information](#information)
+                - [Images](#images)
+                - [Fatmap iFrame](#fatmap-iframe)
+                - [Likes](#likes)
+                - [Comments](#comments)
         - [Future Features](#future-features)
     - [Technologies Used](#technologies-used)
         - [Django](#django)
@@ -321,10 +331,135 @@ When possible I would close an issue from the terminal using the `close #10` com
 
 ## Features
 
-### Current Features
---------------------
+## Current Features
 
 ### Navbar
+----------
+The navbar is simple yet functional, it contains a large logo which makes the site identifiable immediately, the logo is clickable bringing the user to the 'home' page. The nav links are easily distinguishable. 
+
+When an unregistered user is on the site the nav link options will simply be 'home', 'reports', 'login' and 'signup'. The singup is highlighted as that is what the site wants from an unregistered user.
+
+If a logged in, registered user is viewing the navbar they will see their username as a dropdown link. Once clicked the dropdown menu reveals links to 'account' and logout. In addition if the registered user is a 'staff' member they have access to an extra link 'Admin'. This extra link provides access to the django admin panel.
+
+<details>
+<summary>Unregistered User Navbar Screenshots</summary>
+
+![Unregistered user navbar](README_images/features/nav_unreg_m.png)
+![Unregistered user navbar mobile](README_images/features/nav_unreg.png)
+</details>
+
+<details>
+<summary>Registered User Navbar Screenshots</summary>
+
+![Registered user navbar](README_images/features/navbar.png)
+![Registered user navbar mobile](README_images/features/navbar_m.png)
+</details>
+
+### Footer
+----------
+The footer again is simple, providing extra navigation links, social links, a friendly safety message and the contact email address. The navigation links are corresponding to the links in the navbar (updating depending on the users role). The social links open in new tabs when clicked, all links highlight on hover. The footer collapses nicely on itself on smaller screens.
+
+<details>
+<summary>Footer Screenshots</summary>
+
+![Footer](README_images/features/footer.png)
+![Footer mobile](README_images/features/footer_m.png)
+</details>
+
+### Home
+--------
+The 'home' page has a bold and simple design, using large landscape imagery. The images are of different mountain activites, relating to the target audience, and the sites image; motivating and adventurous. The images are selected at random each time the page loads giving users a fun experience. Over the images is an inspring mountain quote which also is chosen at random on page load. More functionality is provided by 2 large buttons. The buttons link to the 'reports' list page and to the 'signup' page for unregistered users, whilst linking to 'create report' page for registered users.
+
+<details>
+<summary>Home Page Screenshots</summary>
+
+![Home](README_images/features/home.png)
+![Home for unregistered user](README_images/features/home_unreg.png)
+</details>
+
+### Reports
+-----------
+The reports page is the main reports list. Here users will find all reports. They are able to select a report from the list, filter the list by 'overall condition grade' or 'activity type'. There also a 'create report' button for ease of access.
+
+Each report object in the list is constructed of key information to enable a user to decide if they wish to read further or not. Each one is implemented as a large clickable button making selection easy.
+
+<details>
+<summary>Reports Page Screenshots</summary>
+
+![Reports](README_images/features/reports.png)
+![Reports mobile](README_images/features/reports_m.png)
+![Filters](README_images/features/filters.png)
+![Report Object](README_images/features/report_list_item.png)
+</details>
+
+### Report Details
+------------------
+
+The 'route name' and 'activity start date' are clearly visible in bold at the top of the page, along with a return button which takes users back to the reports list page.
+
+<details>
+<summary>Report Details Screenshots</summary>
+
+![Report details](README_images/features/report_details.png)
+![Report details mobile](README_images/features/report_details_m.png)
+</details>
+
+#### Information
+
+The reports detail page shows the relevant information from each report object. After the design thinking stage of the project it was clear which pieces of information were valuable to every report. All required fields in the 'Create Report Form' are shown whilst the fields which arent required are only shown when a value is given.
+
+<details>
+<summary>Report Information Screenshot</summary>
+
+![Report details information](README_images/features/report_info.png)
+</details>
+
+#### Images
+
+The images section displays all images related to the report seperately in a thumbnail. If clicked they open a modal with an enlarged version of the image inside. Within the modal users can return via one of the 'x' or 'close' buttons or alternatively clicking outside the modal.
+
+<details>
+<summary>Report Images and Modal Screenshots</summary>
+
+![Report details images](README_images/features/report_details_images.png)
+![Report details image modal](README_images/features/image_modal.png)
+</details>
+
+#### Fatmap Iframe
+
+User have the option to include a [Fatmap.com](https://fatmap.com/adventures/@46.5668314,8.0031898,6596.4744211,-20.0370673,139.3104485,3570.3534546,satellite) url in the report. If they have included one it will appear in the report under the images section. The map is fully interactive, user can move the 3D map using their mouse. Alternatively they can click the map to go to the official site for an enlarged version.
+
+<details>
+<summary>Fatmap iframe Screenshot</summary>
+
+![Fatmap iframe](README_images/features/fatmap.png)
+</details>
+
+#### Likes
+
+Each report has a 'like' button. A registered user can click it to like a report. The same user can click the same button to then unlike the report. The thumbs up icon changes color when liked. Providing user feeback the likes counter next to it will also increment or decrement accordingly.
+
+If an unregistered user attempts to click the like button a tooltip shows suggesting them to register in order to like and comment.
+
+<details>
+<summary>Like Button Screenshots</summary>
+
+![Liked report](README_images/features/liked.png)
+![Unliked report](README_images/features/unliked.png)
+</details>
+
+#### Comments
+
+Finally every report has a comment section, all users can read comments. However only accessible to registered users is the ability to post a comment. Additionally the user can delete only their own comments from the site using the 'x' button. Of course this action requires confirmation from the modal. Each comment posted includes the authors username, content, and date created.
+
+<details>
+<summary>Comment Section Screenshots</summary>
+
+![Comments section registered user](README_images/features/comments.png)
+![Comments section unregistered user](README_images/features/comments_unreg.png)
+</details>
+
+[⏫ contents](#contents)
 
 ### Future Features
 -------------------
