@@ -58,21 +58,27 @@
                     {% if user.is_authenticated %}
                     <!-- over sm -->
                     <li class="d-none d-sm-block nav-item dropdown">
-
                         <a id="username_dropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <strong>{{ user.username }}</strong>
                         </a>
-
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">Account</a></li>
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                            <li><a class="dropdown-item" href="{% url 'account' %}">Account</a></li>
+                            {% if user.is_staff or user.is_superuser %}
+                            <li><a class="dropdown-item" href="{% url 'admin:index' %}">Site Control</a></li>
+                            {% endif %}
+                            <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                         </ul>
                     </li>
                     <!-- under sm -->
                     <li class="d-sm-none nav-item">
                         <a class="nav-link" href="{% url 'account' %}">Account</a>
                     </li>
+                    {% if user.is_staff or user.is_superuser %}
+                    <li class="d-sm-none nav-item">
+                        <a class="nav-link" href="{% url 'admin:index' %}">Site Control</a></a>
+                    </li>
+                    {% endif %}
                     <li class="d-sm-none nav-item">
                         <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
                     </li>
