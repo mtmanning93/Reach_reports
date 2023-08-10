@@ -66,6 +66,7 @@ Cloudinary, Crispy Forms
                 - [Fatmap iFrame](#fatmap-iframe)
                 - [Likes](#likes)
                 - [Comments](#comments)
+            - [Create Report](#create-report)
         - [Future Features](#future-features)
     - [Technologies Used](#technologies-used)
         - [Django](#django)
@@ -374,8 +375,13 @@ The 'home' page has a bold and simple design, using large landscape imagery. The
 <summary>Home Page Screenshots</summary>
 
 ![Home](README_images/features/home.png)
+</details>
+<details>
+<summary>Home Page Unregistered User Screenshots</summary>
+
 ![Home for unregistered user](README_images/features/home_unreg.png)
 </details>
+
 
 ### Reports
 -----------
@@ -429,11 +435,7 @@ The images section displays all images related to the report seperately in a thu
 
 User have the option to include a [Fatmap.com](https://fatmap.com/adventures/@46.5668314,8.0031898,6596.4744211,-20.0370673,139.3104485,3570.3534546,satellite) url in the report. If they have included one it will appear in the report under the images section. The map is fully interactive, user can move the 3D map using their mouse. Alternatively they can click the map to go to the official site for an enlarged version.
 
-<details>
-<summary>Fatmap iframe Screenshot</summary>
-
 ![Fatmap iframe](README_images/features/fatmap.png)
-</details>
 
 #### Likes
 
@@ -441,12 +443,8 @@ Each report has a 'like' button. A registered user can click it to like a report
 
 If an unregistered user attempts to click the like button a tooltip shows suggesting them to register in order to like and comment.
 
-<details>
-<summary>Like Button Screenshots</summary>
-
 ![Liked report](README_images/features/liked.png)
 ![Unliked report](README_images/features/unliked.png)
-</details>
 
 #### Comments
 
@@ -456,7 +454,30 @@ Finally every report has a comment section, all users can read comments. However
 <summary>Comment Section Screenshots</summary>
 
 ![Comments section registered user](README_images/features/comments.png)
+</details>
+<details>
+<summary>Comment Section Unregistered User Screenshots</summary>
+
 ![Comments section unregistered user](README_images/features/comments_unreg.png)
+</details>
+
+### Create Report
+-----------------
+
+The main form on the site is found on the 'Create Report' page accessible only as a logged in, registered user. In this form users can provide the information to create their own reports for the site. The form has a minimum requirement, meaning a report cant be created without these pieces of information. This creates a uniformed report site wide, giving regular users easier reading and faster understanding of each condition report. 
+
+Optionally users can add images and a fatmap url to enhance the reports use. Users are however limited to 12 images per report, as they are made aware in the images section.
+
+If a user enters too little or wrong information the report will not be saved or posted to the site and they will be made visually aware of the issues in the report creation.
+
+To submit the form they must click the large green button which is carried throughout the site for creative actions.
+
+<details>
+<summary>Create Report Form Screenshots</summary>
+
+![Create report form](README_images/features/create_form.png)
+![Create report form mobile](README_images/features/create_form_m.png)
+![Create report form errors](README_images/features/errors.png)
 </details>
 
 [⏫ contents](#contents)
