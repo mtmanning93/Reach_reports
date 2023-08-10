@@ -73,9 +73,12 @@ Cloudinary, Crispy Forms
                 - [Admin Site](#admin-site-staff-users-only)
                 - [Edit/ Delete Report Links](#edit-delete-report-links)
             - [Update Account](#update-account)
+            - [404/ 500 Errors](#404-500-errors)
+            - [Reset Password](#reset-password)
+            - [Login](#login)
+            - [Logout](#logout)
+            - [Signup](#signup)
         - [Future Features](#future-features)
-        - [404/ 500 Errors](#404-500-errors)
-        - [Reset Password](#reset-password)
     - [Technologies Used](#technologies-used)
         - [Django](#django)
         - [Python](#python)
@@ -364,6 +367,8 @@ If a logged in, registered user is viewing the navbar they will see their userna
 ![Registered user navbar mobile](README_images/features/base/navbar_m.png)
 </details>
 
+[⏫ contents](#contents)
+
 ### Footer
 ----------
 The footer again is simple, providing extra navigation links, social links, a friendly safety message and the contact email address. The navigation links are corresponding to the links in the navbar (updating depending on the users role). The social links open in new tabs when clicked, all links highlight on hover. The footer collapses nicely on itself on smaller screens.
@@ -374,6 +379,8 @@ The footer again is simple, providing extra navigation links, social links, a fr
 ![Footer](README_images/features/base/footer.png)
 ![Footer mobile](README_images/features/base/footer_m.png)
 </details>
+
+[⏫ contents](#contents)
 
 ### Home
 --------
@@ -390,6 +397,7 @@ The 'home' page has a bold and simple design, using large landscape imagery. The
 ![Home for unregistered user](README_images/features/home/home_unreg.png)
 </details>
 
+[⏫ contents](#contents)
 
 ### Reports
 -----------
@@ -405,6 +413,8 @@ Each report object in the list is constructed of key information to enable a use
 ![Filters](README_images/features/reports/filters.png)
 ![Report Object](README_images/features/reports/report_list_item.png)
 </details>
+
+[⏫ contents](#contents)
 
 ### Report Details
 ------------------
@@ -469,6 +479,8 @@ Finally every report has a comment section, all users can read comments. However
 ![Comments section unregistered user](README_images/features/report_details/comments_unreg.png)
 </details>
 
+[⏫ contents](#contents)
+
 ### Create Report
 -----------------
 
@@ -488,6 +500,8 @@ To submit the form they must click the large green button which is carried throu
 ![Create report form errors](README_images/features/create_edit/errors.png)
 </details>
 
+[⏫ contents](#contents)
+
 ### Edit Report
 ---------------
 
@@ -502,6 +516,8 @@ To delete images from the report a user just needs to check the box underneath t
 
 ![Edit report form](README_images/features/create_edit/edit_report.png)
 </details>
+
+[⏫ contents](#contents)
 
 ### Account
 -----------
@@ -536,6 +552,8 @@ On each report item in the users personal reports list is an 'Edit' and a 'Delet
 
 ![Edit/ delete reports links](README_images/features/account/report_links.png)
 
+[⏫ contents](#contents)
+
 ### Update Account
 ------------------
 
@@ -543,12 +561,16 @@ When a user chooses to edit their account from inside the [account](#account) pa
 
 ![Update account page](README_images/features/account/update_account.png)
 
+[⏫ contents](#contents)
+
 ### 404/ 500 Errors
 -------------------
 
 Custom error handlers with a simple back to home button provide a better user experience.
 
 ![Error pages](README_images/features/base/404.png)
+
+[⏫ contents](#contents)
 
 ### Reset Password
 ------------------
@@ -566,12 +588,16 @@ Users are able to reset their password in case they have forgotten it prior to l
 ![Edit report form](README_images/features/password/change_password.png)
 </details>
 
+[⏫ contents](#contents)
+
 ### Login
 ---------
 
 When created the site Django automatically sets the login conifgured to username and password although I preferred the email and password approach as it ensures users have a working email address for the ['Password Reset'](#reset-password) functions. Now when users login they must enter a password and username is not required. Also non registered users can find a link to the ['Signup'](#signup) page underneath the login form in case they navigated wrongly.
 
 ![Login page](README_images/features/account/login.png)
+
+[⏫ contents](#contents)
 
 ### Logout
 ----------
@@ -580,7 +606,10 @@ Users need to logout in order t protect their accounts. They can do this from in
 
 ![Logout page](README_images/features/account/logout.png)
 
+[⏫ contents](#contents)
+
 ### Signup
+----------
 
 Non-registered users can navigate to the 'Signup' page. Here they must fill out the forms required fields in order to create an account. If the form is valid the user is directed to their new ['account page'](#account). Additionally if the user has already registered an account with the same email or username the relevant error messages are shown and the user must enter a different username or email.
 
@@ -588,8 +617,11 @@ Non-registered users can navigate to the 'Signup' page. Here they must fill out 
 
 [⏫ contents](#contents)
 
-### Future Features
--------------------
+## Future Features
+
+Whilst building the project new ideas perfect for future releases would come to mind. To stay productive and on track with the current build, I created a [Feature Request Form](#feature-request) using GitHub issues. This meant I could save the ideas for later. Their are still some features in the [Product Backlog](#product-backlog) which would be a great addition to the site at a later point. These features are now marked as ['Wont Do'](#labels) as for this release they aren't of high priority.
+
+[Link to Future Features](https://github.com/mtmanning93/Reach_reports/issues?q=is%3Aissue+label%3A%22Wont+Have%22+is%3Aopen)
 
 [⏫ contents](#contents)
 
