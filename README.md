@@ -82,9 +82,9 @@ Cloudinary, Crispy Forms
         - [Elephant SQL DEployment](#elephant-sql-deployment)
         - [Heroku Deployment](#heroku-deployment)
     - [Credits](#credits)
-        - [References](#references)
         - [Tools](#tools)
         - [Resources](#resources)
+        - [Tutorials](#tutorials)
 
 ## Design Thinking
 
@@ -760,6 +760,8 @@ It would be an incredible feat to remember all information needed to build such 
 ### Tools
 ---------
 * [Lucid Chart](https://www.lucidchart.com/pages/): Wireframe and ERD
+* [ESLint](https://eslint.org/): JavaScript Testing
+* [Coverage](https://coverage.readthedocs.io/en/7.2.7/): To test how much of the project had benn test during unit testing.
 
 ### Resources
 -------------
