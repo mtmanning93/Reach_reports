@@ -65,7 +65,7 @@
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="{% url 'account' %}">Account</a></li>
                             {% if user.is_staff or user.is_superuser %}
-                            <li><a class="dropdown-item" href="{% url 'admin:index' %}">Site Control</a></li>
+                            <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a></li>
                             {% endif %}
                             <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                         </ul>
@@ -76,7 +76,7 @@
                     </li>
                     {% if user.is_staff or user.is_superuser %}
                     <li class="d-sm-none nav-item">
-                        <a class="nav-link" href="{% url 'admin:index' %}">Site Control</a></a>
+                        <a class="nav-link" href="{% url 'admin:index' %}">Admin</a></a>
                     </li>
                     {% endif %}
                     <li class="d-sm-none nav-item">
@@ -124,6 +124,11 @@
                     <li>
                         <a href="{% url 'account' %}">Account</a>
                     </li>
+                    {% if user.is_staff or user.is_superuser %}
+                    <li>
+                        <a href="{% url 'admin:index' %}">Admin</a>
+                    </li>
+                    {% endif %}
                     <li>
                         <a href="{% url 'account_logout' %}">Logout</a>
                     </li>

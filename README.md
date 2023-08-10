@@ -55,6 +55,8 @@ Cloudinary, Crispy Forms
             - [Iterations](#iterations)
             - [Kanban Board](#kanban-board)
     - [Features](#features)
+        - [Current Features](#current-features)
+        - [Future Features](#future-features)
     - [Technologies Used](#technologies-used)
         - [Django](#django)
         - [Python](#python)
@@ -319,6 +321,14 @@ When possible I would close an issue from the terminal using the `close #10` com
 
 ## Features
 
+### Current Features
+--------------------
+
+### Navbar
+
+### Future Features
+-------------------
+
 [⏫ contents](#contents)
 
 ## Technologies Used
@@ -344,7 +354,6 @@ Next add to your settings:
     ]
 
 [Link to allauth docs](https://django-allauth.readthedocs.io/en/latest/)
-
 
 ### Python:
 
