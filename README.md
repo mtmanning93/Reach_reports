@@ -123,6 +123,8 @@ The user would like the ability to read and post condition updates from recent c
 
 The goal is to create a discussion and library of up to date condition reports to enable climbers to make easier decisions and ultimately become more successful.
 
+[⏫ contents](#contents)
+
 ## UX / User Experience Design
 
 ### User Stories
@@ -226,6 +228,8 @@ The sites logo is a simple mountain emblem with bold and capitalised REACH after
 
 ![Reach site logo](README_images/logo.png)
 
+[⏫ contents](#contents)
+
 ## Development
 
 ### Agile Design
@@ -311,7 +315,11 @@ When possible I would close an issue from the terminal using the `close #10` com
 
 [Reach Kanban Board](https://github.com/users/mtmanning93/projects/7)
 
+[⏫ contents](#contents)
+
 ## Features
+
+[⏫ contents](#contents)
 
 ## Technologies Used
 
@@ -413,6 +421,8 @@ I also used cloudinary in my ImageFile model using:
     image_file = CloudinaryField('image', default='placeholder')
 
 [Cloudinary Docs](https://cloudinary.com/documentation)
+
+[⏫ contents](#contents)
 
 ## Testing
 
@@ -631,6 +641,8 @@ The project was developed in Google Chrome using the Gitpod IDE. This made build
 ### Lighthouse
 --------------
 
+[⏫ contents](#contents)
+
 ## Bugs
 
 When a bug is identified I was able to raise an issue in Github using the [Bug Report Template](#bug-report). As I was building the project I would identify a bug but in order to keep productive I would create a report in order to focus on it at a later time.
@@ -647,6 +659,8 @@ When designing the project, even as early as the brainstorming session, it was c
 I attempted to contact fatmap.com and datahappy.co but neither responding to the issue I had raised.
 
 ![Errors with Fatmap iframe](README_images/iframe_errors.png)
+
+[⏫ contents](#contents)
 
 ## Deployment
 
@@ -754,6 +768,8 @@ For this project you will need the following 'Config Vars':
 
 ![View deployed site button](README_images/deployment/view_site.png)
 
+[⏫ contents](#contents)
+
 ## Credits
 It would be an incredible feat to remember all information needed to build such a project, to a deployable standard. Therfore I am not ashamed to mention some resources were used to aid me in the process, below I have detailed some of the resources used.
 
@@ -780,6 +796,8 @@ It would be an incredible feat to remember all information needed to build such 
 
 * [Bootstrap 5.2 Docs](https://getbootstrap.com/docs/5.2/getting-started/introduction/): Relied on heavily for styling and JavaScript.
 
+* [FontAwesome](https://fontawesome.com/): For all icons found site wide.
+
 * [Jinja Filters](https://jinja.palletsprojects.com/en/3.1.x/templates/#list-of-builtin-filters)
 
 * [Crispy Docs](https://django-crispy-forms.readthedocs.io/en/latest/index.html)\
@@ -801,3 +819,5 @@ It would be an incredible feat to remember all information needed to build such 
     - Agile Development
     - 'I Think Therefore I Blog'
     - 'Hello Django' walkthroughs
+
+[⏫ contents](#contents)
