@@ -652,7 +652,35 @@ I attempted to contact fatmap.com and datahappy.co but neither responding to the
 
 ### Cloudinary Deployment
 
-### Elephant SQL Deployment
+### ElephantSQL Deployment
+---------------------------
+For this project I decide to use ElephantSQL which uses PostgresSQL databases. In order to set up ElephantSQL follow these steps:
+
+**1. Create an account or Login to your ElephantSQL dashboard and click the green 'Create New Instance' Button.**
+
+![ElephantSQL dashboard](README_images/deployment/elephant_sql_dash.png)
+
+**2. Next setup the instance plan, when the form is complete click 'Select Region'.**
+
+Generally the title here is the project title.For my project I selected the 'Tiny Turtle (Free)' plan and left the tags field blank.
+
+![ElephantSQL plan setup](README_images/deployment/elephant_setup.png)
+
+**3. Select the data center closest to you from the dropdown list, when selected click 'Review'.**
+
+![Select region](README_images/deployment/elephant_region.png)
+
+**4. Check the details are correct and click the green 'Create Instance' button.**
+
+![Review details](README_images/deployment/elephant_review.png)
+
+**5. Return to the dashboard and select the new instance just created by clicked on its name.**
+
+![Select new instance](README_images/deployment/elephant_select_instance.png)
+
+**6. This will display all the necessary credentials to connect this project to your database.**
+
+![Instance details](README_images/deployment/elephant_details.png)
 
 ### Heroku Deployment
 ---------------------
