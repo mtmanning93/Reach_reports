@@ -755,9 +755,47 @@ For this project you will need the following 'Config Vars':
 ![View deployed site button](README_images/deployment/view_site.png)
 
 ## Credits
-
-### References
+It would be an incredible feat to remember all information needed to build such a project, to a deployable standard. Therfore I am not ashamed to mention some resources were used to aid me in the process, below I have detailed some of the resources used.
 
 ### Tools
+---------
+* [Lucid Chart](https://www.lucidchart.com/pages/): Wireframe and ERD
 
 ### Resources
+-------------
+* [Django Documentation](https://docs.djangoproject.com/en/3.2/): The django docs are really extensive and provide a wealth of support, the main uses I found were:
+    - Testing
+    - Advanced Testing Topics
+    - FormFields
+    - UpdateView
+    - ReverseLazy
+    - Custom Template Tags
+    - DateInput Widget
+
+* [Form 'Select' input](https://stackoverflow.com/questions/33726759dropdown-select-option-to-filter-a-django-list)
+
+* [Enctype](https://www.geeksforgeeks.org/define-multipart-form-data/): Helped to allow for multi-part form data as my reports forms would also contain images.
+
+* [Bootstrap 5.2 Docs](https://getbootstrap.com/docs/5.2/getting-started/introduction/): Relied on heavily for styling and JavaScript.
+
+* [Jinja Filters](https://jinja.palletsprojects.com/en/3.1.x/templates/#list-of-builtin-filters)
+
+* [Crispy Docs](https://django-crispy-forms.readthedocs.io/en/latest/index.html)\
+[Cripsy Bootstrap 5](https://github.com/django-crispy-forms/crispy-bootstrap5): Bootstrap5 form rendering templating
+
+* [Custom Authentication Backend](https://stackoverflow.com/questions/37332190/django-login-with-email): Used to enable email login to override the username input.
+
+* [Email Authenication](https://medium.com/@therealak12/authenticate-using-email-instead-of-username-in-django-rest-framework-857645037bab): Further suport for email login.
+
+### Tutorials
+-------------
+* [Setup SMTP Tutorial](https://dev.to/abderrahmanemustapha/how-to-send-email-with-django-and-gmail-in-production-the-right-way-24ab): This tutorial helped me to set up the gmail smtp required for the password reset functionality. 
+
+* [Password Reset Tutorial](https://learndjango.com/tutorials/django-password-reset-tutorial): This tutorial also helped to set up the password reset using django-allauth.
+
+* [Edit Object Tutorial](https://openclassrooms.com/en/courses/6967196-create-a-web-application-with-django/7349667-update-a-model-object-with-a-modelform): Helped when creating views to edit model objects.
+
+* [Code Institute LMS:](https://learn.codeinstitute.net/dashboard): I took a great amount of support from the following modules, setup, deployment, and both function and class based views.
+    - Agile Development
+    - 'I Think Therefore I Blog'
+    - 'Hello Django' walkthroughs
