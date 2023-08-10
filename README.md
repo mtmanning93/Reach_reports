@@ -74,6 +74,8 @@ Cloudinary, Crispy Forms
                 - [Edit/ Delete Report Links](#edit-delete-report-links)
             - [Update Account](#update-account)
         - [Future Features](#future-features)
+        - [404/ 500 Errors](#404-500-errors)
+        - [Reset Password](#reset-password)
     - [Technologies Used](#technologies-used)
         - [Django](#django)
         - [Python](#python)
@@ -351,15 +353,15 @@ If a logged in, registered user is viewing the navbar they will see their userna
 <details>
 <summary>Unregistered User Navbar Screenshots</summary>
 
-![Unregistered user navbar](README_images/features/nav_unreg_m.png)
-![Unregistered user navbar mobile](README_images/features/nav_unreg.png)
+![Unregistered user navbar](README_images/features/base/nav_unreg_m.png)
+![Unregistered user navbar mobile](README_images/features/base/nav_unreg.png)
 </details>
 
 <details>
 <summary>Registered User Navbar Screenshots</summary>
 
-![Registered user navbar](README_images/features/navbar.png)
-![Registered user navbar mobile](README_images/features/navbar_m.png)
+![Registered user navbar](README_images/features/base/navbar.png)
+![Registered user navbar mobile](README_images/features/base/navbar_m.png)
 </details>
 
 ### Footer
@@ -369,8 +371,8 @@ The footer again is simple, providing extra navigation links, social links, a fr
 <details>
 <summary>Footer Screenshots</summary>
 
-![Footer](README_images/features/footer.png)
-![Footer mobile](README_images/features/footer_m.png)
+![Footer](README_images/features/base/footer.png)
+![Footer mobile](README_images/features/base/footer_m.png)
 </details>
 
 ### Home
@@ -380,12 +382,12 @@ The 'home' page has a bold and simple design, using large landscape imagery. The
 <details>
 <summary>Home Page Screenshots</summary>
 
-![Home](README_images/features/home.png)
+![Home](README_images/features/home/home.png)
 </details>
 <details>
 <summary>Home Page Unregistered User Screenshots</summary>
 
-![Home for unregistered user](README_images/features/home_unreg.png)
+![Home for unregistered user](README_images/features/home/home_unreg.png)
 </details>
 
 
@@ -398,10 +400,10 @@ Each report object in the list is constructed of key information to enable a use
 <details>
 <summary>Reports Page Screenshots</summary>
 
-![Reports](README_images/features/reports.png)
-![Reports mobile](README_images/features/reports_m.png)
-![Filters](README_images/features/filters.png)
-![Report Object](README_images/features/report_list_item.png)
+![Reports](README_images/features/reports/reports.png)
+![Reports mobile](README_images/features/reports/reports_m.png)
+![Filters](README_images/features/reports/filters.png)
+![Report Object](README_images/features/reports/report_list_item.png)
 </details>
 
 ### Report Details
@@ -412,8 +414,8 @@ The 'route name' and 'activity start date' are clearly visible in bold at the to
 <details>
 <summary>Report Details Screenshots</summary>
 
-![Report details](README_images/features/report_details.png)
-![Report details mobile](README_images/features/report_details_m.png)
+![Report details](README_images/features/report_details/report_details.png)
+![Report details mobile](README_images/features/report_details/report_details_m.png)
 </details>
 
 #### Information
@@ -423,7 +425,7 @@ The reports detail page shows the relevant information from each report object. 
 <details>
 <summary>Report Information Screenshot</summary>
 
-![Report details information](README_images/features/report_info.png)
+![Report details information](README_images/features/report_details/report_info.png)
 </details>
 
 #### Images
@@ -433,15 +435,15 @@ The images section displays all images related to the report seperately in a thu
 <details>
 <summary>Report Images and Modal Screenshots</summary>
 
-![Report details images](README_images/features/report_details_images.png)
-![Report details image modal](README_images/features/image_modal.png)
+![Report details images](README_images/features/report_details/report_details_images.png)
+![Report details image modal](README_images/features/report_details/image_modal.png)
 </details>
 
 #### Fatmap Iframe
 
 User have the option to include a [Fatmap.com](https://fatmap.com/adventures/@46.5668314,8.0031898,6596.4744211,-20.0370673,139.3104485,3570.3534546,satellite) url in the report. If they have included one it will appear in the report under the images section. The map is fully interactive, user can move the 3D map using their mouse. Alternatively they can click the map to go to the official site for an enlarged version.
 
-![Fatmap iframe](README_images/features/fatmap.png)
+![Fatmap iframe](README_images/features/report_details/fatmap.png)
 
 #### Likes
 
@@ -449,8 +451,8 @@ Each report has a 'like' button. A registered user can click it to like a report
 
 If an unregistered user attempts to click the like button a tooltip shows suggesting them to register in order to like and comment.
 
-![Liked report](README_images/features/liked.png)
-![Unliked report](README_images/features/unliked.png)
+![Liked report](README_images/features/report_details/liked.png)
+![Unliked report](README_images/features/report_details/unliked.png)
 
 #### Comments
 
@@ -459,12 +461,12 @@ Finally every report has a comment section, all users can read comments. However
 <details>
 <summary>Comment Section Screenshots</summary>
 
-![Comments section registered user](README_images/features/comments.png)
+![Comments section registered user](README_images/features/report_details/comments.png)
 </details>
 <details>
 <summary>Comment Section Unregistered User Screenshots</summary>
 
-![Comments section unregistered user](README_images/features/comments_unreg.png)
+![Comments section unregistered user](README_images/features/report_details/comments_unreg.png)
 </details>
 
 ### Create Report
@@ -481,9 +483,9 @@ To submit the form they must click the large green button which is carried throu
 <details>
 <summary>Create Report Form Screenshots</summary>
 
-![Create report form](README_images/features/create_form.png)
-![Create report form mobile](README_images/features/create_form_m.png)
-![Create report form errors](README_images/features/errors.png)
+![Create report form](README_images/features/create_edit/create_form.png)
+![Create report form mobile](README_images/features/create_edit/create_form_m.png)
+![Create report form errors](README_images/features/create_edit/errors.png)
 </details>
 
 ### Edit Report
@@ -493,12 +495,12 @@ The edit report page inherits most of its functionailty and features from the cr
 
 To delete images from the report a user just needs to check the box underneath the image, then when submitting the form the selected images will be deleted.
 
-![Edit report form image deletion and addition](README_images/features/edit_report_images.png)
+![Edit report form image deletion and addition](README_images/features/create_edit/edit_report_images.png)
 
 <details>
 <summary>Edit Report Full Screenshot</summary>
 
-![Edit report form](README_images/features/edit_report.png)
+![Edit report form](README_images/features/create_edit/edit_report.png)
 </details>
 
 ### Account
@@ -519,46 +521,70 @@ Beneath is the list of the reports written by the user. Each report in the list 
 
 Within the personal details the user can find two links, appropriately colored. The blue 'Edit Account' link will lead the user to the ['Update Account'](#update-account) page. The 'Delete Account' link will open a confirmation modal. Inside the modal will be a list of statistics personal to each user. The statistics tell the user how many report they've created, images uploaded and comments left. If confirmed the users account is deleted and they are redirected to the 'home' page.
 
-![Account information](README_images/features/personal_info.png)
-![Delete account modal](README_images/features/delete_account.png)
+![Account information](README_images/features/account/personal_info.png)
+![Delete account modal](README_images/features/account/delete_account.png)
 
 #### Admin Site (Staff Users Only)
 
 If a user has 'staff' permission they will have an extra buttonin the personal information section, the button links them to the sites admin page. From here they have full CRUD functionality over users, reports, images. They can block users and remove comments and likes from reports.
 
-![Admin button](README_images/features/admin_button.png)
+![Admin button](README_images/features/account/admin_button.png)
 
 #### Edit/ Delete Report Links
 
 On each report item in the users personal reports list is an 'Edit' and a 'Delete' link. If a user chooses to edit they are redirected to the 'edit report' page, whilst if they select 'delete' the confirm deletion modal appears, if confirmed the report is deleted and they're returned to their account page.
 
-![Edit/ delete reports links](README_images/features/report_links.png)
+![Edit/ delete reports links](README_images/features/account/report_links.png)
 
 ### Update Account
 ------------------
 
 When a user chooses to edit their account from inside the [account](#account) page, they are directed to the 'update account' page. The page contains a simple form where users can update their email or username. Also available to user is to change their password via the ['Reset Account Password'](#reset-password) button, when clicked they are directed to the relevant page.
 
-![Update account page](README_images/features/update_account.png)
+![Update account page](README_images/features/account/update_account.png)
 
 ### 404/ 500 Errors
 -------------------
 
 Custom error handlers with a simple back to home button provide a better user experience.
 
-![Error pages](README_images/features/404.png)
+![Error pages](README_images/features/base/404.png)
 
 ### Reset Password
 ------------------
 
 Users are able to reset their password in case they have forgotten it prior to login or from inside the ['Update Account'](#update-account) page. The user is taken through the steps in order to change their password, they must provide an email in order to recieve a momentary link (3 days). When clicked they're able to input a new password. Once the steps are complete the user is directed to the Login page.
 
+![Forgot password link](README_images/features/password/forgot_password.png)
+
 <details>
 <summary>Password Reset Screenshots</summary>
 
-![Edit report form](README_images/features/edit_report.png)
+![Password reset step 1](README_images/features/password/enter_email.png)
+![Edit report form](README_images/features/password/email_sent.png)
+![Edit report form](README_images/features/password/email.png)
+![Edit report form](README_images/features/password/change_password.png)
 </details>
 
+### Login
+---------
+
+When created the site Django automatically sets the login conifgured to username and password although I preferred the email and password approach as it ensures users have a working email address for the ['Password Reset'](#reset-password) functions. Now when users login they must enter a password and username is not required. Also non registered users can find a link to the ['Signup'](#signup) page underneath the login form in case they navigated wrongly.
+
+![Login page](README_images/features/account/login.png)
+
+### Logout
+----------
+
+Users need to logout in order t protect their accounts. They can do this from inside the navbar by clicking their username, then the 'logout' link in the dropdown menu. Of course users must first confirm their choice in the 'Logout' confirmation page. If confirmed they are redirected to the 'home' page.
+
+![Logout page](README_images/features/account/logout.png)
+
+### Signup
+
+Non-registered users can navigate to the 'Signup' page. Here they must fill out the forms required fields in order to create an account. If the form is valid the user is directed to their new ['account page'](#account). Additionally if the user has already registered an account with the same email or username the relevant error messages are shown and the user must enter a different username or email.
+
+![Signup](README_images/features/account/signup.png)
 
 [⏫ contents](#contents)
 
