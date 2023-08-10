@@ -501,8 +501,107 @@ With these errors fixed I ran the deployed url again and recieved "Document chec
 
 ![W3C Html validation success](README_images/w3c_html.png)
 
-### User Testing
+### Manual Testing
 ----------------
+These tests were written and given to a user to carry out whilst using the site. They were made to test overall functionailty of the site.
+
+√ = Success
+
+| **Test** | **Expected result** | **Initial Outcome** | **Final Result** |
+| ---- | ------ | ------ | ------ |
+| **Navbar** |
+| Click logo in navbar | Returns user to landing page | √ | Pass |
+| Click 'Home' link in navbar | Returns user to landing page | √ | Pass |
+| Click 'Reports' link in navbar | Reports list page opens showing list of all reports | √ | Pass |
+| Click 'Login' link in navabar | Opens login page | √ | Pass |
+| Click 'Signup' link in navbar | Opens signup page | √ | Pass |
+| Click 'Burger' list icon on mobile in navbar | Opens Dropdown menu | √ | Pass |
+| **Footer** |
+| Click social links in footer | Opens link in newtab to relevant social media site | √ | Pass |
+| Click footer nav links | Opens relevant pages | √ | Pass |
+| **Home/ Landing page** |
+| Load landing page | Page loads | √ | Pass |
+| Click 'Condition Reports' button | Reports list page opens showing list of all reports | √ | Pass |
+| Click 'Signup' button | Signup page opens | √ | Pass |
+| Reload page | New header image and inspiring quote appears at random | √ | Pass |
+| **Reports** |
+| Click report object | Reports details page opens showing relevant report details | √ | Pass |
+| Apply 'activity' filter | Filters report list to show just the chosen activty reports | √ | Pass |
+| Apply 'grade' filter | Filters report list to show just the chosen grade reports | √ | Pass |
+| Click pagination button (Next/ Prev) | Moves to the next or previous page | √ | Pass |
+| Click 'Log in to Create Reports' button | Opens the login page | √ | Pass |
+| **Report Details** |
+| Click report list "return" button | Returns user to the reports list page | √ | Pass |
+| Click report image | Opens modal showing enlarged image | √ | Pass |
+| Click outside image modal | Closes modal showing enlarged image | √ | Pass |
+| Click one of the close buttons in image modal | Closes modal showing enlarged image | √ | Pass |
+| **Liking** |
+| Hover like button (not logged in) | Shows tooltip regarding login | √ | Pass |
+| Click like button (logged in) | Like icon turns blue and adds to the like count | √ | Pass |
+| Click like button again (logged in) | Like icon turns white and removes a like count | √ | Pass |
+| **Comments** |
+| Write comment and hit post | Reloads the relevant page with new comment and comment count increments | √ | Pass |
+| Click delete comment 'X' button | Opens confirm deletion modal | √ | Pass |
+| Click 'delete' in modal | Removes comment from report details view | √ | Pass |
+| Click 'cancel' in modal | No action, returns user to reportdetails | √ | Pass |
+| **Login** |
+| Enter valid details and click login | Opens account page with correct user details, shows success alert | √ | Pass |
+| Enter invalid details and click login | Form error message is displayed | √ | Pass |
+| Click 'signup' button below | Opens signup page | √ | Pass |
+| Click 'forgot password' link | Opens password reset page | √ | Pass |
+| **Signup** |
+| Enter valid details and click signup | Opens account page with new user details | √ | Pass |
+| Enter invalid details and click signup | Form error messages displayed | √ | Pass |
+| Click 'login' button below | Opens login page | √ | Pass |
+| Click 'forgot password' link | Opens password reset page | √ | Pass |
+| **Account** |
+| Click 'create new report' button | Opens create report page | √ | Pass |
+| Click 'edit account' link | Opens update account page | √ | Pass |
+| Click 'delete account' link | Opens deletion confirmation modal | √ | Pass |
+| Click 'delete' in deletion modal | Deletes account and redirects user to 'home' page | √ | Pass |
+| Click 'cancel' in deletion modal | Closes modal and returns user to account page | √ | Pass |
+| Click report object title | Opens report details of relevant report | √ | Pass |
+| Click report object 'edit' link | Opens edit report page with relevant report details | √ | Pass |
+| Click report object 'delete' link | Opens confirm deletion modal | √ | Pass |
+| Click 'delete' in deletion modal | Deletes report and redirects user to their 'account' page | √ | Pass |
+| Click 'cancel' in deletion modal | Closes modal and returns user to their account page | √ | Pass |
+| **Update Account** |
+| Update account with valid credentials | Account information updated and returned to account page | √ | Pass |
+| Update account with invalid credentials | Form is invalid, corresponding validation error shown | √ | Pass |
+| Click 'reset password' button | Opens reset password page | √ | Pass |
+| **Logged In User** |
+| Click 'username' link in navbar | Opens dropdown including links to account and logout | √ | Pass |
+| **Admin & Staff** |
+| Click 'username' link in navbar | Opens dropdown including links to account, site control and logout | √ | Pass |
+| Click 'site control' link in profile information | Opens django admin panel | √ | Pass |
+| **Create Report Form** |
+| Fill out form with valid data | Creates report and redirects user to reports list page, shows success alert | √ | Pass |
+| Fill out form with invalid data | Shows invalid input validation errors, doesnt submit form | √ | Pass |
+| Add more than 12 images to report | Form is invalid, corresponding error message regarding images is shown | √ | Pass |
+| Select an 'end_date' before the 'start_date' | Form is invalid, corresponding validation error shown | √ | Pass |
+| Select a 'start-date' more than 5 years old | Form is invalid, corresponding validation error shown | √ | Pass |
+| Input a 'summit height' as a negative number | Form is invalid, corresponding validation error shown | √ | Pass |
+| Input a 'summit height' higher than Everest (8849) | Form is invalid, corresponding validation error shown | √ | Pass |
+| Input an invalid duration format in 'time taken' field | Form is invalid, corresponding validation error shown | √ | Pass |
+| Input a negative in the 'number in group' field | Form is invalid, corresponding validation error shown | √ | Pass |
+| Input a negative in the 'number on route' field | Form is invalid, corresponding validation error shown | √ | Pass |
+| Input a number over 50 in 'number in group' field | Form is invalid, corresponding validation error shown | √ | Pass |
+| Input a number over 500 'number on route' field | Form is invalid, corresponding validation error shown | √ | Pass |
+| Input a valid url in the 'Fatmap link' field  | Form is created, displays a iframe in the report details page | √ | Pass |
+| Input an invalid url in the 'Fatmap link' field (doesnt include 'fatmap.com')  | Form is invalid, corresponding validation error shown | √ | Pass |
+| **Edit Report Form** |
+| Select some images to delete (checkbox), submit | Confirm deletion modal is shown, on confirmaation images are removed from report | √ | Pass |
+| Choose a report with images and more images (under 12) | If image count for the report is under 12, images are added | √ | Pass |
+| Choose a report with images and more images (over 12) | Form is invalid, corresponding validation error shown, no action on images taken | √ | Pass |
+| Choose a report with images and more images (over 12), but also delete images (total under 12) | Image count is checked, deleted images removed and added images added to report | √ | Pass |
+| Choose a report with images and more images (over 12), but also delete images (total over 12) | Image count is checked, total images equals too many. No action taken, corresponding error message displayed | √ | Pass |
+| Click 'update report' button | If form is valid, user redirected to account page | √ | Pass |
+| **Reset Password** |
+| Provide valid email, click 'reset my password' button | If email is valid, user receives an email with reset link | √ | Pass |
+| Click 'back to home' button | Returns user to home page | √ | Pass |
+| Click reset link in email | Opens the reset password link for relevant user | √ | Pass |
+| Fill out password reset form, click reset | Opens the reset password link for relevant user | √ | Pass |
+
 
 ## Bugs
 
