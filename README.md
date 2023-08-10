@@ -651,6 +651,20 @@ I attempted to contact fatmap.com and datahappy.co but neither responding to the
 ## Deployment
 
 ### Cloudinary Deployment
+-------------------------
+I used cloudinary in the project to store all media files, its a really easy set up. To do so follow these steps:
+
+**1. Navigate to the Cloudinary website and register or login.**
+
+![Cloudinary landing page](README_images/deployment/cloudinary_site.png)
+
+**2. Once the login or registration is complete, navigate to the 'Dashboard' page.**
+
+![Dashboard button](README_images/deployment/cloudinary_dash.png)
+
+**3. After reaching the dashboard you will find all relevant credentials needed to set up the project with your cloudinary.**
+
+![Cloudinary credentials](README_images/deployment/cloudinary_creds.png)
 
 ### ElephantSQL Deployment
 ---------------------------
