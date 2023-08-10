@@ -14,16 +14,28 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='report',
             name='goal_reached',
-            field=models.CharField(choices=[('yes', 'Yes'), ('no', 'No')], default='yes', max_length=17),
+            field=models.CharField(
+                choices=[('yes', 'Yes'), ('no', 'No')],
+                default='yes', max_length=17
+                ),
         ),
         migrations.AlterField(
             model_name='report',
             name='number_in_group',
-            field=models.PositiveIntegerField(default=1, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(9000)]),
+            field=models.PositiveIntegerField(
+                default=1,
+                validators=[
+                    django.core.validators.MinValueValidator(0),
+                    django.core.validators.MaxValueValidator(9000)
+                    ]),
         ),
         migrations.AlterField(
             model_name='report',
             name='number_on_route',
-            field=models.PositiveIntegerField(default=1, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(9000)]),
+            field=models.PositiveIntegerField(
+                default=1,
+                validators=[
+                    django.core.validators.MinValueValidator(0),
+                    django.core.validators.MaxValueValidator(9000)]),
         ),
     ]

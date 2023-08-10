@@ -19,24 +19,60 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Report',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(
+                    auto_created=True, primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
                 ('title', models.CharField(max_length=100)),
                 ('slug', models.SlugField(max_length=200, unique=True)),
                 ('created_on', models.DateTimeField(auto_now_add=True)),
                 ('start_date', models.DateField()),
                 ('end_date', models.DateField()),
-                ('goal_reached', models.CharField(choices=[('yes', 'Goal Reached'), ('no', 'Goal Not Reached')], default='yes', max_length=17)),
-                ('height_in_meters', models.PositiveIntegerField(blank=True, default=0, null=True, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(9000)])),
-                ('time_taken', models.DurationField(blank=True, help_text='\n            If necessary (speed ascent) please use the following format:\n            HH:MM:SS.\n            ', null=True)),
-                ('overall_conditions', models.CharField(choices=[('bad', 'Bad'), ('ok', 'OK'), ('good', 'Good'), ('perfect', 'Perfect')], max_length=7)),
-                ('activity_category', models.CharField(choices=[('alpine', 'Alpine'), ('hike', 'Hike'), ('skitour', 'Ski Tour'), ('iceclimbing', 'Ice Climbing'), ('multipitch', 'Multi-Pitch'), ('trad', 'Trad'), ('solo', 'Solo'), ('other', 'Other')], max_length=12)),
+                ('goal_reached', models.CharField(
+                    choices=[
+                        ('yes', 'Goal Reached'), ('no', 'Goal Not Reached')
+                        ], default='yes', max_length=17)),
+                ('height_in_meters', models.PositiveIntegerField(
+                    blank=True, default=0, null=True, validators=[
+                        django.core.validators.MinValueValidator(0),
+                        django.core.validators.MaxValueValidator(9000)
+                        ])),
+                ('time_taken', models.DurationField(
+                    blank=True,
+                    help_text='''\n            If necessary (speed ascent)
+                    please use the following format:\n
+                                HH:MM:SS.\n            ''',
+                    null=True)),
+                ('overall_conditions', models.CharField(choices=[
+                    ('bad', 'Bad'),
+                    ('ok', 'OK'),
+                    ('good', 'Good'),
+                    ('perfect', 'Perfect')
+                    ], max_length=7)),
+                ('activity_category', models.CharField(choices=[
+                    ('alpine', 'Alpine'),
+                    ('hike', 'Hike'),
+                    ('skitour', 'Ski Tour'),
+                    ('iceclimbing', 'Ice Climbing'),
+                    ('multipitch', 'Multi-Pitch'),
+                    ('trad', 'Trad'),
+                    ('solo', 'Solo'),
+                    ('other', 'Other')
+                    ], max_length=12)),
                 ('description', models.TextField(blank=True)),
                 ('number_in_group', models.IntegerField(default=1)),
                 ('number_on_route', models.IntegerField(default=1)),
                 ('gps_map_link', models.URLField(blank=True)),
-                ('status', models.IntegerField(choices=[(0, 'Draft'), (1, 'Published')], default=1)),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reports', to=settings.AUTH_USER_MODEL)),
-                ('likes', models.ManyToManyField(blank=True, related_name='report_likes', to=settings.AUTH_USER_MODEL)),
+                ('status', models.IntegerField(choices=[
+                    (0, 'Draft'), (1, 'Published')], default=1)),
+                ('author', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='reports',
+                    to=settings.AUTH_USER_MODEL)),
+                ('likes', models.ManyToManyField(
+                    blank=True,
+                    related_name='report_likes',
+                    to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'ordering': ['-created_on'],
@@ -45,21 +81,38 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ImageFile',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image_file', cloudinary.models.CloudinaryField(default='placeholder', max_length=255, verbose_name='image')),
-                ('report', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='reports.report')),
+                ('id', models.BigAutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
+                ('image_file', cloudinary.models.CloudinaryField(
+                    default='placeholder',
+                    max_length=255,
+                    verbose_name='image')),
+                ('report', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='images',
+                    to='reports.report')),
             ],
         ),
         migrations.CreateModel(
             name='Comment',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
                 ('email', models.EmailField(max_length=254)),
                 ('content', models.TextField()),
                 ('created_on', models.DateTimeField(auto_now_add=True)),
                 ('approved', models.BooleanField(default=True)),
-                ('report', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='reports.report')),
+                ('report', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='comments',
+                    to='reports.report')),
             ],
             options={
                 'ordering': ['created_on'],

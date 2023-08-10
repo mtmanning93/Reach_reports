@@ -439,8 +439,26 @@ After using `coverage` I was able to make **100%** of code covered.
 
 #### Linters
 
-Not done yet
+To check for syntax errors in the projects Python code I used `pycodestyle` *(formerly pep8)*. Using this I was able to twst my code from inside the command line. Its a fast and easy way to heck the syntax as it returns the file name and lines of the error.
 
+To install `pycodestyle` in the command line:
+
+    pip install pycodestyle
+
+Then to test the files in the command line:
+
+    pycodestyle python_file.py
+    or
+    pycodestyle .
+
+When initially running the linter there were a few errors which I addressed and corrected. After these corrections the only errors left were *'E501 line too long'*. These were mostl found in the migration files automatically created during the `makemigration` command. After updating these there were no more errors within my files.
+
+To check I ran in the command line:
+
+    pycodestyle reports
+    pycodestyle reach
+    pycodestyle . (only errors shown in .vscode files)
+ 
 ### JavaScript Testing
 ----------------------
 #### ESLint
@@ -463,11 +481,25 @@ The addition to the `.eslintrc.json` file:
 ---------------
 #### W3C Validator
 
-I ran the css file through the [W3C Validator](https://jigsaw.w3.org/css-validator/validator#css) and the file passed with no errors. After using `Bootstrap` throughout the project I didnt have too much CSS to test.
+I ran the css file through the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/validator#css) and the file passed with no errors. After using `Bootstrap` throughout the project I didnt have too much CSS to test.
+
+![W3C CSS validation success](README_images/w3c_css.png)
 
 ### Html Testing
 ----------------
 #### W3C Validator
+
+When initially running the site through the [W3C Html Validator](https://validator.w3.org/nu/?showsource=yes&showoutline=yes&doc=https%3A%2F%2Freach-reports-e02886ddeda3.herokuapp.com%2F), I recieved 2 error messages:
+
+1.  "Element h5 not allowed as child of element ul in this context."
+- This error was in the footer of the site, I just needed to move the `<ul>><h5>` from inside to outside the `<ul>` element.
+
+2. "Stray end tag `<div>`."
+- Again in the footer I had an unused closing `</div>` tag.
+
+With these errors fixed I ran the deployed url again and recieved "Document checking completed. No errors or warnings to show" message.
+
+![W3C Html validation success](README_images/w3c_html.png)
 
 ### User Testing
 ----------------
