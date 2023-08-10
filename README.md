@@ -68,6 +68,11 @@ Cloudinary, Crispy Forms
                 - [Comments](#comments)
             - [Create Report](#create-report)
             - [Edit Report](#edit-report)
+            - [Account Page](#account)
+                - [Edit/ Delete Account Link](#edit-delete-account-link)
+                - [Admin Site](#admin-site-staff-users-only)
+                - [Edit/ Delete Report Links](#edit-delete-report-links)
+            - [Update Account](#update-account)
         - [Future Features](#future-features)
     - [Technologies Used](#technologies-used)
         - [Django](#django)
@@ -480,6 +485,80 @@ To submit the form they must click the large green button which is carried throu
 ![Create report form mobile](README_images/features/create_form_m.png)
 ![Create report form errors](README_images/features/errors.png)
 </details>
+
+### Edit Report
+---------------
+
+The edit report page inherits most of its functionailty and features from the create report page. The main feature and difference with this page is users are able to delete and add new images to their report. The logic ensures that the total images is never more than 12. If the user attempts to have more than 12 even through adding and delting at the same time the form is considered invalid. If the form is considered invallid no action happens on the images.
+
+To delete images from the report a user just needs to check the box underneath the image, then when submitting the form the selected images will be deleted.
+
+![Edit report form image deletion and addition](README_images/features/edit_report_images.png)
+
+<details>
+<summary>Edit Report Full Screenshot</summary>
+
+![Edit report form](README_images/features/edit_report.png)
+</details>
+
+### Account
+-----------
+
+The account page is the where the user can manage their account details and reports. There a large, centered, profile box contiaining the users personal information and no of written reports statistic. Included are 2 links to ['Edit'](#edit-delete-account-link) and ['Delete'](#edit-delete-account-link) their account.
+
+Beneath is the list of the reports written by the user. Each report in the list has similar information to the items on [reports](#reports) page, however, in the account the user can ['Edit'](#edit-report-link) or ['Delete'](#delete-report-link) their reports via links added to the list item.
+
+<details>
+<summary>Account Full Screenshots</summary>
+
+![Account page](README_images/features/account.png)
+![Account page mobile](README_images/features/account_m.png)
+</details>
+
+#### Edit/ Delete Account Link
+
+Within the personal details the user can find two links, appropriately colored. The blue 'Edit Account' link will lead the user to the ['Update Account'](#update-account) page. The 'Delete Account' link will open a confirmation modal. Inside the modal will be a list of statistics personal to each user. The statistics tell the user how many report they've created, images uploaded and comments left. If confirmed the users account is deleted and they are redirected to the 'home' page.
+
+![Account information](README_images/features/personal_info.png)
+![Delete account modal](README_images/features/delete_account.png)
+
+#### Admin Site (Staff Users Only)
+
+If a user has 'staff' permission they will have an extra buttonin the personal information section, the button links them to the sites admin page. From here they have full CRUD functionality over users, reports, images. They can block users and remove comments and likes from reports.
+
+![Admin button](README_images/features/admin_button.png)
+
+#### Edit/ Delete Report Links
+
+On each report item in the users personal reports list is an 'Edit' and a 'Delete' link. If a user chooses to edit they are redirected to the 'edit report' page, whilst if they select 'delete' the confirm deletion modal appears, if confirmed the report is deleted and they're returned to their account page.
+
+![Edit/ delete reports links](README_images/features/report_links.png)
+
+### Update Account
+------------------
+
+When a user chooses to edit their account from inside the [account](#account) page, they are directed to the 'update account' page. The page contains a simple form where users can update their email or username. Also available to user is to change their password via the ['Reset Account Password'](#reset-password) button, when clicked they are directed to the relevant page.
+
+![Update account page](README_images/features/update_account.png)
+
+### 404/ 500 Errors
+-------------------
+
+Custom error handlers with a simple back to home button provide a better user experience.
+
+![Error pages](README_images/features/404.png)
+
+### Reset Password
+------------------
+
+Users are able to reset their password in case they have forgotten it prior to login or from inside the ['Update Account'](#update-account) page. The user is taken through the steps in order to change their password, they must provide an email in order to recieve a momentary link (3 days). When clicked they're able to input a new password. Once the steps are complete the user is directed to the Login page.
+
+<details>
+<summary>Password Reset Screenshots</summary>
+
+![Edit report form](README_images/features/edit_report.png)
+</details>
+
 
 [⏫ contents](#contents)
 
