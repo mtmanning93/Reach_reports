@@ -600,7 +600,10 @@ These tests were written and given to a user to carry out whilst using the site.
 | Provide valid email, click 'reset my password' button | If email is valid, user receives an email with reset link | √ | Pass |
 | Click 'back to home' button | Returns user to home page | √ | Pass |
 | Click reset link in email | Opens the reset password link for relevant user | √ | Pass |
-| Fill out password reset form, click reset | Opens the reset password link for relevant user | √ | Pass |
+| Fill out password reset form, click reset | Opens the reset password updated page, logs out user if logged in | √ | Pass |
+| Click 'login' button | Opens login page | √ | Pass |
+| **404 & 500 Error** |
+| Click 'back to home' button | returns user to home page | √ | Pass |
 
 
 ## Bugs
