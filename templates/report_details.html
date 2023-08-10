@@ -108,7 +108,7 @@
                 </button>
                 {% endfor %}
                 {% else %}
-                    <img class="col-4 col-lg-6" src="/static/images/no-images.png" alt="No images available">
+                    <img class="col-4 col-lg-6" src="{% static 'images/no-images.png' %}" alt="No images available">
                 {% endif %}
                 <!-- Image Modal -->
                 {% for image_file in report.images.all %}

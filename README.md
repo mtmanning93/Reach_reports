@@ -605,7 +605,6 @@ These tests were written and given to a user to carry out whilst using the site.
 | **404 & 500 Error** |
 | Click 'back to home' button | returns user to home page | √ | Pass |
 
-
 ## Bugs
 
 ### Resolved
