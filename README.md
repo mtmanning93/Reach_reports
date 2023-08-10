@@ -463,6 +463,8 @@ The addition to the `.eslintrc.json` file:
 ---------------
 #### W3C Validator
 
+I ran the css file through the [W3C Validator](https://jigsaw.w3.org/css-validator/validator#css) and the file passed with no errors. After using `Bootstrap` throughout the project I didnt have too much CSS to test.
+
 ### Html Testing
 ----------------
 #### W3C Validator
