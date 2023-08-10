@@ -595,7 +595,8 @@ Non-registered users can navigate to the 'Signup' page. Here they must fill out 
 
 Whilst building the project new ideas perfect for future releases would come to mind. To stay productive and on track with the current build, I created a [Feature Request Form](#feature-request) using GitHub issues. This meant I could save the ideas for later. Their are still some features in the [Product Backlog](#product-backlog) which would be a great addition to the site at a later point. These features are now marked as ['Wont Do'](#labels) as for this release they aren't of high priority.
 
-[Link to Future Features](https://github.com/mtmanning93/Reach_reports/issues?q=is%3Aissue+label%3A%22Wont+Have%22+is%3Aopen)
+[Link To Current 'Wont Dos'](https://github.com/mtmanning93/Reach_reports/issues?q=is%3Aissue+label%3A%22Wont+Have%22+is%3Aopen)
+[Link To Left Feature Requests](https://github.com/mtmanning93/Reach_reports/issues?q=is%3Aopen+is%3Aissue+label%3A%22Feature+Request%22)
 
 [⏫ contents](#contents)
 
