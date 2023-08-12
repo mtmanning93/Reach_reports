@@ -33,7 +33,7 @@
             </h4>
             {% endwith %}
             <div class="col-12 text-center m-2">
-                <a href="{% url 'update_account' %}" class="text-info">Edit Account</a>
+                <a href="{% url 'update_account' %}" class="text-primary">Edit Account</a>
                 <a href="#" class="text-danger ms-1" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">Delete
                     Account</a>
             </div>
@@ -167,7 +167,7 @@
         <!-- Author Activity Date -->
         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
             <p class="text-center">{{ report.start_date }}</p>
-            <a href="{% url 'edit_report' pk=report.pk %}" class="ud-btn text-info">Edit</a>
+            <a href="{% url 'edit_report' pk=report.pk %}" class="ud-btn text-primary">Edit</a>
             <a href="#" class="ud-btn text-danger" data-bs-toggle="modal" data-bs-target="#deleteReportModal"
                 data-report-id="{{ report.pk }}">
                 Delete

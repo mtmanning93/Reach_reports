@@ -23,6 +23,7 @@ function showConfirmationModal() {
         document.getElementById('edit-report-form').submit();
     }
 }
+
 // eslint-disable-next-line no-unused-vars
 function submitForm() {
     // Change 'confirm-deletion' hidden input boolean
