@@ -183,13 +183,34 @@ class ImageFileForm(forms.ModelForm):
         fields = ['image_file']
 
 
+# class UpdateAccountForm(UserChangeForm):
+#     """
+#     Form used for updated account information; username and email.
+#     Removes pop as this is uneditable without token.
+#     """
+
+#     email = forms.EmailField(required=True)
+
+#     class Meta:
+#         model = User
+#         fields = ('username', 'email')
+
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+
+#         self.fields.pop('password',)
+#         self.fields['username'].label = "Update Username"
+#         self.fields['email'].label = "Update Email"
+
 class UpdateAccountForm(UserChangeForm):
     """
-    Form used for updated account information; username and email.
-    Removes pop as this is uneditable without token.
+    Form used for updating account information: username and email.
+    Email is displayed as a selection box with connected email addresses
+    as choices.
     """
 
-    email = forms.EmailField(required=True)
+    email = forms.EmailField(
+        widget=forms.Select(attrs={'class': 'form-control'}))
 
     class Meta:
         model = User
@@ -200,4 +221,13 @@ class UpdateAccountForm(UserChangeForm):
 
         self.fields.pop('password',)
         self.fields['username'].label = "Update Username"
-        self.fields['email'].label = "Update Email"
+        self.fields['email'].label = "Update Display Email"
+
+        self.fields[
+            'email'].widget.choices = [
+            (
+                email, email
+                ) for email in self.instance.emailaddress_set.values_list(
+                    'email', flat=True
+                    )
+            ]
