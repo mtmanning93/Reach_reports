@@ -183,6 +183,22 @@ class ImageFileForm(forms.ModelForm):
         fields = ['image_file']
 
 
+class UpdateAccountForm(UserChangeForm):
+    """
+    Form used for updated account information; username and email.
+    Removes pop as this is uneditable without token.
+    """
+
+    class Meta:
+        model = User
+        fields = ('username',)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields.pop('password',)
+        self.fields['username'].label = "Update Username"
+
 # class UpdateAccountForm(UserChangeForm):
 #     """
 #     Form used for updating account information: username and email.
@@ -214,18 +230,3 @@ class ImageFileForm(forms.ModelForm):
 #                     'email', flat=True
 #                     )
 #             ]
-
-class UpdateAccountForm(UserChangeForm):
-    """
-    Form used for updating account information: username.
-    """
-
-    class Meta:
-        model = User
-        fields = ('username',)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        self.fields.pop('password',)
-        self.fields['username'].label = "Update Username"
