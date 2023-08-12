@@ -50,9 +50,9 @@
                     </div>
                     {% endfor %}
                     <div class="buttonHolder text-center">
-                        <button class="secondaryAction border-end btn btn-none text-primary" type="submit"
+                        <button class="secondaryAction btn btn-none text-primary" type="submit"
                             name="action_primary">{% trans 'Make Primary' %}</button>
-                        <button class="secondaryAction border-end btn btn-none text-success" type="submit"
+                        <button class="secondaryAction btn btn-none text-success" type="submit"
                             name="action_send">{% trans 'Re-send Verification' %}</button>
                         <button class="primaryAction btn btn-none text-danger" type="submit"
                             name="action_remove" >{% trans 'Remove' %}</button>
@@ -66,7 +66,7 @@
             </p>
             {% endif %}
             {% if can_add_email %}
-            <h2>{% trans "Add E-mail Address" %}</h2>
+            <h2 class="m-0">{% trans "Add E-mail Address" %}</h2>
             <form method="post" action="{% url 'account_email' %}"
                 class="add_email d-sm-flex flex-column col-12 col-sm-9 p-3">
                 {% csrf_token %}
