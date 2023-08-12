@@ -15,6 +15,11 @@
             {{ edit_form.non_field_errors }}
             {% endif %}
         </div>
+        {% if edit_form.errors %}
+        <div class="error">
+            <p>Invalid Input: Please alter the highlighted fields accordingly.</p>
+        </div>
+        {% endif %}
     </div>
 </div>
 
