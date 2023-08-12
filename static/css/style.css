@@ -303,6 +303,10 @@ label {
     color: red;
 }
 
+.fatmap-help {
+    border-color: #2596be;
+}
+
 /* Media Queries */
 
 /* XS screens, mainly for logo */
@@ -435,7 +439,8 @@ label {
         display: none;
     }
 
-    #date_published {
+    #date_published,
+    .fatmap-help {
         font-size: 0.75em;
     }
 

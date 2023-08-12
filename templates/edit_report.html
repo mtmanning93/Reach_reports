@@ -81,7 +81,31 @@
                     </div>
                 </div>
                 <div class="col-12">
+                    <label class="pb-2" for="{{ report_form.gps_map_link.id_for_label }}">
+                        <a class="btn p-0" data-bs-toggle="collapse" href="#fatmapcollapse" role="button"
+                            aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fa-solid fa-circle-info"></i> Fatmap.com url
+                        </a>
+                        {{ edit_form.gps_map_link.label_tag }}
+                    </label>
                     {{ edit_form.gps_map_link|as_crispy_field }}
+                    <div class="collapse" id="fatmapcollapse">
+                        <div class="fatmap-help card card-body">
+                            <h5><strong>Add an interactive 3D map to your report.</strong></h5>
+                            <p>
+                                Go to <a class="text-primary" href="https://fatmap.com/" target="_blank">fatmap.com</a> to create an adventure. Then copy the url and paste it in above.
+                                <br>
+                                <strong>For more instructions go to:</strong>
+                                <br>
+                                <a class="text-primary" href="https://about.fatmap.com/journal-digest/how-to-share-adventures" target="_blank">
+                                    fatmap.com/how-to-share-adventures</a>
+                                <br>
+                                <strong>Example url:</strong>
+                                <br>
+                                'https://fatmap.com/routeid/2907789/eiger-heckmair?fmid=cp'
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-12 col-sm-4">
                     {{ edit_form.status|as_crispy_field }}

@@ -69,7 +69,7 @@ class CreateReportForm(forms.ModelForm):
             MaxLengthValidator(limit_value=max_description_length)
         )
         self.fields['status'].label = "Publish/ Draft"
-        self.fields['gps_map_link'].label = "Fatmap.com link"
+        self.fields['gps_map_link'].label = ""
         self.fields['gps_map_link'].required = False
 
     # Validators
