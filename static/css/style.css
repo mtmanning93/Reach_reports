@@ -48,7 +48,7 @@ a {
 }
 
 a:hover {
-    color: #41ccff;
+    color: #2f8eb1f8;
 }
 
 .content-wrapper {
@@ -81,6 +81,7 @@ a:hover {
 
 .nav-item a {
     font-size: 1.1em;
+    color: black;
 }
 
 #username_dropdown {
@@ -108,7 +109,6 @@ a:hover {
     top: 10%;
     left: 50%;
     text-align: center;
-    /* border: 2px solid black; */
     border-radius: 5px;
     background-color: #f6f6f669;
     padding: 10px;
@@ -309,6 +309,115 @@ label {
 
 /* Media Queries */
 
+/* M screens, Tablets, Bootstrap <medium breakpoint */
+@media screen and (max-width: 768px) {
+
+    h1 {
+        font-size: 2.5em;
+    }
+
+    #logo {
+        height: 60px;
+    }
+
+    #sociallinks>h5,
+    #footer-nav-title,
+    .contact>h5 {
+        font-size: 15px;
+    }
+
+    #sociallinks,
+    #footer-nav li,
+    .report-list-item,
+    #list-key {
+        font-size: 0.75em;
+    }
+
+    /* Reports */
+
+    .report-list-item h4,
+    .account_report_title a h5 {
+        font-size: 1.5em;
+    }
+
+    .img-thumbnail {
+        width: 75px;
+        height: 75px;
+    }
+
+}
+
+/* S screens, mobiles, Bootstrap <small breakpoint */
+@media screen and (max-width: 576px) {
+
+    .nav-item a {
+        text-align: center;
+    }
+
+    #head-img-wrapper {
+        height: 571px;
+    }
+
+    #head-quote {
+        border-radius: 0;
+        background-color: #8ca9c9;
+        font-size: 0.9em;
+    }
+
+    footer {
+        height: fit-content;
+        padding: 10px;
+    }
+
+    #sociallinks>div {
+        display: inline-flex;
+    }
+
+    /* Reports */
+
+    #filters a,
+    #filter-forms {
+        font-size: 0.85em;
+    }
+
+    .report-list-item,
+    #list-key {
+        font-size: 0.7em;
+    }
+
+    .report-list-item h4 {
+        font-size: 1.2em;
+    }
+
+    .img-thumbnail {
+        width: 65px;
+        height: 65px;
+    }
+
+    .img-num {
+        display: none;
+    }
+
+    #date_published,
+    .fatmap-help {
+        font-size: 0.75em;
+    }
+
+    /* Report forms */
+
+    .report_img_wrapper {
+        width: auto;
+    }
+
+        /* Email Updates */
+
+        .email-status {
+            display: inline;
+            float: right;
+        }
+
+}
+
 /* XS screens, mainly for logo */
 @media screen and (max-width: 366px) {
 
@@ -329,7 +438,7 @@ label {
     }
 
     #head-img-wrapper {
-        height: 571px;
+        height: 540px;
     }
 
     #head-quote {
@@ -387,106 +496,10 @@ label {
         padding: 0;
     }
 
-}
+    /* Email Updates */
 
-/* S screens, mobiles, Bootstrap <small breakpoint */
-@media screen and (max-width: 576px) {
-
-    .nav-item a {
-        text-align: center;
+    .email-status {
+        width: 100%;
     }
-
-    #head-img-wrapper {
-        height: 571px;
-    }
-
-    #head-quote {
-        top: 10%;
-        font-size: 0.9em;
-    }
-
-    footer {
-        height: fit-content;
-        padding: 10px;
-    }
-
-    #sociallinks>div {
-        display: inline-flex;
-    }
-
-    /* Reports */
-
-    #filters a,
-    #filter-forms {
-        font-size: 0.85em;
-    }
-
-    .report-list-item,
-    #list-key {
-        font-size: 0.7em;
-    }
-
-    .report-list-item h4 {
-        font-size: 1.2em;
-    }
-
-    .img-thumbnail {
-        width: 65px;
-        height: 65px;
-    }
-
-    .img-num {
-        display: none;
-    }
-
-    #date_published,
-    .fatmap-help {
-        font-size: 0.75em;
-    }
-
-    /* Report forms */
-
-    .report_img_wrapper {
-        width: auto;
-    }
-
-}
-
-/* M screens, Tablets, Bootstrap <medium breakpoint */
-@media screen and (max-width: 768px) {
-
-    h1 {
-        font-size: 2.5em;
-    }
-
-    #logo {
-        height: 60px;
-    }
-
-    #sociallinks>h5,
-    #footer-nav-title,
-    .contact>h5 {
-        font-size: 15px;
-    }
-
-    #sociallinks,
-    #footer-nav li,
-    .report-list-item,
-    #list-key {
-        font-size: 0.75em;
-    }
-
-    /* Reports */
-
-    .report-list-item h4,
-    .account_report_title a h5 {
-        font-size: 1.5em;
-    }
-
-    .img-thumbnail {
-        width: 75px;
-        height: 75px;
-    }
-
 
 }

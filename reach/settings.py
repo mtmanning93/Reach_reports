@@ -64,9 +64,8 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory' # 'none'
 ACCOUNT_EMAIL_REQUIRED = True
-
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 AUTHENTICATION_BACKENDS = [
@@ -81,7 +80,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Password Reset
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ.get('GMAIL_ACC')
