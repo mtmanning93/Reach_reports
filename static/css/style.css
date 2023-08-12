@@ -415,6 +415,10 @@ label {
             display: inline;
             float: right;
         }
+    
+        #inactive-account h5 {
+            font-size: 1.1em;
+        }
 
 }
 
