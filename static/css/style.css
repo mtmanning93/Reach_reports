@@ -43,6 +43,7 @@ p {
 }
 
 a {
+    font-family: 'Lato', sans-serif;
     text-decoration: none;
     color: inherit;
 }
@@ -71,8 +72,16 @@ a:hover {
 }
 
 .signup_button {
+    background-color: whitesmoke;
     border: 2px solid #2596be;
     padding: 5px;
+}
+
+.signup_button:hover {
+    background-color: #2596be;
+    color: #ffffff;
+    border: 2px solid black;
+    transition: 0.3s;
 }
 
 .navbar {
@@ -121,14 +130,18 @@ a:hover {
     left: 50%;
 }
 
-#head-sign-up-btn {
-    border: 2px solid #2596be;
+#head-btns a {
+    font-weight: 600;
 }
 
-#head-sign-up-btn:hover,
-.signup_button:hover {
-    border-color: #41ccff;
-    transition: 0.2s;
+#reports-btn {
+    border: 2px solid black;
+    background-color: #2595be;
+    color: black;
+}
+
+#reports-btn:hover {
+    background-color: #2595be72;
 }
 
 /* Footer */
