@@ -13,6 +13,11 @@
 
 Reach is a website where users have the abiltiy to create and post condition reports from their climbing adventures and expeditions. Non registered users have the ability to read reports and comments. Registered users have full CRUD functionailty over their reports, along with extra features, such as, commenting and liking other users reports.
 
+## Getting Started
+To get started with deploying the project locally, visit this link below:
+
+[Github Cloning](#github-cloning)
+
 ## Built With:
 Django, Python, JavaScript, Bootstrap 5.2, CSS, HTML
 
@@ -25,6 +30,7 @@ Cloudinary, Crispy Forms
     - [Live Site](#live-site)
     - [Repository](#repository)
     - [Introduction](#introduction)
+    - [Getting Started](#getting-started)
     - [Built With](#built-with)
     - [Design Thinking](#design-thinking)
         - [Problem ID](#problem-id)
@@ -102,6 +108,7 @@ Cloudinary, Crispy Forms
         - [Resolved Bugs](#resolved)
         - [Unresolved Bugs](#unresolved-bugs)
     - [Deployment](#deployment)
+        - [Github Cloning](#github-cloning)
         - [Cloudinary Deployment](#cloudinary-deployment)
         - [Elephant SQL DEployment](#elephant-sql-deployment)
         - [Heroku Deployment](#heroku-deployment)
@@ -941,6 +948,10 @@ I attempted to contact fatmap.com and datahappy.co but neither responding to the
 [⏫ contents](#contents)
 
 ## Deployment
+
+### Github Cloning
+------------------
+
 
 ### Cloudinary Deployment
 -------------------------
