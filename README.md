@@ -1067,6 +1067,9 @@ It would be an incredible feat to remember all information needed to build such 
 * [Lucid Chart](https://www.lucidchart.com/pages/): Wireframe and ERD
 * [ESLint](https://eslint.org/): JavaScript Testing
 * [Coverage](https://coverage.readthedocs.io/en/7.2.7/): To test how much of the project had benn test during unit testing.
+* [Google Fonts](https://fonts.google.com/)
+* [Favicon.io](https://favicon.io/)
+* [Am i Responsive](https://ui.dev/amiresponsive?url=https://reach-reports-e02886ddeda3.herokuapp.com/)
 
 ### Resources
 -------------
