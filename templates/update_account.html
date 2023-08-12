@@ -16,7 +16,7 @@
             <h4 class="text-center mt-2">
                 Edit account details for {{ user.username }}.
             </h4>
-            <form class="login col-12 col-lg-6 border-bottom border-primary pb-3" method="POST" action="{% url 'update_account' %}">
+            <form class="login col-12 col-sm-9 border-bottom border-primary pb-3" method="POST" action="{% url 'update_account' %}">
                 {% csrf_token %}
                 {{ form|crispy }}
                 <button class="primaryAction btn signup_button col-12" type="submit">Update</button>
