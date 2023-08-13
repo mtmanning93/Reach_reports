@@ -49,6 +49,11 @@ Cloudinary, Crispy Forms
             - [Fonts](#fonts)
             - [Imagery](#imagery)
             - [Logo](#logo)
+    - [Database ERD](#database-erd)
+        - [User Model](#user-model)
+        - [Comment Model](#comment-model)
+        - [ImageFile Model](#imagefile-model)
+        - [Report Model](#report-model)
     - [Development](#development)
         - [Agile Design](#agile-design)
             - [Github Isssues](#github-issues)
@@ -258,6 +263,43 @@ Across the site I used just nine images. Seven of these are shown as the 'Home' 
 The sites logo is a simple mountain emblem with bold and capitalised REACH after it. This is immediately visible to a user and allows the user to quickly identify the site, the colors are inkeeping with the sites theme.
 
 ![Reach site logo](README_images/logo.png)
+
+[⏫ contents](#contents)
+
+## Database ERD
+
+I created an ERD to aid in the creation of the database, below is a a screenshot to help visualise the models. Below the image are descriptions for each model.
+
+![Rearch ERD (Database Model)](README_images/database_model.png)
+
+### User Model
+
+The user object is created on registration for each user. Within the project I decided to use Django's built-in User model. Due to the simplicity of the information required for each user in this project, the Django User model was a way to simplify the build.
+
+Each user has a one-to-many relationship with both reports and comments, enabling users to create reports and comment as much as they wish.
+
+### Comment Model
+
+The comments model contains information about the user and of course the content. This is relevant when rendering each comment object on the reports details pages. Additionally the 'approved' field is used from inside the admin site, allowing staff to disapprove comments, removing them from the users view.
+
+It has a many to one relationship with the user and report models.
+
+### ImageFile Model
+
+A simple model created to store the report images uploaded when creating a report. The images are stored using cloudinary, therefore the obvious choice was a CloudinaryField for the actual imagefile. The images have a many-to-one relationship with the reports, allowing users to add multiple images per report.
+
+### Report Model
+
+The main model in the database, this holds each report objects information, all other models are connected to this model. When creating the ERD the fields to be inclluded were chosen by their use to a user reading the report. The addition of 'required' fields means that a minimum standardised report will be viewable across the site. To create a better user experience when creating and editing forms I added choices to simplify the report creation process. 
+
+- **Success:**
+    The success choices allow a user to quickly show if they reached their goal or not, a simple yes/no selection.
+- **Grade Choices:**
+    These are used when a user specifies the overall condition grade of the route. Were the conditions 'good' or just 'bad'. The four choices make the explanation much simpler.
+- **Category Choices:**
+    Each report can be placed into a category of activity type, from ice-climbing to hiking. A range of mountain activites can be chosen, and if its not available a selection of 'other' is available.
+- **Status:**
+    The status selection is simplified by a yes/no choice, 'is the report published or not'. If the report is published it will be displayed in the list of reports for the site, if not it remains only visible to the user in their account.
 
 [⏫ contents](#contents)
 
@@ -989,20 +1031,28 @@ In order to find the above variables you can follow the steps below to set up:
 
 **8. IMPORTANT! List the following files in your .gitignore file to prevent any private information being public.**
 
-    core.Microsoft*
-    core.mongo*
-    core.python*
-    env.py
-    __pycache__/
-    *.py[cod]
-    node_modules/
-    .github/
-    cloudinary_python.txt
-    package-lock.json
-    package.json
-    .eslintrc.json
-    .coverage
-    htmlcov/
+    annotated-types==0.5.0
+    asgiref==3.7.2
+    cloudinary==1.33.0
+    coverage==7.2.7
+    crispy-bootstrap5==0.7
+    dj-database-url==0.5.0
+    dj3-cloudinary-storage==0.0.6
+    Django==3.2.20
+    django-allauth==0.54.0
+    django-crispy-forms==2.0
+    django-summernote==0.8.20.0
+    gunicorn==20.1.0
+    oauthlib==3.2.2
+    psycopg2==2.9.6
+    pydantic==2.0.3
+    pydantic_core==2.3.0
+    PyJWT==2.7.0
+    python3-openid==3.2.0
+    pytz==2023.3
+    requests-oauthlib==1.3.1
+    sqlparse==0.4.4
+    urllib3==1.26.16
 
 **9. Install all requirements using the following terminal command.**
 
