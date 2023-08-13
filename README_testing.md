@@ -110,7 +110,6 @@ With these errors fixed I ran the deployed url again and recieved "Document chec
 
 [⏫ contents](#contents)
 
-
 ### User Testing
 ----------------
 These tests were written and given to a user to carry out whilst using the site. They were made to test overall functionailty of the site.
@@ -174,9 +173,10 @@ These tests were written and given to a user to carry out whilst using the site.
 | Click 'delete' in deletion modal | Deletes report and redirects user to their 'account' page | √ | Pass |
 | Click 'cancel' in deletion modal | Closes modal and returns user to their account page | √ | Pass |
 | **Update Account** |
-| Update account with valid credentials | Account information updated and returned to account page | √ | Pass |
-| Update account with invalid credentials | Form is invalid, corresponding validation error shown | √ | Pass |
-| Click 'reset password' button | Opens reset password page | √ | Pass |
+| Update account with valid username | Account information updated and returned to account page | √ | Pass |
+| Update account with invalid username | Form is invalid, corresponding validation error shown | √ | Pass |
+| Click 'Change Account Password' button | Opens change password page | √ | Pass |
+| Click 'Manage Email Accounts' button | Opens corresponding page | √ | Pass |
 | **Logged In User** |
 | Click 'username' link in navbar | Opens dropdown including links to account and logout | √ | Pass |
 | **Admin & Staff** |
@@ -210,6 +210,19 @@ These tests were written and given to a user to carry out whilst using the site.
 | Click reset link in email | Opens the reset password link for relevant user | √ | Pass |
 | Fill out password reset form, click reset | Opens the reset password updated page, logs out user if logged in | √ | Pass |
 | Click 'login' button | Opens login page | √ | Pass |
+| **Change Password** |
+| Provide valid password inputs to change account password | 'Password changed successfully' alert displays | √ | Pass |
+| Provide invalid password inputs to change account password | Corresponding validation errors display | √ | Pass |
+| **Password Verification** |
+| Provide valid email, click 'signup' button | If email is valid, user receives an email with confirm email link, and send confirmation page is shown | √ | Pass |
+| Click 'confirm' link in email | Takes user to 'login' page | √ | Pass |
+| **Email Account Mangement** |
+| Add a valid email address to your account | Email address is added to list of accounts and success message is displayed | √ | Pass |
+| Add a invalid input into email address field | Field error message displayed | √ | Pass |
+| Select an email address (not primary) to remove | Email address removes successfully | √ | Pass |
+| Select an email address (primary) to remove | Error alert displayed 'you cannot remove your primary email address' | √ | Pass |
+| Select an unverified email address, send verification | 'Verification sent' alert displayed, email recieved | √ | Pass |
+| Select a new primary email address | After navigating to account, the displayed email address in personal inofrmation is the new primary address | √ | Pass |
 | **404 & 500 Error** |
 | Click 'back to home' button | returns user to home page | √ | Pass |
 

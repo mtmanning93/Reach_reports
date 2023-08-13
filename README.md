@@ -482,7 +482,11 @@ The images section displays all images related to the report seperately in a thu
 
 User have the option to include a [Fatmap.com](https://fatmap.com/adventures/@46.5668314,8.0031898,6596.4744211,-20.0370673,139.3104485,3570.3534546,satellite) url in the report. If they have included one it will appear in the report under the images section. The map is fully interactive, user can move the 3D map using their mouse. Alternatively they can click the map to go to the official site for an enlarged version.
 
+<details>
+<summary>iFrame Screenshot</summary>
+
 ![Fatmap iframe](README_images/features/report_details/fatmap.png)
+</details>
 
 #### Likes
 
@@ -490,8 +494,12 @@ Each report has a 'like' button. A registered user can click it to like a report
 
 If an unregistered user attempts to click the like button a tooltip shows suggesting them to register in order to like and comment.
 
+<details>
+<summary>Like Section Screenshots</summary>
+
 ![Liked report](README_images/features/report_details/liked.png)
 ![Unliked report](README_images/features/report_details/unliked.png)
+</details>
 
 #### Comments
 
@@ -507,8 +515,6 @@ Finally every report has a comment section, all users can read comments. However
 
 ![Comments section unregistered user](README_images/features/report_details/comments_unreg.png)
 </details>
-
-[⏫ contents](#contents)
 
 ### Create Report
 -----------------
@@ -536,11 +542,10 @@ The edit report page inherits most of its functionailty and features from the cr
 
 To delete images from the report a user just needs to check the box underneath the image, then when submitting the form the selected images will be deleted.
 
-![Edit report form image deletion and addition](README_images/features/create_edit/edit_report_images.png)
-
 <details>
-<summary>Edit Report Full Screenshot</summary>
+<summary>Edit Report Screenshots</summary>
 
+![Edit report form image deletion and addition](README_images/features/create_edit/edit_report_images.png)
 ![Edit report form](README_images/features/create_edit/edit_report.png)
 </details>
 
@@ -554,53 +559,85 @@ Beneath is the list of the reports written by the user. Each report in the list 
 <details>
 <summary>Account Full Screenshots</summary>
 
-![Account page](README_images/features/account.png)
-![Account page mobile](README_images/features/account_m.png)
+![Account page](README_images/features/account/account.png)
+![Account page mobile](README_images/features/account/account_m.png)
 </details>
 
 #### Edit/ Delete Account Link
 
 Within the personal details the user can find two links, appropriately colored. The blue 'Edit Account' link will lead the user to the ['Update Account'](#update-account) page. The 'Delete Account' link will open a confirmation modal. Inside the modal will be a list of statistics personal to each user. The statistics tell the user how many report they've created, images uploaded and comments left. If confirmed the users account is deleted and they are redirected to the 'home' page.
 
+<details>
+<summary>Account Options Screenshots</summary>
+
 ![Account information](README_images/features/account/personal_info.png)
 ![Delete account modal](README_images/features/account/delete_account.png)
+</details>
 
 #### Admin Site (Staff Users Only)
 
 If a user has 'staff' permission they will have an extra buttonin the personal information section, the button links them to the sites admin page. From here they have full CRUD functionality over users, reports, images. They can block users and remove comments and likes from reports.
 
+Due to the current scope of the project and time connstraints, the current version uses the built-in Django admin site, only accessible from inside a staff account. A future improvement could be a custom admin panel.
+
+<details>
+<summary>Admin Site Screenshot</summary>
+
 ![Admin button](README_images/features/account/admin_button.png)
+</details>
 
 #### Edit/ Delete Report Links
 
 On each report item in the users personal reports list is an 'Edit' and a 'Delete' link. If a user chooses to edit they are redirected to the 'edit report' page, whilst if they select 'delete' the confirm deletion modal appears, if confirmed the report is deleted and they're returned to their account page.
 
+<details>
+<summary>Report Management Screenshot</summary>
+
 ![Edit/ delete reports links](README_images/features/account/report_links.png)
+</details>
 
 ### Update Account
 ------------------
 
-When a user chooses to edit their account from inside the [account](#account) page, they are directed to the 'update account' page. The page contains a simple form where users can update their email or username. Also available to user is to change their password via the ['Reset Account Password'](#reset-password) button, when clicked they are directed to the relevant page.
+When a user chooses to edit their account from inside the [account](#account) page, they are directed to the 'update account' page. The page contains a simple form where users can update their username. Also available to users is an account managements section containing the option to change their password via the ['Reset Account Password' button](#reset-password), and the ['Manage email accounts' button]().
+
+<details>
+<summary>Update Account Screenshot</summary>
 
 ![Update account page](README_images/features/account/update_account.png)
+</details>
+
+### Manage Email Accounts
+-------------------------
+
+On this page only, accessible from the users account page, users are able to add emails to their account, re-send verification emails and choose their primary email address. The primary email address is then displayed in their personal information section on the accounts page.
+
+<details>
+<summary>Manage Email Accounts Screenshot</summary>
+
+![Manage emails](README_images/features/account/manage_emails.png)
+</details>
 
 ### 404/ 500 Errors
 -------------------
 
 Custom error handlers with a simple back to home button provide a better user experience.
 
+<details>
+<summary>Error Page Screenshot</summary>
+
 ![Error pages](README_images/features/base/404.png)
+</details>
 
 ### Reset Password
 ------------------
 
 Users are able to reset their password in case they have forgotten it prior to login or from inside the ['Update Account'](#update-account) page. The user is taken through the steps in order to change their password, they must provide an email in order to recieve a momentary link (3 days). When clicked they're able to input a new password. Once the steps are complete the user is directed to the Login page.
 
-![Forgot password link](README_images/features/password/forgot_password.png)
-
 <details>
 <summary>Password Reset Screenshots</summary>
 
+![Forgot password link](README_images/features/password/forgot_password.png)
 ![Password reset step 1](README_images/features/password/enter_email.png)
 ![Edit report form](README_images/features/password/email_sent.png)
 ![Edit report form](README_images/features/password/email.png)
@@ -610,23 +647,40 @@ Users are able to reset their password in case they have forgotten it prior to l
 ### Login
 ---------
 
-When created the site Django automatically sets the login conifgured to username and password although I preferred the email and password approach as it ensures users have a working email address for the ['Password Reset'](#reset-password) functions. Now when users login they must enter a password and username is not required. Also non registered users can find a link to the ['Signup'](#signup) page underneath the login form in case they navigated wrongly.
+When created the site Django automatically sets the login conifgured to username and password although I preferred the email and password approach as it ensures users have a working email address for the ['Password Reset'](#reset-password) functions. Now when users login they must enter an email and password, username is not required. Also non registered users can find a link to the ['Signup'](#signup) page underneath the login form in case they navigated wrongly.
+
+<details>
+<summary>Login Screenshot</summary>
 
 ![Login page](README_images/features/account/login.png)
+</details>
 
 ### Logout
 ----------
 
 Users need to logout in order t protect their accounts. They can do this from inside the navbar by clicking their username, then the 'logout' link in the dropdown menu. Of course users must first confirm their choice in the 'Logout' confirmation page. If confirmed they are redirected to the 'home' page.
 
+<details>
+<summary>Logout Screenshot</summary>
+
 ![Logout page](README_images/features/account/logout.png)
+</details>
 
 ### Signup
 ----------
 
-Non-registered users can navigate to the 'Signup' page. Here they must fill out the forms required fields in order to create an account. If the form is valid the user is directed to their new ['account page'](#account). Additionally if the user has already registered an account with the same email or username the relevant error messages are shown and the user must enter a different username or email.
+Non-registered users can navigate to the 'Signup' page. Here they must fill out the forms required fields in order to create an account. I decided to implement email verification for the project. This means when users click signup they are sent a verification link in an email, this verifies the users email address. When the email link is clicked the user is taken to the login page.
 
+Additionally if the user has already registered an account with the same email or username the relevant error messages are shown and the user must enter a different username or email.
+
+<details>
+<summary>Signup Screenshots</summary>
+
+![Verification Sent](README_images/features/account/verification_sent.png)
 ![Signup](README_images/features/account/signup.png)
+</details>
+
+[⏫ contents](#contents)
 
 ## Future Features
 
