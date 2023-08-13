@@ -38,7 +38,6 @@ ALLOWED_HOSTS = [
     '8000-mtmanning93-reachreport-5awquwjx6kz.ws-eu103.gitpod.io',
     ]
 
-
 # Application definition
 
 INSTALLED_APPS = [
