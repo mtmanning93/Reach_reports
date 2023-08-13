@@ -38,7 +38,7 @@
                     Account</a>
             </div>
             {% if user.is_staff or user.is_superuser %}
-            <a class="btn btn-outline-warning text-dark" href="{% url 'admin:index' %}">
+            <a class="btn btn-dark text-light" href="{% url 'admin:index' %}">
                 <i class="fa-solid fa-gears"></i> Admin Site
             </a>
             {% endif %}
