@@ -19,7 +19,7 @@
             <form class="login d-sm-flex flex-column align-items-center col-12 col-sm-9 border-bottom border-primary pb-3" method="POST" action="{% url 'update_account' %}">
                 {% csrf_token %}
                 {{ form|crispy }}
-                <button class="primaryAction btn signup_button col-6" type="submit">Update Username</button>
+                <button class="primaryAction btn btn-outline-primary col-6" type="submit">Update Username</button>
             </form>
             <h4 class="text-center mt-3">Account Management</h4>
             <div class="col-12 d-sm-flex justify-content-center">
