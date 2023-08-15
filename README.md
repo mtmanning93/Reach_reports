@@ -1016,6 +1016,7 @@ It would be an incredible feat to remember all information needed to build such 
 * [Google Fonts](https://fonts.google.com/)
 * [Favicon.io](https://favicon.io/)
 * [Am i Responsive](https://ui.dev/amiresponsive?url=https://reach-reports-e02886ddeda3.herokuapp.com/)
+* [Looka](https://looka.com/onboarding?gclid=Cj0KCQjwoeemBhCfARIsADR2QCv_4Sk-E2qyPMvF2918hnwloja34mSPjNp3fO0QplTzD7A99QQ1U-UaAt1REALw_wcB): Site Logo and 'no-image' image.
 
 ### Resources
 -------------
