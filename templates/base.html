@@ -35,11 +35,11 @@
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-expand-sm d-flex flex-column bg-light">
+    <nav class="navbar navbar-dark navbar-expand-sm d-flex flex-column">
         <div id="nav-pos" class="container-fluid d-sm-flex justify-content-sm-center">
 
             <a class="navbar-brand" href="{% url 'home' %}">
-                <img id="logo" src="{% static 'images/blue-mountains-trans.png' %}" alt="Reach logo">
+                <img id="logo" src="{% static 'images/logo-name.png' %}" alt="Reach logo">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
@@ -102,17 +102,17 @@
         {% endblock content %}
     </main>
 
-    <footer class="container-fluid d-flex flex-column justify-content-center bg-light text-dark mt-auto">
+    <footer class="container-fluid d-flex flex-column justify-content-center text-dark mt-auto">
         <div class="row d-flex justify-content-between">
             <div class="contact d-sm-none text-center mb-2 col-12">
                 <p class="safety_message">
                     All Reach Reports are provided with intention to simply give advice. It is down to you as a climber
                     to make the right decisions. Be safe, respect the mountains and don't forget to Reach!
                 </p>
-                <h5 class="m-0"><i class="fa-solid fa-envelope"></i> reportsreach@gmail.com</h5>
+                <h5 class="email m-0"><i class="fa-solid fa-envelope"></i> reportsreach@gmail.com</h5>
             </div>
             <div class="d-sm-block col-6 col-sm-3 d-sm-flex flex-column justify-content-start">
-                <h5 id="footer-nav-title" class="text-secondary">Navigation:</h5>
+                <h5 id="footer-nav-title">Navigation:</h5>
                 <ul id="footer-nav" class="d-flex flex-column">
                     <li>
                         <a href="{% url 'home' %}">Home</a>
@@ -147,10 +147,10 @@
                     All Reach Reports are provided with intention to simply give advice. It is down to you as a climber
                     to make the right decisions. Be safe, respect the mountains and don't forget to Reach!
                 </p>
-                <h5 class="m-0"><i class="fa-solid fa-envelope"></i> reportsreach@gmail.com</h5>
+                <h5 class="email m-0"><i class="fa-solid fa-envelope"></i> reportsreach@gmail.com</h5>
             </div>
             <div id="sociallinks" class="text-end col-6 col-sm-3 d-sm-flex flex-column">
-                <h5 class="d-block text-secondary">Social Links:</h5>
+                <h5 class="d-block">Social Links:</h5>
                 <div>
                     <a href="https://www.youtube.com/" target="_blank">
                         <i class="fa-brands fa-youtube"></i>

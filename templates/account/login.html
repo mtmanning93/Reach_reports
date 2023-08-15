@@ -26,7 +26,7 @@
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
-                <button class="primaryAction btn signup_button col-12" type="submit">{% trans "Login" %}</button>
+                <button class="primaryAction btn btn-success col-12" type="submit">{% trans "Login" %}</button>
             </form>
                 <a href="{% url 'account_reset_password' %}" class="text-center border-bottom border-primary col-12 col-md-9 pb-3">
                     Forgot Password
@@ -34,7 +34,7 @@
             <h5 class="mt-3 text-center">
                 {% blocktrans %}Want to join the community?
             </h5>
-            <a href="{{ signup_url }}" class="m-sm-3 col-12 btn btn-success">
+            <a href="{{ signup_url }}" class="m-sm-3 col-12 btn btn-secondary">
                 Signup
             </a>
             {% endblocktrans %}

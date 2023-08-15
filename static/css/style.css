@@ -66,31 +66,37 @@ a:hover {
 }
 
 .signup_button {
-    border: 2px solid #2b5876;
+    border: 2px solid #ffffff;
     padding: 5px;
 }
 
 .signup_button:hover {
-    background-color: #2b5876;
+    border: 2px solid #ffffff;
+    background-color: #3f97be;
     color: #ffffff;
     transition: 0.3s;
 }
 
 .navbar {
-    border-bottom: 2px solid black;
+    background-color: #2a3344;
+    border-bottom: 2px solid #ffffff;
 }
 
 .nav-item a {
     font-size: 1.2em;
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 #username_dropdown {
-    color: #2596be;
+    color: #40cdff;
 }
 
 .dropdown .dropdown-menu {
     border: 2px solid #2596be;
+}
+
+.dropdown .dropdown-menu>li>a{
+    color: #2a3344;
 }
 
 /* Header Images */
@@ -123,11 +129,13 @@ a:hover {
 }
 
 #head-btns a {
-    font-weight: 600;
+    font-weight: 700;
+    border-radius: 20px;
+    border: 1px solid black;
 }
         
 .signup-main {
-    background-color: rgb(69, 129, 168);
+    background-color: #2a3344;
     text-align: center;
     transition: 0.5s;
     background-size: 200% auto;
@@ -146,13 +154,22 @@ a:hover {
 
 footer {
     height: 150px;
-    border-top: 2px solid black;
+    background-color: #2a3344;
+    border-top: 1px solid #191919;
+}
+
+footer h5 {
+    color: #bdbdbd;
+}
+
+.email {
+    color: #ffffff;
 }
 
 footer a {
     padding: 0 5px;
     font-size: 1.5em;
-    color: black;
+    color: #d0cfcf;
     text-decoration: none;
 }
 
@@ -169,6 +186,7 @@ footer a {
 
 .safety_message {
     font-size: 0.75em;
+    color: #eeeeee;
 }
 
 /* Reports List */
@@ -297,7 +315,9 @@ label {
 /* Create Report Form */
 
 #upload {
-    padding: 6px 0;
+    padding: 6px;
+    background-color: white;
+    border: 1px solid #dfdede;
 }
 
 .errorlist {
