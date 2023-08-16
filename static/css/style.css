@@ -2,10 +2,12 @@
 
 /* Utils */
 
-/* body {
-    position: relative;
+body {
+    /* position: relative; */
     min-height: 100vh;
-} */
+    display: flex;
+    flex-direction: column;
+}
 
 h1 {
     font-family: 'Poppins', sans-serif;
@@ -49,10 +51,6 @@ a {
 
 a:hover {
     color: #40cdff;
-}
-
-.content-wrapper {
-    min-height: 65vh;
 }
 
 #messages {
@@ -100,7 +98,7 @@ a:hover {
     border: 2px solid #2596be;
 }
 
-.dropdown .dropdown-menu>li>a{
+.dropdown .dropdown-menu>li>a {
     color: #2a3344;
 }
 
@@ -108,7 +106,7 @@ a:hover {
 
 #head-img-wrapper {
     overflow: hidden;
-    height: 685px;
+    height: 87vh;
 }
 
 #head-img-wrapper img {
@@ -138,7 +136,7 @@ a:hover {
     border-radius: 20px;
     border: 1px solid black;
 }
-        
+
 .signup-main {
     background-color: #2a3344;
     text-align: center;
@@ -154,13 +152,14 @@ a:hover {
     color: whitesmoke;
     border: 1px solid black;
 }
- 
+
 /* Footer */
 
 footer {
     height: 150px;
     background-color: #2a3344;
     border-top: 1px solid #191919;
+    margin-top: auto;
 }
 
 footer h5 {
@@ -446,16 +445,16 @@ label {
         width: auto;
     }
 
-        /* Email Updates */
+    /* Email Updates */
 
-        .email-status {
-            display: inline;
-            float: right;
-        }
-    
-        #inactive-account h5 {
-            font-size: 1.1em;
-        }
+    .email-status {
+        display: inline;
+        float: right;
+    }
+
+    #inactive-account h5 {
+        font-size: 1.1em;
+    }
 
 }
 
@@ -465,7 +464,7 @@ label {
     #logo {
         height: 45px;
     }
-    
+
     #nav-pos {
         padding: 0;
     }
@@ -485,7 +484,7 @@ label {
     #head-quote {
         display: none;
     }
-    
+
     #head-btns {
         width: 100%;
     }
