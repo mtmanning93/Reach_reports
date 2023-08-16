@@ -319,10 +319,11 @@ label {
 
 /* Create Report Form */
 
-#upload {
+.upload {
     padding: 6px;
     background-color: white;
     border: 1px solid #dfdede;
+    margin-top: 2.5px;
 }
 
 .errorlist {

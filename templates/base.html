@@ -60,7 +60,7 @@
                     <li class="d-none d-sm-block nav-item dropdown">
                         <a id="username_dropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <strong>{{ user.username }}</strong>
+                            <strong><i class="fa-solid fa-user"></i> {{ user.username }}</strong>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="{% url 'account' %}">Account</a></li>
@@ -101,7 +101,7 @@
         {% endblock content %}
     </main>
 
-    <footer class="container-fluid d-flex flex-column justify-content-center text-dark mt-auto">
+    <footer class="container-fluid d-flex flex-column justify-content-center mt-auto">
         <div class="row d-flex justify-content-between">
             <div class="contact d-sm-none text-center mb-2 col-12">
                 <p class="safety_message">

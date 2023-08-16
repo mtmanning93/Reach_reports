@@ -64,8 +64,9 @@
                 </div>
                 <div class="col-12">
                     <div class="row">
+                        <label for="deletions"><i class="fa-solid fa-images"></i> Current Images:</label>
                         {% for image in images %}
-                        <div class="report_img_wrapper col-sm-3 col-xxl-2">
+                        <div id="deletions" class="report_img_wrapper col-sm-3 col-xxl-2">
                             <img class="report-img" src="{{ image.image_file.url }}" alt="Image" height="100">
                             <!-- Delete Image -->
                             <p class="text-secondary d-inline">Delete</p>
@@ -77,7 +78,7 @@
                     <div class="col-12 mt-2">
                         <label for="upload"><i class="fa-solid fa-camera"></i> Upload More Images: <span
                                 class="text-danger">Max Total 12</span></label>
-                        <input class="btn" id="upload" type="file" name="images" accept="image/*" multiple>
+                        <input class="form-control upload mt-2" id="upload" type="file" name="images" accept="image/*" multiple>
                     </div>
                 </div>
                 <div class="col-12">

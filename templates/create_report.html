@@ -23,7 +23,7 @@
     </div>
 </div>
 <div class="container-fluid d-flex justify-content-center p-0 pb-3 p-sm-3">
-    <div class="row col-12 col-md-9 col-lg-6 bg-light rounded pt-2 p-sm-3 mb-3">
+    <div class="row col-12 col-md-9 col-lg-7 bg-light rounded pt-2 p-sm-3 mb-3">
         <form id="create_form" class="text-start pb-3" method="post" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
             <div class="row col-12 justify-content-center justify-content-sm-start g-2">
@@ -61,10 +61,10 @@
                     {{ report_form.description|as_crispy_field }}
                 </div>
                 <div class="col-12 col-sm-6">
-                    <label for="upload"><i class="fa-solid fa-camera"></i> Upload Images: <span class="text-danger">Max
-                            Total 12</span></label>
-                    <br>
-                    <input class="form-control mt-2" id="upload" type="file" name="images" multiple>
+                    <label class="pb-2" for="upload">
+                        <i class="fa-solid fa-camera p-0">
+                        </i> Upload Images: <span class="text-danger">Max Total 12</span></label>
+                    <input class="form-control upload" id="upload" type="file" name="images" multiple>
                 </div>
                 <div class="col-12 col-sm-6">
                     <label class="pb-2" for="{{ report_form.gps_map_link.id_for_label }}">
