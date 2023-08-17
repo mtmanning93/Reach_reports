@@ -391,6 +391,10 @@ def delete_account(request):
 
 
 def toggle_report(request, pk):
+    """
+    Updates report status on toggle,
+    switching between draft and published.
+    """
     report = Report.objects.get(pk=pk)
 
     if request.method == 'POST':
