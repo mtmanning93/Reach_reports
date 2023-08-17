@@ -344,6 +344,15 @@ label {
 
 /* Media Queries */
 
+/* L screens, Bootstrap <large breakpoint */
+@media screen and (max-width: 992px) {
+
+    #reports-list-create-btn {
+        font-size: 0.9em;
+    }
+
+}
+
 /* M screens, Tablets, Bootstrap <medium breakpoint */
 @media screen and (max-width: 768px) {
 
@@ -460,6 +469,10 @@ label {
 /* XS screens, mainly for logo */
 @media screen and (max-width: 366px) {
 
+    h1 {
+        font-size: 1.75em;
+    }
+
     #logo {
         height: 45px;
     }
@@ -495,6 +508,11 @@ label {
     }
 
     /* Reports */
+
+    .sort {
+        text-align: end;
+        font-size: 0.9em;
+    }
 
     .report-list-item {
         font-size: 0.65em;
@@ -539,6 +557,19 @@ label {
 
     .email-status {
         width: 100%;
+    }
+
+}
+
+/* XXS screens */
+@media screen and (max-width: 250px) {
+
+    #filter-forms {
+        flex-wrap: wrap;
+    }
+
+    #filter-forms>div {
+        margin-bottom: 5px;
     }
 
 }
