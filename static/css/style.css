@@ -310,10 +310,6 @@ label {
     -moz-box-shadow: -2px 15px 53px -3px rgba(29, 49, 107, 0.82);
 }
 
-.ud-btn:hover {
-    text-decoration: underline;
-}
-
 /* Create Report Form */
 
 .upload {
@@ -372,7 +368,7 @@ label {
     #sociallinks,
     #footer-nav li,
     .report-list-item,
-    #list-key,
+    .list-key,
     .safety_message {
         font-size: 0.75em;
     }
@@ -425,7 +421,7 @@ label {
     }
 
     .report-list-item,
-    #list-key {
+    .list-key {
         font-size: 0.7em;
     }
 
