@@ -106,6 +106,7 @@ a:hover {
 #head-img-wrapper {
     overflow: hidden;
     height: 87vh;
+    min-height: 450px;
 }
 
 #head-img-wrapper img {
