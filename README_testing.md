@@ -261,16 +261,70 @@ The project was developed in Google Chrome using the Gitpod IDE. This made build
 
 ### Lighthouse
 --------------
+
+All site pages underwent a Lighthouse test, the goal here was to get all green scores, through; performance, accessibilty, best practices and SEO. After making some minor tweaks to some of the pages I was able to 'reach' over 90 in all of the categories on each of the site pages.
+
 <details>
 <summary>Home</summary>
 
 ![Comments section registered user](README_images/features/report_details/comments.png)
 </details>
+
 <details>
 <summary>Reports</summary>
 
 ![Comments section registered user](README_images/features/report_details/comments.png)
 </details>
+
+<details>
+<summary>Reports Details</summary>
+
+![Comments section registered user](README_images/features/report_details/comments.png)
+</details>
+
+<details>
+<summary>Create Report</summary>
+
+![Comments section registered user](README_images/features/report_details/comments.png)
+</details>
+
+<details>
+<summary>Edit Report</summary>
+
+![Comments section registered user](README_images/features/report_details/comments.png)
+</details>
+
+<details>
+<summary>Account</summary>
+
+![Comments section registered user](README_images/features/report_details/comments.png)
+</details>
+
+<details>
+<summary>Update Account</summary>
+
+![Comments section registered user](README_images/features/report_details/comments.png)
+</details>
+
+<details>
+<summary>Manage Email Accounts</summary>
+
+![Comments section registered user](README_images/features/report_details/comments.png)
+</details>
+
+<details>
+<summary>Logout, Login, Signup</summary>
+
+![Comments section registered user](README_images/features/report_details/comments.png)
+</details>
+
+<details>
+<summary>Password Reset</summary>
+
+![Comments section registered user](README_images/features/report_details/comments.png)
+</details>
+
+
 
 [⏫ contents](#contents)
 

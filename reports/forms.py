@@ -198,35 +198,3 @@ class UpdateAccountForm(UserChangeForm):
 
         self.fields.pop('password',)
         self.fields['username'].label = "Update Username"
-
-# class UpdateAccountForm(UserChangeForm):
-#     """
-#     Form used for updating account information: username and email.
-#     Email is displayed as a selection box with connected email addresses
-#     as choices.
-#     """
-
-#     email = forms.EmailField(
-#         widget=forms.Select(attrs={'class': 'form-control'}))
-
-#     class Meta:
-#         model = User
-#         fields = ('username', 'email')
-
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-
-#         self.fields.pop('password',)
-#         self.fields['username'].label = "Update Username"
-#         self.fields['email'].label = "Update Display Email"
-
-#         verified_emails = self.instance.emailaddress_set.filter(verified=True)
-
-#         self.fields[
-#             'email'].widget.choices = [
-#             (
-#                 email, email
-#                 ) for email in verified_emails.values_list(
-#                     'email', flat=True
-#                     )
-#             ]

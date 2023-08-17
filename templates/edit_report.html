@@ -64,13 +64,12 @@
                 </div>
                 <div class="col-12">
                     <div class="row">
-                        <label for="deletions"><i class="fa-solid fa-images"></i> Current Images:</label>
                         {% for image in images %}
                         <div id="deletions" class="report_img_wrapper col-sm-3 col-xxl-2">
-                            <img class="report-img" src="{{ image.image_file.url }}" alt="Image" height="100">
+                            <img class="report-img" src="{{ image.image_file.url }}" alt="Image">
                             <!-- Delete Image -->
-                            <p class="text-secondary d-inline">Delete</p>
-                            <input type="checkbox" name="delete_image_{{ image.id }}" data-marked-for-deletion>
+                            <label for="check{{ image.id }}" class="d-inline">Delete</label>
+                            <input id="check{{ image.id }}" type="checkbox" name="delete_image_{{ image.id }}" data-marked-for-deletion>
                         </div>
                         {% endfor %}
                     </div>
@@ -82,6 +81,9 @@
                     </div>
                 </div>
                 <div class="col-12">
+                    <label class="visually-hidden" for="{{ edit_form.gps_map_link.id_for_label }}">
+                        Fatmap.com url link
+                    </label>
                     <label class="pb-2" for="{{ report_form.gps_map_link.id_for_label }}">
                         <a class="btn p-0" data-bs-toggle="collapse" href="#fatmapcollapse" role="button"
                             aria-expanded="false" aria-controls="collapseExample">

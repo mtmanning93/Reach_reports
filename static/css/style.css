@@ -65,6 +65,7 @@ a:hover {
 
 #logo {
     max-height: 75px;
+    width: auto;
 }
 
 .signup_button {
@@ -240,7 +241,7 @@ label {
 /* Report Details */
 
 .back-button {
-    color: #2596be;
+    color: #3f97be;
 }
 
 .back-button i {
@@ -250,7 +251,7 @@ label {
 .info-label {
     margin: 0 0 3px 5px;
     font-family: 'Poppins', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 0.7em;
 }
 

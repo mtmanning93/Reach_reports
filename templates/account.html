@@ -155,7 +155,7 @@
         <!-- Title -->
         <div class="account_report_title col-3 text-start">
             <a href="{% url 'report_details' report.pk  %}">
-                <h4 class="report-list-title">{{ report.title }}</h4>
+                <h5 class="report-list-title">{{ report.title }}</h5>
             </a>
             <p>{{ report.activity_category|title }}</p>
         </div>
@@ -198,18 +198,18 @@
         <div class="col-1 d-flex flex-column align-items-center justify-content-evenly">
             <a href="{% url 'edit_report' pk=report.pk %}" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Click to edit report."><i class="fa-solid fa-pencil"></i></a>
             <a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Click to delete report.">
-                <i class="fa-solid fa-trash" data-bs-toggle="modal" data-bs-target="#deleteReportModal" data-report-id="{{ report.pk }}"></i>
+                <i class="fa-solid fa-trash" data-bs-toggle="modal" data-bs-target="#deleteReportModal{{ report.pk }}" data-report-id="{{ report.pk }}"></i>
             </a>
         </div>
 
         <!-- Delete Report Modal -->
 
-        <div class="modal" id="deleteReportModal" tabindex="-1" aria-labelledby="deleteReportModalLabel"
+        <div class="modal" id="deleteReportModal{{ report.pk }}" tabindex="-1" aria-labelledby="delete{{ report.pk }}ModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2 class="modal-title" id="deleteReportModalLabel">Confirm Deletion</h2>
+                        <h2 class="modal-title" id="delete{{ report.pk }}ModalLabel">Confirm Deletion</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">

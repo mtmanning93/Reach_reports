@@ -28,19 +28,19 @@
         <div class="col-lg-6 {% if report.images.count == 0 and not report.gps_map_link %}col-lg-12{% endif %} text-start">
             <div class="row g-2">
                 <div class="col-12 border rounded bg-light">
-                    <p class="info-label text-muted">Author:</p>
+                    <p class="info-label">Author:</p>
                     <p class="info-item">{{ report.author }}</p>
                 </div>
                 <div class="col-6 border rounded bg-light">
-                    <p class="info-label text-muted">End Date:</p>
+                    <p class="info-label">End Date:</p>
                     <p class="info-item">{{ report.end_date }}</p>
                 </div>
                 <div class="col-6 border rounded bg-light">
-                    <p class="info-label text-muted">Climb Type:</p>
+                    <p class="info-label">Climb Type:</p>
                     <p class="info-item">{{ report.activity_category|title }}</p>
                 </div>
                 <div class="col-6 border rounded bg-light">
-                    <p class="info-label text-muted">Conditions:</p>
+                    <p class="info-label">Conditions:</p>
                     <p class="info-item">
                         &nbsp;
                         {% if report.overall_conditions == "perfect" %}
@@ -56,7 +56,7 @@
                     </p>
                 </div>
                 <div class="col-6 border rounded bg-light">
-                    <p class="info-label text-muted">Goal Reached:</p>
+                    <p class="info-label">Goal Reached:</p>
                     <p class="info-item">
                         &nbsp;
                         {% if report.goal_reached == "yes" %}
@@ -68,13 +68,13 @@
                     </p>
                 </div>
                 <div class="col-6 border rounded bg-light">
-                    <p class="info-label text-muted mt-1">
+                    <p class="info-label mt-1">
                         <i class="fa-solid fa-person-hiking fs-6">-</i>
                         <i class="fa-solid fa-person-hiking fs-6"></i> People in Group:</p>
                     <p class="info-item">{{ report.number_in_group }}</p>
                 </div>
                 <div class="col-6 border rounded bg-light">
-                    <p class="info-label text-muted mt-1">
+                    <p class="info-label mt-1">
                         <i class="fa-solid fa-people-group fs-6"></i>
                         People on Route:
                     </p>
@@ -82,18 +82,18 @@
                 </div>
                 {% if report.height_in_meters %}
                 <div class="col-6 border rounded bg-light">
-                    <p class="info-label text-muted">Summit Height (masl):</p>
+                    <p class="info-label">Summit Height (masl):</p>
                     <p class="info-item">{{ report.height_in_meters }}m</p>
                 </div>
                 {% endif %}
                 {% if report.time_taken %}
                 <div class="col-6 border rounded bg-light">
-                    <p class="info-label text-muted">Time Taken (Speed Ascent):</p>
+                    <p class="info-label">Time Taken (Speed Ascent):</p>
                     <p class="info-item">{{ report.time_taken }}</p>
                 </div>
                 {% endif %}
                 <div class="col-12 border rounded bg-light text-start">
-                    <p class="info-label text-muted">Description:</p>
+                    <p class="info-label">Description:</p>
                     <p id="report-description">{{ report.description|striptags }}</p>
                 </div>
             </div>
@@ -102,7 +102,7 @@
         <div class="col-lg-6 col-lg-6 mt-2 mt-lg-0 {% if report.images.count == 0 and not report.gps_map_link %}d-none{% endif %}">
             <div class="row ps-3 pe-3 p-lg-0">
                 {% if report.images.count > 0 %}
-                <p class="info-label text-muted m-0 p-0"><i class="fa-solid fa-camera"></i> Images: (click to enlarge)</p>
+                <p class="info-label m-0 p-0"><i class="fa-solid fa-camera"></i> Images: (click to enlarge)</p>
                 {% for image_file in report.images.all %}
                 <button type="button" class="report-img col-4" data-bs-toggle="modal"
                     data-bs-target="#myModal{{image_file.pk}}">
@@ -115,11 +115,11 @@
                 <!-- Image Modal -->
                 {% for image_file in report.images.all %}
                 <div class="modal fade" id="myModal{{ image_file.pk }}" tabindex="-1"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    aria-labelledby="{{ image_file.pk }}ModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fa-solid fa-camera"></i>
+                                <h1 class="modal-title fs-5" id="{{ image_file.pk }}ModalLabel"><i class="fa-solid fa-camera"></i>
                                     {{ report.title }}</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
@@ -139,8 +139,8 @@
             <!-- Map -->
             {% if report.gps_map_link %}
             <div id="map" class="d-sm-block col-12 mt-2 mt-lg-0">
-                <p class="info-label text-muted m-0 p-0">Interactive Map:</p>
-                <iframe class="col-12 mt-2 p-0" src="{{ report.gps_map_link }}" frameborder="" allowfullscreen=""
+                <p class="info-label m-0 p-0">Interactive Map:</p>
+                <iframe title="FatmapIframe" class="col-12 mt-2 p-0" src="{{ report.gps_map_link }}" frameborder="" allowfullscreen=""
                     height="300px"></iframe>
             </div>
             {% endif %}
@@ -165,7 +165,7 @@
             {% if request.user in report.likes.all %}
             <form action="{% url 'like_report' report.pk %}" method="post">
                 {% csrf_token %}
-                <button type="submit" class="btn p-0 border-none">
+                <button type="submit" class="btn p-0 border-none" aria-label="Likes">
                     <h3 id="liked"><i class="fa-solid fa-thumbs-up"></i></h3>
                 </button>
             </form>
