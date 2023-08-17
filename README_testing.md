@@ -261,6 +261,16 @@ The project was developed in Google Chrome using the Gitpod IDE. This made build
 
 ### Lighthouse
 --------------
+<details>
+<summary>Home</summary>
+
+![Comments section registered user](README_images/features/report_details/comments.png)
+</details>
+<details>
+<summary>Reports</summary>
+
+![Comments section registered user](README_images/features/report_details/comments.png)
+</details>
 
 [⏫ contents](#contents)
 

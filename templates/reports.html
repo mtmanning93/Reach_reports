@@ -8,7 +8,7 @@
 <div class="container-fluid p-3 mb-5">
     <div class="row text-center">
         <h1>Condition Reports</h1>
-        <h4>Written by climbers for climbers.</h4>
+        <h2>Written by climbers for climbers.</h2>
     </div>
 </div>
 
@@ -112,7 +112,8 @@
             <div class="col-4 col-sm-3 text-start">
                 <h4 class="report-list-title mt-2 mb-2">{{ report.title }}</h4>
                 <p class="m-0">{{ report.activity_category|title }}</p>
-                <p class="mb-2"><span class="text-secondary">Goal achieved:</span>
+                <p class="mb-2">
+                    Goal achieved:
                     {% if report.goal_reached == "yes" %}
                     <i class="fa-solid fa-circle-check text-success"></i>
                     {% else %}
@@ -131,7 +132,7 @@
                 {% else %}
                 <i class="fa-solid fa-circle-xmark"></i>
                 {% endif %}
-                {{ report.overall_conditions }}
+                {{ report.overall_conditions|title }}
             </div>
             <!-- Author Activity Date -->
             <div class="col-3 d-flex flex-column justify-content-center align-items-center">
