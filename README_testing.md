@@ -262,66 +262,79 @@ The project was developed in Google Chrome using the Gitpod IDE. This made build
 ### Lighthouse
 --------------
 
-All site pages underwent a Lighthouse test, the goal here was to get all green scores, through; performance, accessibilty, best practices and SEO. After making some minor tweaks to some of the pages I was able to 'reach' over 90 in all of the categories on each of the site pages.
+All site pages underwent a Lighthouse test, the goal here was to get all green scores, through; performance, accessibilty, best practices and SEO. After making some minor tweaks to some of the pages I was able to 'reach' 85 or higher in all of the categories on each of the site pages.
 
 <details>
 <summary>Home</summary>
 
-![Comments section registered user](README_images/features/report_details/comments.png)
+![Lighthouse scores for home page](README_images/lighthouse/lh_home.png)
 </details>
 
 <details>
 <summary>Reports</summary>
 
-![Comments section registered user](README_images/features/report_details/comments.png)
+When lighthouse testing the reports list page the performance was dropping, although different on a few occasions it always hit around 80-89. The lighthouse issue displayed 'Properly sized images'. When researching it showed that the images could be compressed, and a different file type could be 'Serve images in next-gen format'. However as users will be uploading images directly from their documents It would create a much worse user experience if they had to convert all their image files before uploading.
+
+![Reports list page lighthouse error messages](README_images/lighthouse/lh-next-gen.png)
+![Reports list page lighthouse images](README_images/lighthouse/lh-images.png)
+![Reports list page lighthouse score](README_images/lighthouse/lh-reports.png)
 </details>
 
 <details>
 <summary>Reports Details</summary>
 
-![Comments section registered user](README_images/features/report_details/comments.png)
+![Report details page lighthouse score](README_images/lighthouse/lh-details.png)
 </details>
 
 <details>
 <summary>Create Report</summary>
 
-![Comments section registered user](README_images/features/report_details/comments.png)
+![Create report form lighthouse score](README_images/lighthouse/lh-create.png)
 </details>
 
 <details>
 <summary>Edit Report</summary>
 
-![Comments section registered user](README_images/features/report_details/comments.png)
+![Edit report form lightouse score](README_images/lighthouse/lh-edit.png)
 </details>
 
 <details>
 <summary>Account</summary>
 
-![Comments section registered user](README_images/features/report_details/comments.png)
+![Account page lighthouse score](README_images/lighthouse/lh-account.png)
 </details>
 
 <details>
 <summary>Update Account</summary>
 
-![Comments section registered user](README_images/features/report_details/comments.png)
+![Update account page lighthouse score](README_images/lighthouse/lh-update-acc.png)
 </details>
 
 <details>
 <summary>Manage Email Accounts</summary>
 
-![Comments section registered user](README_images/features/report_details/comments.png)
+![Email management page lighthouse score](README_images/lighthouse/lh-email.png)
 </details>
 
 <details>
 <summary>Logout, Login, Signup</summary>
 
-![Comments section registered user](README_images/features/report_details/comments.png)
+![Logout page lighthouse score](README_images/lighthouse/lh-logout.png)
+![Login page lighthouse score](README_images/lighthouse/lh-login.png)
+![Signup page lighthouse score](README_images/lighthouse/lh-signup.png)
 </details>
 
 <details>
-<summary>Password Reset</summary>
+<summary>Password Reset/ Change Password </summary>
 
-![Comments section registered user](README_images/features/report_details/comments.png)
+### Change Password
+![Change password page lighthouse score](README_images/lighthouse/lh-change.png)
+
+### Password Reset
+
+![Password reset sent page lighthouse score](README_images/lighthouse/lh-email-link.png)
+![Password reset sent page lighthouse score](README_images/lighthouse/lh-sent.png)
+![Password reset page lighthouse score](README_images/lighthouse/lh-password-reset.png)
 </details>
 
 
