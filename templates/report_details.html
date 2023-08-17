@@ -25,7 +25,7 @@
 <div class="container-fluid d-flex justify-content-center">
     <div class="row flex-column flex-lg-row col-12 col-md-9 col-xl-7 bg-light rounded pt-2 p-sm-3 mb-3">
         <!-- Info -->
-        <div class="col-lg-6 text-start">
+        <div class="col-lg-6 {% if report.images.count == 0 and not report.gps_map_link %}col-lg-12{% endif %} text-start">
             <div class="row g-2">
                 <div class="col-12 border rounded bg-light">
                     <p class="info-label text-muted">Author:</p>
@@ -99,7 +99,7 @@
             </div>
         </div>
         <!-- Images -->
-        <div class="col-lg-6 col-lg-6 mt-2 mt-lg-0">
+        <div class="col-lg-6 col-lg-6 mt-2 mt-lg-0 {% if report.images.count == 0 and not report.gps_map_link %}d-none{% endif %}">
             <div class="row ps-3 pe-3 p-lg-0">
                 {% if report.images.count > 0 %}
                 <p class="info-label text-muted m-0 p-0"><i class="fa-solid fa-camera"></i> Images: (click to enlarge)</p>
@@ -138,7 +138,7 @@
             </div>
             <!-- Map -->
             {% if report.gps_map_link %}
-            <div class="d-none d-sm-block col-12 mt-2 mt-lg-0">
+            <div id="map" class="d-sm-block col-12 mt-2 mt-lg-0">
                 <p class="info-label text-muted m-0 p-0">Interactive Map:</p>
                 <iframe class="col-12 mt-2 p-0" src="{{ report.gps_map_link }}" frameborder="" allowfullscreen=""
                     height="300px"></iframe>

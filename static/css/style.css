@@ -541,6 +541,10 @@ label {
         font-size: 0.75em;
     }
 
+    #map {
+        display: none;
+    }
+
     /* Create Report */
 
     #create_form,
