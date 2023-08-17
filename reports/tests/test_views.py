@@ -816,3 +816,47 @@ class UpdateAccountViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertFormError(
             response, 'form', 'username', 'This field is required.')
+
+
+class ToggleReportViewTest(TestCase):
+    """
+    Unit tests for the toggle_report view.
+    """
+    def setUp(self):
+        """
+        Set up the test environment.
+        """
+        self.user = User.objects.create(
+            username="testuser",
+            email='test@example.com',
+            password='testpassword'
+        )
+
+    def test_toggle_status(self):
+        """
+        Test the toggle functionality, changes report status from
+        0 'Draft' to 1 'Published' and back. First assertions checks
+        for the initial change the second checks for the opposite.
+        """
+        report = Report.objects.create(
+            title="Sample Report",
+            slug="sample-report",
+            author=self.user,
+            start_date="2023-07-13",
+            end_date="2023-07-15",
+            overall_conditions="Good",
+            activity_category="Hiking",
+            description="This is a sample report.",
+            status=0
+        )
+
+        url = reverse('toggle_report', args=[report.pk])
+        response = self.client.post(url)
+        report.refresh_from_db()
+
+        self.assertEqual(report.status, 1)
+        # Test view also toggles back
+        response = self.client.post(url)
+        report.refresh_from_db()
+
+        self.assertEqual(report.status, 0)

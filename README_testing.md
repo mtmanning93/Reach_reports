@@ -20,7 +20,7 @@
 ------------------
 #### Unit Tests (automated testing)
 
-I decided to take on Unit Testing for all python code in the project. After a steep and frustrating learning curve I managed to write **80** tests, including **152** assertions. I am however aware that there is many more tests which could be run to check the logic even further.
+I decided to take on Unit Testing for all python code in the project. After a steep and frustrating learning curve I managed to write **81** tests, including **154** assertions. I am however aware that there is many more tests which could be run to check the logic even further.
 
 *Some resources I used to build knowledge and write tests:*
 
@@ -37,6 +37,10 @@ I decided to take on Unit Testing for all python code in the project. After a st
 Throughout testing I was using `coverage` to test how much of my code was being tested and which statements still needed to be tested. Its an icredibly helpful tool, providing reports in the CLI and even a Html docment, visible from the browser. To avoid even further confusion I seperated my tests into different files, seperating `test_views` from `test_forms` meant I could also focus running tests on just one document or TestCase easier.
 
 After using `coverage` I was able to make **100%** of code covered.
+
+To run `coverage` in command line type:
+
+    coverage run --source=reports manage.py test
 
 ![Coverage report](README_images/coverage.png)
 

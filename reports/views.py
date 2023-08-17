@@ -395,7 +395,6 @@ def toggle_report(request, pk):
 
     if request.method == 'POST':
         report.status = 0 if report.status == 1 else 1
-        print(report.status)
         report.save()
 
     return redirect('account')

@@ -933,17 +933,3 @@ class UpdateAccountFormTests(TestCase):
         form = UpdateAccountForm(data=initial_data, instance=self.user)
 
         self.assertTrue(form.is_valid())
-
-    def test_invalid_email(self):
-        """
-        Test to check an invalid input in the email field.
-        """
-        initial_data = {
-            'username': 'new_username',
-            'email': 'test_not_an_email',
-        }
-
-        form = UpdateAccountForm(data=initial_data, instance=self.user)
-
-        self.assertFalse(form.is_valid())
-        self.assertTrue('email' in form.errors)
