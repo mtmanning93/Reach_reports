@@ -188,7 +188,6 @@ footer a {
 }
 
 .safety_message {
-    font-size: 0.75em;
     color: #eeeeee;
 }
 
@@ -373,7 +372,8 @@ label {
     #sociallinks,
     #footer-nav li,
     .report-list-item,
-    #list-key {
+    #list-key,
+    .safety_message {
         font-size: 0.75em;
     }
 

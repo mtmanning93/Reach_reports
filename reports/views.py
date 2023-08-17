@@ -388,3 +388,14 @@ def delete_account(request):
         return redirect('home')
 
     return render(request, 'account.html')
+
+
+def toggle_report(request, pk):
+    report = Report.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        report.status = 0 if report.status == 1 else 1
+        print(report.status)
+        report.save()
+
+    return redirect('account')

@@ -101,14 +101,14 @@
                 <h2 class="p-md-0 m-0 mb-md-2">Your Reports:</h2>
             </div>
             <p class="sort d-block d-md-none m-0 text-secondary"><span class="d-none d-sm-inline">Sorted By:
-                </span>Activity Date <i class="fa-solid fa-sort-down"></i></p>
+                </span>Created Date <i class="fa-solid fa-sort-down"></i></p>
         </div>
         <div class="col-md-4 col-md-4 p-0 mb-2">
             <a href="{% url 'create_report' %}" class="btn btn-success w-100">
                 Create New Report
             </a>
         </div>
-        <p class="sort d-none d-md-block p-0 m-0 text-secondary text-end">Sorted By: Activity Date <i
+        <p class="sort d-none d-md-block p-0 m-0 text-secondary text-end">Sorted By: Created Date <i
                 class="fa-solid fa-sort-down"></i></p>
     </div>
 
@@ -171,7 +171,20 @@
         </div>
         <!-- Status -->
         <div class="d-flex flex-column align-items-center justify-content-center col-sm-2">
-            {{ report.status|display_status|title }}
+            <form class="text-center" action="{% url 'toggle_report' report.id %}" method="post">
+                {% csrf_token %}
+                {% if report.status == 0 %}
+                <a class="status" type="submit" name="action" value="toggle" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Click to publish report.">
+                    <i class="fa-regular fa-share-from-square d-block"></i>
+                    {{ report.status|display_status|title }}
+                </a>
+                {% else %}
+                <a class="status" type="submit" name="action" value="toggle" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Click to return to draft.">
+                    <i class="fa-solid fa-share-from-square d-block"></i>
+                    {{ report.status|display_status|title }}
+                </a>
+                {% endif %}
+            </form>
         </div>
         <!-- Author Activity Date -->
         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
