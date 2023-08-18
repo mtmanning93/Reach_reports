@@ -340,6 +340,13 @@ label {
     border-color: #2596be;
 }
 
+/* Override Safari Styles */
+
+[type="submit"] {
+    appearance: none;
+    -webkit-appearance: none;
+}
+
 /* Media Queries */
 
 /* L screens, Bootstrap <large breakpoint */

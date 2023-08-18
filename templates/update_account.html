@@ -16,13 +16,13 @@
             <h4 class="text-center mt-2">
                 Edit account details for {{ user.username }}.
             </h4>
-            <form class="login d-sm-flex flex-column align-items-center col-12 col-sm-9 border-bottom border-primary pb-3" method="POST" action="{% url 'update_account' %}">
+            <form class="login d-flex flex-column align-items-center col-12 col-sm-9 border-bottom border-primary pb-3" method="POST" action="{% url 'update_account' %}">
                 {% csrf_token %}
                 {{ form|crispy }}
-                <button class="primaryAction btn btn-outline-primary col-6" type="submit">Update Username</button>
+                <button class="primaryAction btn btn-success col-9 col-md-6" type="submit">Update Username</button>
             </form>
             <h4 class="text-center mt-3">Account Management</h4>
-            <div class="col-12 d-sm-flex justify-content-center">
+            <div class="col-12 d-flex flex-column align-items-center flex-sm-row justify-content-center">
                 <a href="{% url 'account_email' %}" class="m-2 col-9 col-sm-6 col-lg-4 btn btn-outline-dark">
                     Manage Email Accounts
                 </a>

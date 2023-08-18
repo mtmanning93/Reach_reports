@@ -166,6 +166,7 @@ def like_report(request, pk):
             "Unauthorized users are not allowed to access this view.")
 
     return HttpResponseRedirect(reverse('report_details', args=[pk]))
+
 # @login_required
 # def like_report(request, pk):
 #     """

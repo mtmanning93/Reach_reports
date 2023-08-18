@@ -252,8 +252,8 @@ To further test whether the app would work across screens I physically tested it
 -------------------
 The project was developed in Google Chrome using the Gitpod IDE. This made building the project simple as I had access to the Chrome Devtools. It is however not just available in the Chrome browser therefore it was important to test it across a number of different browsers, the browser tests included:
 
-- Chrome
-- Firefox
+- Chrome (Development)
+- Firefox 
 - Safari
 - Edge
 
