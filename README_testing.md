@@ -239,7 +239,7 @@ When designing the app and the UI, responsiveness was key. When the sites main c
 To further test whether the app would work across screens I physically tested its appearance across some devices of differing sizes, these were:
 
 - 24" Monitor
-- 12" Square Desktop
+- 19" Square Desktop
 - 12" Macbook Air Laptop
 - iPad
 - Samsung Galaxy s21
