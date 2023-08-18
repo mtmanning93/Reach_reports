@@ -146,6 +146,7 @@ def report_details(request, pk):
     return render(request, 'report_details.html', context)
 
 
+@login_required
 def like_report(request, pk):
     """
     Provides like and unlike functionality on each report.
@@ -162,6 +163,7 @@ def like_report(request, pk):
     return HttpResponseRedirect(reverse('report_details', args=[pk]))
 
 
+@login_required
 def delete_comment(request, pk):
     """
     Deletes selected comment from database and displays confirmation.
@@ -357,6 +359,7 @@ def delete_image(image):
     image.delete()
 
 
+@login_required
 def delete_report(request, pk):
     """
     Deletes report instances and displays success message.
@@ -390,6 +393,7 @@ def delete_account(request):
     return render(request, 'account.html')
 
 
+@login_required
 def toggle_report(request, pk):
     """
     Updates report status on toggle,

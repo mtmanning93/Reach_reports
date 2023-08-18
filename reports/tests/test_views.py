@@ -709,9 +709,7 @@ class DeleteReportTests(TestCase):
         Tests reports are deleted when confirmed by the user.
         Checks if report object no longer exist in the db.
         """
-        self.client.login(
-            username=self.user.username, password=self.user.password
-            )
+        self.client.force_login(self.user)
         response = self.client.post(reverse('delete', args=[self.report.pk]))
 
         self.assertEqual(response.status_code, 302)
@@ -849,6 +847,8 @@ class ToggleReportViewTest(TestCase):
             description="This is a sample report.",
             status=0
         )
+
+        self.client.force_login(self.user)
 
         url = reverse('toggle_report', args=[report.pk])
         response = self.client.post(url)
