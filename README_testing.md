@@ -11,7 +11,7 @@
 - [JavaScript Testing](#javascript-testing)
     - [ESLint](#eslint)
 - [CSS Testing](#css-testing)
-- [User Testing](#user-testing)
+- [Manual Testing](#manual-testing)
 - [Screen Testing](#screen-testing)
 - [Browser Testing](#browser-testing)
 - [Lighthouse](#lighthouse)
@@ -20,7 +20,7 @@
 ------------------
 #### Unit Tests (automated testing)
 
-I decided to take on Unit Testing for all python code in the project. After a steep and frustrating learning curve I managed to write **81** tests, including **154** assertions. I am however aware that there is many more tests which could be run to check the logic even further.
+I decided to take on Unit Testing for all Python code in the project. After a steep and frustrating learning curve, I wrote **81** tests, including **154** assertions. I am however aware that there are many more tests that could be run to check the logic even further.
 
 *Some resources I used to build knowledge and write tests:*
 
@@ -34,9 +34,9 @@ I decided to take on Unit Testing for all python code in the project. After a st
 
 #### Coverage
 
-Throughout testing I was using `coverage` to test how much of my code was being tested and which statements still needed to be tested. Its an icredibly helpful tool, providing reports in the CLI and even a Html docment, visible from the browser. To avoid even further confusion I seperated my tests into different files, seperating `test_views` from `test_forms` meant I could also focus running tests on just one document or TestCase easier.
+Throughout testing, I was using `coverage` to test how much of my code was being tested and which statements still needed to be tested. It's an incredibly helpful tool, providing reports in the CLI and even an Html document, visible from the browser. To avoid even further confusion I seperated my tests into different files, seperating `test_views` from `test_forms` meant I could also focus running tests on just one document or TestCase easier.
 
-After using `coverage` I was able to make **100%** of code covered.
+After using `coverage` I was able to make **100%** of the code covered.
 
 To run `coverage` in command line type:
 
@@ -46,7 +46,7 @@ To run `coverage` in command line type:
 
 #### Linters
 
-To check for syntax errors in the projects Python code I used `pycodestyle` *(formerly pep8)*. Using this I was able to twst my code from inside the command line. Its a fast and easy way to heck the syntax as it returns the file name and lines of the error.
+To check for syntax errors in the project's Python code I used `pycodestyle` *(formerly pep8)*. Using this I was able to test my code from inside the command line. Its a fast and easy way to heck the syntax as it returns the file name and lines of the error.
 
 To install `pycodestyle` in the command line:
 
@@ -58,9 +58,9 @@ Then to test the files in the command line:
     or
     pycodestyle .
 
-When initially running the linter there were a few errors which I addressed and corrected. After these corrections the only errors left were *'E501 line too long'*. These were mostl found in the migration files automatically created during the `makemigration` command. After updating these there were no more errors within my files.
+When initially running the linter there were a few errors which I addressed and corrected. After these corrections the only errors left were *'E501 line too long'*. These were mostly found in the migration files automatically created during the `makemigration` command. After updating these there were no more errors within my files.
 
-To check I ran in the command line:
+To check I ran the following in the command line:
 
     pycodestyle reports
     pycodestyle reach
@@ -72,7 +72,7 @@ To check I ran in the command line:
 ----------------------
 #### ESLint
 
-I tested the JavaScript file using ESLint. After running the tests initally there were 3 errors, regarding the use of global variables. ESLint isnt aware of project file structure so I needed to update the settings within the `.eslintrc.json` file. Once this was done and used variables was specified the `script.js` file **passed** all tests with 0 errors.
+I tested the JavaScript file using ESLint. After running the tests initially there were 3 errors, regarding the use of global variables. ESLint isn't aware of the project file structure so I needed to update the settings within the `.eslintrc.json` file. Once this was done and used variables were specified the `script.js` file **passed** all tests with 0 errors.
 
 To install ESLint in the terminal:
 
@@ -92,7 +92,7 @@ The addition to the `.eslintrc.json` file:
 ---------------
 #### W3C Validator
 
-I ran the css file through the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/validator#css) and the file passed with no errors. After using `Bootstrap` throughout the project I didnt have too much CSS to test.
+I ran the CSS file through the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/validator#css) and the file passed with no errors. After using `Bootstrap` throughout the project I didn't have too much CSS to test.
 
 ![W3C CSS validation success](README_images/w3c_css.png)
 
@@ -100,7 +100,7 @@ I ran the css file through the [W3C CSS Validator](https://jigsaw.w3.org/css-val
 ----------------
 #### W3C Validator
 
-When initially running the site through the [W3C Html Validator](https://validator.w3.org/nu/?showsource=yes&showoutline=yes&doc=https%3A%2F%2Freach-reports-e02886ddeda3.herokuapp.com%2F), I recieved 2 error messages:
+When initially running the site through the [W3C Html Validator](https://validator.w3.org/nu/?showsource=yes&showoutline=yes&doc=https%3A%2F%2Freach-reports-e02886ddeda3.herokuapp.com%2F), I received 2 error messages:
 
 1.  "Element h5 not allowed as child of element ul in this context."
 - This error was in the footer of the site, I just needed to move the `<ul>><h5>` from inside to outside the `<ul>` element.
@@ -108,13 +108,13 @@ When initially running the site through the [W3C Html Validator](https://validat
 2. "Stray end tag `<div>`."
 - Again in the footer I had an unused closing `</div>` tag.
 
-With these errors fixed I ran the deployed url again and recieved "Document checking completed. No errors or warnings to show" message.
+With these errors fixed I ran the deployed URL again and received the "Document checking completed. No errors or warnings to show" message.
 
 ![W3C Html validation success](README_images/w3c_html.png)
 
 [⏫ contents](#contents)
 
-### User Testing
+### Manual Testing
 ----------------
 These tests were written and given to a user to carry out whilst using the site. They were made to test overall functionailty of the site.
 
@@ -128,13 +128,13 @@ These tests were written and given to a user to carry out whilst using the site.
 | Click 'Signup' link in navbar | Opens signup page | √ | Pass |
 | Click 'Burger' list icon on mobile in navbar | Opens Dropdown menu | √ | Pass |
 | **Footer** |
-| Click social links in footer | Opens link in newtab to relevant social media site | √ | Pass |
+| Click social links in footer | Opens link in new tab to relevant social media site | √ | Pass |
 | Click footer nav links | Opens relevant pages | √ | Pass |
 | **Home/ Landing page** |
 | Load landing page | Page loads | √ | Pass |
 | Click 'Condition Reports' button | Reports list page opens showing list of all reports | √ | Pass |
 | Click 'Signup' button | Signup page opens | √ | Pass |
-| Reload page | New header image and inspiring quote appears at random | √ | Pass |
+| Reload page | New header image and the inspiring quote's appear at random | √ | Pass |
 | **Reports** |
 | Click report object | Reports details page opens showing relevant report details | √ | Pass |
 | Apply 'activity' filter | Filters report list to show just the chosen activty reports | √ | Pass |
@@ -151,7 +151,7 @@ These tests were written and given to a user to carry out whilst using the site.
 | Click like button (logged in) | Like icon turns blue and adds to the like count | √ | Pass |
 | Click like button again (logged in) | Like icon turns white and removes a like count | √ | Pass |
 | **Comments** |
-| Write comment and hit post | Reloads the relevant page with new comment and comment count increments | √ | Pass |
+| Write a comment and hit post | Reloads the relevant page with new comment and comment count increments | √ | Pass |
 | Click delete comment 'X' button | Opens confirm deletion modal | √ | Pass |
 | Click 'delete' in modal | Removes comment from report details view | √ | Pass |
 | Click 'cancel' in modal | No action, returns user to reportdetails | √ | Pass |
@@ -174,8 +174,8 @@ These tests were written and given to a user to carry out whilst using the site.
 | Click report object title | Opens report details of relevant report | √ | Pass |
 | Click report object 'edit' link | Opens edit report page with relevant report details | √ | Pass |
 | Click report object 'delete' link | Opens confirm deletion modal | √ | Pass |
-| Click 'delete' in deletion modal | Deletes report and redirects user to their 'account' page | √ | Pass |
-| Click 'cancel' in deletion modal | Closes modal and returns user to their account page | √ | Pass |
+| Click 'delete' in the deletion modal | Deletes report and redirects the user to their 'account' page | √ | Pass |
+| Click 'cancel' in deletion modal | Closes modal and returns the user to their account page | √ | Pass |
 | **Update Account** |
 | Update account with valid username | Account information updated and returned to account page | √ | Pass |
 | Update account with invalid username | Form is invalid, corresponding validation error shown | √ | Pass |
@@ -184,7 +184,7 @@ These tests were written and given to a user to carry out whilst using the site.
 | **Logged In User** |
 | Click 'username' link in navbar | Opens dropdown including links to account and logout | √ | Pass |
 | **Admin & Staff** |
-| Click 'username' link in navbar | Opens dropdown including links to account, site control and logout | √ | Pass |
+| Click the 'username' link in the navbar | Opens dropdown including links to account, site control and logout | √ | Pass |
 | Click 'site control' link in profile information | Opens django admin panel | √ | Pass |
 | **Create Report Form** |
 | Fill out form with valid data | Creates report and redirects user to reports list page, shows success alert | √ | Pass |
@@ -194,15 +194,15 @@ These tests were written and given to a user to carry out whilst using the site.
 | Select a 'start-date' more than 5 years old | Form is invalid, corresponding validation error shown | √ | Pass |
 | Input a 'summit height' as a negative number | Form is invalid, corresponding validation error shown | √ | Pass |
 | Input a 'summit height' higher than Everest (8849) | Form is invalid, corresponding validation error shown | √ | Pass |
-| Input an invalid duration format in 'time taken' field | Form is invalid, corresponding validation error shown | √ | Pass |
+| Input an invalid duration format in the 'time taken' field | Form is invalid, corresponding validation error shown | √ | Pass |
 | Input a negative in the 'number in group' field | Form is invalid, corresponding validation error shown | √ | Pass |
 | Input a negative in the 'number on route' field | Form is invalid, corresponding validation error shown | √ | Pass |
 | Input a number over 50 in 'number in group' field | Form is invalid, corresponding validation error shown | √ | Pass |
 | Input a number over 500 'number on route' field | Form is invalid, corresponding validation error shown | √ | Pass |
 | Input a valid url in the 'Fatmap link' field  | Form is created, displays a iframe in the report details page | √ | Pass |
-| Input an invalid url in the 'Fatmap link' field (doesnt include 'fatmap.com')  | Form is invalid, corresponding validation error shown | √ | Pass |
+| Input an invalid URL in the 'Fatmap link' field (doesn't include 'fatmap.com')  | Form is invalid, corresponding validation error shown | √ | Pass |
 | **Edit Report Form** |
-| Select some images to delete (checkbox), submit | Confirm deletion modal is shown, on confirmaation images are removed from report | √ | Pass |
+| Select some images to delete (checkbox), submit | Confirm deletion modal is shown, on confirmation images are removed from report | √ | Pass |
 | Choose a report with images and more images (under 12) | If image count for the report is under 12, images are added | √ | Pass |
 | Choose a report with images and more images (over 12) | Form is invalid, corresponding validation error shown, no action on images taken | √ | Pass |
 | Choose a report with images and more images (over 12), but also delete images (total under 12) | Image count is checked, deleted images removed and added images added to report | √ | Pass |
@@ -218,7 +218,7 @@ These tests were written and given to a user to carry out whilst using the site.
 | Provide valid password inputs to change account password | 'Password changed successfully' alert displays | √ | Pass |
 | Provide invalid password inputs to change account password | Corresponding validation errors display | √ | Pass |
 | **Password Verification** |
-| Provide valid email, click 'signup' button | If email is valid, user receives an email with confirm email link, and send confirmation page is shown | √ | Pass |
+| Provide a valid email, click the 'signup' button | If the email is valid, the user receives an email with confirm email link, and send confirmation page is shown | √ | Pass |
 | Click 'confirm' link in email | Takes user to 'login' page | √ | Pass |
 | **Email Account Mangement** |
 | Add a valid email address to your account | Email address is added to list of accounts and success message is displayed | √ | Pass |
@@ -234,9 +234,9 @@ These tests were written and given to a user to carry out whilst using the site.
 
 ### Screen Testing
 ------------------
-When designing the app and the UI, responsiveness was key. When the sites main components were in place, I worked on the less responsive parts of the design, using `bootstraps` gridsystem and some custom styling I was able to use Chrome dev tools to implement a responsive design site wide across a range of devices from iPhone 6 to large monitor sized screens.
+When designing the app and the UI, responsiveness was key. When the sites main components were in place, I worked on the less responsive parts of the design, using `bootstraps` grid system and some custom styling I was able to use Chrome dev tools to implement a responsive design site-wide across a range of devices from iPhone 6 to large monitor sized screens.
 
-To further test the app would work across screens I physically tested its appearance across some devices of differeing sizes, these were:
+To further test whether the app would work across screens I physically tested its appearance across some devices of differing sizes, these were:
 
 - 24" Monitor
 - 12" Square Desktop
@@ -262,7 +262,7 @@ The project was developed in Google Chrome using the Gitpod IDE. This made build
 ### Lighthouse
 --------------
 
-All site pages underwent a Lighthouse test, the goal here was to get all green scores, through; performance, accessibilty, best practices and SEO. After making some minor tweaks to some of the pages I was able to 'reach' 85 or higher in all of the categories on each of the site pages.
+All site pages underwent a Lighthouse test, the goal here was to get all green scores, through; performance, accessibility, best practices and SEO. After making some minor tweaks to some of the pages I was able to 'reach' 85 or higher in all of the categories on each of the site pages. Click the dropdowns below to see the lighthouse screenshots from each page.
 
 <details>
 <summary>Home</summary>
@@ -273,7 +273,7 @@ All site pages underwent a Lighthouse test, the goal here was to get all green s
 <details>
 <summary>Reports</summary>
 
-When lighthouse testing the reports list page the performance was dropping, although different on a few occasions it always hit around 80-89. The lighthouse issue displayed 'Properly sized images'. When researching it showed that the images could be compressed, and a different file type could be 'Serve images in next-gen format'. However as users will be uploading images directly from their documents It would create a much worse user experience if they had to convert all their image files before uploading.
+When lighthouse testing the reports list page the performance was dropping, although different on a few occasions it always hit around 80-89. The lighthouse issue displayed 'Properly sized images'. When researching it showed that the images could be compressed, and a different file type could be 'Serve images in next-gen format'. However, as users will be uploading images directly from their documents It would create a much worse user experience if they had to convert all their image files before uploading.
 
 ![Reports list page lighthouse error messages](README_images/lighthouse/lh-next-gen.png)
 ![Reports list page lighthouse images](README_images/lighthouse/lh-images.png)
@@ -336,8 +336,6 @@ When lighthouse testing the reports list page the performance was dropping, alth
 ![Password reset sent page lighthouse score](README_images/lighthouse/lh-sent.png)
 ![Password reset page lighthouse score](README_images/lighthouse/lh-password-reset.png)
 </details>
-
-
 
 [⏫ contents](#contents)
 
