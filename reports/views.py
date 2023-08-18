@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 import cloudinary
 import random
 
@@ -151,16 +152,35 @@ def like_report(request, pk):
     """
     Provides like and unlike functionality on each report.
     """
-    if request.method == 'POST':
-        report = get_object_or_404(Report, pk=pk)
+    try:
+        if request.method == 'POST':
+            report = get_object_or_404(Report, pk=pk)
 
-        if request.user.is_authenticated:
             if report.likes.filter(id=request.user.id).exists():
                 report.likes.remove(request.user)
             else:
                 report.likes.add(request.user)
 
+    except AttributeError:
+        raise PermissionDenied(
+            "Unauthorized users are not allowed to access this view.")
+
     return HttpResponseRedirect(reverse('report_details', args=[pk]))
+# @login_required
+# def like_report(request, pk):
+#     """
+#     Provides like and unlike functionality on each report.
+#     """
+#     if request.method == 'POST':
+#         report = get_object_or_404(Report, pk=pk)
+
+#         if request.user.is_authenticated:
+#             if report.likes.filter(id=request.user.id).exists():
+#                 report.likes.remove(request.user)
+#             else:
+#                 report.likes.add(request.user)
+
+#     return HttpResponseRedirect(reverse('report_details', args=[pk]))
 
 
 @login_required
