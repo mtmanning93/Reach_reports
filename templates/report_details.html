@@ -248,7 +248,7 @@
             {{ comment_form|crispy }}
             {% csrf_token %}
             <p class="float-start"><span class="text-muted">Commenting: </span>{{ user.username }}</p>
-            <button type="submit" class="col-4 col-sm-2 col-xl-1 btn signup_button float-end">Post</button>
+            <button type="submit" class="col-4 col-sm-2 col-xl-1 btn btn-success float-end">Post</button>
         </form>
         {% endif %}
     </div>
