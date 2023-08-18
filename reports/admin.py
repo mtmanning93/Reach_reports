@@ -27,10 +27,11 @@ class CommentAdmin(admin.ModelAdmin):
         'name',
         'content',
         'report',
-        'created_on')
+        'created_on',
+        'approved',)
     list_filter = ('approved', 'created_on',)
     search_fields = ['name', 'email', 'content']
-    actions = ['approve_comments']
+    actions = ['toggle_approval']
 
-    def approve_comments(self, request, queryset):
-        queryset.update(approved=True)
+    def toggle_approval(self, request, queryset):
+        queryset.update(approved=False)

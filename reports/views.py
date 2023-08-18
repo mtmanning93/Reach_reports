@@ -128,6 +128,7 @@ def report_details(request, pk):
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.report = report
+            comment.email = request.user.email
             comment.name = request.user.username
             comment.save()
 
