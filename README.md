@@ -1048,7 +1048,7 @@ It would be an incredible feat to remember all information needed to build such 
 
 ### Tutorials
 -------------
-* [Setup SMTP Tutorial](https://dev.to/abderrahmanemustapha/how-to-send-email-with-django-and-gmail-in-production-the-right-way-24ab): This tutorial helped me to set up the gmail smtp required for the password reset functionality. 
+* [Setup SMTP Tutorial](https://dev.to/abderrahmanemustapha/how-to-send-email-with-django-and-gmail-in-production-the-right-way-24ab), [Setup SMTP Tutorial 2](https://www.codesnail.com/django-allauth-email-authentication-tutorial/#:~:text=password%20with%20login-,Email%20verification,none%20to%20mandatory%20like%20this.&text=Now%20while%20registering%20it%20will%20send%20an%20email%20verification%20link.): These tutorials helped me to set up the gmail smtp required for the password reset functionality. 
 
 * [Password Reset Tutorial](https://learndjango.com/tutorials/django-password-reset-tutorial): This tutorial also helped to set up the password reset using django-allauth.
 
