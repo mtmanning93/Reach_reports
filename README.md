@@ -1,7 +1,7 @@
 # REACH
 ### Condition reports from the mountains, written by climbers, for climbers.
 
-![Overall site view across different devices](README_images/responsive_preview.png)
+![Overall site view across different devices](README_images/development/preview.png)
 
 ## Live Site
 [Hosted on Heroku](https://reach-reports-e02886ddeda3.herokuapp.com/)
@@ -198,7 +198,7 @@ Line Key:\
 **Orange** - Action\
 **Red** - Deletion
 
-![Full wireframe and flow of Reach website](README_images/wirefram_full.png)
+![Full wireframe and flow of Reach website](README_images/development/wirefram_full.png)
 
 ### Information Architecture
 ----------------------------
@@ -232,25 +232,25 @@ The color scheme was chosen to effectively communicate the adventurous and trust
 
 The main colors used throughout the site were:
 
-![Color palette](README_images/color-palette.png)
+![Color palette](README_images/development/color-palette.png)
 
 #### Fonts
 
-I used 2 fonts throughout the site, in different weights, to display hierarchy and guide users. The fonts were chosen due to the versatility and clarity. The two fonts used were; **LATO** for almost all elements, and **Poppins** for added details of lesser importance.
+I used 2 fonts throughout the site, in different weights, to display hierarchy and guide users. The fonts were chosen due to the versatility and clarity. The two fonts used were; **LATO** for almost all elements, and **Poppins** for stand out headings or alternate text. In the example below the blue text is 'Poppins' and the black is 'Lato'.
 
-![An example use of both fonts](README_images/fonts.png)
+![An example use of fonts](README_images/development/fonts.png)
 
 #### Imagery
 
 Across the site, I used just nine images. Seven of these are shown as the 'Home' page's main header image. These images were chosen as they cover a wide range of mountainous activities and all convey the main them of the site, adventure. These header images were taken from [Unsplash](https://unsplash.com/) a loyalty free high-quality image resource.
 
-![Header Images](README_images/header_images.png)
+![Header Images](README_images/development/header_images.png)
 
 #### Logo
 
 The site's logo is a simple mountain emblem with bold and capitalized REACH after it. This is immediately visible to a user and allows the user to quickly identify the site, the colors are in keeping with the site's theme.
 
-![Reach site logo](README_images/logo.png)
+![Reach site logo](README_images/development/logo.png)
 
 [⏫ contents](#contents)
 
@@ -258,7 +258,7 @@ The site's logo is a simple mountain emblem with bold and capitalized REACH afte
 
 I created an ERD to aid in the creation of the database, below is a screenshot to help visualize the models. Below the image are descriptions for each model.
 
-![Rearch ERD (Database Model)](README_images/database_model.png)
+![Rearch ERD (Database Model)](README_images/development/database_model.png)
 
 ### User Model
 
@@ -588,7 +588,7 @@ Due to the current scope of the project and time constraints, the current versio
 
 #### Edit/ Delete Report Links
 
-On each report item in the user's personal reports list is an 'Edit' and a 'Delete' link. If a user chooses to edit they are redirected to the 'edit report' page, whilst if they select 'delete' the confirm deletion modal appears, if confirmed the report is deleted and they're returned to their account page.
+On each report item in the user's personal reports list is an 'Edit' and a 'Delete' icon. If a user chooses to edit they are redirected to the 'edit report' page, whilst if they select 'delete' the confirm deletion modal appears, if confirmed the report is deleted and they're returned to their account page. For clarity, both icons have a tooltip to describe their functionality.
 
 <details>
 <summary>Report Management Screenshot</summary>
@@ -671,7 +671,7 @@ Users need to logout in order t protect their accounts. They can do this from in
 
 Non-registered users can navigate to the 'Signup' page. Here they must fill out the forms required fields in order to create an account. I decided to implement email verification for the project. This means when users click signup they are sent a verification link in an email, this verifies the user's email address. When the email link is clicked the user is taken to the login page.
 
-Additionally, if the user has already registered an account with the same email or username the relevant error messages are shown and the user must enter a different username or email.
+Additionally, if the user has already registered an account with the same username the relevant error message is shown and the user must enter a different username.
 
 <details>
 <summary>Signup Screenshots</summary>
@@ -687,6 +687,7 @@ Additionally, if the user has already registered an account with the same email 
 Whilst building the project new ideas perfect for future releases would come to mind. To stay productive and on track with the current build, I created a [Feature Request Form](#feature-request) using GitHub issues. This meant I could save the ideas for later. Their are still some features in the [Product Backlog](#product-backlog) that would be a great addition to the site at a later point. These features are now marked as ['Won't Do'](#labels) as for this release they aren't of high priority.
 
 [Link To Current 'Wont Dos'](https://github.com/mtmanning93/Reach_reports/issues?q=is%3Aissue+label%3A%22Wont+Have%22+is%3Aopen)
+
 [Link To Left Feature Requests](https://github.com/mtmanning93/Reach_reports/issues?q=is%3Aopen+is%3Aissue+label%3A%22Feature+Request%22)
 
 [⏫ contents](#contents)
@@ -808,7 +809,7 @@ When designing the project, even as early as the brainstorming session, it was c
 
 I attempted to contact 'fatmap.com' and 'datahappy.co' but neither responded to the issue I had raised.
 
-![Errors with Fatmap iframe](README_images/iframe_errors.png)
+![Errors with Fatmap iframe](README_images/testing/iframe_errors.png)
 
 [⏫ contents](#contents)
 

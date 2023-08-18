@@ -42,7 +42,7 @@ To run `coverage` in command line type:
 
     coverage run --source=reports manage.py test
 
-![Coverage report](README_images/coverage.png)
+![Coverage report](README_images/testing/coverage.png)
 
 #### Linters
 
@@ -94,7 +94,7 @@ The addition to the `.eslintrc.json` file:
 
 I ran the CSS file through the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/validator#css) and the file passed with no errors. After using `Bootstrap` throughout the project I didn't have too much CSS to test.
 
-![W3C CSS validation success](README_images/w3c_css.png)
+![W3C CSS validation success](README_images/testing/w3c_css.png)
 
 ### Html Testing
 ----------------
@@ -110,7 +110,7 @@ When initially running the site through the [W3C Html Validator](https://validat
 
 With these errors fixed I ran the deployed URL again and received the "Document checking completed. No errors or warnings to show" message.
 
-![W3C Html validation success](README_images/w3c_html.png)
+![W3C Html validation success](README_images/testing/w3c_html.png)
 
 [⏫ contents](#contents)
 
