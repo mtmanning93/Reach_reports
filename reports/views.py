@@ -13,8 +13,37 @@ from . import forms
 from .models import Report, Comment, ImageFile, generate_slug
 
 
-def get_random_quote():
+def user_owns_report(view_func):
+    """
+    Decorator to check if the requested report to edit or delete is owned
+    by the current user. Applied to:
+    - delete_report
+    - toggle_report
+    - edit_report
 
+    If 'True' the view is accessed.
+
+    If 'False' (the user does not own the report) they are redirected
+    to their account. Subsequently if they have no account they're
+    redirected to the login page via the @login_required decorator.
+    """
+    def _wrapped_view(request, *args, **kwargs):
+        report = get_object_or_404(Report, pk=kwargs['pk'])
+
+        if report.author == request.user:
+
+            return view_func(request, *args, **kwargs)
+
+        else:
+            return redirect('account')
+
+    return _wrapped_view
+
+
+def get_random_quote():
+    """
+    Lists the random quote selection and picks one at random.
+    """
     quotes = [
         {
             'quote': """We cannot lower the mountain,
@@ -153,36 +182,16 @@ def like_report(request, pk):
     """
     Provides like and unlike functionality on each report.
     """
-    try:
-        if request.method == 'POST':
-            report = get_object_or_404(Report, pk=pk)
+    if request.method == 'POST':
+        report = get_object_or_404(Report, pk=pk)
 
+        if request.user.is_authenticated:
             if report.likes.filter(id=request.user.id).exists():
                 report.likes.remove(request.user)
             else:
                 report.likes.add(request.user)
 
-    except AttributeError:
-        raise PermissionDenied(
-            "Unauthorized users are not allowed to access this view.")
-
     return HttpResponseRedirect(reverse('report_details', args=[pk]))
-
-# @login_required
-# def like_report(request, pk):
-#     """
-#     Provides like and unlike functionality on each report.
-#     """
-#     if request.method == 'POST':
-#         report = get_object_or_404(Report, pk=pk)
-
-#         if request.user.is_authenticated:
-#             if report.likes.filter(id=request.user.id).exists():
-#                 report.likes.remove(request.user)
-#             else:
-#                 report.likes.add(request.user)
-
-#     return HttpResponseRedirect(reverse('report_details', args=[pk]))
 
 
 @login_required
@@ -308,6 +317,7 @@ def create_new_images(report, new_images):
 
 
 @login_required
+@user_owns_report
 def edit_report(request, pk):
     """
     Updates report details with valid form. Redirects to 'account'.
@@ -382,6 +392,7 @@ def delete_image(image):
 
 
 @login_required
+@user_owns_report
 def delete_report(request, pk):
     """
     Deletes report instances and displays success message.
@@ -416,6 +427,7 @@ def delete_account(request):
 
 
 @login_required
+@user_owns_report
 def toggle_report(request, pk):
     """
     Updates report status on toggle,
