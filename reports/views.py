@@ -20,18 +20,20 @@ def user_owns_report(view_func):
     - delete_report
     - toggle_report
     - edit_report
-
-    If 'True' the view is accessed.
-
-    If 'False' (the user does not own the report) they are redirected
-    to their account. Subsequently if they have no account they're
-    redirected to the login page via the @login_required decorator.
     """
     def _wrapped_view(request, *args, **kwargs):
+        """
+        Logic to check ownership.
+
+        If 'True' the view is accessed.
+
+        If 'False' (the user does not own the report) they are redirected
+        to their account. Subsequently if they have no account they're
+        redirected to the login page via the @login_required decorator.
+        """
         report = get_object_or_404(Report, pk=kwargs['pk'])
 
         if report.author == request.user:
-
             return view_func(request, *args, **kwargs)
 
         else:
