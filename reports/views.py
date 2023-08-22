@@ -35,7 +35,6 @@ def user_owns_report(view_func):
 
         if report.author == request.user:
             return view_func(request, *args, **kwargs)
-
         else:
             return redirect('account')
 
