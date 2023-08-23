@@ -8,6 +8,47 @@ from reports.forms import CreateReportForm, UpdateAccountForm
 from reports import views
 
 
+class TestCustomDecorator(TestCase):
+    """
+    Tests custom decorator user_owns_report to check for redirect
+    in the case of user not owning the report.
+    """
+    def setUp(self):
+        self.owner = User.objects.create(
+            username="testowner",
+            email='testowner@example.com',
+            password='testowner'
+        )
+
+        self.user = User.objects.create(
+            username="testuser",
+            email='test@example.com',
+            password='testpassword'
+        )
+
+        self.report = Report.objects.create(
+            title="Sample Report",
+            slug="sample-report",
+            author=self.owner,
+            start_date="2023-07-13",
+            end_date="2023-07-15",
+            overall_conditions="Good",
+            activity_category="Hiking",
+            description="This is a sample report."
+        )
+
+    def test_redirect_if_user_does_not_own_report(self):
+        """
+        Tests for a redirect when the user isnt the report owner.
+        """
+        self.client.login(email='test@example.com', password='testpassword')
+        response = self.client.get(
+            reverse('toggle_report', kwargs={'pk': self.report.pk}))
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('home'))
+
+
 class TestGetViews(TestCase):
     """
     Tests for the retrieval of view and templates.
@@ -242,7 +283,7 @@ class LikeReportTests(TestCase):
         self.assertFalse(self.report.likes.filter(id=self.user.id).exists())
 
 
-class DeleteCommentTests(TestCase):
+class CommentTests(TestCase):
     """
     Unit tests for the delete report view.
     """
@@ -268,7 +309,7 @@ class DeleteCommentTests(TestCase):
 
         self.comment = Comment.objects.create(
             name='testuser',
-            content='Test comment content.',
+            content='Test comment 1',
             report=self.report
         )
 
@@ -283,6 +324,28 @@ class DeleteCommentTests(TestCase):
 
         self.assertEqual(response.status_code, 302)
         self.assertFalse(Comment.objects.filter(pk=self.comment.pk).exists())
+
+    def test_submit_comment(self):
+        """
+        Tests submittion of comment form, checks:
+        - Comment is added
+        - Comment count is incremented
+        - User is redirected
+        """
+        self.client.login(username='testuser', password='testpassword')
+        comment_data = {
+            'content': 'Test comment content'
+        }
+
+        # Simulate post request
+        response = self.client.post(
+            reverse('report_details', args=[self.report.pk]), comment_data)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.report.comments.count(), 2)
+
+        self.assertRedirects(
+            response, reverse('report_details', args=[self.report.pk]))
 
 
 class CreateReportTests(TestCase):

@@ -84,33 +84,6 @@ class TestCommentForm(TestCase):
 
         self.assertIn('content', form.as_p())
 
-    def test_comment_posts_to_page(self):
-        """
-        Ensures that when a comment is posted to a page using the CommentForm,
-        the posted comment content appears in the response.
-        """
-
-        form_data = {
-            'content': 'This is a test comment',
-        }
-        form = CommentForm(data=form_data)
-
-        response = self.client.post(
-            reverse(
-                'report_details', kwargs={'pk': self.report.pk}
-            ), data=form_data, follow=True
-        )
-
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, form_data['content'])
-
-        saved_comments = Comment.objects.filter(content=form_data['content'])
-
-        self.assertGreaterEqual(saved_comments.count(), 1)
-        self.assertTrue(
-            any(comment.report == self.report for comment in saved_comments)
-        )
-
 
 class CreateReportFormTests(TestCase):
     """

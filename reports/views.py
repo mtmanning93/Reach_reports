@@ -28,15 +28,15 @@ def user_owns_report(view_func):
         If 'True' the view is accessed.
 
         If 'False' (the user does not own the report) they are redirected
-        to their account. Subsequently if they have no account they're
-        redirected to the login page via the @login_required decorator.
+        to the home page.
         """
         report = get_object_or_404(Report, pk=kwargs['pk'])
 
         if report.author == request.user:
             return view_func(request, *args, **kwargs)
+
         else:
-            return redirect('account')
+            return redirect('home')
 
     return _wrapped_view
 
@@ -427,7 +427,6 @@ def delete_account(request):
     return render(request, 'account.html')
 
 
-@login_required
 @user_owns_report
 def toggle_report(request, pk):
     """
