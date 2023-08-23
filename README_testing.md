@@ -26,9 +26,9 @@ I decided to take on Unit Testing for all Python code in the project. After a st
 
 [Intro Testing Python](https://www.freecodecamp.org/news/an-introduction-to-testing-in-python/#:~:text=First%20you%20need%20to%20create,cases%20of%20your%20function's%20behavior.&text=First%2C%20you%20need%20to%20import,want%20to%20test%2C%20formatted_name()%20.)
 
-[Beginner Tests](https://cferreirasuazo.medium.com/lets-unit-test-django-forms-280704168d1b)
+[Django-testing-docs](https://django-testing-docs.readthedocs.io/en/latest/index.html)
 
-[Django Testing Docs](https://docs.djangoproject.com/en/4.2/topics/testing/tools/)
+[Django Docs](https://docs.djangoproject.com/en/4.2/topics/testing/tools/)
 
 [Django Advanced Testing](https://docs.djangoproject.com/en/4.2/topics/testing/advanced/)
 

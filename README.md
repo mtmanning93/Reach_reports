@@ -1009,10 +1009,13 @@ For this project, you will need the following 'Config Vars':
 ## Credits
 It would be an incredible feat to remember all information needed to build such a project, to a deployable standard. Therefore I am not ashamed to mention some resources were used to aid me in the process, I have detailed some of the resources used.
 
+I must also credit my mentor Jubril Akolade, for his inputs. Particularly with defensive design and the custom `@user_owns_report` decorator. This decorator was implemented at the beginning of the views.py file _(lines 16-41, reports/views.py)_.
+
 ### Tools
 ---------
 * [Lucid Chart](https://www.lucidchart.com/pages/): Wireframe and ERD
 * [ESLint](https://eslint.org/): JavaScript Testing
+* [PyLint](https://pylint.org/): Python Linting
 * [Coverage](https://coverage.readthedocs.io/en/7.2.7/): To test how much of the project had benn test during unit testing.
 * [Google Fonts](https://fonts.google.com/)
 * [Favicon.io](https://favicon.io/)
@@ -1029,10 +1032,6 @@ It would be an incredible feat to remember all information needed to build such 
     - ReverseLazy
     - Custom Template Tags
     - DateInput Widget
-
-* [Form 'Select' input](https://stackoverflow.com/questions/33726759dropdown-select-option-to-filter-a-django-list)
-
-* [Enctype](https://www.geeksforgeeks.org/define-multipart-form-data/): Helped to allow for multi-part form data as my reports forms would also contain images.
 
 * [Bootstrap 5.2 Docs](https://getbootstrap.com/docs/5.2/getting-started/introduction/): Relied on heavily for styling and JavaScript.
 
@@ -1055,9 +1054,11 @@ It would be an incredible feat to remember all information needed to build such 
 
 * [Edit Object Tutorial](https://openclassrooms.com/en/courses/6967196-create-a-web-application-with-django/7349667-update-a-model-object-with-a-modelform): Helped when creating views to edit model objects.
 
-* [Code Institute LMS:](https://learn.codeinstitute.net/dashboard): I took a great amount of support from the following modules, setup, deployment, and both function and class based views.
+* [Code Institute LMS:](https://learn.codeinstitute.net/dashboard): I took a great amount of support from the following modules, setup, deployment, and function, generic and class based views.
     - Agile Development
     - 'I Think Therefore I Blog'
     - 'Hello Django' walkthroughs
+
+* [Defensive Design](https://www.youtube.com/watch?v=TAH01Iy5AuE): For user restrictions, I used this to help implement the custom `@user_owns_report` decorator.
 
 [⏫ contents](#contents)
