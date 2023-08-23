@@ -92,7 +92,7 @@ The addition to the `.eslintrc.json` file:
 ---------------
 #### W3C Validator
 
-I ran the CSS file through the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/validator#css) and the file passed with no errors. After using `Bootstrap` throughout the project I didn't have too much CSS to test.
+I ran the script.css file through the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) and the file passed with no errors. After using `Bootstrap` throughout the project I didn't have too much CSS to test.
 
 ![W3C CSS validation success](README_images/testing/w3c_css.png)
 
@@ -100,7 +100,7 @@ I ran the CSS file through the [W3C CSS Validator](https://jigsaw.w3.org/css-val
 ----------------
 #### W3C Validator
 
-When initially running the site through the [W3C Html Validator](https://validator.w3.org/nu/?showsource=yes&showoutline=yes&doc=https%3A%2F%2Freach-reports-e02886ddeda3.herokuapp.com%2F), I received 2 error messages:
+When initially running the site URL through the [W3C Html Validator](https://validator.w3.org/nu/?showsource=yes&showoutline=yes&doc=https%3A%2F%2Freach-reports-e02886ddeda3.herokuapp.com%2F), I received 2 error messages:
 
 1.  "Element h5 not allowed as child of element ul in this context."
 - This error was in the footer of the site, I just needed to move the `<ul>><h5>` from inside to outside the `<ul>` element.

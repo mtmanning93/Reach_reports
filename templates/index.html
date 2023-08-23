@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<div id="head-quote" class="container-fluid d-sm-flex d-sm-none justify-content-center">
+<div class="head-quote container-fluid d-sm-flex d-sm-none justify-content-center">
     <blockquote class="m-0">
         <em>“{{ quote.quote }}”</em>
         - <strong>{{ quote.author }}</strong>
@@ -12,8 +12,7 @@
 <div id="head-img-wrapper" class="container-fluid p-0 position-relative">
     <img src="{% static random_image_url %}" alt="Random Image" class="col-12 d-block">
 
-    <div id="head-quote"
-        class="d-none col-10 col-sm-8 col-md-6 col-xl-4 position-absolute translate-middle d-sm-flex flex-column align-items-center">
+    <div class="head-quote d-none col-10 col-sm-8 col-md-6 col-xl-4 position-absolute translate-middle d-sm-flex flex-column align-items-center">
         <blockquote class="m-0">
             <em>“{{ quote.quote }}”</em>
             - <strong>{{ quote.author }}</strong>

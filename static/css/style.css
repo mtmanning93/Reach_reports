@@ -116,7 +116,7 @@ a:hover {
     object-fit: cover;
 }
 
-#head-quote {
+.head-quote {
     top: 10%;
     left: 50%;
     text-align: center;
@@ -408,7 +408,7 @@ label {
         height: 571px;
     }
 
-    #head-quote {
+    .head-quote {
         border-radius: 0;
         background-color: #8ca9c9;
         font-size: 0.9em;
@@ -499,7 +499,7 @@ label {
         height: 540px;
     }
 
-    #head-quote {
+    .head-quote {
         display: none;
     }
 
