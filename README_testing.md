@@ -229,6 +229,8 @@ These tests were written and given to a user to carry out whilst using the site.
 | Select a new primary email address | After navigating to account, the displayed email address in personal inofrmation is the new primary address | √ | Pass |
 | **404 & 500 Error** |
 | Click 'back to home' button | returns user to home page | √ | Pass |
+| **Custom Decorator (@user_owns_report)** |
+| Login with registered credentials and type `/reports/edit_report/87/` at the end of the url | returns user to home page | √ | Pass |
 
 [⏫ contents](#contents)
 
@@ -246,7 +248,6 @@ To further test whether the app would work across screens I physically tested it
 - iPhone 7
 
 [⏫ contents](#contents)
-
 
 ### Browser Testing
 -------------------
