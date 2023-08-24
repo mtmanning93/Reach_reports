@@ -90,6 +90,7 @@ Cloudinary, Crispy Forms
             - [Logout](#logout)
             - [Signup](#signup)
         - [Future Features](#future-features)
+        - [Defensive Design](#defensive-design)
     - [Technologies Used](#technologies-used)
         - [Django](#django)
         - [Python](#python)
@@ -692,6 +693,46 @@ Whilst building the project new ideas perfect for future releases would come to 
 
 [⏫ contents](#contents)
 
+## Defensive Design
+
+When in production it was clear that defenses would be needed to prevent unauthorised users from accessing views they shouldn't, for exmple the delete_report, edit_report and toggle_report views. Prior to the custom decorator implementation a unauthorized user had the ability to force their way into these views with any `report.pk` by typing, for example:
+
+    /reports/edit_report/3/ 
+_(or any report.pk not owned by the logged in user)_
+
+Here the built iin `@login_required` decorator wouldn't work if the user was logged in but trying to access another users report object. After some deliberation and research, my mentor, Jubril Akolade, told me that a custom decorator checking who owns the report would be a way to control this. He provided an in depth example of how this might work, allowing me to implement it specifically to the site.
+
+The decorator `@user_owns_report` was created to check if the user owns the report before accessing it, if the user does not own the report theyre redirected to the 'home' page. The custom decorator can be found on _lines 16-41 or reports/views.py_.
+
+    def user_owns_report(view_func):
+        """
+        Decorator to check if the requested report to edit or delete is owned
+        by the current user. Applied to:
+        - delete_report
+        - toggle_report
+        - edit_report
+        """
+        def _wrapped_view(request, *args, **kwargs):
+            """
+            Logic to check ownership.
+
+            If 'True' the view is accessed.
+
+            If 'False' (the user does not own the report) they are redirected
+            to the home page.
+            """
+            report = get_object_or_404(Report, pk=kwargs['pk'])
+
+            if report.author == request.user:
+                return view_func(request, *args, **kwargs)
+
+            else:
+                return redirect('home')
+
+        return _wrapped_view
+
+[⏫ contents](#contents)
+
 ## Technologies Used
 
 ### Django:
@@ -1046,6 +1087,8 @@ I must also credit my mentor Jubril Akolade, for his inputs. Particularly with d
 
 * [Email Authenication](https://medium.com/@therealak12/authenticate-using-email-instead-of-username-in-django-rest-framework-857645037bab): Further suport for email login.
 
+* [Assertions](https://www.tutorialspoint.com/unittest_framework/unittest_framework_assertion.htm): Assertion definitions for writing tests.
+
 ### Tutorials
 -------------
 * [Setup SMTP Tutorial](https://dev.to/abderrahmanemustapha/how-to-send-email-with-django-and-gmail-in-production-the-right-way-24ab), [Setup SMTP Tutorial 2](https://www.codesnail.com/django-allauth-email-authentication-tutorial/#:~:text=password%20with%20login-,Email%20verification,none%20to%20mandatory%20like%20this.&text=Now%20while%20registering%20it%20will%20send%20an%20email%20verification%20link.): These tutorials helped me to set up the gmail smtp required for the password reset functionality. 
@@ -1061,4 +1104,12 @@ I must also credit my mentor Jubril Akolade, for his inputs. Particularly with d
 
 * [Defensive Design](https://www.youtube.com/watch?v=TAH01Iy5AuE): For user restrictions, I used this to help implement the custom `@user_owns_report` decorator.
 
-[⏫ contents](#contents)
+### Example Projects
+--------------------
+During the project build I used 2 projects as examples to compare structure of the project, and Unit testing ideas. These projects were used purely to compare, as they were rewarded a distinction grade by [Code Institute](). There are some similarities in README structure and appearance, but all content is specific to my site. These projects were:
+
+[BobWritesCode/Server-directory-website](https://github.com/BobWritesCode/server-directory-website/tree/master)
+
+[Edb83/Moose-Juice](https://github.com/Edb83/moose-juice)
+
+[⏫ contents](#contents) [⏩ Testing README](README.md)
