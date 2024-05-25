@@ -104,7 +104,8 @@ Cloudinary, Crispy Forms
     - [Deployment](#deployment)
         - [Github Cloning](#github-cloning)
         - [Cloudinary Deployment](#cloudinary-deployment)
-        - [Elephant SQL DEployment](#elephant-sql-deployment)
+        - [Elephant SQL Deployment](#elephantsql-deployment)
+        - [Neon Deployment](#neon-deployment)
         - [Heroku Deployment](#heroku-deployment)
     - [Credits](#credits)
         - [Tools](#tools)
@@ -957,7 +958,7 @@ I used Cloudinary in the project to store all media files, it's a really easy se
 
 ### ElephantSQL Deployment
 ---------------------------
-For this project, I decide to use ElephantSQL which uses PostgreSQL databases. In order to set up ElephantSQL follow these steps:
+Originally for this project, ElephantSQL was used which uses PostgreSQL databases. However ElephantSQL will reach end of life early 2025, therfore the databases were migrated to Neon, see ['Neon Deployment'](#neon-deployment) for more. In case of necessity, in order to set up ElephantSQL follow these steps:
 
 **1. Create an account or log in to your ElephantSQL dashboard and click the green 'Create New Instance' Button.**
 
@@ -984,6 +985,26 @@ Generally, the title here is the project title. For my project, I selected the '
 **6. This will display all the necessary credentials to connect this project to your database.**
 
 ![Instance details](README_images/deployment/elephant_details.png)
+
+[⏫ contents](#contents)
+
+### Neon Deployment
+-------------------
+Due to ElephantSQL end of life, the project database was migrated over to [Neon](https://console.neon.tech/realms/prod-realm/protocol/openid-connect/auth?client_id=neon-console&redirect_uri=https%3A%2F%2Fconsole.neon.tech%2Fauth%2Fkeycloak%2Fcallback&response_type=code&scope=openid+profile+email&state=0tRwwIsTryvbbFvrKBn7vA%3D%3D%2C%2C%2C).
+
+I order to use Neon to host your PostgreSQL databases follow these steps:
+
+**1. Navigate to the Neon website and signup.**
+
+![Neon signup](README_images/deployment/neon_login.png)
+
+**2. Once signed up create a project by providing a project name, database name, and selecting the region closest to you. Click create project.**
+
+![Create Project](README_images/deployment/neon_create.png)
+
+**3. Next in the dashboard, locate the 'connection string'. This string will be used as the DATABASE_URL during deployment**
+
+![Connection String](README_images/deployment/neon_dashboard.png)
 
 [⏫ contents](#contents)
 
